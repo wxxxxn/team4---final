@@ -6,14 +6,19 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import custompanel.ItemPanel;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import java.awt.Color;
+import java.awt.GridLayout;
 
-public class Store extends JFrame {
+public class StoreFrame extends JFrame {
 
 	private JPanel contentPane;
 
@@ -21,7 +26,7 @@ public class Store extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Store frame = new Store();
+					StoreFrame frame = new StoreFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,12 +35,11 @@ public class Store extends JFrame {
 		});
 	}
 
-	public Store() {
-//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public StoreFrame() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 800);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
-		contentPane.setForeground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -47,9 +51,18 @@ public class Store extends JFrame {
 		contentPane.add(storeLabel);
 		
 		JPanel itemsPanel = new JPanel();
+		itemsPanel.setOpaque(true);
+		itemsPanel.setBackground(new Color(255, 0, 0, 0));
 		itemsPanel.setBounds(12, 72, 560, 619);
 		contentPane.add(itemsPanel);
-		itemsPanel.setLayout(new BoxLayout(itemsPanel, BoxLayout.Y_AXIS));
+		itemsPanel.setLayout(new GridLayout(5, 0, 0, 25));
+		
+		ItemPanel[] item = new ItemPanel[5];
+		for (int i = 0; i < item.length; i++) {
+			ItemPanel itemPanel = new ItemPanel();
+			item[i] = itemPanel;
+			itemsPanel.add(item[i]);
+		}
 		
 		JButton closeButton = new JButton("닫기");
 		closeButton.setBounds(180, 701, 200, 50);
