@@ -18,33 +18,10 @@ public class MainFrame extends JFrame {
 	private JPanel Mainpnl;
 	private JButton settingbtn;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainFrame frame = new MainFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-
 	public MainFrame() {
 		
-
-//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1200, 800);
 		Mainpnl = new JPanel();
-//		Mainpnl.add(contentPanel);
 		Mainpnl.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(Mainpnl);
 		Mainpnl.setLayout(null);
@@ -125,6 +102,13 @@ public class MainFrame extends JFrame {
 		rankingbtn.setBorderPainted(false);
 		rankingbtn.setOpaque(false);
 		rankingbtn.setBackground(new Color(255, 0, 0, 0));
+		rankingbtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				RankingFrame rankingFrame = new RankingFrame();
+				rankingFrame.showGUI();
+			}
+		});
 
 		settingbtn = new JButton("설정");
 		settingbtn.setBounds(1044, 30, 97, 65);
@@ -136,8 +120,8 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SettingFrame s1 = new SettingFrame();
-				s1.setVisible(true);
+				SettingFrame settingFrame = new SettingFrame();
+				settingFrame.showGUI();
 			}
 		});
 
@@ -147,6 +131,13 @@ public class MainFrame extends JFrame {
 		storebtn.setOpaque(false);
 		storebtn.setBackground(new Color(255, 0, 0, 0));
 		storebtn.setBorderPainted(false);
+		storebtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				StoreFrame storeFrame = new StoreFrame();
+				storeFrame.showGUI();
+			}
+		});
 		
 		JButton gamebtn = new JButton("미니게임");
 		gamebtn.setBounds(901, 608, 97, 38);
@@ -162,6 +153,8 @@ public class MainFrame extends JFrame {
 		taskbtn.setBorderPainted(false);
 		taskbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				ProjectFrame projectFrame = new ProjectFrame();
+				projectFrame.showGUI();
 			}
 		});
 		Mainpnl.add(taskbtn);
@@ -172,6 +165,13 @@ public class MainFrame extends JFrame {
 		activitybtn.setOpaque(false);
 		activitybtn.setBorderPainted(false);
 		activitybtn.setBackground(new Color(255, 0, 0, 0));
+		activitybtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ActiveFrame activeFrame = new ActiveFrame();
+				activeFrame.showGUI();
+			}
+		});
 
 		JLabel lblNewLabel_2 = new JLabel("exp");
 		lblNewLabel_2.setBounds(22, 736, 723, 15);
@@ -181,5 +181,9 @@ public class MainFrame extends JFrame {
 		Image.setIcon(new ImageIcon("background.png"));
 		Image.setBounds(0, 0, 1200, 800);
 		Mainpnl.add(Image);
+	}
+	
+	public void showGUI() {
+		setVisible(true);
 	}
 }

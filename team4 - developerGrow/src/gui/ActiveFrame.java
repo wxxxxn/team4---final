@@ -14,25 +14,6 @@ public class ActiveFrame extends JFrame {
 
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ActiveFrame frame = new ActiveFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public ActiveFrame() {
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
@@ -104,4 +85,7 @@ public class ActiveFrame extends JFrame {
 		contentPane.add(lblNewLabel_1_5);
 	}
 
+	public void showGUI() {
+		setVisible(true);
+	}
 }

@@ -22,19 +22,6 @@ public class StoreFrame extends JFrame {
 
 	private JPanel contentPane;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					StoreFrame frame = new StoreFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	public StoreFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 800);
@@ -67,5 +54,9 @@ public class StoreFrame extends JFrame {
 		JButton closeButton = new JButton("닫기");
 		closeButton.setBounds(180, 701, 200, 50);
 		contentPane.add(closeButton);
+	}
+	
+	public void showGUI() {
+		setVisible(true);
 	}
 }

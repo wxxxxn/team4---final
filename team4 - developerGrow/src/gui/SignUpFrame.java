@@ -103,7 +103,9 @@ public class SignUpFrame {
 		dialog.getContentPane().add(okbtn);
 		dialog.setBounds(100, 100, 500, 500);
 		dialog.getContentPane().setLayout(null);
-		dialog.setVisible(true);
 	}
 
+	public void showGUI() {
+		dialog.setVisible(true);
+	}
 }
