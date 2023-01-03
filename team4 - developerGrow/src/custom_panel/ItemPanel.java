@@ -1,4 +1,4 @@
-package custompanel;
+package custom_panel;
 
 import javax.swing.JPanel;
 import javax.swing.BorderFactory;
