@@ -17,13 +17,14 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class StoreFrame extends JFrame {
 
 	private JPanel contentPane;
 
 	public StoreFrame() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 800);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -53,6 +54,12 @@ public class StoreFrame extends JFrame {
 		
 		JButton closeButton = new JButton("닫기");
 		closeButton.setBounds(180, 701, 200, 50);
+		closeButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		contentPane.add(closeButton);
 	}
 	
