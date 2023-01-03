@@ -2,8 +2,10 @@ package custom_panel;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.net.URL;
 
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
@@ -45,17 +47,15 @@ public class RankPanel extends JPanel {
 		usedCigaLabel.setBounds(448, 48, 100, 42);
 		add(usedCigaLabel);
 		
-		JLabel cigaImageLabel = new JLabel("담배 이미지");
+		ClassLoader classLoader = getClass().getClassLoader();
+		URL URLCigaImage = classLoader.getResource("rank_image/ciga.png");
+		ImageIcon cigaImageIcon = new ImageIcon(URLCigaImage);
+		
+		JLabel cigaImageLabel = new JLabel();
 		cigaImageLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		cigaImageLabel.setForeground(Color.BLACK);
-		cigaImageLabel.setBackground(Color.WHITE);
-		cigaImageLabel.setOpaque(true);
+		cigaImageLabel.setIcon(cigaImageIcon);
 		cigaImageLabel.setBounds(384, 48, 52, 42);
 		add(cigaImageLabel);
-		
-		JLabel label = new JLabel("New label");
-		label.setBounds(104, 75, 155, -24);
-		add(label);
 		
 		JLabel scoreLabel = new JLabel("4444점");
 		scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
