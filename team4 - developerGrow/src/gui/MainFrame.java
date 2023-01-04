@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.net.URL;
 
 import javax.swing.JButton;
@@ -13,15 +15,20 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
 public class MainFrame extends JFrame {
 
 	private JPanel Mainpnl;
 	private JButton settingbtn;
+	private static Clip clip;
 
 	public MainFrame() {
 		ClassLoader classLoader = getClass().getClassLoader();
+		sound("src\\music\\mix.wav");
 		
 		setBounds(100, 100, 1200, 800);
 		Mainpnl = new JPanel();
@@ -132,6 +139,7 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				SettingFrame settingFrame = new SettingFrame();
 				settingFrame.showGUI();
+				stopSound();
 			}
 		});
 
@@ -218,5 +226,23 @@ public class MainFrame extends JFrame {
 	
 	public void showGUI() {
 		setVisible(true);
+	}
+	
+	public static void sound(String file) {
+		try {
+			AudioInputStream ais1 = AudioSystem.getAudioInputStream(new BufferedInputStream(new FileInputStream(file)));
+			clip = AudioSystem.getClip();
+			clip.stop();
+			clip.open(ais1);
+			clip.start();
+			clip.loop(1000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void stopSound() {
+		clip.stop();
+		clip.close();
 	}
 }

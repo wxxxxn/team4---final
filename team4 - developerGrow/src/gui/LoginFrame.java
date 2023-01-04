@@ -7,8 +7,13 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.net.URL;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,13 +24,14 @@ import guiDesign.MyPassword;
 import guiDesign.MyTextField;
 
 public class LoginFrame extends JFrame {
-	// 잉
+
 	private JFrame frame;
 	private MyTextField txtId;
 	private JButton signupbtn;
 	private JButton loginbtn;
 	private MyPassword passwordField;
 	private JLabel lblNewLabel_1;
+	private static Clip clip;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -41,6 +47,8 @@ public class LoginFrame extends JFrame {
 	}
 
 	public LoginFrame() {
+		sound("src\\music\\main.wav");
+		
 		ClassLoader classLoader = getClass().getClassLoader();
 		
 		frame = new JFrame();
@@ -115,6 +123,7 @@ public class LoginFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				MainFrame mainFrame = new MainFrame();
 				mainFrame.showGUI();
+				stopSound();
 			}
 		});
 	}
@@ -136,4 +145,21 @@ public class LoginFrame extends JFrame {
 		}
 		return null;
 	 }
+	
+	public static void sound(String file) {
+		try {
+			AudioInputStream ais = AudioSystem.getAudioInputStream(new BufferedInputStream(new FileInputStream(file)));
+			clip = AudioSystem.getClip();
+			clip.stop();
+			clip.open(ais);
+			clip.start();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void stopSound() {
+		clip.stop();
+		clip.close();
+	}
 }
