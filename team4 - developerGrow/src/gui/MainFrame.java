@@ -1,5 +1,6 @@
 package gui;
 
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -71,9 +72,9 @@ public class MainFrame extends JFrame {
 		JPanel hppnl = new JPanel();
 		hppnl.setBounds(292, 62, 563, 42);
 		statuspnl.add(hppnl);
-		hppnl.setLayout(null);
 		hppnl.setOpaque(false);
 		hppnl.setBackground(new Color(255, 0, 0, 0));
+		hppnl.setLayout(null);
 		
 
 		JLabel hplbl = new JLabel("HP");
@@ -195,6 +196,14 @@ public class MainFrame extends JFrame {
 		lblNewLabel_2.setBounds(22, 736, 723, 15);
 		Mainpnl.add(lblNewLabel_2);
 		
+		JLabel character = new JLabel("");
+		character.setBounds(211, 392, 210, 300);
+		URL URLcharImage = classLoader.getResource("character/character.gif");
+		character.setIcon(new ImageIcon(URLcharImage));
+//		character.setOpaque(false);
+//		character.setBackground(new Color(255, 0, 0, 0));
+		Mainpnl.add(character);
+		
 		JLabel Image = new JLabel("");
 		Image.setBounds(0, 0, 1200, 800);
 		URL URLbackImage = classLoader.getResource("backimg/background.png");
@@ -203,13 +212,6 @@ public class MainFrame extends JFrame {
 		Image.setOpaque(false);
 		Image.setBackground(new Color(255, 0, 0, 0));
 		
-		JLabel character = new JLabel("");
-		URL URLcharImage = classLoader.getResource("character/character.gif");
-		character.setIcon(new ImageIcon(URLcharImage));
-		character.setOpaque(false);
-		character.setBackground(new Color(255, 0, 0, 0));
-		character.setBounds(221, 395, 191, 253);
-		Mainpnl.add(character);
 
 		
 	}
