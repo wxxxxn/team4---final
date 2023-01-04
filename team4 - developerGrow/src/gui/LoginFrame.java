@@ -47,9 +47,9 @@ public class LoginFrame extends JFrame {
 	}
 
 	public LoginFrame() {
-		sound("src\\music\\main.wav");
-		
 		ClassLoader classLoader = getClass().getClassLoader();
+		URL URLmix = classLoader.getResource("src\\music\\main.wav");
+		sound(URLmix);
 		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 500, 500);
@@ -146,9 +146,9 @@ public class LoginFrame extends JFrame {
 		return null;
 	 }
 	
-	public static void sound(String file) {
+	public static void sound(URL file) {
 		try {
-			AudioInputStream ais = AudioSystem.getAudioInputStream(new BufferedInputStream(new FileInputStream(file)));
+			AudioInputStream ais = AudioSystem.getAudioInputStream(file);
 			clip = AudioSystem.getClip();
 			clip.stop();
 			clip.open(ais);
