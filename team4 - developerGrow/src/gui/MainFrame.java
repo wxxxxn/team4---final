@@ -149,6 +149,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 		
+		
 		JButton gamebtn = new JButton();
 		URL URLgameImage = classLoader.getResource("btn_image/miniGameBtnImage.png");
 		gamebtn.setIcon(new ImageIcon(URLgameImage));
