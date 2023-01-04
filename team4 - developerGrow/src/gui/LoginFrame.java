@@ -2,28 +2,29 @@ package gui;
 
 import java.awt.Color;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 
-import javax.swing.JTextField;
-import javax.print.attribute.standard.Sides;
-import javax.swing.JButton;
-import javax.swing.JPasswordField;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import guiDesign.MyPassword;
+import guiDesign.MyTextField;
 
 public class LoginFrame extends JFrame {
 
 	private JFrame frame;
-	private JTextField txtId;
+	private MyTextField txtId;
 	private JButton signupbtn;
 	private JButton loginbtn;
-	private JPasswordField passwordField;
+	private MyPassword passwordField;
 	private JLabel lblNewLabel_1;
 
 	public static void main(String[] args) {
@@ -51,15 +52,15 @@ public class LoginFrame extends JFrame {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 
-		txtId = new JTextField();
-		txtId.setFont(new Font("굴림", Font.PLAIN, 24));
-		txtId.setText("id");
+		txtId = new MyTextField();
+		txtId.setFont(new Font("휴먼둥근헤드라인", Font.PLAIN, 20));
+		txtId.setPrefixIcon(convertToIcon(getClass(), "guiDesign\\user.png", 30, 30));
 		txtId.setBounds(12, 10, 338, 41);
 		panel.add(txtId);
-		txtId.setColumns(10);
 
-		passwordField = new JPasswordField();
-		passwordField.setBounds(12, 61, 338, 35);
+		passwordField = new MyPassword();
+		passwordField.setPrefixIcon(convertToIcon(getClass(), "guiDesign\\key.png", 30, 30));
+		passwordField.setBounds(12, 61, 338, 41);
 		panel.add(passwordField);
 
 		JLabel lblNewLabel = new JLabel("개발자 키우기");
@@ -117,4 +118,22 @@ public class LoginFrame extends JFrame {
 			}
 		});
 	}
+	
+	public static ImageIcon convertToIcon(Class useClass, String name, int width, int height) {
+		String imageName = name;
+		int thisWidth = width;
+		int thisHeight = height;
+		Toolkit kit = Toolkit.getDefaultToolkit();
+		ClassLoader classLoader = useClass.getClassLoader();
+		try {
+			Image image = kit.getImage(classLoader.getResource(imageName));
+			image = image.getScaledInstance(thisWidth, thisHeight, Image.SCALE_SMOOTH);
+			// 이미지크기조절
+			ImageIcon icon = new ImageIcon(image);
+			return icon;
+		} catch (NullPointerException e) {
+			System.out.println(name + " 해당 이미지 파일을 찾을 수 없습니다.");
+		}
+		return null;
+	 }
 }
