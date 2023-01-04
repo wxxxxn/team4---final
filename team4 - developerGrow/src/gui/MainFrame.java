@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.border.EmptyBorder;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -85,7 +86,18 @@ public class MainFrame extends JFrame {
 		setContentPane(Mainpnl);
 		Mainpnl.setLayout(null);
 
-		
+		JProgressBar expbar = new JProgressBar();
+		expbar.setValue(20);
+		expbar.setStringPainted(true);
+		expbar.setForeground(new Color(30, 144, 255));
+		expbar.setFont(new Font("휴먼편지체", Font.PLAIN, 12));
+		expbar.setBounds(50, 735, 827, 20);
+		Mainpnl.add(expbar);
+
+		JLabel lblNewLabel_2 = new JLabel("exp");
+		lblNewLabel_2.setFont(new Font("휴먼편지체", Font.BOLD, 20));
+		lblNewLabel_2.setBounds(12, 728, 37, 29);
+		Mainpnl.add(lblNewLabel_2);		
 		
 		
 		JPanel date = new JPanel();
@@ -102,8 +114,9 @@ public class MainFrame extends JFrame {
 		JPanel statuspnl = new JPanel();
 		statuspnl.setBounds(12, 608, 877, 114);
 		Mainpnl.add(statuspnl);
-		statuspnl.setOpaque(false);
+//		statuspnl.setOpaque(false);
 		statuspnl.setLayout(null);
+		statuspnl.setBackground(new Color(255, 255, 255, 100));
 
 		JPanel currentcigapnl = new JPanel();
 		currentcigapnl.setBounds(22, 10, 225, 42);
@@ -111,32 +124,36 @@ public class MainFrame extends JFrame {
 		currentcigapnl.setOpaque(false);
 		currentcigapnl.setLayout(null);
 
-		JLabel currentcigalbl = new JLabel("담배개비");
-		currentcigalbl.setBounds(12, 0, 102, 43);
+		JLabel currentcigalbl = new JLabel("담배  X");
+		currentcigalbl.setIcon(new ImageIcon(MainFrame.class.getResource("/rank_image/ciga.png")));
+		currentcigalbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
+		currentcigalbl.setBounds(12, 0, 117, 43);
 		currentcigapnl.add(currentcigalbl);
+		
+		JLabel numOfcigalbl = new JLabel("10");
+		numOfcigalbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
+		numOfcigalbl.setBounds(124, 5, 89, 33);
+		currentcigapnl.add(numOfcigalbl);
 
 		JPanel stresspnl = new JPanel();
-		stresspnl.setBounds(292, 10, 563, 42);
+		stresspnl.setBounds(294, 40, 571, 30);
 		statuspnl.add(stresspnl);
 		stresspnl.setOpaque(false);
 		stresspnl.setLayout(null);
 
 		JLabel stresslbl = new JLabel("스트레스");
-		stresslbl.setBounds(12, 10, 100, 22);
+		stresslbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
+		stresslbl.setBounds(12, 5, 64, 22);
 		stresspnl.add(stresslbl);
-
-		JPanel hppnl = new JPanel();
-		hppnl.setBounds(292, 62, 563, 42);
-		statuspnl.add(hppnl);
-		hppnl.setOpaque(false);
-		hppnl.setBackground(new Color(255, 0, 0, 0));
-		hppnl.setLayout(null);
 		
-
-		JLabel hplbl = new JLabel("HP");
-		hplbl.setBounds(12, 10, 57, 22);
-		hppnl.add(hplbl);
-
+		JProgressBar stessbar = new JProgressBar();
+		stessbar.setFont(new Font("휴먼편지체", Font.PLAIN, 12));
+		stessbar.setValue(10);
+		stessbar.setStringPainted(true);
+		stessbar.setForeground(new Color(139, 0, 0));
+		stessbar.setBounds(80, 5, 480, 22);
+		stresspnl.add(stessbar);
+		
 		JPanel developlvpnl = new JPanel();
 		developlvpnl.setBounds(22, 62, 225, 42);
 		statuspnl.add(developlvpnl);
@@ -144,9 +161,55 @@ public class MainFrame extends JFrame {
 		developlvpnl.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("개발능력Lv");
-		lblNewLabel.setBounds(12, 10, 110, 32);
+		lblNewLabel.setFont(new Font("휴먼편지체", Font.BOLD, 20));
+		lblNewLabel.setBounds(12, 5, 110, 32);
 		developlvpnl.add(lblNewLabel);
+		
+		JLabel numOflevellbl = new JLabel("10");
+		numOflevellbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
+		numOflevellbl.setBounds(124, 5, 89, 33);
+		developlvpnl.add(numOflevellbl);
 
+		JPanel healthpnl = new JPanel();
+		healthpnl.setLayout(null);
+		healthpnl.setOpaque(false);
+		healthpnl.setBounds(294, 75, 571, 30);
+		statuspnl.add(healthpnl);
+		
+		JLabel healthlbl = new JLabel("건강");
+		healthlbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
+		healthlbl.setBounds(12, 5, 54, 22);
+		healthpnl.add(healthlbl);
+		
+		JProgressBar healthbar = new JProgressBar();
+		healthbar.setFont(new Font("휴먼편지체", Font.PLAIN, 12));
+		healthbar.setValue(100);
+		healthbar.setStringPainted(true);
+		healthbar.setForeground(new Color(0, 128, 0));
+		healthbar.setBounds(80, 5, 480, 22);
+		healthpnl.add(healthbar);
+		
+				JPanel hppnl = new JPanel();
+				hppnl.setBounds(294, 5, 571, 30);
+				statuspnl.add(hppnl);
+				hppnl.setOpaque(false);
+				hppnl.setBackground(new Color(255, 0, 0, 0));
+				hppnl.setLayout(null);
+				
+
+				JLabel hplbl = new JLabel("HP");
+				hplbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
+				hplbl.setBounds(12, 5, 57, 22);
+				hppnl.add(hplbl);
+				
+						JProgressBar hpbar = new JProgressBar();
+						hpbar.setFont(new Font("휴먼편지체", Font.PLAIN, 12));
+						hpbar.setForeground(Color.RED);
+						hpbar.setStringPainted(true);
+						hpbar.setValue(100);
+						hpbar.setBounds(80, 5, 480, 22);
+						hppnl.add(hpbar);
+		
 		JPanel currentpnl = new JPanel();
 		currentpnl.setBounds(12, 75, 232, 45);
 		Mainpnl.add(currentpnl);
@@ -249,9 +312,6 @@ public class MainFrame extends JFrame {
 			}
 		});
 
-		JLabel lblNewLabel_2 = new JLabel("exp");
-		lblNewLabel_2.setBounds(22, 736, 723, 15);
-		Mainpnl.add(lblNewLabel_2);
 		
 		JLabel character = new JLabel("");
 		character.setBounds(211, 392, 210, 300);
