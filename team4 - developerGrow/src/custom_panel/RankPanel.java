@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 public class RankPanel extends JPanel {
-
 	public RankPanel() {
 		setBackground(Color.GRAY);
 		setBounds(100, 100, 560, 100);
