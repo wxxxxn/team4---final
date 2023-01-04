@@ -4,7 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -21,6 +23,7 @@ public class SignUpFrame {
 
 	public SignUpFrame() {
 		dialog = new JDialog();
+		ClassLoader classLoader = getClass().getClassLoader();
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(35, 103, 389, 267);
@@ -43,13 +46,28 @@ public class SignUpFrame {
 		lblNewLabel_1_1_1_1.setBounds(0, 176, 85, 15);
 		panel.add(lblNewLabel_1_1_1_1);
 		
-		JButton btnNewButton_1 = new JButton("중복 확인");
-		btnNewButton_1.setBounds(280, 62, 97, 23);
+		// 중복확인버튼
+		JButton btnNewButton_1 = new JButton("");
+		URL URLduplicateImage = classLoader.getResource("btn_image/duplicateBtnImage.png");
+		ImageIcon duplicateBtnIcon = new ImageIcon(URLduplicateImage);
+		URL URLduplicatePushImage = classLoader.getResource("btn_image/duplicatePushBtnImage.png");
+		ImageIcon duplicatePushBtnIcon = new ImageIcon(URLduplicatePushImage);
+		btnNewButton_1.setIcon(duplicateBtnIcon);
+		btnNewButton_1.setPressedIcon(duplicatePushBtnIcon);
+		btnNewButton_1.setBounds(280, 58, 97, 26);
+		btnNewButton_1.setBorderPainted(false);
+		btnNewButton_1.setOpaque(false);
+		btnNewButton_1.setBackground(new Color(255, 0, 0, 0));
 		panel.add(btnNewButton_1);
 		
-		JButton btnNewButton = new JButton("중복 확인");
-		btnNewButton.setBounds(280, 10, 97, 23);
-		panel.add(btnNewButton);
+		JButton btnNewButton_2 = new JButton("");
+		btnNewButton_2.setIcon(duplicateBtnIcon);
+		btnNewButton_2.setPressedIcon(duplicatePushBtnIcon);
+		btnNewButton_2.setBorderPainted(false);
+		btnNewButton_2.setOpaque(false);
+		btnNewButton_2.setBackground(new Color(255, 0, 0, 0));
+		btnNewButton_2.setBounds(280, 2, 97, 26);
+		panel.add(btnNewButton_2);
 		
 		JLabel lblNewLabel_2 = new JLabel("중복");
 		lblNewLabel_2.setForeground(Color.RED);
@@ -91,7 +109,17 @@ public class SignUpFrame {
 		lblNewLabel.setBounds(197, 22, 130, 33);
 		dialog.getContentPane().add(lblNewLabel);
 		
-		JButton okbtn = new JButton("확인");
+		JButton okbtn = new JButton("");
+		URL URLOkImage = classLoader.getResource("btn_image/signofconfirmBtnImage.png");
+		ImageIcon OkBtnIcon = new ImageIcon(URLOkImage);
+		URL URLOkPushImage = classLoader.getResource("btn_image/signofconfirmPushBtnImage.png");
+		ImageIcon OkPushBtnIcon = new ImageIcon(URLOkPushImage);
+		okbtn.setIcon(OkBtnIcon);
+		okbtn.setPressedIcon(OkPushBtnIcon);
+		okbtn.setBorderPainted(false);
+		okbtn.setOpaque(false);
+		okbtn.setBackground(new Color(255, 0, 0, 0));
+		
 		okbtn.setBounds(327, 396, 97, 41);
 		okbtn.addActionListener(new ActionListener() {
 			

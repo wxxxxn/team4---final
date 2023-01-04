@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,6 +9,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 import javax.swing.JTextField;
 import javax.print.attribute.standard.Sides;
@@ -38,6 +40,8 @@ public class LoginFrame extends JFrame {
 	}
 
 	public LoginFrame() {
+		ClassLoader classLoader = getClass().getClassLoader();
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 500, 500);
 		frame.getContentPane().setLayout(null);
@@ -63,7 +67,16 @@ public class LoginFrame extends JFrame {
 		lblNewLabel.setBounds(39, 69, 267, 63);
 		frame.getContentPane().add(lblNewLabel);
 
-		signupbtn = new JButton("회원가입");
+		signupbtn = new JButton("");
+		URL URLSignupImage = classLoader.getResource("btn_image/SignBtnImage.png");
+		ImageIcon SignupBtnIcon = new ImageIcon(URLSignupImage);
+		URL URLSignupPushImage = classLoader.getResource("btn_image/SignPushBtnImage.png");
+		ImageIcon SignupPushBtnIcon = new ImageIcon(URLSignupPushImage);
+		signupbtn.setIcon(SignupBtnIcon);
+		signupbtn.setPressedIcon(SignupPushBtnIcon);
+		signupbtn.setBorderPainted(false);
+		signupbtn.setOpaque(false);
+		signupbtn.setBackground(new Color(255, 0, 0, 0));
 		signupbtn.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		signupbtn.setBounds(94, 347, 139, 63);
 		frame.getContentPane().add(signupbtn);
@@ -76,13 +89,23 @@ public class LoginFrame extends JFrame {
 			}
 		});
 
-		loginbtn = new JButton("로그인");
+		loginbtn = new JButton("");
+		URL URLLoginImage = classLoader.getResource("btn_image/loginBtnImage.png");
+		ImageIcon LoginBtnIcon = new ImageIcon(URLLoginImage);
+		URL URLLoginPushImage = classLoader.getResource("btn_image/loginPushBtnImage.png");
+		ImageIcon LoginPushBtnIcon = new ImageIcon(URLLoginPushImage);
+		loginbtn.setIcon(LoginBtnIcon);
+		loginbtn.setPressedIcon(LoginPushBtnIcon);
+		loginbtn.setBorderPainted(false);
+		loginbtn.setOpaque(false);
+		loginbtn.setBackground(new Color(255, 0, 0, 0));
 		loginbtn.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		loginbtn.setBounds(245, 347, 139, 63);
 		frame.getContentPane().add(loginbtn);
 
 		lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("로그인.png"));
+		URL URLbackImage = classLoader.getResource("character/logincharacter.gif");
+		lblNewLabel_1.setIcon(new ImageIcon(URLbackImage));
 		lblNewLabel_1.setBounds(299, 24, 161, 166);
 		frame.getContentPane().add(lblNewLabel_1);
 		loginbtn.addActionListener(new ActionListener() {
