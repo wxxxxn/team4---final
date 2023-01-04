@@ -81,6 +81,7 @@ public class MainFrame extends JFrame {
 		sound(URLmix);
 		
 		setBounds(100, 100, 1200, 800);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Mainpnl = new JPanel();
 		Mainpnl.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(Mainpnl);

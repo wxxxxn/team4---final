@@ -22,7 +22,6 @@ public class ActiveDialog extends JDialog {
 		
 		setUndecorated(true);
 		setModal(true);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(x + 7, y + 30, 1185, 762);
 		setBackground(new Color(0, 0, 0, 100));
 		contentPane = new JPanel();

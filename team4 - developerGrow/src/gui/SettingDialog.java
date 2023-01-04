@@ -17,6 +17,7 @@ public class SettingDialog extends JDialog {
 	private JPanel contentPane;
 
 	public SettingDialog(int x, int y) {
+		
 		setBounds(x + 7, y + 30, 1185, 762);
 		setUndecorated(true);
 		setModal(true);

@@ -94,6 +94,7 @@ public class LoginFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SignUpFrame signUpFrame = new SignUpFrame();
+				dispose();
 				signUpFrame.showGUI();
 			}
 		});

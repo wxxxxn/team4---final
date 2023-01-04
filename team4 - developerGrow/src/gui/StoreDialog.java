@@ -29,7 +29,6 @@ public class StoreDialog extends JDialog {
 		setModal(true);
 		contentPane = new JPanel();
 		setBackground(new Color(0, 0, 0, 100));
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(x + 7, y + 30, 1185, 762);
 		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
