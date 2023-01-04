@@ -76,7 +76,8 @@ public class MainFrame extends JFrame {
 		});
 		
 		ClassLoader classLoader = getClass().getClassLoader();
-		sound("src\\music\\mix.wav");
+		URL URLmix = classLoader.getResource("src\\music\\mix.wav");
+		sound(URLmix);
 		
 		setBounds(100, 100, 1200, 800);
 		Mainpnl = new JPanel();
@@ -276,9 +277,9 @@ public class MainFrame extends JFrame {
 		setVisible(true);
 	}
 	
-	public static void sound(String file) {
+	public static void sound(URL file) {
 		try {
-			AudioInputStream ais1 = AudioSystem.getAudioInputStream(new BufferedInputStream(new FileInputStream(file)));
+			AudioInputStream ais1 = AudioSystem.getAudioInputStream(file);
 			clip = AudioSystem.getClip();
 			clip.stop();
 			clip.open(ais1);
