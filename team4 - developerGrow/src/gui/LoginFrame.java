@@ -19,7 +19,7 @@ import guiDesign.MyPassword;
 import guiDesign.MyTextField;
 
 public class LoginFrame extends JFrame {
-
+	// 잉
 	private JFrame frame;
 	private MyTextField txtId;
 	private JButton signupbtn;
