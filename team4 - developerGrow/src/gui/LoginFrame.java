@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 import javax.swing.JTextField;
 import javax.print.attribute.standard.Sides;
@@ -38,6 +39,8 @@ public class LoginFrame extends JFrame {
 	}
 
 	public LoginFrame() {
+		ClassLoader classLoader = getClass().getClassLoader();
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 500, 500);
 		frame.getContentPane().setLayout(null);
@@ -82,7 +85,8 @@ public class LoginFrame extends JFrame {
 		frame.getContentPane().add(loginbtn);
 
 		lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("로그인.png"));
+		URL URLbackImage = classLoader.getResource("character/logincharacter.gif");
+		lblNewLabel_1.setIcon(new ImageIcon(URLbackImage));
 		lblNewLabel_1.setBounds(299, 24, 161, 166);
 		frame.getContentPane().add(lblNewLabel_1);
 		loginbtn.addActionListener(new ActionListener() {

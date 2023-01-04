@@ -203,12 +203,15 @@ public class MainFrame extends JFrame {
 		Image.setOpaque(false);
 		Image.setBackground(new Color(255, 0, 0, 0));
 		
-		JLabel character = new JLabel();
+		JLabel character = new JLabel("");
 		URL URLcharImage = classLoader.getResource("character/character.gif");
 		character.setIcon(new ImageIcon(URLcharImage));
+		character.setOpaque(false);
+		character.setBackground(new Color(255, 0, 0, 0));
 		character.setBounds(221, 395, 191, 253);
 		Mainpnl.add(character);
-	
+
+		
 	}
 	
 	public void showGUI() {
