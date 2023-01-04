@@ -15,6 +15,9 @@ import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 
 public class RankPanel extends JPanel {
+	
+	private JLabel rankLabel;
+	
 	public RankPanel() {
 		
 		EtchedBorder eborder = new EtchedBorder(EtchedBorder.RAISED);
@@ -23,7 +26,7 @@ public class RankPanel extends JPanel {
 		setBounds(100, 100, 540, 100);
 		setLayout(null);
 		
-		JLabel rankLabel = new JLabel("1등");
+		rankLabel = new JLabel("1등");
 		rankLabel.setBorder(eborder);
 		rankLabel.setFont(new Font("휴먼편지체", Font.BOLD, 15));
 		rankLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -102,5 +105,9 @@ public class RankPanel extends JPanel {
 	@Override
 	public Dimension preferredSize() {
 		return new Dimension(540, 100);
+	}
+	
+	public JLabel getRankLabel() {
+		return rankLabel;
 	}
 }

@@ -169,7 +169,7 @@ public class MainFrame extends JFrame {
 		rankingbtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				RankingFrame rankingFrame = new RankingFrame();
+				RankingDialog rankingFrame = new RankingDialog(MainFrame.this.getX(), MainFrame.this.getY());
 				rankingFrame.showGUI();
 			}
 		});
@@ -186,7 +186,7 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SettingFrame settingFrame = new SettingFrame();
+				SettingDialog settingFrame = new SettingDialog(MainFrame.this.getX(), MainFrame.this.getY());
 				settingFrame.showGUI();
 				stopSound();
 			}
@@ -203,7 +203,7 @@ public class MainFrame extends JFrame {
 		storebtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				StoreFrame storeFrame = new StoreFrame();
+				StoreDialog storeFrame = new StoreDialog(MainFrame.this.getX(), MainFrame.this.getY());
 				storeFrame.showGUI();
 			}
 		});
@@ -227,7 +227,7 @@ public class MainFrame extends JFrame {
 		taskbtn.setBorderPainted(false);
 		taskbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ProjectFrame projectFrame = new ProjectFrame();
+				ProjectDialog projectFrame = new ProjectDialog(MainFrame.this.getX(), MainFrame.this.getY());
 				projectFrame.showGUI();
 			}
 		});
@@ -244,7 +244,7 @@ public class MainFrame extends JFrame {
 		activitybtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ActiveFrame activeFrame = new ActiveFrame();
+				ActiveDialog activeFrame = new ActiveDialog(MainFrame.this.getX(), MainFrame.this.getY());
 				activeFrame.showGUI();
 			}
 		});

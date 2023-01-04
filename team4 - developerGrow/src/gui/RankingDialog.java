@@ -27,17 +27,20 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
-public class RankingFrame extends JDialog {
+public class RankingDialog extends JDialog {
 
 	private JPanel contentPane;
 
-	public RankingFrame() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(400, 100, 600, 800);
+	public RankingDialog(int x, int y) {
+		
+		setUndecorated(true);
 		setModal(true);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(x + 7, y + 30, 1185, 762);
+		setBackground(new Color(0, 0, 0, 100));
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(new Color(0, 0, 0, 0));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
@@ -52,24 +55,25 @@ public class RankingFrame extends JDialog {
 		rankTextPanel.setBackground(Color.WHITE);
 		rankTextPanel.setHorizontalAlignment(SwingConstants.CENTER);
 		rankTextPanel.setFont(new Font("HY목각파임B", Font.BOLD, 40));
-		rankTextPanel.setBounds(12, 10, 560, 50);
+		rankTextPanel.setBounds(12, 10, 1161, 50);
 		contentPane.add(rankTextPanel);
 
 		JPanel rankersPanel = new JPanel();
-		rankersPanel.setBackground(Color.WHITE);
+		rankersPanel.setBackground(new Color(0, 0, 0, 0));
 		rankersPanel.setLayout(new BoxLayout(rankersPanel, BoxLayout.Y_AXIS));
 
 		RankPanel[] rp = new RankPanel[10];
 		for (int i = 0; i < rp.length; i++) {
 			RankPanel ranker = new RankPanel();
+			ranker.getRankLabel().setText(String.valueOf((i + 1)));;
 			rp[i] = ranker;
 			rankersPanel.add(rp[i]);
 			rankersPanel.add(Box.createVerticalStrut(25));
 		}
 
 		JScrollPane scrollPane = new JScrollPane(rankersPanel);
-		scrollPane.setBackground(new Color(255, 0, 0, 0));
-		scrollPane.setBounds(12, 72, 560, 619);
+		scrollPane.setBackground(new Color(0, 0, 0, 0));
+		scrollPane.setBounds(312, 72, 560, 619);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		contentPane.add(scrollPane);
@@ -83,7 +87,7 @@ public class RankingFrame extends JDialog {
 		ImageIcon CloseButtonPushIcon = new ImageIcon(URLCloseButtonPushImage);
 
 		JButton closeButton = new JButton();
-		closeButton.setBounds(180, 701, 200, 50);
+		closeButton.setBounds(488, 701, 200, 50);
 		closeButton.setIcon(CloseButtonIcon);
 		closeButton.setPressedIcon(CloseButtonPushIcon);
 		closeButton.addActionListener(new ActionListener() {

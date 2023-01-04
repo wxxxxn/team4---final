@@ -10,13 +10,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
-public class SettingFrame extends JDialog {
+public class SettingDialog extends JDialog {
 
 	private JPanel contentPane;
 
-	public SettingFrame() {
-		setBounds(500, 200, 400, 600);
+	public SettingDialog(int x, int y) {
+		setBounds(x + 7, y + 30, 1185, 762);
 		setUndecorated(true);
 		setModal(true);
 		setBackground(new Color(0,0,0,100));
@@ -27,20 +28,21 @@ public class SettingFrame extends JDialog {
 		contentPane.setBackground(new Color(0, 0, 0, 0));
 
 		JLabel settinglbl = new JLabel("환경설정");
+		settinglbl.setHorizontalAlignment(SwingConstants.CENTER);
 		settinglbl.setForeground(Color.WHITE);
 		settinglbl.setFont(new Font("휴먼편지체", Font.PLAIN, 40));
-		settinglbl.setBounds(132, 23, 140, 68);
+		settinglbl.setBounds(12, 23, 1161, 68);
 		contentPane.add(settinglbl);
 
 		JLabel lblNewLabel = new JLabel("현재 접속중인 닉네임");
 		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setHorizontalAlignment(JLabel.CENTER);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel.setFont(new Font("휴먼편지체", Font.PLAIN, 20));
-		lblNewLabel.setBounds(39, 153, 170, 54);
+		lblNewLabel.setBounds(12, 153, 585, 54);
 		contentPane.add(lblNewLabel);
 
 		JButton resetbtn = new JButton("리셋");
-		resetbtn.setBounds(122, 254, 150, 40);
+		resetbtn.setBounds(517, 246, 150, 40);
 		contentPane.add(resetbtn);
 		resetbtn.setOpaque(false);
 		resetbtn.setBorderPainted(false);
@@ -50,13 +52,13 @@ public class SettingFrame extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		logoutbtn.setBounds(122, 326, 150, 40);
+		logoutbtn.setBounds(517, 321, 150, 40);
 		contentPane.add(logoutbtn);
 		logoutbtn.setOpaque(false);
 		logoutbtn.setBorderPainted(false);
 
 		JButton outbtn = new JButton("회원탈퇴");
-		outbtn.setBounds(122, 398, 150, 40);
+		outbtn.setBounds(517, 397, 150, 40);
 		contentPane.add(outbtn);
 		outbtn.setOpaque(false);
 		outbtn.setBorderPainted(false);
@@ -67,14 +69,14 @@ public class SettingFrame extends JDialog {
 				dispose();
 			}
 		});
-		btnNewButton.setBounds(288, 544, 100, 30);
+		btnNewButton.setBounds(542, 543, 100, 30);
 		contentPane.add(btnNewButton);
 		
 		JLabel lblNewLabel_1 = new JLabel("포비");
 		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setHorizontalAlignment(JLabel.CENTER);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1.setFont(new Font("휴먼편지체", Font.PLAIN, 20));
-		lblNewLabel_1.setBounds(238, 153, 126, 54);
+		lblNewLabel_1.setBounds(672, 153, 487, 54);
 		contentPane.add(lblNewLabel_1);
 		
 

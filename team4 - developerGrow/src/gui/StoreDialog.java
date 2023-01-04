@@ -19,18 +19,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 
-public class StoreFrame extends JDialog {
+public class StoreDialog extends JDialog {
 
 	private JPanel contentPane;
 
-	public StoreFrame() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(400, 100, 600, 800);
+	public StoreDialog(int x, int y) {
+		
+		setUndecorated(true);
 		setModal(true);
 		contentPane = new JPanel();
-		contentPane.setForeground(Color.WHITE);
-		contentPane.setBackground(Color.WHITE);
+		setBackground(new Color(0, 0, 0, 100));
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(x + 7, y + 30, 1185, 762);
+		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(new Color(0, 0, 0, 0));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -39,14 +42,14 @@ public class StoreFrame extends JDialog {
 		storeLabel.setBackground(Color.WHITE);
 		storeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		storeLabel.setFont(new Font("HY목각파임B", Font.BOLD, 40));
-		storeLabel.setBounds(12, 10, 560, 50);
+		storeLabel.setBounds(12, 10, 1176, 50);
 		contentPane.add(storeLabel);
 		
 		JPanel itemsPanel = new JPanel();
 		itemsPanel.setForeground(new Color(255, 255, 255));
 		itemsPanel.setOpaque(true);
 		itemsPanel.setBackground(new Color(255, 0, 0, 0));
-		itemsPanel.setBounds(12, 72, 560, 619);
+		itemsPanel.setBounds(308, 70, 560, 619);
 		contentPane.add(itemsPanel);
 		itemsPanel.setLayout(new GridLayout(5, 0, 10, 25));
 		
@@ -66,7 +69,7 @@ public class StoreFrame extends JDialog {
 		ImageIcon CloseButtonPushIcon = new ImageIcon(URLCloseButtonPushImage);
 		
 		JButton closeButton = new JButton("");
-		closeButton.setBounds(180, 701, 200, 50);
+		closeButton.setBounds(488, 701, 200, 50);
 		closeButton.setIcon(CloseButtonIcon);
 		closeButton.setPressedIcon(CloseButtonPushIcon);
 		closeButton.addActionListener(new ActionListener() {
