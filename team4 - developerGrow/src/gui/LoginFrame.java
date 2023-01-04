@@ -52,12 +52,13 @@ public class LoginFrame extends JFrame {
 		sound(URLmix);
 		
 		frame = new JFrame();
-		frame.setBounds(100, 100, 500, 500);
+		frame.setBounds(100, 100, 1000, 500);
 		frame.getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(60, 200, 362, 115);
+		panel.setBounds(309, 200, 362, 115);
 		frame.getContentPane().add(panel);
+		panel.setBackground(new Color(255, 0, 0, 0));
 		panel.setLayout(null);
 
 		txtId = new MyTextField();
@@ -71,10 +72,10 @@ public class LoginFrame extends JFrame {
 		passwordField.setBounds(12, 61, 338, 41);
 		panel.add(passwordField);
 
-		JLabel lblNewLabel = new JLabel("개발자 키우기");
-		lblNewLabel.setFont(new Font("휴먼둥근헤드라인", Font.BOLD, 36));
-		lblNewLabel.setBounds(39, 69, 267, 63);
-		frame.getContentPane().add(lblNewLabel);
+//		JLabel lblNewLabel = new JLabel("개발자 키우기");
+//		lblNewLabel.setFont(new Font("휴먼둥근헤드라인", Font.BOLD, 36));
+//		lblNewLabel.setBounds(39, 69, 267, 63);
+//		frame.getContentPane().add(lblNewLabel);
 
 		signupbtn = new JButton("");
 		URL URLSignupImage = classLoader.getResource("btn_image/SignBtnImage.png");
@@ -87,7 +88,7 @@ public class LoginFrame extends JFrame {
 		signupbtn.setOpaque(false);
 		signupbtn.setBackground(new Color(255, 0, 0, 0));
 		signupbtn.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		signupbtn.setBounds(94, 347, 139, 63);
+		signupbtn.setBounds(336, 335, 139, 63);
 		frame.getContentPane().add(signupbtn);
 		signupbtn.addActionListener(new ActionListener() {
 
@@ -109,14 +110,21 @@ public class LoginFrame extends JFrame {
 		loginbtn.setOpaque(false);
 		loginbtn.setBackground(new Color(255, 0, 0, 0));
 		loginbtn.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		loginbtn.setBounds(245, 347, 139, 63);
+		loginbtn.setBounds(508, 335, 139, 63);
 		frame.getContentPane().add(loginbtn);
 
 		lblNewLabel_1 = new JLabel("");
 		URL URLbackImage = classLoader.getResource("character/logincharacter.gif");
 		lblNewLabel_1.setIcon(new ImageIcon(URLbackImage));
-		lblNewLabel_1.setBounds(299, 24, 161, 166);
+		lblNewLabel_1.setBounds(683, 207, 161, 166);
 		frame.getContentPane().add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		URL URLLoginBack = classLoader.getResource("backimg/LoginBackground.png");
+		lblNewLabel_2.setIcon(new ImageIcon(URLLoginBack));
+		lblNewLabel_2.setBounds(0, 0, 984, 461);
+		frame.getContentPane().add(lblNewLabel_2);
+		
 		loginbtn.addActionListener(new ActionListener() {
 
 			@Override
