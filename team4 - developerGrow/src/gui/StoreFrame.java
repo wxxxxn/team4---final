@@ -1,8 +1,5 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -13,12 +10,13 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 public class StoreFrame extends JFrame {
 
@@ -32,9 +30,9 @@ public class StoreFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel storeLabel = new JLabel("상점");
+		JLabel storeLabel = new JLabel("스킬 목록");
 		storeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		storeLabel.setFont(new Font("HY목각파임B", Font.BOLD, 40));
+		storeLabel.setFont(new Font("굴림", Font.BOLD, 25));
 		storeLabel.setBounds(12, 10, 560, 50);
 		contentPane.add(storeLabel);
 		
@@ -52,8 +50,18 @@ public class StoreFrame extends JFrame {
 			itemsPanel.add(item[i]);
 		}
 		
-		JButton closeButton = new JButton("닫기");
+		ClassLoader classLoader = getClass().getClassLoader();
+		
+		URL URLCloseButtonImage = classLoader.getResource("btn_image/closeBtnImage.png");
+		ImageIcon CloseButtonIcon = new ImageIcon(URLCloseButtonImage);
+		
+		URL URLCloseButtonPushImage = classLoader.getResource("btn_image/closeBtnPushImage.png");
+		ImageIcon CloseButtonPushIcon = new ImageIcon(URLCloseButtonPushImage);
+		
+		JButton closeButton = new JButton("");
 		closeButton.setBounds(180, 701, 200, 50);
+		closeButton.setIcon(CloseButtonIcon);
+		closeButton.setPressedIcon(CloseButtonPushIcon);
 		closeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
