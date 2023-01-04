@@ -21,6 +21,7 @@ public class MainFrame extends JFrame {
 
 	public MainFrame() {
 		ClassLoader classLoader = getClass().getClassLoader();
+		
 		setBounds(100, 100, 1200, 800);
 		Mainpnl = new JPanel();
 		Mainpnl.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -101,9 +102,9 @@ public class MainFrame extends JFrame {
 		currentpnl.add(lblNewLabel_1);
 
 		JButton rankingbtn = new JButton();
+		rankingbtn.setBounds(1051, 140, 90, 89);
 		URL URLrankImage = classLoader.getResource("btn_image/rankBtnImage.png");
 		rankingbtn.setIcon(new ImageIcon(URLrankImage));
-		rankingbtn.setBounds(901, 30, 97, 65);
 		Mainpnl.add(rankingbtn);
 		rankingbtn.setBorderPainted(false);
 		rankingbtn.setOpaque(false);
@@ -117,9 +118,9 @@ public class MainFrame extends JFrame {
 		});
 
 		settingbtn = new JButton();
+		settingbtn.setBounds(1051, 10, 90, 89);
 		URL URLsettingImage = classLoader.getResource("btn_image/settingBtnImage.png");
 		settingbtn.setIcon(new ImageIcon(URLsettingImage));
-		settingbtn.setBounds(1044, 30, 97, 65);
 		Mainpnl.add(settingbtn);
 		settingbtn.setOpaque(false);
 		settingbtn.setBorderPainted(false);
@@ -134,9 +135,9 @@ public class MainFrame extends JFrame {
 		});
 
 		JButton storebtn = new JButton();
+		storebtn.setBounds(1051, 275, 90, 89);
 		URL URLstoreImage = classLoader.getResource("btn_image/StoreBtnImage.png");
 		storebtn.setIcon(new ImageIcon(URLstoreImage));
-		storebtn.setBounds(901, 684, 97, 38);
 		Mainpnl.add(storebtn);
 		storebtn.setOpaque(false);
 		storebtn.setBackground(new Color(255, 0, 0, 0));
@@ -151,18 +152,18 @@ public class MainFrame extends JFrame {
 		
 		
 		JButton gamebtn = new JButton();
+		gamebtn.setBounds(1051, 395, 90, 81);
 		URL URLgameImage = classLoader.getResource("btn_image/miniGameBtnImage.png");
 		gamebtn.setIcon(new ImageIcon(URLgameImage));
-		gamebtn.setBounds(901, 608, 97, 38);
 		Mainpnl.add(gamebtn);
 		gamebtn.setOpaque(false);
 		gamebtn.setBorderPainted(false);
 		gamebtn.setBackground(new Color(255, 0, 0, 0));
 
 		JButton taskbtn = new JButton();
+		taskbtn.setBounds(1052, 525, 89, 81);
 		URL URLtaskImage = classLoader.getResource("btn_image/projectBtnImage.png");
 		taskbtn.setIcon(new ImageIcon(URLtaskImage));
-		taskbtn.setBounds(1044, 608, 97, 38);
 		taskbtn.setOpaque(false);
 		taskbtn.setBackground(new Color(255, 0, 0, 0));
 		taskbtn.setBorderPainted(false);
@@ -174,10 +175,10 @@ public class MainFrame extends JFrame {
 		});
 		Mainpnl.add(taskbtn);
 
-		JButton activitybtn = new JButton("");
+		JButton activitybtn = new JButton();
+		activitybtn.setBounds(1058, 633, 83, 89);
 		URL URLactiveImage = classLoader.getResource("btn_image/activeBtnImage.png");
 		activitybtn.setIcon(new ImageIcon(URLactiveImage));
-		activitybtn.setBounds(1044, 684, 97, 38);
 		Mainpnl.add(activitybtn);
 		activitybtn.setOpaque(false);
 		activitybtn.setBorderPainted(false);
@@ -195,12 +196,18 @@ public class MainFrame extends JFrame {
 		Mainpnl.add(lblNewLabel_2);
 		
 		JLabel Image = new JLabel("");
+		Image.setBounds(0, 0, 1200, 800);
 		URL URLbackImage = classLoader.getResource("backimg/background.png");
 		Image.setIcon(new ImageIcon(URLbackImage));
-		Image.setBounds(0, 0, 1200, 800);
 		Mainpnl.add(Image);
 		Image.setOpaque(false);
 		Image.setBackground(new Color(255, 0, 0, 0));
+		
+		JLabel character = new JLabel();
+		URL URLcharImage = classLoader.getResource("character/character.gif");
+		character.setIcon(new ImageIcon(URLcharImage));
+		character.setBounds(221, 395, 191, 253);
+		Mainpnl.add(character);
 	
 	}
 	
