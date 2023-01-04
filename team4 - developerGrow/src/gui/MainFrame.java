@@ -104,7 +104,7 @@ public class MainFrame extends JFrame {
 		
 		
 		JPanel date = new JPanel();
-		date.setBounds(12, 10, 184, 45);
+		date.setBounds(12, 10, 250, 45);
 		Mainpnl.add(date);
 		date.setLayout(null);
 		date.setOpaque(false);
