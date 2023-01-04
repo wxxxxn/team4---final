@@ -22,18 +22,21 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
-public class RankingFrame extends JFrame {
+public class RankingFrame extends JDialog {
 
 	private JPanel contentPane;
 
 	public RankingFrame() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 600, 800);
+		setBounds(400, 100, 600, 800);
+		setModal(true);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -46,12 +49,14 @@ public class RankingFrame extends JFrame {
 //		rankTextPanel.add(rankTextLabel);
 
 		JLabel rankTextPanel = new JLabel("랭킹");
+		rankTextPanel.setBackground(Color.WHITE);
 		rankTextPanel.setHorizontalAlignment(SwingConstants.CENTER);
 		rankTextPanel.setFont(new Font("HY목각파임B", Font.BOLD, 40));
 		rankTextPanel.setBounds(12, 10, 560, 50);
 		contentPane.add(rankTextPanel);
 
 		JPanel rankersPanel = new JPanel();
+		rankersPanel.setBackground(Color.WHITE);
 		rankersPanel.setLayout(new BoxLayout(rankersPanel, BoxLayout.Y_AXIS));
 
 		RankPanel[] rp = new RankPanel[10];

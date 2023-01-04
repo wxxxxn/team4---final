@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.ImageIcon;
 
 import java.awt.Color;
@@ -18,30 +19,36 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 
-public class StoreFrame extends JFrame {
+public class StoreFrame extends JDialog {
 
 	private JPanel contentPane;
 
 	public StoreFrame() {
-		setBounds(100, 100, 600, 800);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(400, 100, 600, 800);
+		setModal(true);
 		contentPane = new JPanel();
+		contentPane.setForeground(Color.WHITE);
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel storeLabel = new JLabel("스킬 목록");
+		storeLabel.setForeground(Color.BLACK);
+		storeLabel.setBackground(Color.WHITE);
 		storeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		storeLabel.setFont(new Font("굴림", Font.BOLD, 25));
+		storeLabel.setFont(new Font("HY목각파임B", Font.BOLD, 40));
 		storeLabel.setBounds(12, 10, 560, 50);
 		contentPane.add(storeLabel);
 		
 		JPanel itemsPanel = new JPanel();
+		itemsPanel.setForeground(new Color(255, 255, 255));
 		itemsPanel.setOpaque(true);
 		itemsPanel.setBackground(new Color(255, 0, 0, 0));
 		itemsPanel.setBounds(12, 72, 560, 619);
 		contentPane.add(itemsPanel);
-		itemsPanel.setLayout(new GridLayout(5, 0, 0, 25));
+		itemsPanel.setLayout(new GridLayout(5, 0, 10, 25));
 		
 		ItemPanel[] item = new ItemPanel[5];
 		for (int i = 0; i < item.length; i++) {
