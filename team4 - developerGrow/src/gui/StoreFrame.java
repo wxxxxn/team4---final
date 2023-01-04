@@ -32,9 +32,9 @@ public class StoreFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel storeLabel = new JLabel("스킬 목록");
+		JLabel storeLabel = new JLabel("상점");
 		storeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		storeLabel.setFont(new Font("굴림", Font.BOLD, 25));
+		storeLabel.setFont(new Font("HY목각파임B", Font.BOLD, 40));
 		storeLabel.setBounds(12, 10, 560, 50);
 		contentPane.add(storeLabel);
 		

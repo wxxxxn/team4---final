@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 
@@ -12,6 +13,7 @@ import custom_panel.RankPanel;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,6 +22,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 
 public class RankingFrame extends JFrame {
 
@@ -30,15 +33,21 @@ public class RankingFrame extends JFrame {
 		setBounds(100, 100, 600, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-		JPanel rankTextPanel = new JPanel();
-		contentPane.add(rankTextPanel, BorderLayout.NORTH);
+//		JPanel rankTextPanel = new JPanel();
+//		contentPane.add(rankTextPanel, BorderLayout.NORTH);
+//		
+//		JLabel rankTextLabel = new JLabel("랭킹");
+//		rankTextLabel.setFont(new Font("굴림", Font.BOLD, 25));
+//		rankTextPanel.add(rankTextLabel);
 		
-		JLabel rankTextLabel = new JLabel("랭킹");
-		rankTextLabel.setFont(new Font("굴림", Font.BOLD, 25));
-		rankTextPanel.add(rankTextLabel);
+		JLabel rankTextPanel = new JLabel("랭킹");
+		rankTextPanel.setHorizontalAlignment(SwingConstants.CENTER);
+		rankTextPanel.setFont(new Font("HY목각파임B", Font.BOLD, 40));
+		rankTextPanel.setBounds(12, 10, 560, 50);
+		contentPane.add(rankTextPanel);
 		
 		JPanel rankersPanel = new JPanel();
 		rankersPanel.setLayout(new BoxLayout(rankersPanel, BoxLayout.Y_AXIS));
@@ -50,23 +59,23 @@ public class RankingFrame extends JFrame {
 			rankersPanel.add(rp[i]);
 			rankersPanel.add(Box.createVerticalStrut(25));
 		}
+		
 		JScrollPane scrollPane = new JScrollPane(rankersPanel);
+		scrollPane.setBackground(new Color(255, 0, 0, 0));
+		scrollPane.setBounds(12, 72, 560, 619);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		contentPane.add(scrollPane, BorderLayout.CENTER);
-		
-		JPanel closeButtonPanel = new JPanel();
-		contentPane.add(closeButtonPanel, BorderLayout.SOUTH);
+		contentPane.add(scrollPane);
 		
 		JButton closeButton = new JButton("닫기");
+		closeButton.setBounds(180, 701, 200, 50);
 		closeButton.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
-		closeButtonPanel.add(closeButton);
+		contentPane.add(closeButton);
 		
 	}
 
