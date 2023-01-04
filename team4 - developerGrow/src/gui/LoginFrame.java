@@ -48,7 +48,7 @@ public class LoginFrame extends JFrame {
 
 	public LoginFrame() {
 		ClassLoader classLoader = getClass().getClassLoader();
-		URL URLmix = classLoader.getResource("src\\music\\main.wav");
+		URL URLmix = classLoader.getResource("music\\main.wav");
 		sound(URLmix);
 		
 		frame = new JFrame();

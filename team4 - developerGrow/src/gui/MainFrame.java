@@ -76,7 +76,7 @@ public class MainFrame extends JFrame {
 		});
 		
 		ClassLoader classLoader = getClass().getClassLoader();
-		URL URLmix = classLoader.getResource("src\\music\\mix.wav");
+		URL URLmix = classLoader.getResource("music\\mix.wav");
 		sound(URLmix);
 		
 		setBounds(100, 100, 1200, 800);
