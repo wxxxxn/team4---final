@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -109,8 +110,10 @@ public class MainFrame extends JFrame {
 		date.setOpaque(false);
 
 		JLabel datelbl = new JLabel("2023-01-03");
-		datelbl.setFont(new Font("굴림", Font.PLAIN, 16));
-		datelbl.setBounds(12, 5, 160, 40);
+		datelbl.setHorizontalAlignment(SwingConstants.CENTER);
+		datelbl.setBorder(new LineBorder(Color.BLACK, 3));
+		datelbl.setFont(new Font("Algerian", Font.BOLD, 30));
+		datelbl.setBounds(12, 5, 237, 40);
 		date.add(datelbl);
 
 		JPanel statuspnl = new JPanel();
@@ -220,7 +223,8 @@ public class MainFrame extends JFrame {
 		currentpnl.setLayout(null);
 
 		JLabel lblNewLabel_1 = new JLabel("현재 진행중인 업무");
-		lblNewLabel_1.setBounds(12, 5, 177, 40);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(12, 5, 237, 159);
 		currentpnl.add(lblNewLabel_1);
 
 		JButton rankingbtn = new JButton();
