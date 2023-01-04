@@ -27,6 +27,9 @@ public class MainFrame extends JFrame {
 		setContentPane(Mainpnl);
 		Mainpnl.setLayout(null);
 
+		
+		
+		
 		JPanel date = new JPanel();
 		date.setBounds(12, 10, 184, 45);
 		Mainpnl.add(date);
@@ -98,8 +101,8 @@ public class MainFrame extends JFrame {
 		currentpnl.add(lblNewLabel_1);
 
 		JButton rankingbtn = new JButton();
-		URL URLCigaImage = classLoader.getResource("backimg/background.png");
-		rankingbtn.setIcon(new ImageIcon("rankingBtnImage.png"));
+		URL URLrankImage = classLoader.getResource("btn_image/rankBtnImage.png");
+		rankingbtn.setIcon(new ImageIcon(URLrankImage));
 		rankingbtn.setBounds(901, 30, 97, 65);
 		Mainpnl.add(rankingbtn);
 		rankingbtn.setBorderPainted(false);
@@ -113,8 +116,9 @@ public class MainFrame extends JFrame {
 			}
 		});
 
-		settingbtn = new JButton("");
-		settingbtn.setIcon(new ImageIcon("settingBtnImage.png"));
+		settingbtn = new JButton();
+		URL URLsettingImage = classLoader.getResource("btn_image/settingBtnImage.png");
+		settingbtn.setIcon(new ImageIcon(URLsettingImage));
 		settingbtn.setBounds(1044, 30, 97, 65);
 		Mainpnl.add(settingbtn);
 		settingbtn.setOpaque(false);
@@ -129,7 +133,9 @@ public class MainFrame extends JFrame {
 			}
 		});
 
-		JButton storebtn = new JButton("상점");
+		JButton storebtn = new JButton();
+		URL URLstoreImage = classLoader.getResource("btn_image/StoreBtnImage.png");
+		storebtn.setIcon(new ImageIcon(URLstoreImage));
 		storebtn.setBounds(901, 684, 97, 38);
 		Mainpnl.add(storebtn);
 		storebtn.setOpaque(false);
@@ -143,16 +149,18 @@ public class MainFrame extends JFrame {
 			}
 		});
 		
-		JButton gamebtn = new JButton("미니게임");
-		gamebtn.setIcon(new ImageIcon("miniGameBtnImage.png"));
+		JButton gamebtn = new JButton();
+		URL URLgameImage = classLoader.getResource("btn_image/miniGameBtnImage.png");
+		gamebtn.setIcon(new ImageIcon(URLgameImage));
 		gamebtn.setBounds(901, 608, 97, 38);
 		Mainpnl.add(gamebtn);
 		gamebtn.setOpaque(false);
 		gamebtn.setBorderPainted(false);
 		gamebtn.setBackground(new Color(255, 0, 0, 0));
 
-		JButton taskbtn = new JButton("업무");
-		taskbtn.setIcon(new ImageIcon("projectBtnImage.png"));
+		JButton taskbtn = new JButton();
+		URL URLtaskImage = classLoader.getResource("btn_image/projectBtnImage.png");
+		taskbtn.setIcon(new ImageIcon(URLtaskImage));
 		taskbtn.setBounds(1044, 608, 97, 38);
 		taskbtn.setOpaque(false);
 		taskbtn.setBackground(new Color(255, 0, 0, 0));
@@ -165,9 +173,9 @@ public class MainFrame extends JFrame {
 		});
 		Mainpnl.add(taskbtn);
 
-		JButton activitybtn = new JButton("활동");
-		
-		activitybtn.setIcon(new ImageIcon("activeBtnImage.png"));
+		JButton activitybtn = new JButton("");
+		URL URLactiveImage = classLoader.getResource("btn_image/activeBtnImage.png");
+		activitybtn.setIcon(new ImageIcon(URLactiveImage));
 		activitybtn.setBounds(1044, 684, 97, 38);
 		Mainpnl.add(activitybtn);
 		activitybtn.setOpaque(false);
@@ -190,6 +198,9 @@ public class MainFrame extends JFrame {
 		Image.setIcon(new ImageIcon(URLbackImage));
 		Image.setBounds(0, 0, 1200, 800);
 		Mainpnl.add(Image);
+		Image.setOpaque(false);
+		Image.setBackground(new Color(255, 0, 0, 0));
+	
 	}
 	
 	public void showGUI() {
