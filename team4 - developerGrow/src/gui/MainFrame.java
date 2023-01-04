@@ -22,6 +22,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 public class MainFrame extends JFrame {
 
@@ -283,7 +284,8 @@ public class MainFrame extends JFrame {
 		gamebtn.setBackground(new Color(255, 0, 0, 0));
 
 		JButton taskbtn = new JButton();
-		taskbtn.setBounds(1052, 525, 89, 81);
+		taskbtn.setHorizontalAlignment(SwingConstants.LEFT);
+		taskbtn.setBounds(1042, 525, 99, 81);
 		URL URLtaskImage = classLoader.getResource("btn_image/projectBtnImage.png");
 		taskbtn.setIcon(new ImageIcon(URLtaskImage));
 		taskbtn.setOpaque(false);
