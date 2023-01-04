@@ -43,13 +43,6 @@ public class RankingDialog extends JDialog {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-//		JPanel rankTextPanel = new JPanel();
-//		contentPane.add(rankTextPanel, BorderLayout.NORTH);
-//		
-//		JLabel rankTextLabel = new JLabel("랭킹");
-//		rankTextLabel.setFont(new Font("굴림", Font.BOLD, 25));
-//		rankTextPanel.add(rankTextLabel);
-
 		JLabel rankTextPanel = new JLabel("랭킹");
 		rankTextPanel.setBackground(Color.WHITE);
 		rankTextPanel.setHorizontalAlignment(SwingConstants.CENTER);
