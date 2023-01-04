@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,7 +20,7 @@ public class MainFrame extends JFrame {
 	private JButton settingbtn;
 
 	public MainFrame() {
-		
+		ClassLoader classLoader = getClass().getClassLoader();
 		setBounds(100, 100, 1200, 800);
 		Mainpnl = new JPanel();
 		Mainpnl.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -96,7 +97,9 @@ public class MainFrame extends JFrame {
 		lblNewLabel_1.setBounds(12, 5, 177, 40);
 		currentpnl.add(lblNewLabel_1);
 
-		JButton rankingbtn = new JButton("랭킹");
+		JButton rankingbtn = new JButton();
+		URL URLCigaImage = classLoader.getResource("backimg/background.png");
+		rankingbtn.setIcon(new ImageIcon("rankingBtnImage.png"));
 		rankingbtn.setBounds(901, 30, 97, 65);
 		Mainpnl.add(rankingbtn);
 		rankingbtn.setBorderPainted(false);
@@ -110,7 +113,8 @@ public class MainFrame extends JFrame {
 			}
 		});
 
-		settingbtn = new JButton("설정");
+		settingbtn = new JButton("");
+		settingbtn.setIcon(new ImageIcon("settingBtnImage.png"));
 		settingbtn.setBounds(1044, 30, 97, 65);
 		Mainpnl.add(settingbtn);
 		settingbtn.setOpaque(false);
@@ -140,6 +144,7 @@ public class MainFrame extends JFrame {
 		});
 		
 		JButton gamebtn = new JButton("미니게임");
+		gamebtn.setIcon(new ImageIcon("miniGameBtnImage.png"));
 		gamebtn.setBounds(901, 608, 97, 38);
 		Mainpnl.add(gamebtn);
 		gamebtn.setOpaque(false);
@@ -147,6 +152,7 @@ public class MainFrame extends JFrame {
 		gamebtn.setBackground(new Color(255, 0, 0, 0));
 
 		JButton taskbtn = new JButton("업무");
+		taskbtn.setIcon(new ImageIcon("projectBtnImage.png"));
 		taskbtn.setBounds(1044, 608, 97, 38);
 		taskbtn.setOpaque(false);
 		taskbtn.setBackground(new Color(255, 0, 0, 0));
@@ -160,6 +166,8 @@ public class MainFrame extends JFrame {
 		Mainpnl.add(taskbtn);
 
 		JButton activitybtn = new JButton("활동");
+		
+		activitybtn.setIcon(new ImageIcon("activeBtnImage.png"));
 		activitybtn.setBounds(1044, 684, 97, 38);
 		Mainpnl.add(activitybtn);
 		activitybtn.setOpaque(false);
@@ -178,7 +186,8 @@ public class MainFrame extends JFrame {
 		Mainpnl.add(lblNewLabel_2);
 		
 		JLabel Image = new JLabel("");
-		Image.setIcon(new ImageIcon("background.png"));
+		URL URLbackImage = classLoader.getResource("backimg/background.png");
+		Image.setIcon(new ImageIcon(URLbackImage));
 		Image.setBounds(0, 0, 1200, 800);
 		Mainpnl.add(Image);
 	}
