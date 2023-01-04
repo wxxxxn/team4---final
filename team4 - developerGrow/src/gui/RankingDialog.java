@@ -39,6 +39,7 @@ public class RankingDialog extends JDialog {
 		setBackground(new Color(0, 0, 0, 100));
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setOpaque(false);
 		contentPane.setBackground(new Color(0, 0, 0, 0));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -51,20 +52,23 @@ public class RankingDialog extends JDialog {
 		contentPane.add(rankTextPanel);
 
 		JPanel rankersPanel = new JPanel();
-		rankersPanel.setBackground(new Color(0, 0, 0, 0));
+		rankersPanel.setOpaque(false);
+		rankersPanel.setBackground(new Color(0, true));
 		rankersPanel.setLayout(new BoxLayout(rankersPanel, BoxLayout.Y_AXIS));
 
 		RankPanel[] rp = new RankPanel[10];
 		for (int i = 0; i < rp.length; i++) {
 			RankPanel ranker = new RankPanel();
-			ranker.getRankLabel().setText(String.valueOf((i + 1)));;
+			ranker.getRankLabel().setText(String.valueOf((i + 1)));
 			rp[i] = ranker;
 			rankersPanel.add(rp[i]);
 			rankersPanel.add(Box.createVerticalStrut(25));
 		}
 
 		JScrollPane scrollPane = new JScrollPane(rankersPanel);
-		scrollPane.setBackground(new Color(0, 0, 0, 0));
+		scrollPane.setOpaque(false);
+		scrollPane.setBackground(new Color(0, true));
+		scrollPane.getViewport().setOpaque(false);
 		scrollPane.setBounds(312, 72, 560, 619);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
