@@ -13,38 +13,40 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class SignUpFrame {
+public class SignUpDialog extends JDialog  {
 
 	private JDialog dialog;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField idField;
+	private JTextField nameField;
+	private JTextField passwordChkField;
+	private JTextField passwordField;
 
-	public SignUpFrame() {
+	public SignUpDialog(int x, int y) {
 		dialog = new JDialog();
+		dialog.getContentPane().setBackground(new Color (255, 0, 0, 0));
 		ClassLoader classLoader = getClass().getClassLoader();
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(35, 103, 389, 267);
+		panel.setBackground(new Color (255, 0, 0, 0));
+		panel.setBounds(357, 73, 410, 330);
 		dialog.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("아이디");
-		lblNewLabel_1.setBounds(0, 10, 57, 15);
-		panel.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_1_1 = new JLabel("닉네임");
-		lblNewLabel_1_1.setBounds(0, 66, 57, 15);
-		panel.add(lblNewLabel_1_1);
-		
-		JLabel lblNewLabel_1_1_1 = new JLabel("비밀번호");
-		lblNewLabel_1_1_1.setBounds(0, 123, 57, 15);
-		panel.add(lblNewLabel_1_1_1);
-		
-		JLabel lblNewLabel_1_1_1_1 = new JLabel("비밀번호 확인");
-		lblNewLabel_1_1_1_1.setBounds(0, 176, 85, 15);
-		panel.add(lblNewLabel_1_1_1_1);
+//		JLabel lblNewLabel_1 = new JLabel("아이디");
+//		lblNewLabel_1.setBounds(0, 10, 57, 15);
+//		panel.add(lblNewLabel_1);
+//		
+//		JLabel lblNewLabel_1_1 = new JLabel("닉네임");
+//		lblNewLabel_1_1.setBounds(0, 66, 57, 15);
+//		panel.add(lblNewLabel_1_1);
+//		
+//		JLabel lblNewLabel_1_1_1 = new JLabel("비밀번호");
+//		lblNewLabel_1_1_1.setBounds(0, 123, 57, 15);
+//		panel.add(lblNewLabel_1_1_1);
+//		
+//		JLabel lblNewLabel_1_1_1_1 = new JLabel("비밀번호 확인");
+//		lblNewLabel_1_1_1_1.setBounds(0, 176, 85, 15);
+//		panel.add(lblNewLabel_1_1_1_1);
 		
 		// 중복확인버튼
 		JButton btnNewButton_1 = new JButton("");
@@ -54,7 +56,7 @@ public class SignUpFrame {
 		ImageIcon duplicatePushBtnIcon = new ImageIcon(URLduplicatePushImage);
 		btnNewButton_1.setIcon(duplicateBtnIcon);
 		btnNewButton_1.setPressedIcon(duplicatePushBtnIcon);
-		btnNewButton_1.setBounds(280, 58, 97, 26);
+		btnNewButton_1.setBounds(313, 102, 97, 26);
 		btnNewButton_1.setBorderPainted(false);
 		btnNewButton_1.setOpaque(false);
 		btnNewButton_1.setBackground(new Color(255, 0, 0, 0));
@@ -66,48 +68,48 @@ public class SignUpFrame {
 		btnNewButton_2.setBorderPainted(false);
 		btnNewButton_2.setOpaque(false);
 		btnNewButton_2.setBackground(new Color(255, 0, 0, 0));
-		btnNewButton_2.setBounds(280, 2, 97, 26);
+		btnNewButton_2.setBounds(313, 20, 97, 26);
 		panel.add(btnNewButton_2);
 		
 		JLabel lblNewLabel_2 = new JLabel("중복");
 		lblNewLabel_2.setForeground(Color.RED);
-		lblNewLabel_2.setBounds(228, 10, 57, 15);
+		lblNewLabel_2.setBounds(216, 20, 57, 26);
 		panel.add(lblNewLabel_2);
 		
-		textField = new JTextField();
-		textField.setBounds(88, 4, 116, 21);
-		panel.add(textField);
-		textField.setColumns(10);
+		idField = new JTextField();
+		idField.setBounds(67, 20, 116, 28);
+		panel.add(idField);
+		idField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(88, 60, 116, 21);
-		panel.add(textField_1);
+		nameField = new JTextField();
+		nameField.setColumns(10);
+		nameField.setBounds(67, 100, 116, 28);
+		panel.add(nameField);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(88, 179, 116, 21);
-		panel.add(textField_2);
+		passwordChkField = new JTextField();
+		passwordChkField.setColumns(10);
+		passwordChkField.setBounds(67, 275, 116, 28);
+		panel.add(passwordChkField);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(88, 123, 116, 21);
-		panel.add(textField_3);
+		passwordField = new JTextField();
+		passwordField.setColumns(10);
+		passwordField.setBounds(67, 183, 116, 28);
+		panel.add(passwordField);
 		
 		JLabel lblNewLabel_2_1 = new JLabel("중복");
 		lblNewLabel_2_1.setForeground(Color.RED);
-		lblNewLabel_2_1.setBounds(228, 66, 57, 15);
+		lblNewLabel_2_1.setBounds(216, 110, 57, 15);
 		panel.add(lblNewLabel_2_1);
 		
 		JLabel lblNewLabel_2_1_1 = new JLabel("일치");
 		lblNewLabel_2_1_1.setForeground(Color.RED);
-		lblNewLabel_2_1_1.setBounds(228, 182, 57, 15);
+		lblNewLabel_2_1_1.setBounds(216, 281, 57, 15);
 		panel.add(lblNewLabel_2_1_1);
 		
-		JLabel lblNewLabel = new JLabel("회원가입");
-		lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 24));
-		lblNewLabel.setBounds(197, 22, 130, 33);
-		dialog.getContentPane().add(lblNewLabel);
+//		JLabel lblNewLabel = new JLabel("회원가입");
+//		lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 24));
+//		lblNewLabel.setBounds(197, 22, 130, 33);
+//		dialog.getContentPane().add(lblNewLabel);
 		
 		JButton okbtn = new JButton("");
 		URL URLOkImage = classLoader.getResource("btn_image/signofconfirmBtnImage.png");
@@ -120,7 +122,7 @@ public class SignUpFrame {
 		okbtn.setOpaque(false);
 		okbtn.setBackground(new Color(255, 0, 0, 0));
 		
-		okbtn.setBounds(327, 396, 97, 41);
+		okbtn.setBounds(670, 413, 97, 41);
 		okbtn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -129,7 +131,17 @@ public class SignUpFrame {
 			}
 		});
 		dialog.getContentPane().add(okbtn);
-		dialog.setBounds(100, 100, 500, 500);
+		
+		JLabel label = new JLabel("");
+		URL URLSignBackImage = classLoader.getResource("backimg/SignBackground.png");
+		ImageIcon SignBackIcon = new ImageIcon(URLSignBackImage);
+		label.setIcon(SignBackIcon);
+		label.setBounds(0, 0, 984, 463);
+		dialog.getContentPane().add(label);
+		
+		dialog.setBounds(x + 8, y + 30, 984, 463);
+		dialog.setUndecorated(true);
+		dialog.setModal(true);
 		dialog.getContentPane().setLayout(null);
 	}
 

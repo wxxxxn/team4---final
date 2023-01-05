@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -95,8 +96,9 @@ public class LoginFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SignUpFrame signUpFrame = new SignUpFrame();
-				signUpFrame.showGUI();
+				Point p = frame.getLocationOnScreen();
+				SignUpDialog signupFrame = new SignUpDialog(p.x, p.y);
+				signupFrame.showGUI();
 			}
 		});
 
