@@ -15,16 +15,24 @@ public class GameControllerImpl implements GameController{
 	
 	@Override
 	public void timeController() {
+		
 		Timer currentTime = new Timer();
 		currentTime.scheduleAtFixedRate(timerTask, 250, 250);
 	}
 
 	private TimerTask timerTask = new TimerTask() {
+		
 		@Override
 		public void run() {
 			
-			minutes++;
-			updateTime(minutes);
+			if (minutes == 1440) {
+				minutes = 0;
+				updateDate();
+				updateTime(minutes);
+			} else {
+				minutes++;
+				updateTime(minutes);
+			}
 		}
 	};
 	
@@ -32,10 +40,13 @@ public class GameControllerImpl implements GameController{
 		
 		mainFrame.getHourlbl().setText(String.format("%02d", minutes / 60));
 		mainFrame.getMinutelbl().setText(String.format("%02d", minutes % 60));
-		
-		mainFrame.getHourlbl().revalidate();
-		mainFrame.getHourlbl().repaint();
-		mainFrame.getMinutelbl().revalidate();
-		mainFrame.getMinutelbl().repaint();
     }
+	
+	private void updateDate() {
+		
+		int day = 0;
+		
+		day++;
+		mainFrame.getDatelbl().setText(String.format("%02d", day) + "일차");
+	}
 }

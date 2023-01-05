@@ -31,14 +31,17 @@ import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
+@SuppressWarnings("serial")
 public class MainFrame extends JFrame {
 
 	private JPanel Mainpnl;
 	private JButton settingbtn;
 	private static Clip clip;
+	private JLabel datelbl;
 	private JLabel hourlbl;
 	private JLabel minutelbl;
 	private GameControllerImpl gameControllerImpl = new GameControllerImpl(this);
+	private GameEventImpl gameEventImpl = new GameEventImpl(this);
 
 	public MainFrame() {
 		
@@ -69,22 +72,22 @@ public class MainFrame extends JFrame {
 		Mainpnl.add(lblNewLabel_2);
 
 		JPanel date = new JPanel();
-		date.setBounds(12, 10, 260, 45);
+		date.setBounds(12, 10, 135, 45);
 		Mainpnl.add(date);
 		date.setLayout(null);
 		date.setOpaque(false);
 
-		JLabel datelbl = new JLabel("2023-01-03");
+		datelbl = new JLabel("00일차");
 		datelbl.setHorizontalAlignment(SwingConstants.CENTER);
-		datelbl.setBorder(new LineBorder(Color.BLACK, 3));
-		datelbl.setFont(new Font("Algerian", Font.BOLD, 30));
-		datelbl.setBounds(0, 0, 260, 45);
+//		datelbl.setBorder(new LineBorder(Color.BLACK, 2));
+		datelbl.setFont(new Font("HY목각파임B", Font.BOLD, 30));
+		datelbl.setBounds(0, 0, 135, 45);
 		date.add(datelbl);
 		
 		JPanel currentTime = new JPanel();
-		currentTime.setBounds(162, 65, 110, 45);
+		currentTime.setBounds(147, 10, 135, 45);
 		Mainpnl.add(currentTime);
-		currentTime.setBorder(new LineBorder(Color.BLACK, 3));
+//		currentTime.setBorder(new LineBorder(Color.BLACK, 2));
 		currentTime.setOpaque(false);
 		currentTime.setBackground(new Color(255, 0, 0, 0));
 		currentTime.setLayout(null);
@@ -92,20 +95,20 @@ public class MainFrame extends JFrame {
 		hourlbl = new JLabel("07");
 		hourlbl.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		hourlbl.setFont(new Font("Algerian", Font.BOLD, 30));
-		hourlbl.setBounds(0, 0, 50, 45);
+		hourlbl.setFont(new Font("HY목각파임B", Font.BOLD, 30));
+		hourlbl.setBounds(0, 0, 60, 45);
 		currentTime.add(hourlbl);
 		
 		minutelbl = new JLabel("00");
 		minutelbl.setHorizontalAlignment(SwingConstants.CENTER);
-		minutelbl.setFont(new Font("Algerian", Font.BOLD, 30));
-		minutelbl.setBounds(60, 0, 50, 45);
+		minutelbl.setFont(new Font("HY목각파임B", Font.BOLD, 28));
+		minutelbl.setBounds(75, 0, 60, 45);
 		currentTime.add(minutelbl);
 		
 		JLabel colonlbl = new JLabel(":");
 		colonlbl.setHorizontalAlignment(SwingConstants.CENTER);
 		colonlbl.setFont(new Font("Algerian", Font.BOLD, 30));
-		colonlbl.setBounds(50, 0, 10, 45);
+		colonlbl.setBounds(60, 0, 15, 45);
 		currentTime.add(colonlbl);
 
 		JPanel statuspnl = new JPanel();
@@ -343,15 +346,11 @@ public class MainFrame extends JFrame {
 		return hourlbl;
 	}
 
-	public void setHourlbl(JLabel hourlbl) {
-		this.hourlbl = hourlbl;
-	}
-
 	public JLabel getMinutelbl() {
 		return minutelbl;
 	}
 
-	public void setMinutelbl(JLabel minutelbl) {
-		this.minutelbl = minutelbl;
+	public JLabel getDatelbl() {
+		return datelbl;
 	}
 }
