@@ -22,9 +22,9 @@ import gui.ActiveDialog;
 import gui.ProjectDialog;
 import gui.RankingDialog;
 import gui.SettingDialog;
-import gui.StoreDialog;
 import guiDesign.ImagePanel;
 import guiDesign.Methods;
+import main.store.StoreDialog;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {

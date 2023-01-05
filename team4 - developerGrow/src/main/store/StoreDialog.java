@@ -1,4 +1,4 @@
-package gui;
+package main.store;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -22,6 +22,8 @@ import java.net.URL;
 public class StoreDialog extends JDialog {
 
 	private JPanel contentPane;
+	private skillPanel[] skills;
+	private StoreEventImpl storeEventImpl = new StoreEventImpl();
 
 	public StoreDialog(int x, int y) {
 		
@@ -52,11 +54,12 @@ public class StoreDialog extends JDialog {
 		contentPane.add(itemsPanel);
 		itemsPanel.setLayout(new GridLayout(5, 0, 10, 25));
 		
-		skillPanel[] item = new skillPanel[5];
-		for (int i = 0; i < item.length; i++) {
+		skills = new skillPanel[5];
+		for (int i = 0; i < skills.length; i++) {
 			skillPanel itemPanel = new skillPanel();
-			item[i] = itemPanel;
-			itemsPanel.add(item[i]);
+			skills[i] = itemPanel;
+			storeEventImpl.inputSkillInfo(i, skills[i]);
+			itemsPanel.add(skills[i]);
 		}
 		
 		ClassLoader classLoader = getClass().getClassLoader();
@@ -83,4 +86,8 @@ public class StoreDialog extends JDialog {
 	public void showGUI() {
 		setVisible(true);
 	}
+
+	public skillPanel[] getItems() {
+		return skills;
+	}	
 }
