@@ -36,8 +36,13 @@ public class MainFrame extends JFrame {
 	private JPanel Mainpnl;
 	private JButton settingbtn;
 	private static Clip clip;
+	private JLabel hourlbl;
+	private JLabel minutelbl;
+	private GameControllerImpl gameControllerImpl = new GameControllerImpl(this);
 
 	public MainFrame() {
+		
+		gameControllerImpl.timeController();
 
 		ClassLoader classLoader = getClass().getClassLoader();
 		URL URLmix = classLoader.getResource("music\\mix.wav");
@@ -84,29 +89,28 @@ public class MainFrame extends JFrame {
 		currentTime.setBackground(new Color(255, 0, 0, 0));
 		currentTime.setLayout(null);
 		
-		JLabel timelbl = new JLabel("07");
-		timelbl.setHorizontalAlignment(SwingConstants.CENTER);
+		hourlbl = new JLabel("07");
+		hourlbl.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		timelbl.setFont(new Font("Algerian", Font.BOLD, 30));
-		timelbl.setBounds(0, 0, 50, 45);
-		currentTime.add(timelbl);
+		hourlbl.setFont(new Font("Algerian", Font.BOLD, 30));
+		hourlbl.setBounds(0, 0, 50, 45);
+		currentTime.add(hourlbl);
 		
-		JLabel timelbl_1 = new JLabel("00");
-		timelbl_1.setHorizontalAlignment(SwingConstants.CENTER);
-		timelbl_1.setFont(new Font("Algerian", Font.BOLD, 30));
-		timelbl_1.setBounds(60, 0, 50, 45);
-		currentTime.add(timelbl_1);
+		minutelbl = new JLabel("00");
+		minutelbl.setHorizontalAlignment(SwingConstants.CENTER);
+		minutelbl.setFont(new Font("Algerian", Font.BOLD, 30));
+		minutelbl.setBounds(60, 0, 50, 45);
+		currentTime.add(minutelbl);
 		
-		JLabel timelbl_2 = new JLabel(":");
-		timelbl_2.setHorizontalAlignment(SwingConstants.CENTER);
-		timelbl_2.setFont(new Font("Algerian", Font.BOLD, 30));
-		timelbl_2.setBounds(50, 0, 10, 45);
-		currentTime.add(timelbl_2);
+		JLabel colonlbl = new JLabel(":");
+		colonlbl.setHorizontalAlignment(SwingConstants.CENTER);
+		colonlbl.setFont(new Font("Algerian", Font.BOLD, 30));
+		colonlbl.setBounds(50, 0, 10, 45);
+		currentTime.add(colonlbl);
 
 		JPanel statuspnl = new JPanel();
 		statuspnl.setBounds(12, 608, 877, 114);
 		Mainpnl.add(statuspnl);
-//		statuspnl.setOpaque(false);
 		statuspnl.setLayout(null);
 		statuspnl.setBackground(new Color(255, 255, 255, 100));
 
@@ -296,8 +300,6 @@ public class MainFrame extends JFrame {
 		character.setBounds(211, 392, 210, 300);
 		URL URLcharImage = classLoader.getResource("character/character.gif");
 		character.setIcon(new ImageIcon(URLcharImage));
-//		character.setOpaque(false);
-//		character.setBackground(new Color(255, 0, 0, 0));
 		Mainpnl.add(character);
 
 		JLabel Image = new JLabel("");
@@ -335,5 +337,21 @@ public class MainFrame extends JFrame {
 	public static void stopSound() {
 		clip.stop();
 		clip.close();
+	}
+	
+	public JLabel getHourlbl() {
+		return hourlbl;
+	}
+
+	public void setHourlbl(JLabel hourlbl) {
+		this.hourlbl = hourlbl;
+	}
+
+	public JLabel getMinutelbl() {
+		return minutelbl;
+	}
+
+	public void setMinutelbl(JLabel minutelbl) {
+		this.minutelbl = minutelbl;
 	}
 }
