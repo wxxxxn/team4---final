@@ -43,6 +43,10 @@ public class MainFrame extends JFrame {
 	private GameControllerImpl gameControllerImpl = new GameControllerImpl(this);
 	private GameEventImpl gameEventImpl = new GameEventImpl(this);
 
+	public MainFrame(int id) {
+		// 나중에 채우기
+	}
+		// 테스트용
 	public MainFrame() {
 		
 		gameControllerImpl.timeController();

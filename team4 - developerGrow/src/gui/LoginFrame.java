@@ -19,8 +19,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import accountData.Login;
 import guiDesign.MyPassword;
 import guiDesign.MyTextField;
 import main.MainFrame;
@@ -131,12 +133,37 @@ public class LoginFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Login login = new accountData.Login();
+				String textId = txtId.getText();
+				String textPw = passwordField.getText();
+				if (login.checkUserId(textId) != null) {
+					if (login.checkUserPw(textId, textPw)) {
+						MainFrame mainFrame = new MainFrame(login.idValue(textId));
+						mainFrame.showGUI();
+						frame.dispose();
+						stopSound();
+					}
+				} else {
+					new JOptionPane().showMessageDialog(null, "아이디 또는 비밀번호가 잘못 입력되었습니다. ");
+				}
+			}
+		});
+		
+		//////////////////// 테스트용 버튼
+		JButton testBtn = new JButton("테스트용 버튼");
+		testBtn.setBounds(300, 130, 200, 70);
+		frame.getContentPane().add(testBtn);
+		testBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				MainFrame mainFrame = new MainFrame();
 				mainFrame.showGUI();
 				frame.dispose();
 				stopSound();
 			}
 		});
+		////////////////////
+		
 	}
 	
 	public static ImageIcon convertToIcon(Class useClass, String name, int width, int height) {

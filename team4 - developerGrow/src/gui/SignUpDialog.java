@@ -4,14 +4,19 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import accountData.SignUp;
 
 public class SignUpDialog extends JDialog  {
 
@@ -20,6 +25,10 @@ public class SignUpDialog extends JDialog  {
 	private JTextField nameField;
 	private JTextField passwordChkField;
 	private JTextField passwordField;
+	private JLabel lblPwCheck;
+	private String userId;
+	private String userPw;
+	private String nick;
 
 	public SignUpDialog(int x, int y) {
 		dialog = new JDialog();
@@ -35,32 +44,32 @@ public class SignUpDialog extends JDialog  {
 
 		
 		// 중복확인버튼
-		JButton btnNewButton_1 = new JButton("");
+		JButton btnIdCheck = new JButton("");
 		URL URLduplicateImage = classLoader.getResource("btn_image/duplicateBtnImage.png");
 		ImageIcon duplicateBtnIcon = new ImageIcon(URLduplicateImage);
 		URL URLduplicatePushImage = classLoader.getResource("btn_image/duplicatePushBtnImage.png");
 		ImageIcon duplicatePushBtnIcon = new ImageIcon(URLduplicatePushImage);
-		btnNewButton_1.setIcon(duplicateBtnIcon);
-		btnNewButton_1.setPressedIcon(duplicatePushBtnIcon);
-		btnNewButton_1.setBounds(313, 102, 97, 26);
-		btnNewButton_1.setBorderPainted(false);
-		btnNewButton_1.setOpaque(false);
-		btnNewButton_1.setBackground(new Color(255, 0, 0, 0));
-		panel.add(btnNewButton_1);
+		btnIdCheck.setIcon(duplicateBtnIcon);
+		btnIdCheck.setPressedIcon(duplicatePushBtnIcon);
+		btnIdCheck.setBounds(313, 20, 97, 26);
+		btnIdCheck.setBorderPainted(false);
+		btnIdCheck.setOpaque(false);
+		btnIdCheck.setBackground(new Color(255, 0, 0, 0));
+		panel.add(btnIdCheck);
 		
-		JButton btnNewButton_2 = new JButton("");
-		btnNewButton_2.setIcon(duplicateBtnIcon);
-		btnNewButton_2.setPressedIcon(duplicatePushBtnIcon);
-		btnNewButton_2.setBorderPainted(false);
-		btnNewButton_2.setOpaque(false);
-		btnNewButton_2.setBackground(new Color(255, 0, 0, 0));
-		btnNewButton_2.setBounds(313, 20, 97, 26);
-		panel.add(btnNewButton_2);
+		JButton btnNickCheck = new JButton("");
+		btnNickCheck.setIcon(duplicateBtnIcon);
+		btnNickCheck.setPressedIcon(duplicatePushBtnIcon);
+		btnNickCheck.setBorderPainted(false);
+		btnNickCheck.setOpaque(false);
+		btnNickCheck.setBackground(new Color(255, 0, 0, 0));
+		btnNickCheck.setBounds(313, 102, 97, 26);
+		panel.add(btnNickCheck);
 		
-		JLabel lblNewLabel_2 = new JLabel("중복");
-		lblNewLabel_2.setForeground(Color.RED);
-		lblNewLabel_2.setBounds(216, 20, 57, 26);
-		panel.add(lblNewLabel_2);
+		JLabel lblIdCheck = new JLabel("");
+		lblIdCheck.setForeground(Color.RED);
+		lblIdCheck.setBounds(216, 20, 57, 26);
+		panel.add(lblIdCheck);
 		
 		idField = new JTextField();
 		idField.setBounds(67, 20, 116, 28);
@@ -74,28 +83,88 @@ public class SignUpDialog extends JDialog  {
 		
 		passwordChkField = new JTextField();
 		passwordChkField.setColumns(10);
-		passwordChkField.setBounds(67, 275, 116, 28);
+		passwordChkField.setBounds(67, 183, 116, 28);
 		panel.add(passwordChkField);
 		
 		passwordField = new JTextField();
 		passwordField.setColumns(10);
-		passwordField.setBounds(67, 183, 116, 28);
+		passwordField.setBounds(67, 275, 116, 28);
 		panel.add(passwordField);
 		
-		JLabel lblNewLabel_2_1 = new JLabel("중복");
-		lblNewLabel_2_1.setForeground(Color.RED);
-		lblNewLabel_2_1.setBounds(216, 110, 57, 15);
-		panel.add(lblNewLabel_2_1);
+		JLabel lblNickCheck = new JLabel("");
+		lblNickCheck.setForeground(Color.RED);
+		lblNickCheck.setBounds(216, 110, 57, 15);
+		panel.add(lblNickCheck);
 		
-		JLabel lblNewLabel_2_1_1 = new JLabel("일치");
-		lblNewLabel_2_1_1.setForeground(Color.RED);
-		lblNewLabel_2_1_1.setBounds(216, 281, 57, 15);
-		panel.add(lblNewLabel_2_1_1);
+		lblPwCheck = new JLabel("");
+		lblPwCheck.setForeground(Color.RED);
+		lblPwCheck.setBounds(216, 281, 57, 15);
+		panel.add(lblPwCheck);
 		
 //		JLabel lblNewLabel = new JLabel("회원가입");
 //		lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 24));
 //		lblNewLabel.setBounds(197, 22, 130, 33);
 //		dialog.getContentPane().add(lblNewLabel);
+		
+		btnIdCheck.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String testId = idField.getText(); 
+				SignUp signUp = new accountData.SignUp();
+				if (signUp.verifyUserId(testId) && signUp.useridDuplicationCheck(testId)) {
+					lblIdCheck.setText("허용");
+					userId = testId;
+				} else if (!signUp.verifyUserId(testId)) {
+					lblIdCheck.setText("불가");
+					userId = null;
+				} else {
+					lblIdCheck.setText("중복");
+					userId = null;
+				}
+			}
+		});
+		btnNickCheck.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String testNick = nameField.getText(); 
+				SignUp signUp = new accountData.SignUp();
+				if (signUp.verifyUserNickName(testNick) && signUp.userNickNameDuplicationCheck(testNick)) {
+					lblNickCheck.setText("허용");
+					nick = testNick;
+				} else if (!signUp.verifyUserNickName(testNick)) {
+					lblNickCheck.setText("불가");
+					nick = null;
+				} else {
+					lblNickCheck.setText("중복");
+					nick = null;
+				}
+			}
+		});
+		
+		passwordField.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+			}
+			@Override
+			public void keyPressed(KeyEvent e) {
+				passWordCheck();
+			}
+		});
+		passwordChkField.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+			}
+			@Override
+			public void keyPressed(KeyEvent e) {
+				passWordCheck();
+			}
+		});
 		
 		JButton okbtn = new JButton("");
 		URL URLOkImage = classLoader.getResource("btn_image/signofconfirmBtnImage.png");
@@ -113,7 +182,13 @@ public class SignUpDialog extends JDialog  {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dialog.dispose();
+				SignUp signUp = new accountData.SignUp();
+				if ((userPw != null) && (userId != null) && (nick != null)) {
+					signUp.signUp(userId, userPw, nick);
+					dialog.dispose();
+				} else {
+					new JOptionPane().showMessageDialog(null, "가입 정보를 다시 확인해주세요. ");
+				}
 			}
 		});
 		dialog.getContentPane().add(okbtn);
@@ -151,7 +226,23 @@ public class SignUpDialog extends JDialog  {
 		dialog.setModal(true);
 		dialog.getContentPane().setLayout(null);
 	}
-
+	
+	public void passWordCheck() {
+		String testPw = passwordField.getText(); 
+		String testPwCheck = passwordChkField.getText();
+		SignUp signUp = new accountData.SignUp();
+		if (signUp.verifyUserPw(testPw) && (testPw.equals(testPwCheck))) {
+			lblPwCheck.setText("일치");
+			userPw = testPw;
+		} else if (!signUp.verifyUserPw(testPw)) {
+			lblPwCheck.setText("불가");
+			userPw = null;
+		} else {
+			lblPwCheck.setText("불일치");
+			userPw = null;
+		}
+	}
+	
 	public void showGUI() {
 		dialog.setVisible(true);
 	}
