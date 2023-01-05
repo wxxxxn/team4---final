@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import custom_panel.ItemPanel;
+import custom_panel.skillPanel;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -52,9 +52,9 @@ public class StoreDialog extends JDialog {
 		contentPane.add(itemsPanel);
 		itemsPanel.setLayout(new GridLayout(5, 0, 10, 25));
 		
-		ItemPanel[] item = new ItemPanel[5];
+		skillPanel[] item = new skillPanel[5];
 		for (int i = 0; i < item.length; i++) {
-			ItemPanel itemPanel = new ItemPanel();
+			skillPanel itemPanel = new skillPanel();
 			item[i] = itemPanel;
 			itemsPanel.add(item[i]);
 		}

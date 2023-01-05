@@ -11,9 +11,9 @@ import javax.swing.border.EtchedBorder;
 import java.awt.Font;
 
 
-public class ItemPanel extends JPanel {
+public class skillPanel extends JPanel {
 
-	public ItemPanel() {
+	public skillPanel() {
 		EtchedBorder eborder = new EtchedBorder(EtchedBorder.RAISED);
 		
 		setBorder(eborder);
