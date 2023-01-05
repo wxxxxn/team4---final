@@ -136,7 +136,7 @@ public class LoginFrame extends JFrame {
 				Login login = new accountData.Login();
 				String textId = txtId.getText();
 				String textPw = passwordField.getText();
-				if (login.checkUserId(textId) != null) {
+				if (login.checkUserId(textId) != null && !textId.equals("")) {
 					if (login.checkUserPw(textId, textPw)) {
 						MainFrame mainFrame = new MainFrame(login.idValue(textId));
 						mainFrame.showGUI();
@@ -163,7 +163,6 @@ public class LoginFrame extends JFrame {
 			}
 		});
 		////////////////////
-		
 	}
 	
 	public static ImageIcon convertToIcon(Class useClass, String name, int width, int height) {

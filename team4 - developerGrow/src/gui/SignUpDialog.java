@@ -147,22 +147,24 @@ public class SignUpDialog extends JDialog  {
 			}
 			@Override
 			public void keyReleased(KeyEvent e) {
+				passWordCheck();
 			}
 			@Override
 			public void keyPressed(KeyEvent e) {
-				passWordCheck();
+
 			}
 		});
 		passwordChkField.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent e) {
+				
 			}
 			@Override
 			public void keyReleased(KeyEvent e) {
+				passWordCheck();
 			}
 			@Override
 			public void keyPressed(KeyEvent e) {
-				passWordCheck();
 			}
 		});
 		
@@ -231,13 +233,13 @@ public class SignUpDialog extends JDialog  {
 		String testPw = passwordField.getText(); 
 		String testPwCheck = passwordChkField.getText();
 		SignUp signUp = new accountData.SignUp();
-		if (signUp.verifyUserPw(testPw) && (testPw.equals(testPwCheck))) {
+		if (signUp.verifyUserPw(testPw) && testPw.equals(testPwCheck)) {
 			lblPwCheck.setText("일치");
 			userPw = testPw;
 		} else if (!signUp.verifyUserPw(testPw)) {
-			lblPwCheck.setText("불가");
+			lblPwCheck.setText("비밀번호 형식이 틀립니다");
 			userPw = null;
-		} else {
+		} else if (!(testPw.equals(testPwCheck))) {
 			lblPwCheck.setText("불일치");
 			userPw = null;
 		}
