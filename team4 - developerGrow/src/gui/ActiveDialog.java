@@ -8,13 +8,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
+import main.GameEventImpl;
+
 public class ActiveDialog extends JDialog {
 	private JButton[] btn = new JButton[7];
 	private ClassLoader classLoader;
-	public ActiveDialog(int x, int y) {
+	private GameEventImpl gameEventImpl;
+	
+	public ActiveDialog(int x, int y, GameEventImpl gameEventImpl) {
 		setUndecorated(true);
 		setModal(true);
 		setBounds(x + 7, y + 30, 1185, 762);
+		
+		this.gameEventImpl = gameEventImpl;
 		
 		setBackground(new Color(0, 0, 0, 80));
 		setLayout(null);
@@ -60,7 +66,7 @@ public class ActiveDialog extends JDialog {
 	}
 	
 	// 추가
-	public static void active (int num) {
+	public void active (int num) {
 		switch (num) {
 			case 0:
 				break;
@@ -71,6 +77,7 @@ public class ActiveDialog extends JDialog {
 			case 3:
 				break;
 			case 4:
+				gameEventImpl.timerController();
 				break;
 			case 5:
 				break;

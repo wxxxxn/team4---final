@@ -42,7 +42,9 @@ public class MainFrame extends JFrame {
 	private JLabel minutelbl;
 	private GameControllerImpl gameControllerImpl = new GameControllerImpl(this);
 	private GameEventImpl gameEventImpl = new GameEventImpl(this);
-
+	private JLabel smokecharacter;
+	private JLabel character;
+	
 	public MainFrame(int id) {
 		// 나중에 채우기
 	}
@@ -298,16 +300,23 @@ public class MainFrame extends JFrame {
 		activitybtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ActiveDialog activeFrame = new ActiveDialog(MainFrame.this.getX(), MainFrame.this.getY());
+				ActiveDialog activeFrame = new ActiveDialog(MainFrame.this.getX(), MainFrame.this.getY(), gameEventImpl);
 				activeFrame.showGUI();
 			}
 		});
 
-		JLabel character = new JLabel("");
+		character = new JLabel("");
 		character.setBounds(211, 392, 210, 300);
 		URL URLcharImage = classLoader.getResource("character/character.gif");
 		character.setIcon(new ImageIcon(URLcharImage));
 		Mainpnl.add(character);
+		
+		smokecharacter = new JLabel("");
+		smokecharacter.setVisible(false);
+		smokecharacter.setBounds(211, 392, 210, 300);
+		URL URLsmokecharImage = classLoader.getResource("character/smokecharacter.gif");
+		smokecharacter.setIcon(new ImageIcon(URLsmokecharImage));
+		Mainpnl.add(smokecharacter);
 
 		JLabel Image = new JLabel("");
 		Image.setBounds(0, 0, 1200, 800);
@@ -339,6 +348,13 @@ public class MainFrame extends JFrame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	public JLabel getCharacter() {
+		return character;
+	}
+
+	public JLabel getSmokecharacter() {
+		return smokecharacter;
 	}
 
 	public static void stopSound() {
