@@ -137,11 +137,13 @@ public class LoginFrame extends JFrame {
 				String textId = txtId.getText();
 				String textPw = passwordField.getText();
 				if (login.checkUserId(textId) != null && !textId.equals("")) {
-					if (login.checkUserPw(textId, textPw)) {
+					if (login.checkUserPw(textId, textPw) && !textPw.equals("") && textPw != null) {
 						MainFrame mainFrame = new MainFrame(login.idValue(textId));
 						mainFrame.showGUI();
 						frame.dispose();
 						stopSound();
+					} else {
+						new JOptionPane().showMessageDialog(null, "아이디 또는 비밀번호가 잘못 입력되었습니다. ");
 					}
 				} else {
 					new JOptionPane().showMessageDialog(null, "아이디 또는 비밀번호가 잘못 입력되었습니다. ");

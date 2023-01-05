@@ -49,12 +49,14 @@ public class SignUp {
 			try (ResultSet rs = stmt.executeQuery()) {
 				if(rs.next()) {
 					return false; // 아이디 중복이면 false 반환
+				} else {
+					return true; // 아이디 중복 아니면 true 반환
 				}
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return true; // 중복 아니면 true 반환
+		return false;
 	}
 	
 	public static boolean userNickNameDuplicationCheck (String userNickName) {
@@ -65,12 +67,14 @@ public class SignUp {
 			try (ResultSet rs = stmt.executeQuery()) {
 				if(rs.next()) {
 					return false; // 닉네임 중복이면 false 반환
+				} else {
+					return true; // 닉네임 중복 아니면 true 반환
 				}
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return true; // 중복 아니면 true 반환
+		return false;
 	}
 	
 	public static void signUp(String userId, String userPw, String nick) { // 회원가입
