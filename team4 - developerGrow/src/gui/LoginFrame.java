@@ -113,9 +113,11 @@ public class LoginFrame extends JFrame {
 		loginbtn.setBounds(508, 335, 139, 63);
 		frame.getContentPane().add(loginbtn);
 
+		URL URLback1Image = classLoader.getResource("character/logincharacter.gif");
+		ImageIcon URLback1Icon = new ImageIcon(URLback1Image);
+		
 		lblNewLabel_1 = new JLabel("");
-		URL URLbackImage = classLoader.getResource("character/logincharacter.gif");
-		lblNewLabel_1.setIcon(new ImageIcon(URLbackImage));
+		lblNewLabel_1.setIcon(URLback1Icon);
 		lblNewLabel_1.setBounds(683, 207, 161, 166);
 		frame.getContentPane().add(lblNewLabel_1);
 		
