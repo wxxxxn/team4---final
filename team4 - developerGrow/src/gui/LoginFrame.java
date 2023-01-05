@@ -74,10 +74,7 @@ public class LoginFrame extends JFrame {
 		passwordField.setBounds(12, 61, 338, 41);
 		panel.add(passwordField);
 
-//		JLabel lblNewLabel = new JLabel("개발자 키우기");
-//		lblNewLabel.setFont(new Font("휴먼둥근헤드라인", Font.BOLD, 36));
-//		lblNewLabel.setBounds(39, 69, 267, 63);
-//		frame.getContentPane().add(lblNewLabel);
+
 
 		signupbtn = new JButton("");
 		URL URLSignupImage = classLoader.getResource("btn_image/SignBtnImage.png");

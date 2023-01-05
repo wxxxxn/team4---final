@@ -32,21 +32,7 @@ public class SignUpDialog extends JDialog  {
 		dialog.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-//		JLabel lblNewLabel_1 = new JLabel("아이디");
-//		lblNewLabel_1.setBounds(0, 10, 57, 15);
-//		panel.add(lblNewLabel_1);
-//		
-//		JLabel lblNewLabel_1_1 = new JLabel("닉네임");
-//		lblNewLabel_1_1.setBounds(0, 66, 57, 15);
-//		panel.add(lblNewLabel_1_1);
-//		
-//		JLabel lblNewLabel_1_1_1 = new JLabel("비밀번호");
-//		lblNewLabel_1_1_1.setBounds(0, 123, 57, 15);
-//		panel.add(lblNewLabel_1_1_1);
-//		
-//		JLabel lblNewLabel_1_1_1_1 = new JLabel("비밀번호 확인");
-//		lblNewLabel_1_1_1_1.setBounds(0, 176, 85, 15);
-//		panel.add(lblNewLabel_1_1_1_1);
+
 		
 		// 중복확인버튼
 		JButton btnNewButton_1 = new JButton("");
