@@ -41,7 +41,8 @@ public class MainFrame extends JFrame {
 	private JLabel character;	
 	private JLabel nowRatinglbl;
 	private JLabel nowProjectlbl;
-	private JLabel projectTimelbl;
+	private JLabel projectHour;
+	private JLabel projectMinute;
 
 	public MainFrame(int id) {
 		// 나중에 채우기
@@ -276,7 +277,7 @@ public class MainFrame extends JFrame {
 		taskbtn.setBorderPainted(false);
 		taskbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ProjectDialog projectFrame = new ProjectDialog(MainFrame.this.getX(), MainFrame.this.getY());
+				ProjectDialog projectFrame = new ProjectDialog(MainFrame.this.getX(), MainFrame.this.getY(), MainFrame.this);
 				projectFrame.showGUI();
 			}
 		});
@@ -330,14 +331,15 @@ public class MainFrame extends JFrame {
 		ratingText.setBounds(18, 78, 72, 15);
 		panel.add(ratingText);
 		
-		nowRatinglbl = new JLabel("100");
+		nowRatinglbl = new JLabel("0");
 		nowRatinglbl.setFont(new Font("HY엽서L", Font.BOLD, 14));
-		nowRatinglbl.setBounds(84, 78, 43, 15);
+		nowRatinglbl.setHorizontalAlignment(SwingConstants.CENTER);
+		nowRatinglbl.setBounds(84, 78, 58, 15);
 		panel.add(nowRatinglbl);
 		
 		JLabel lblNewLabel_1 = new JLabel("%");
 		lblNewLabel_1.setFont(new Font("휴먼편지체", Font.BOLD, 14));
-		lblNewLabel_1.setBounds(133, 78, 21, 15);
+		lblNewLabel_1.setBounds(154, 78, 21, 15);
 		panel.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_3 = new JLabel("남은 시간: ");
@@ -345,10 +347,20 @@ public class MainFrame extends JFrame {
 		lblNewLabel_3.setBounds(18, 105, 83, 15);
 		panel.add(lblNewLabel_3);
 		
-		projectTimelbl = new JLabel("20:30");
-		projectTimelbl.setFont(new Font("HY엽서L", Font.BOLD, 14));
-		projectTimelbl.setBounds(113, 103, 83, 17);
-		panel.add(projectTimelbl);
+		projectHour = new JLabel("24");
+		projectHour.setFont(new Font("HY엽서L", Font.BOLD, 14));
+		projectHour.setBounds(113, 103, 29, 17);
+		panel.add(projectHour);
+		
+		JLabel lblNewLabel_4 = new JLabel(":");
+		lblNewLabel_4.setFont(new Font("HY엽서L", Font.BOLD, 14));
+		lblNewLabel_4.setBounds(143, 103, 11, 15);
+		panel.add(lblNewLabel_4);
+		
+		projectMinute = new JLabel("00");
+		projectMinute.setFont(new Font("HY엽서L", Font.BOLD, 14));
+		projectMinute.setBounds(154, 103, 29, 17);
+		panel.add(projectMinute);
 
 	}
 
@@ -393,11 +405,19 @@ public class MainFrame extends JFrame {
 		return datelbl;
 	}
 	
+	public JLabel getNowProjectlbl() {
+		return nowProjectlbl;
+	}
+
 	public JLabel getNowRatinglbl() {
 		return nowRatinglbl;
 	}
 	
-	public JLabel getProjectTimelbl() {
-		return projectTimelbl;
+	public JLabel getProjectHour() {
+		return projectHour;
+	}
+	
+	public JLabel getProjectMinute() {
+		return projectMinute;
 	}
 }

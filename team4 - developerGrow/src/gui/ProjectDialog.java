@@ -4,9 +4,13 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -21,12 +25,20 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import custom_panel.ProjectPanel;
+import main.MainFrame;
 
-public class ProjectDialog extends JDialog {
+public class ProjectDialog extends JDialog implements MouseListener {
 
 	private JPanel contentPane;
+	private MainFrame mainFrame;
+	private List<String> projectList;
+	private ProjectPanel[] pjs;
+	private int minutes;
+	private int hours;
+	private double rate;
 
-	public ProjectDialog(int x, int y) {
+	public ProjectDialog(int x, int y, MainFrame mainFrame) {
+		this.mainFrame = mainFrame;
 		
 		setUndecorated(true);
 		setModal(true);
@@ -51,8 +63,8 @@ public class ProjectDialog extends JDialog {
 		ProjectsPanel.setBackground(new Color(0, true));
 		ProjectsPanel.setLayout(new BoxLayout(ProjectsPanel, BoxLayout.Y_AXIS));
 
-		ProjectPanel[] pj = new ProjectPanel[17];
-		List<String> projectList = new ArrayList<>();
+		pjs = new ProjectPanel[17];
+		projectList = new ArrayList<>();
 		projectList.add("자바 기초 및 프로그래밍 기초");
 		projectList.add("선택, 반복, 배열");
 		projectList.add("객체 지향 소개 및 클래스, 객체, 메소드");
@@ -71,13 +83,14 @@ public class ProjectDialog extends JDialog {
 		projectList.add("데이터베이스 프로그래밍");
 		projectList.add("기말 평가");
 		
-		for (int i = 0; i < pj.length; i++) {
+		for (int i = 0; i < pjs.length; i++) {
 			ProjectPanel project = new ProjectPanel();
 			project.getRankLabel().setText(String.valueOf((i + 1) + "주차"));
 			project.getProjectName().setText(projectList.get(i));
-			pj[i] = project;
-			ProjectsPanel.add(pj[i]);
+			pjs[i] = project;
+			ProjectsPanel.add(pjs[i]);
 			ProjectsPanel.add(Box.createVerticalStrut(25));
+			pjs[i].addMouseListener(this);
 		}
 
 		JScrollPane scrollPane = new JScrollPane(ProjectsPanel);
@@ -109,10 +122,71 @@ public class ProjectDialog extends JDialog {
 			}
 		});
 		contentPane.add(closeButton);
-
 	}
 
 	public void showGUI() {
 		setVisible(true);
+	}
+	
+	public void timeController() {
+		minutes = Integer.valueOf(mainFrame.getProjectMinute().getText());
+		hours = Integer.valueOf(mainFrame.getProjectHour().getText());
+		rate = Integer.valueOf(mainFrame.getNowRatinglbl().getText());
+		Timer currentTime = new Timer();
+	    TimerTask timerTask = new TimerTask() {
+			@Override
+			public void run() {
+				
+				if (minutes == 0) {
+					hours--;
+					minutes = 59;
+				} else {
+					minutes--;
+				}
+				rate = 100 - ((double)(hours * 60 + minutes) / 1440) * 100;
+				updateTime(minutes, hours, rate);
+			}
+	    };
+		currentTime.scheduleAtFixedRate(timerTask, 250, 250);
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		Object command = e.getSource();
+		for (int i = 0; i < projectList.size(); i++) {
+			if (command == pjs[i]) {
+				String str = projectList.get(i);
+				mainFrame.getNowProjectlbl().setText(str);
+				mainFrame.revalidate();
+				mainFrame.repaint();
+				dispose();
+				timeController();
+			}
+		}	
+	}
+	
+	private void updateTime(int minutes, int hours, double rate) {
+		mainFrame.getProjectHour().setText(String.format("%02d", hours));
+		mainFrame.getProjectMinute().setText(String.format("%02d", minutes));
+		mainFrame.getNowRatinglbl().setText(String.format("%.03f", rate));
+		mainFrame.revalidate();
+		mainFrame.repaint();		
+    }
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
 	}
 }
