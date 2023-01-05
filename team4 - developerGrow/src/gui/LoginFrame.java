@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 
 import guiDesign.MyPassword;
 import guiDesign.MyTextField;
+import main.MainFrame;
 
 public class LoginFrame extends JFrame {
 

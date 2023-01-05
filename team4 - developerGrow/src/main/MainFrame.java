@@ -1,5 +1,4 @@
-package gui;
-
+package main;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -19,6 +18,13 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import gui.ActiveDialog;
+import gui.ProjectDialog;
+import gui.RankingDialog;
+import gui.SettingDialog;
+import gui.StoreDialog;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -32,56 +38,11 @@ public class MainFrame extends JFrame {
 	private static Clip clip;
 
 	public MainFrame() {
-		addWindowListener(new WindowListener() {
 
-			@Override
-			public void windowOpened(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowClosing(WindowEvent e) {
-				stopSound();
-				
-			}
-
-			@Override
-			public void windowClosed(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowIconified(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowDeiconified(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowActivated(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowDeactivated(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		});
-		
 		ClassLoader classLoader = getClass().getClassLoader();
 		URL URLmix = classLoader.getResource("music\\mix.wav");
 		sound(URLmix);
-		
+
 		setBounds(100, 100, 1200, 800);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Mainpnl = new JPanel();
@@ -100,11 +61,10 @@ public class MainFrame extends JFrame {
 		JLabel lblNewLabel_2 = new JLabel("exp");
 		lblNewLabel_2.setFont(new Font("휴먼편지체", Font.BOLD, 20));
 		lblNewLabel_2.setBounds(12, 728, 37, 29);
-		Mainpnl.add(lblNewLabel_2);		
-		
-		
+		Mainpnl.add(lblNewLabel_2);
+
 		JPanel date = new JPanel();
-		date.setBounds(12, 10, 250, 45);
+		date.setBounds(12, 10, 260, 45);
 		Mainpnl.add(date);
 		date.setLayout(null);
 		date.setOpaque(false);
@@ -113,8 +73,35 @@ public class MainFrame extends JFrame {
 		datelbl.setHorizontalAlignment(SwingConstants.CENTER);
 		datelbl.setBorder(new LineBorder(Color.BLACK, 3));
 		datelbl.setFont(new Font("Algerian", Font.BOLD, 30));
-		datelbl.setBounds(12, 5, 237, 40);
+		datelbl.setBounds(0, 0, 260, 45);
 		date.add(datelbl);
+		
+		JPanel currentTime = new JPanel();
+		currentTime.setBounds(162, 65, 110, 45);
+		Mainpnl.add(currentTime);
+		currentTime.setBorder(new LineBorder(Color.BLACK, 3));
+		currentTime.setOpaque(false);
+		currentTime.setBackground(new Color(255, 0, 0, 0));
+		currentTime.setLayout(null);
+		
+		JLabel timelbl = new JLabel("07");
+		timelbl.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		timelbl.setFont(new Font("Algerian", Font.BOLD, 30));
+		timelbl.setBounds(0, 0, 50, 45);
+		currentTime.add(timelbl);
+		
+		JLabel timelbl_1 = new JLabel("00");
+		timelbl_1.setHorizontalAlignment(SwingConstants.CENTER);
+		timelbl_1.setFont(new Font("Algerian", Font.BOLD, 30));
+		timelbl_1.setBounds(60, 0, 50, 45);
+		currentTime.add(timelbl_1);
+		
+		JLabel timelbl_2 = new JLabel(":");
+		timelbl_2.setHorizontalAlignment(SwingConstants.CENTER);
+		timelbl_2.setFont(new Font("Algerian", Font.BOLD, 30));
+		timelbl_2.setBounds(50, 0, 10, 45);
+		currentTime.add(timelbl_2);
 
 		JPanel statuspnl = new JPanel();
 		statuspnl.setBounds(12, 608, 877, 114);
@@ -134,7 +121,7 @@ public class MainFrame extends JFrame {
 		currentcigalbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
 		currentcigalbl.setBounds(12, 0, 117, 43);
 		currentcigapnl.add(currentcigalbl);
-		
+
 		JLabel numOfcigalbl = new JLabel("10");
 		numOfcigalbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
 		numOfcigalbl.setBounds(124, 5, 89, 33);
@@ -150,7 +137,7 @@ public class MainFrame extends JFrame {
 		stresslbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
 		stresslbl.setBounds(12, 5, 64, 22);
 		stresspnl.add(stresslbl);
-		
+
 		JProgressBar stessbar = new JProgressBar();
 		stessbar.setFont(new Font("휴먼편지체", Font.PLAIN, 12));
 		stessbar.setValue(10);
@@ -158,7 +145,7 @@ public class MainFrame extends JFrame {
 		stessbar.setForeground(new Color(139, 0, 0));
 		stessbar.setBounds(80, 5, 480, 22);
 		stresspnl.add(stessbar);
-		
+
 		JPanel developlvpnl = new JPanel();
 		developlvpnl.setBounds(22, 62, 225, 42);
 		statuspnl.add(developlvpnl);
@@ -169,7 +156,7 @@ public class MainFrame extends JFrame {
 		lblNewLabel.setFont(new Font("휴먼편지체", Font.BOLD, 20));
 		lblNewLabel.setBounds(12, 5, 110, 32);
 		developlvpnl.add(lblNewLabel);
-		
+
 		JLabel numOflevellbl = new JLabel("10");
 		numOflevellbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
 		numOflevellbl.setBounds(124, 5, 89, 33);
@@ -180,12 +167,12 @@ public class MainFrame extends JFrame {
 		healthpnl.setOpaque(false);
 		healthpnl.setBounds(294, 75, 571, 30);
 		statuspnl.add(healthpnl);
-		
+
 		JLabel healthlbl = new JLabel("건강");
 		healthlbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
 		healthlbl.setBounds(12, 5, 54, 22);
 		healthpnl.add(healthlbl);
-		
+
 		JProgressBar healthbar = new JProgressBar();
 		healthbar.setFont(new Font("휴먼편지체", Font.PLAIN, 12));
 		healthbar.setValue(100);
@@ -193,39 +180,26 @@ public class MainFrame extends JFrame {
 		healthbar.setForeground(new Color(0, 128, 0));
 		healthbar.setBounds(80, 5, 480, 22);
 		healthpnl.add(healthbar);
-		
-				JPanel hppnl = new JPanel();
-				hppnl.setBounds(294, 5, 571, 30);
-				statuspnl.add(hppnl);
-				hppnl.setOpaque(false);
-				hppnl.setBackground(new Color(255, 0, 0, 0));
-				hppnl.setLayout(null);
-				
 
-				JLabel hplbl = new JLabel("HP");
-				hplbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
-				hplbl.setBounds(12, 5, 57, 22);
-				hppnl.add(hplbl);
-				
-						JProgressBar hpbar = new JProgressBar();
-						hpbar.setFont(new Font("휴먼편지체", Font.PLAIN, 12));
-						hpbar.setForeground(Color.RED);
-						hpbar.setStringPainted(true);
-						hpbar.setValue(100);
-						hpbar.setBounds(80, 5, 480, 22);
-						hppnl.add(hpbar);
-		
-		JPanel currentpnl = new JPanel();
-		currentpnl.setBounds(12, 75, 232, 45);
-		Mainpnl.add(currentpnl);
-		currentpnl.setOpaque(false);
-		currentpnl.setBackground(new Color(255, 0, 0, 0));
-		currentpnl.setLayout(null);
+		JPanel hppnl = new JPanel();
+		hppnl.setBounds(294, 5, 571, 30);
+		statuspnl.add(hppnl);
+		hppnl.setOpaque(false);
+		hppnl.setBackground(new Color(255, 0, 0, 0));
+		hppnl.setLayout(null);
 
-		JLabel lblNewLabel_1 = new JLabel("현재 진행중인 업무");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(12, 5, 237, 159);
-		currentpnl.add(lblNewLabel_1);
+		JLabel hplbl = new JLabel("HP");
+		hplbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
+		hplbl.setBounds(12, 5, 57, 22);
+		hppnl.add(hplbl);
+
+		JProgressBar hpbar = new JProgressBar();
+		hpbar.setFont(new Font("휴먼편지체", Font.PLAIN, 12));
+		hpbar.setForeground(Color.RED);
+		hpbar.setStringPainted(true);
+		hpbar.setValue(100);
+		hpbar.setBounds(80, 5, 480, 22);
+		hppnl.add(hpbar);
 
 		JButton rankingbtn = new JButton();
 		rankingbtn.setBounds(1051, 140, 90, 89);
@@ -276,8 +250,7 @@ public class MainFrame extends JFrame {
 				storeFrame.showGUI();
 			}
 		});
-		
-		
+
 		JButton gamebtn = new JButton();
 		gamebtn.setBounds(1051, 395, 90, 81);
 		URL URLgameImage = classLoader.getResource("btn_image/miniGameBtnImage.png");
@@ -319,7 +292,6 @@ public class MainFrame extends JFrame {
 			}
 		});
 
-		
 		JLabel character = new JLabel("");
 		character.setBounds(211, 392, 210, 300);
 		URL URLcharImage = classLoader.getResource("character/character.gif");
@@ -327,7 +299,7 @@ public class MainFrame extends JFrame {
 //		character.setOpaque(false);
 //		character.setBackground(new Color(255, 0, 0, 0));
 		Mainpnl.add(character);
-		
+
 		JLabel Image = new JLabel("");
 		Image.setBounds(0, 0, 1200, 800);
 		URL URLbackImage = classLoader.getResource("backimg/background.png");
@@ -335,15 +307,18 @@ public class MainFrame extends JFrame {
 		Mainpnl.add(Image);
 		Image.setOpaque(false);
 		Image.setBackground(new Color(255, 0, 0, 0));
-		
 
-		
+		JLabel lblNewLabel_1 = new JLabel("현재 진행중인 업무");
+		lblNewLabel_1.setBounds(12, 201, 250, 159);
+		Mainpnl.add(lblNewLabel_1);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+
 	}
-	
+
 	public void showGUI() {
 		setVisible(true);
 	}
-	
+
 	public static void sound(URL file) {
 		try {
 			AudioInputStream ais1 = AudioSystem.getAudioInputStream(file);
@@ -356,7 +331,7 @@ public class MainFrame extends JFrame {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void stopSound() {
 		clip.stop();
 		clip.close();
