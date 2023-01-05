@@ -137,7 +137,7 @@ public class LoginFrame extends JFrame {
 				String textId = txtId.getText();
 				String textPw = passwordField.getText();
 				if (login.checkUserId(textId) != null && !textId.equals("")) {
-					if (login.checkUserPw(textId, textPw) && !textPw.equals("") && textPw != null) {
+					if (login.checkUserPw(login.checkUserId(textId), textPw) && !textPw.equals("") && textPw != null) {
 						MainFrame mainFrame = new MainFrame(login.idValue(textId));
 						mainFrame.showGUI();
 						frame.dispose();
