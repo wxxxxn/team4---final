@@ -72,6 +72,7 @@ public class RankingDialog extends JDialog {
 		scrollPane.setBounds(312, 72, 560, 619);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 		contentPane.add(scrollPane);
 
 		ClassLoader classLoader = getClass().getClassLoader();
