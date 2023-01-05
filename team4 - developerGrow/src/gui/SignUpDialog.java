@@ -108,7 +108,7 @@ public class SignUpDialog extends JDialog  {
 		okbtn.setOpaque(false);
 		okbtn.setBackground(new Color(255, 0, 0, 0));
 		
-		okbtn.setBounds(670, 413, 97, 41);
+		okbtn.setBounds(560, 401, 97, 41);
 		okbtn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -117,6 +117,27 @@ public class SignUpDialog extends JDialog  {
 			}
 		});
 		dialog.getContentPane().add(okbtn);
+		
+		JButton CancelBtn = new JButton("");
+		URL URLCancelImage = classLoader.getResource("btn_image/cancelBtnImage.png");
+		ImageIcon CancelIcon = new ImageIcon(URLCancelImage);
+		URL URLCancelPushImage = classLoader.getResource("btn_image/cancelPushBtnImage.png");
+		ImageIcon CancelPushIcon = new ImageIcon(URLCancelPushImage);
+		CancelBtn.setIcon(CancelIcon);
+		CancelBtn.setPressedIcon(CancelPushIcon);
+		CancelBtn.setBorderPainted(false);
+		CancelBtn.setOpaque(false);
+		CancelBtn.setBackground(new Color(255, 0, 0, 0));
+		
+		CancelBtn.setBounds(670, 401, 97, 41);
+		CancelBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dialog.dispose();
+			}
+		});
+		
+		dialog.getContentPane().add(CancelBtn);
 		
 		JLabel label = new JLabel("");
 		URL URLSignBackImage = classLoader.getResource("backimg/SignBackground.png");
