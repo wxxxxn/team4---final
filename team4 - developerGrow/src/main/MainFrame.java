@@ -24,6 +24,8 @@ import gui.ProjectDialog;
 import gui.RankingDialog;
 import gui.SettingDialog;
 import gui.StoreDialog;
+import guiDesign.ImagePanel;
+import guiDesign.Methods;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -43,8 +45,11 @@ public class MainFrame extends JFrame {
 	private GameControllerImpl gameControllerImpl = new GameControllerImpl(this);
 	private GameEventImpl gameEventImpl = new GameEventImpl(this);
 	private JLabel smokecharacter;
-	private JLabel character;
-	
+	private JLabel character;	
+	private JLabel nowRatinglbl;
+	private JLabel nowProjectlbl;
+	private JLabel projectTimelbl;
+
 	public MainFrame(int id) {
 		// 나중에 채우기
 	}
@@ -59,7 +64,7 @@ public class MainFrame extends JFrame {
 
 		setBounds(100, 100, 1200, 800);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Mainpnl = new JPanel();
+		Mainpnl = new ImagePanel(Methods.converImage(getClass(), "backimg/background.png"));
 		Mainpnl.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(Mainpnl);
 		Mainpnl.setLayout(null);
@@ -216,8 +221,7 @@ public class MainFrame extends JFrame {
 
 		JButton rankingbtn = new JButton();
 		rankingbtn.setBounds(1051, 140, 90, 89);
-		URL URLrankImage = classLoader.getResource("btn_image/rankBtnImage.png");
-		rankingbtn.setIcon(new ImageIcon(URLrankImage));
+		rankingbtn.setIcon(Methods.convertToIcon(getClass(), "btn_image/rankBtnImage.png"));
 		Mainpnl.add(rankingbtn);
 		rankingbtn.setBorderPainted(false);
 		rankingbtn.setOpaque(false);
@@ -232,8 +236,7 @@ public class MainFrame extends JFrame {
 
 		settingbtn = new JButton();
 		settingbtn.setBounds(1051, 10, 90, 89);
-		URL URLsettingImage = classLoader.getResource("btn_image/settingBtnImage.png");
-		settingbtn.setIcon(new ImageIcon(URLsettingImage));
+		settingbtn.setIcon(Methods.convertToIcon(getClass(), "btn_image/settingBtnImage.png"));
 		Mainpnl.add(settingbtn);
 		settingbtn.setOpaque(false);
 		settingbtn.setBorderPainted(false);
@@ -250,8 +253,7 @@ public class MainFrame extends JFrame {
 
 		JButton storebtn = new JButton();
 		storebtn.setBounds(1051, 275, 90, 89);
-		URL URLstoreImage = classLoader.getResource("btn_image/StoreBtnImage.png");
-		storebtn.setIcon(new ImageIcon(URLstoreImage));
+		storebtn.setIcon(Methods.convertToIcon(getClass(), "btn_image/StoreBtnImage.png"));
 		Mainpnl.add(storebtn);
 		storebtn.setOpaque(false);
 		storebtn.setBackground(new Color(255, 0, 0, 0));
@@ -266,8 +268,7 @@ public class MainFrame extends JFrame {
 
 		JButton gamebtn = new JButton();
 		gamebtn.setBounds(1051, 395, 90, 81);
-		URL URLgameImage = classLoader.getResource("btn_image/miniGameBtnImage.png");
-		gamebtn.setIcon(new ImageIcon(URLgameImage));
+		gamebtn.setIcon(Methods.convertToIcon(getClass(), "btn_image/miniGameBtnImage.png"));
 		Mainpnl.add(gamebtn);
 		gamebtn.setOpaque(false);
 		gamebtn.setBorderPainted(false);
@@ -275,9 +276,8 @@ public class MainFrame extends JFrame {
 
 		JButton taskbtn = new JButton();
 		taskbtn.setHorizontalAlignment(SwingConstants.LEFT);
-		taskbtn.setBounds(1042, 525, 99, 81);
-		URL URLtaskImage = classLoader.getResource("btn_image/projectBtnImage.png");
-		taskbtn.setIcon(new ImageIcon(URLtaskImage));
+		taskbtn.setBounds(1042, 525, 99, 81);;
+		taskbtn.setIcon(Methods.convertToIcon(getClass(), "btn_image/projectBtnImage.png"));
 		taskbtn.setOpaque(false);
 		taskbtn.setBackground(new Color(255, 0, 0, 0));
 		taskbtn.setBorderPainted(false);
@@ -291,8 +291,7 @@ public class MainFrame extends JFrame {
 
 		JButton activitybtn = new JButton();
 		activitybtn.setBounds(1058, 633, 83, 89);
-		URL URLactiveImage = classLoader.getResource("btn_image/activeBtnImage.png");
-		activitybtn.setIcon(new ImageIcon(URLactiveImage));
+		activitybtn.setIcon(Methods.convertToIcon(getClass(), "btn_image/activeBtnImage.png"));
 		Mainpnl.add(activitybtn);
 		activitybtn.setOpaque(false);
 		activitybtn.setBorderPainted(false);
@@ -307,29 +306,56 @@ public class MainFrame extends JFrame {
 
 		character = new JLabel("");
 		character.setBounds(211, 392, 210, 300);
-		URL URLcharImage = classLoader.getResource("character/character.gif");
-		character.setIcon(new ImageIcon(URLcharImage));
+		character.setIcon(Methods.convertToIcon(getClass(), "character/character.gif"));
 		Mainpnl.add(character);
-		
+
 		smokecharacter = new JLabel("");
 		smokecharacter.setVisible(false);
 		smokecharacter.setBounds(211, 392, 210, 300);
 		URL URLsmokecharImage = classLoader.getResource("character/smokecharacter.gif");
 		smokecharacter.setIcon(new ImageIcon(URLsmokecharImage));
 		Mainpnl.add(smokecharacter);
-
-		JLabel Image = new JLabel("");
-		Image.setBounds(0, 0, 1200, 800);
-		URL URLbackImage = classLoader.getResource("backimg/background.png");
-		Image.setIcon(new ImageIcon(URLbackImage));
-		Mainpnl.add(Image);
-		Image.setOpaque(false);
-		Image.setBackground(new Color(255, 0, 0, 0));
-
-		JLabel lblNewLabel_1 = new JLabel("현재 진행중인 업무");
-		lblNewLabel_1.setBounds(12, 201, 250, 159);
-		Mainpnl.add(lblNewLabel_1);
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(0, 0, 0, 50));
+		panel.setBounds(12, 207, 263, 137);
+		Mainpnl.add(panel);
+		panel.setLayout(null);
+		
+		JLabel prjectTitlelbl = new JLabel("<현재 진행중인 Project>");
+		prjectTitlelbl.setBounds(18, 10, 227, 24);
+		prjectTitlelbl.setFont(new Font("HY목각파임B", Font.BOLD, 16));
+		panel.add(prjectTitlelbl);
+		
+		nowProjectlbl = new JLabel("자바 기초");
+		nowProjectlbl.setFont(new Font("HY엽서L", Font.BOLD, 14));
+		nowProjectlbl.setBounds(18, 44, 227, 24);
+		panel.add(nowProjectlbl);
+		
+		JLabel ratingText = new JLabel("진행률 : ");
+		ratingText.setFont(new Font("HY엽서L", Font.BOLD, 14));
+		ratingText.setBounds(18, 78, 72, 15);
+		panel.add(ratingText);
+		
+		nowRatinglbl = new JLabel("100");
+		nowRatinglbl.setFont(new Font("HY엽서L", Font.BOLD, 14));
+		nowRatinglbl.setBounds(84, 78, 43, 15);
+		panel.add(nowRatinglbl);
+		
+		JLabel lblNewLabel_1 = new JLabel("%");
+		lblNewLabel_1.setFont(new Font("휴먼편지체", Font.BOLD, 14));
+		lblNewLabel_1.setBounds(133, 78, 21, 15);
+		panel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_3 = new JLabel("남은 시간: ");
+		lblNewLabel_3.setFont(new Font("HY엽서L", Font.BOLD, 14));
+		lblNewLabel_3.setBounds(18, 105, 83, 15);
+		panel.add(lblNewLabel_3);
+		
+		projectTimelbl = new JLabel("20:30");
+		projectTimelbl.setFont(new Font("HY엽서L", Font.BOLD, 14));
+		projectTimelbl.setBounds(113, 103, 83, 17);
+		panel.add(projectTimelbl);
 
 	}
 
@@ -356,7 +382,7 @@ public class MainFrame extends JFrame {
 	public JLabel getSmokecharacter() {
 		return smokecharacter;
 	}
-
+	
 	public static void stopSound() {
 		clip.stop();
 		clip.close();
@@ -372,5 +398,13 @@ public class MainFrame extends JFrame {
 
 	public JLabel getDatelbl() {
 		return datelbl;
+	}
+	
+	public JLabel getNowRatinglbl() {
+		return nowRatinglbl;
+	}
+	
+	public JLabel getProjectTimelbl() {
+		return projectTimelbl;
 	}
 }
