@@ -35,21 +35,31 @@ public class MainFrame extends JFrame {
 	private JLabel datelbl;
 	private JLabel hourlbl;
 	private JLabel minutelbl;
-	private GameControllerImpl gameControllerImpl = new GameControllerImpl(this);
-	private GameEventImpl gameEventImpl = new GameEventImpl(this);
+	private JLabel bedlbl;
+	private JLabel sleeplbl;
+	private JLabel bedsleeplbl;
+	private JLabel coupangimg;
 	private JLabel smokecharacter;
-	private JLabel character;	
+	private JLabel projectTimelbl;
+	private JLabel gameImg;
+	private JLabel character;
 	private JLabel nowRatinglbl;
 	private JLabel nowProjectlbl;
 	private JLabel projectHour;
 	private JLabel projectMinute;
+	private SleepEventImpl sleepEventImpl = new SleepEventImpl(this);
+	private GameControllerImpl gameControllerImpl = new GameControllerImpl(this);
+	private GameEventImpl gameEventImpl = new GameEventImpl(this);
+	private PlayGameEventImpl playGameEventImpl = new PlayGameEventImpl(this);
+	private CoupangEventImpl coupangEventImpl = new CoupangEventImpl(this);
 
 	public MainFrame(int id) {
 		// 나중에 채우기
 	}
-		// 테스트용
+
+	// 테스트용
 	public MainFrame() {
-		
+
 		gameControllerImpl.timeController();
 
 		ClassLoader classLoader = getClass().getClassLoader();
@@ -88,7 +98,7 @@ public class MainFrame extends JFrame {
 		datelbl.setFont(new Font("HY목각파임B", Font.BOLD, 30));
 		datelbl.setBounds(0, 0, 135, 45);
 		date.add(datelbl);
-		
+
 		JPanel currentTime = new JPanel();
 		currentTime.setBounds(147, 10, 135, 45);
 		Mainpnl.add(currentTime);
@@ -96,20 +106,20 @@ public class MainFrame extends JFrame {
 		currentTime.setOpaque(false);
 		currentTime.setBackground(new Color(255, 0, 0, 0));
 		currentTime.setLayout(null);
-		
+
 		hourlbl = new JLabel("07");
 		hourlbl.setHorizontalAlignment(SwingConstants.CENTER);
-		
+
 		hourlbl.setFont(new Font("HY목각파임B", Font.BOLD, 30));
 		hourlbl.setBounds(0, 0, 60, 45);
 		currentTime.add(hourlbl);
-		
+
 		minutelbl = new JLabel("00");
 		minutelbl.setHorizontalAlignment(SwingConstants.CENTER);
 		minutelbl.setFont(new Font("HY목각파임B", Font.BOLD, 28));
 		minutelbl.setBounds(75, 0, 60, 45);
 		currentTime.add(minutelbl);
-		
+
 		JLabel colonlbl = new JLabel(":");
 		colonlbl.setHorizontalAlignment(SwingConstants.CENTER);
 		colonlbl.setFont(new Font("Algerian", Font.BOLD, 30));
@@ -270,14 +280,16 @@ public class MainFrame extends JFrame {
 
 		JButton taskbtn = new JButton();
 		taskbtn.setHorizontalAlignment(SwingConstants.LEFT);
-		taskbtn.setBounds(1042, 525, 99, 81);;
+		taskbtn.setBounds(1042, 525, 99, 81);
+		;
 		taskbtn.setIcon(Methods.convertToIcon(getClass(), "btn_image/projectBtnImage.png"));
 		taskbtn.setOpaque(false);
 		taskbtn.setBackground(new Color(255, 0, 0, 0));
 		taskbtn.setBorderPainted(false);
 		taskbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ProjectDialog projectFrame = new ProjectDialog(MainFrame.this.getX(), MainFrame.this.getY(), MainFrame.this);
+				ProjectDialog projectFrame = new ProjectDialog(MainFrame.this.getX(), MainFrame.this.getY(),
+						MainFrame.this);
 				projectFrame.showGUI();
 			}
 		});
@@ -293,7 +305,8 @@ public class MainFrame extends JFrame {
 		activitybtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ActiveDialog activeFrame = new ActiveDialog(MainFrame.this.getX(), MainFrame.this.getY(), gameEventImpl);
+				ActiveDialog activeFrame = new ActiveDialog(MainFrame.this.getX(), MainFrame.this.getY(), gameEventImpl,
+						sleepEventImpl, playGameEventImpl, coupangEventImpl);
 				activeFrame.showGUI();
 			}
 		});
@@ -309,59 +322,88 @@ public class MainFrame extends JFrame {
 		URL URLsmokecharImage = classLoader.getResource("character/smokecharacter.gif");
 		smokecharacter.setIcon(new ImageIcon(URLsmokecharImage));
 		Mainpnl.add(smokecharacter);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 0, 50));
 		panel.setBounds(12, 207, 263, 137);
 		Mainpnl.add(panel);
 		panel.setLayout(null);
-		
+
 		JLabel prjectTitlelbl = new JLabel("<현재 진행중인 Project>");
 		prjectTitlelbl.setBounds(18, 10, 227, 24);
 		prjectTitlelbl.setFont(new Font("HY목각파임B", Font.BOLD, 16));
 		panel.add(prjectTitlelbl);
-		
+
 		nowProjectlbl = new JLabel("자바 기초");
 		nowProjectlbl.setFont(new Font("HY엽서L", Font.BOLD, 14));
 		nowProjectlbl.setBounds(18, 44, 227, 24);
 		panel.add(nowProjectlbl);
-		
+
 		JLabel ratingText = new JLabel("진행률 : ");
 		ratingText.setFont(new Font("HY엽서L", Font.BOLD, 14));
 		ratingText.setBounds(18, 78, 72, 15);
 		panel.add(ratingText);
-		
+
 		nowRatinglbl = new JLabel("0");
 		nowRatinglbl.setFont(new Font("HY엽서L", Font.BOLD, 14));
 		nowRatinglbl.setHorizontalAlignment(SwingConstants.CENTER);
 		nowRatinglbl.setBounds(84, 78, 58, 15);
 		panel.add(nowRatinglbl);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("%");
 		lblNewLabel_1.setFont(new Font("휴먼편지체", Font.BOLD, 14));
 		lblNewLabel_1.setBounds(154, 78, 21, 15);
 		panel.add(lblNewLabel_1);
-		
+
 		JLabel lblNewLabel_3 = new JLabel("남은 시간: ");
 		lblNewLabel_3.setFont(new Font("HY엽서L", Font.BOLD, 14));
 		lblNewLabel_3.setBounds(18, 105, 83, 15);
 		panel.add(lblNewLabel_3);
-		
+
 		projectHour = new JLabel("24");
 		projectHour.setFont(new Font("HY엽서L", Font.BOLD, 14));
 		projectHour.setBounds(113, 103, 29, 17);
 		panel.add(projectHour);
-		
+
 		JLabel lblNewLabel_4 = new JLabel(":");
 		lblNewLabel_4.setFont(new Font("HY엽서L", Font.BOLD, 14));
 		lblNewLabel_4.setBounds(143, 103, 11, 15);
 		panel.add(lblNewLabel_4);
-		
+
 		projectMinute = new JLabel("00");
 		projectMinute.setFont(new Font("HY엽서L", Font.BOLD, 14));
 		projectMinute.setBounds(154, 103, 29, 17);
 		panel.add(projectMinute);
 
+		bedlbl = new JLabel("");
+		bedlbl.setIcon(Methods.convertToIcon(getClass(), "active_image/bed.png"));
+		bedlbl.setBounds(626, 287, 417, 335);
+		Mainpnl.add(bedlbl);
+		bedlbl.setVisible(false);
+
+		sleeplbl = new JLabel("");
+		sleeplbl.setIcon(Methods.convertToIcon(getClass(), "active_image/sleep.png"));
+		sleeplbl.setBounds(638, 408, 341, 190);
+		Mainpnl.add(sleeplbl);
+		sleeplbl.setVisible(false);
+
+		bedsleeplbl = new JLabel("");
+		bedsleeplbl.setBounds(597, 382, 446, 240);
+		bedsleeplbl.setIcon(Methods.convertToIcon(getClass(), "active_image/bedsleep.png"));
+		Mainpnl.add(bedsleeplbl);
+		bedsleeplbl.setVisible(false);
+
+		gameImg = new JLabel("");
+		gameImg.setIcon(Methods.convertToIcon(getClass(), "active_image/playgame.gif"));
+		gameImg.setBounds(331, 47, 408, 335);
+		Mainpnl.add(gameImg);
+		gameImg.setVisible(false);
+
+		coupangimg = new JLabel("");
+		coupangimg.setIcon(Methods.convertToIcon(getClass(), "active_image/coupang.gif"));
+		coupangimg.setBounds(306, 0, 490, 418);
+		Mainpnl.add(coupangimg);
+		coupangimg.setVisible(false);
 	}
 
 	public void showGUI() {
@@ -380,6 +422,7 @@ public class MainFrame extends JFrame {
 			e.printStackTrace();
 		}
 	}
+
 	public JLabel getCharacter() {
 		return character;
 	}
@@ -387,12 +430,12 @@ public class MainFrame extends JFrame {
 	public JLabel getSmokecharacter() {
 		return smokecharacter;
 	}
-	
+
 	public static void stopSound() {
 		clip.stop();
 		clip.close();
 	}
-	
+
 	public JLabel getHourlbl() {
 		return hourlbl;
 	}
@@ -404,19 +447,39 @@ public class MainFrame extends JFrame {
 	public JLabel getDatelbl() {
 		return datelbl;
 	}
-	
+
 	public JLabel getNowProjectlbl() {
 		return nowProjectlbl;
+	}
+
+	public JLabel getBedlbl() {
+		return bedlbl;
+	}
+
+	public JLabel getSleeplbl() {
+		return sleeplbl;
+	}
+
+	public JLabel getBedsleeplbl() {
+		return bedsleeplbl;
+	}
+
+	public JLabel getCoupangimg() {
+		return coupangimg;
+	}
+
+	public JLabel getGameImg() {
+		return gameImg;
 	}
 
 	public JLabel getNowRatinglbl() {
 		return nowRatinglbl;
 	}
-	
+
 	public JLabel getProjectHour() {
 		return projectHour;
 	}
-	
+
 	public JLabel getProjectMinute() {
 		return projectMinute;
 	}

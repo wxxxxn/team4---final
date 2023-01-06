@@ -8,19 +8,28 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
+import main.CoupangEventImpl;
 import main.GameEventImpl;
+import main.PlayGameEventImpl;
+import main.SleepEventImpl;
 
 public class ActiveDialog extends JDialog {
 	private JButton[] btn = new JButton[7];
 	private ClassLoader classLoader;
 	private GameEventImpl gameEventImpl;
+	private SleepEventImpl sleepEventImpl;
+	private PlayGameEventImpl playGameEventImpl;
+	private CoupangEventImpl coupangEventImpl;
 	
-	public ActiveDialog(int x, int y, GameEventImpl gameEventImpl) {
+	public ActiveDialog(int x, int y, GameEventImpl gameEventImpl, SleepEventImpl sleepEventImpl, PlayGameEventImpl playGameEventImpl, CoupangEventImpl coupangEventImpl) {
 		setUndecorated(true);
 		setModal(true);
 		setBounds(x + 7, y + 30, 1185, 762);
 		
 		this.gameEventImpl = gameEventImpl;
+		this.sleepEventImpl = sleepEventImpl;
+		this.playGameEventImpl = playGameEventImpl;
+		this.coupangEventImpl = coupangEventImpl;
 		
 		setBackground(new Color(0, 0, 0, 80));
 		setLayout(null);
@@ -69,12 +78,15 @@ public class ActiveDialog extends JDialog {
 	public void active (int num) {
 		switch (num) {
 			case 0:
+				coupangEventImpl.timerController();
 				break;
 			case 1:
 				break;
 			case 2:
+				playGameEventImpl.timerController();
 				break;
 			case 3:
+				sleepEventImpl.sleepTimer();
 				break;
 			case 4:
 				gameEventImpl.timerController();
