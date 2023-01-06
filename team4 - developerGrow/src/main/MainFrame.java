@@ -55,6 +55,9 @@ public class MainFrame extends JFrame {
 	private Characters chrs;
 	private JProgressBar hpbar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
 	private ProgressbarEvent progressbarEventImpl = new ProgressbarEvent(this);
+	private JProgressBar expbar;
+	private JProgressBar stessbar;
+	private JProgressBar healthbar;
 	
 
 	
@@ -67,10 +70,10 @@ public class MainFrame extends JFrame {
 	// 테스트용
 	public MainFrame() {
 		gameControllerImpl.timeController();
-		progressbarEventImpl.ProgressBarTime();
+		ProgressbarEvent pb = new ProgressbarEvent(this);
 
 		ClassLoader classLoader = getClass().getClassLoader();
-		URL URLmix = classLoader.getResource("music\\mix.wav");
+		URL URLmix = classLoader.getResource("music/mix.wav");
 		sound(URLmix);
 
 		setBounds(100, 100, 1200, 800);
@@ -83,7 +86,7 @@ public class MainFrame extends JFrame {
 		chrs = new Characters(this);
 		chrs.defaultCharacter();
 		
-		JProgressBar expbar = new JProgressBar();
+		expbar = new JProgressBar();
 		expbar.setValue(20);
 		expbar.setStringPainted(true);
 		expbar.setForeground(new Color(30, 144, 255));
@@ -170,7 +173,7 @@ public class MainFrame extends JFrame {
 		stresslbl.setBounds(12, 5, 64, 22);
 		stresspnl.add(stresslbl);
 
-		JProgressBar stessbar = new JProgressBar();
+		stessbar = new JProgressBar();
 		stessbar.setFont(new Font("휴먼편지체", Font.PLAIN, 12));
 		stessbar.setValue(10);
 		stessbar.setStringPainted(true);
@@ -205,7 +208,7 @@ public class MainFrame extends JFrame {
 		healthlbl.setBounds(12, 5, 54, 22);
 		healthpnl.add(healthlbl);
 
-		JProgressBar healthbar = new JProgressBar();
+		healthbar = new JProgressBar();
 		healthbar.setFont(new Font("휴먼편지체", Font.PLAIN, 12));
 		healthbar.setValue(100);
 		healthbar.setStringPainted(true);
@@ -373,6 +376,10 @@ public class MainFrame extends JFrame {
 		projectMinute.setFont(new Font("HY엽서L", Font.BOLD, 14));
 		projectMinute.setBounds(154, 103, 29, 17);
 		panel.add(projectMinute);
+		
+		pb.hpbarDecreas(1000, 500);
+		pb.stressbarIncrease(1000, 1000);
+		pb.healthbarDecreas(1000, 2000);
 	}
 
 	public void showGUI() {
@@ -458,5 +465,17 @@ public class MainFrame extends JFrame {
 	}
 	public JProgressBar getHpbar() {
 		return hpbar;
+	}
+
+	public JProgressBar getExpbar() {
+		return expbar;
+	}
+
+	public JProgressBar getStessbar() {
+		return stessbar;
+	}
+
+	public JProgressBar getHealthbar() {
+		return healthbar;
 	}
 }

@@ -52,7 +52,7 @@ public class LoginFrame extends JFrame {
 
 	public LoginFrame() {
 		ClassLoader classLoader = getClass().getClassLoader();
-		URL URLmix = classLoader.getResource("music\\main.wav");
+		URL URLmix = classLoader.getResource("music/main.wav");
 		sound(URLmix);
 		
 		frame = new JFrame();
@@ -67,12 +67,12 @@ public class LoginFrame extends JFrame {
 
 		txtId = new MyTextField();
 		txtId.setFont(new Font("휴먼둥근헤드라인", Font.PLAIN, 20));
-		txtId.setPrefixIcon(convertToIcon(getClass(), "guiDesign\\user.png", 30, 30));
+		txtId.setPrefixIcon(convertToIcon(getClass(), "guiDesign/user.png", 30, 30));
 		txtId.setBounds(12, 10, 338, 41);
 		panel.add(txtId);
 
 		passwordField = new MyPassword();
-		passwordField.setPrefixIcon(convertToIcon(getClass(), "guiDesign\\key.png", 30, 30));
+		passwordField.setPrefixIcon(convertToIcon(getClass(), "guiDesign/key.png", 30, 30));
 		passwordField.setBounds(12, 61, 338, 41);
 		panel.add(passwordField);
 
