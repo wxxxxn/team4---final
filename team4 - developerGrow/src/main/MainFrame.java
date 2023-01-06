@@ -24,6 +24,7 @@ import gui.SettingDialog;
 import guiDesign.ImagePanel;
 import guiDesign.Methods;
 import main.store.StoreDialog;
+import progressbar.ProgressbarEventImpl;
 import projectDialog.ProjectDialog;
 
 @SuppressWarnings("serial")
@@ -53,6 +54,8 @@ public class MainFrame extends JFrame {
 	private PlayGameEventImpl playGameEventImpl = new PlayGameEventImpl(this);
 	private CoupangEventImpl coupangEventImpl = new CoupangEventImpl(this);
 	private ProjectDialog projectFrame = null;
+	private JProgressBar hpbar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
+	private ProgressbarEventImpl progressbarEventImpl = new ProgressbarEventImpl(this);
 
 	public MainFrame(int id) {
 		// 나중에 채우기
@@ -62,6 +65,7 @@ public class MainFrame extends JFrame {
 	public MainFrame() {
 
 		gameControllerImpl.timeController();
+		progressbarEventImpl.ProgressBarTime();
 
 		ClassLoader classLoader = getClass().getClassLoader();
 		URL URLmix = classLoader.getResource("music\\mix.wav");
@@ -216,7 +220,6 @@ public class MainFrame extends JFrame {
 		hplbl.setBounds(12, 5, 57, 22);
 		hppnl.add(hplbl);
 
-		JProgressBar hpbar = new JProgressBar();
 		hpbar.setFont(new Font("휴먼편지체", Font.PLAIN, 12));
 		hpbar.setForeground(Color.RED);
 		hpbar.setStringPainted(true);
@@ -485,5 +488,8 @@ public class MainFrame extends JFrame {
 
 	public JLabel getProjectMinute() {
 		return projectMinute;
+	}
+	public JProgressBar getHpbar() {
+		return hpbar;
 	}
 }
