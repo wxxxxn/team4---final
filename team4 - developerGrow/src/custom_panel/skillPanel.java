@@ -10,16 +10,19 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 
 import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.net.URL;
 
 
-public class skillPanel extends JPanel {
+public class skillPanel extends JPanel  implements MouseListener{
 
 	private JLabel imageLabel;
 	private JLabel SkillNameLabel;
 	private JLabel SkillDescriptionLabel;
 	private JLabel levelLabel;
 	private JLabel priceLabel;
+	private int level = 0;
 
 	public skillPanel() {
 		EtchedBorder eborder = new EtchedBorder(EtchedBorder.RAISED);
@@ -59,7 +62,7 @@ public class skillPanel extends JPanel {
 		SkillDescriptionLabel.setBounds(104, 43, 352, 47);
 		add(SkillDescriptionLabel);
 		
-		levelLabel = new JLabel("LV.0");
+		levelLabel = new JLabel("LV." + level);
 		levelLabel.setBorder(eborder);
 		levelLabel.setFont(new Font("휴먼편지체", Font.BOLD, 15));
 		levelLabel.setBackground(Color.WHITE);
@@ -91,7 +94,10 @@ public class skillPanel extends JPanel {
 		cigaImageLabel.setBackground(Color.WHITE);
 		cigaImageLabel.setBounds(261, 10, 23, 23);
 		add(cigaImageLabel);
+		
+		addMouseListener(this);
 	}
+	
 
 	public JLabel getImageLabel() {
 		return imageLabel;
@@ -112,4 +118,23 @@ public class skillPanel extends JPanel {
 	public JLabel getPriceLabel() {
 		return priceLabel;
 	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		level++;
+		levelLabel.setText("LV." + level);
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {}
+	@Override
+	public void mouseReleased(MouseEvent e) {}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		setBackground(Color.pink);
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		setBackground(Color.LIGHT_GRAY);
+	}
+	
 }
