@@ -38,10 +38,8 @@ public class SkillInfos {
 					int price = rs.getInt("price");
 					String description = rs.getString("description");
 					
-//					String encode = rs.getString("image");
-//					byte[] decode = decodeBase64(encode);
-					byte[] encode = rs.getBytes("image");
-					ByteArrayInputStream bais = new ByteArrayInputStream(encode);
+					byte[] byteArr = rs.getBytes("image");
+					ByteArrayInputStream bais = new ByteArrayInputStream(byteArr);
 					BufferedImage image = ImageIO.read(bais);
 					
 					skillInfos.add(new SkillInfo(skillId, skillName, price, description, image));
