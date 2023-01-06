@@ -14,10 +14,18 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 
+/**
+ * @author GGG
+ *
+ */
 public class ProjectPanel extends JPanel implements MouseListener {
 	
 	private JLabel rankLabel;
 	private JLabel projectName;
+	private JLabel timeTakenlbl;
+	private JLabel completelbl;
+	private boolean complete = false;
+	private JPanel completepnl;
 	
 	public ProjectPanel() {
 		
@@ -26,6 +34,20 @@ public class ProjectPanel extends JPanel implements MouseListener {
 		setBackground(Color.LIGHT_GRAY);
 		setBounds(100, 100, 540, 100);
 		setLayout(null);
+		
+		completepnl = new JPanel();
+		completepnl.setBounds(0, 0, 540, 100);
+		completepnl.setBackground(new Color(100, 0, 0, 100));
+		add(completepnl);
+		completepnl.setVisible(false);
+		completepnl.setLayout(null);
+		
+		completelbl = new JLabel("완료");
+		completelbl.setForeground(Color.RED);
+		completelbl.setFont(new Font("HY목각파임B", Font.BOLD, 40));
+		completelbl.setHorizontalAlignment(SwingConstants.CENTER);
+		completelbl.setBounds(236, 24, 84, 47);
+		completepnl.add(completelbl);
 		
 		rankLabel = new JLabel("1주차");
 		rankLabel.setBorder(eborder);
@@ -86,11 +108,11 @@ public class ProjectPanel extends JPanel implements MouseListener {
 		add(panel);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-		JLabel timeTakenlbl = new JLabel("24:00");
+		timeTakenlbl = new JLabel("24");
+		timeTakenlbl.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(timeTakenlbl);
 		timeTakenlbl.setBorder(null);
 		timeTakenlbl.setFont(new Font("휴먼편지체", Font.BOLD, 15));
-		timeTakenlbl.setHorizontalAlignment(SwingConstants.CENTER);
 		timeTakenlbl.setForeground(Color.BLACK);
 		timeTakenlbl.setBackground(Color.WHITE);
 		timeTakenlbl.setOpaque(true);
@@ -110,11 +132,26 @@ public class ProjectPanel extends JPanel implements MouseListener {
 	public JLabel getProjectName() {
 		return projectName;
 	}
+	
+	public JLabel getTimeTakenlbl() {
+		return timeTakenlbl;
+	}
+	
+	public JPanel getCompletepnl() {
+		return completepnl;
+	}
+
+	public boolean isComplete() {
+		return complete;
+	}
+
+	public void setComplete(boolean complete) {
+		this.complete = complete;
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		completepnl.setVisible(true);
 	}
 
 	@Override
@@ -131,11 +168,15 @@ public class ProjectPanel extends JPanel implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		setBackground(Color.pink);
+		if (!complete) {
+			setBackground(Color.pink);
+		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		setBackground(Color.LIGHT_GRAY);
+		if (!complete) {
+			setBackground(Color.LIGHT_GRAY);
+		}
 	}
 }

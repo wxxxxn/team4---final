@@ -19,12 +19,12 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import gui.ActiveDialog;
-import gui.ProjectDialog;
 import gui.RankingDialog;
 import gui.SettingDialog;
 import guiDesign.ImagePanel;
 import guiDesign.Methods;
 import main.store.StoreDialog;
+import projectDialog.ProjectDialog;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
@@ -52,6 +52,7 @@ public class MainFrame extends JFrame {
 	private GameEventImpl gameEventImpl = new GameEventImpl(this);
 	private PlayGameEventImpl playGameEventImpl = new PlayGameEventImpl(this);
 	private CoupangEventImpl coupangEventImpl = new CoupangEventImpl(this);
+	private ProjectDialog projectFrame = null;
 
 	public MainFrame(int id) {
 		// 나중에 채우기
@@ -288,9 +289,11 @@ public class MainFrame extends JFrame {
 		taskbtn.setBorderPainted(false);
 		taskbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ProjectDialog projectFrame = new ProjectDialog(MainFrame.this.getX(), MainFrame.this.getY(),
-						MainFrame.this);
-				projectFrame.showGUI();
+				if (projectFrame == null) {
+					projectFrame = new ProjectDialog(MainFrame.this);
+				}
+				projectFrame.setBounds(MainFrame.this.getX() + 7, MainFrame.this.getY() + 30, 1185, 762);
+				projectFrame.showGUI();	
 			}
 		});
 		Mainpnl.add(taskbtn);
