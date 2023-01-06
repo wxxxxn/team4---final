@@ -1,3 +1,4 @@
+package statData;
 
 public class UserInfo {
 	private int infoId;
