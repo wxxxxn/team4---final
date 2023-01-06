@@ -2,6 +2,8 @@ package main;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
@@ -30,7 +32,7 @@ import projectDialog.ProjectDialog;
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
 
-	private JPanel Mainpnl;
+	private ImagePanel Mainpnl;
 	private JButton settingbtn;
 	private static Clip clip;
 	private JLabel datelbl;
@@ -48,14 +50,15 @@ public class MainFrame extends JFrame {
 	private JLabel nowProjectlbl;
 	private JLabel projectHour;
 	private JLabel projectMinute;
-	private SleepEventImpl sleepEventImpl = new SleepEventImpl(this);
 	private GameControllerImpl gameControllerImpl = new GameControllerImpl(this);
-	private GameEventImpl gameEventImpl = new GameEventImpl(this);
-	private PlayGameEventImpl playGameEventImpl = new PlayGameEventImpl(this);
-	private CoupangEventImpl coupangEventImpl = new CoupangEventImpl(this);
 	private ProjectDialog projectFrame = null;
+	private Characters chrs;
 	private JProgressBar hpbar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
 	private ProgressbarEventImpl progressbarEventImpl = new ProgressbarEventImpl(this);
+	
+
+	
+	
 
 	public MainFrame(int id) {
 		// 나중에 채우기
@@ -63,9 +66,7 @@ public class MainFrame extends JFrame {
 
 	// 테스트용
 	public MainFrame() {
-
 		gameControllerImpl.timeController();
-		progressbarEventImpl.ProgressBarTime();
 
 		ClassLoader classLoader = getClass().getClassLoader();
 		URL URLmix = classLoader.getResource("music\\mix.wav");
@@ -76,8 +77,11 @@ public class MainFrame extends JFrame {
 		Mainpnl = new ImagePanel(Methods.converImage(getClass(), "backimg/background.png"));
 		Mainpnl.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(Mainpnl);
-		Mainpnl.setLayout(null);
-
+		Mainpnl.setLayout(null);	
+	
+		chrs = new Characters(this);
+		chrs.defaultCharacter();
+		
 		JProgressBar expbar = new JProgressBar();
 		expbar.setValue(20);
 		expbar.setStringPainted(true);
@@ -220,6 +224,7 @@ public class MainFrame extends JFrame {
 		hplbl.setBounds(12, 5, 57, 22);
 		hppnl.add(hplbl);
 
+	
 		hpbar.setFont(new Font("휴먼편지체", Font.PLAIN, 12));
 		hpbar.setForeground(Color.RED);
 		hpbar.setStringPainted(true);
@@ -311,23 +316,10 @@ public class MainFrame extends JFrame {
 		activitybtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ActiveDialog activeFrame = new ActiveDialog(MainFrame.this.getX(), MainFrame.this.getY(), gameEventImpl,
-						sleepEventImpl, playGameEventImpl, coupangEventImpl);
+				ActiveDialog activeFrame = new ActiveDialog(MainFrame.this.getX(), MainFrame.this.getY(), MainFrame.this);
 				activeFrame.showGUI();
 			}
 		});
-
-		character = new JLabel("");
-		character.setBounds(211, 392, 210, 300);
-		character.setIcon(Methods.convertToIcon(getClass(), "character/character.gif"));
-		Mainpnl.add(character);
-
-		smokecharacter = new JLabel("");
-		smokecharacter.setVisible(false);
-		smokecharacter.setBounds(211, 392, 210, 300);
-		URL URLsmokecharImage = classLoader.getResource("character/smokecharacter.gif");
-		smokecharacter.setIcon(new ImageIcon(URLsmokecharImage));
-		Mainpnl.add(smokecharacter);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 0, 50));
@@ -380,36 +372,6 @@ public class MainFrame extends JFrame {
 		projectMinute.setFont(new Font("HY엽서L", Font.BOLD, 14));
 		projectMinute.setBounds(154, 103, 29, 17);
 		panel.add(projectMinute);
-
-		bedlbl = new JLabel("");
-		bedlbl.setIcon(Methods.convertToIcon(getClass(), "active_image/bed.png"));
-		bedlbl.setBounds(626, 287, 417, 335);
-		Mainpnl.add(bedlbl);
-		bedlbl.setVisible(false);
-
-		sleeplbl = new JLabel("");
-		sleeplbl.setIcon(Methods.convertToIcon(getClass(), "active_image/sleep.png"));
-		sleeplbl.setBounds(638, 408, 341, 190);
-		Mainpnl.add(sleeplbl);
-		sleeplbl.setVisible(false);
-
-		bedsleeplbl = new JLabel("");
-		bedsleeplbl.setBounds(597, 382, 446, 240);
-		bedsleeplbl.setIcon(Methods.convertToIcon(getClass(), "active_image/bedsleep.png"));
-		Mainpnl.add(bedsleeplbl);
-		bedsleeplbl.setVisible(false);
-
-		gameImg = new JLabel("");
-		gameImg.setIcon(Methods.convertToIcon(getClass(), "active_image/playgame.gif"));
-		gameImg.setBounds(331, 47, 408, 335);
-		Mainpnl.add(gameImg);
-		gameImg.setVisible(false);
-
-		coupangimg = new JLabel("");
-		coupangimg.setIcon(Methods.convertToIcon(getClass(), "active_image/coupang.gif"));
-		coupangimg.setBounds(306, 0, 490, 418);
-		Mainpnl.add(coupangimg);
-		coupangimg.setVisible(false);
 	}
 
 	public void showGUI() {
@@ -488,6 +450,10 @@ public class MainFrame extends JFrame {
 
 	public JLabel getProjectMinute() {
 		return projectMinute;
+	}
+
+	public Characters getChrs() {
+		return chrs;
 	}
 	public JProgressBar getHpbar() {
 		return hpbar;
