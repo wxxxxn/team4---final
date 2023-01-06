@@ -5,15 +5,16 @@ import java.util.TimerTask;
 
 import main.MainFrame;
 
-public class ProgressbarEventImpl {
+public class ProgressbarEvent {
 	MainFrame mainFrame;
+	
 
-	public ProgressbarEventImpl(MainFrame mainFrame) {
+	public ProgressbarEvent(MainFrame mainFrame) {
 		super();
 		this.mainFrame = mainFrame;
 	}
 
-	public ProgressbarEventImpl() {
+	public ProgressbarEvent() {
 		super();
 	}
 

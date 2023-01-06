@@ -26,7 +26,7 @@ import gui.SettingDialog;
 import guiDesign.ImagePanel;
 import guiDesign.Methods;
 import main.store.StoreDialog;
-import progressbar.ProgressbarEventImpl;
+import progressbar.ProgressbarEvent;
 import projectDialog.ProjectDialog;
 
 @SuppressWarnings("serial")
@@ -54,7 +54,7 @@ public class MainFrame extends JFrame {
 	private ProjectDialog projectFrame = null;
 	private Characters chrs;
 	private JProgressBar hpbar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
-	private ProgressbarEventImpl progressbarEventImpl = new ProgressbarEventImpl(this);
+	private ProgressbarEvent progressbarEventImpl = new ProgressbarEvent(this);
 	
 
 	
