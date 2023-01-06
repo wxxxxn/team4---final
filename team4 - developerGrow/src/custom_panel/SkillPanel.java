@@ -1,7 +1,6 @@
 package custom_panel;
 
 import javax.swing.JPanel;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.Color;
@@ -15,7 +14,7 @@ import java.awt.event.MouseListener;
 import java.net.URL;
 
 
-public class skillPanel extends JPanel  implements MouseListener{
+public class SkillPanel extends JPanel  implements MouseListener{
 
 	private JLabel imageLabel;
 	private JLabel SkillNameLabel;
@@ -24,7 +23,7 @@ public class skillPanel extends JPanel  implements MouseListener{
 	private JLabel priceLabel;
 	private int level = 0;
 
-	public skillPanel() {
+	public SkillPanel() {
 		EtchedBorder eborder = new EtchedBorder(EtchedBorder.RAISED);
 		
 		setBorder(eborder);
@@ -117,6 +116,12 @@ public class skillPanel extends JPanel  implements MouseListener{
 
 	public JLabel getPriceLabel() {
 		return priceLabel;
+	}
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
 	}
 
 	@Override

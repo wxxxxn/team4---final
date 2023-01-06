@@ -33,7 +33,7 @@ public class SkillInfos {
 			try (ResultSet rs = pstmt.executeQuery()) {
 				
 				while (rs.next()) {
-					int skillId = rs.getInt("skillid");
+					int skillLevel = rs.getInt("skilllevel");
 					String skillName = rs.getString("skillname");
 					int price = rs.getInt("price");
 					String description = rs.getString("description");
@@ -42,7 +42,7 @@ public class SkillInfos {
 					ByteArrayInputStream bais = new ByteArrayInputStream(byteArr);
 					BufferedImage image = ImageIO.read(bais);
 					
-					skillInfos.add(new SkillInfo(skillId, skillName, price, description, image));
+					skillInfos.add(new SkillInfo(skillLevel, skillName, price, description, image));
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -54,9 +54,5 @@ public class SkillInfos {
 		}
 
 		return null;
-	}
-	
-	public static byte[] decodeBase64(String encode) {
-		return Base64.getDecoder().decode(encode);
 	}
 }

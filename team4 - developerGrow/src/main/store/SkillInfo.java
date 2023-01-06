@@ -5,19 +5,23 @@ import java.sql.Blob;
 
 public class SkillInfo {
 	
-	private int skillId;
+	private int skillLevel;
 	private String skillName;
 	private int price;
 	private String description;
 	private Image skillImage;
 	
-	public SkillInfo(int skillId, String skillName, int price, String description, Image skillImage) {
+	public SkillInfo(int skillLevel, String skillName, int price, String description, Image skillImage) {
 		super();
-		this.skillId = skillId;
+		this.skillLevel = skillLevel;
 		this.skillName = skillName;
 		this.price = price;
 		this.description = description;
 		this.skillImage = skillImage;
+	}
+	
+	public int getSkillLevel() {
+		return skillLevel;
 	}
 
 	public String getSkillName() {

@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import custom_panel.skillPanel;
+import custom_panel.SkillPanel;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -22,7 +22,7 @@ import java.net.URL;
 public class StoreDialog extends JDialog {
 
 	private JPanel contentPane;
-	private skillPanel[] skills;
+	private SkillPanel[] skills;
 	private StoreEventImpl storeEventImpl = new StoreEventImpl();
 
 	public StoreDialog(int x, int y) {
@@ -54,9 +54,9 @@ public class StoreDialog extends JDialog {
 		contentPane.add(itemsPanel);
 		itemsPanel.setLayout(new GridLayout(5, 0, 10, 25));
 		
-		skills = new skillPanel[5];
+		skills = new SkillPanel[5];
 		for (int i = 0; i < skills.length; i++) {
-			skillPanel itemPanel = new skillPanel();
+			SkillPanel itemPanel = new SkillPanel();
 			skills[i] = itemPanel;
 			storeEventImpl.inputSkillInfo(i, skills[i]);
 			itemsPanel.add(skills[i]);
@@ -77,6 +77,7 @@ public class StoreDialog extends JDialog {
 		closeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				storeEventImpl.updateLevelToDB(skills);
 				dispose();
 			}
 		});
@@ -87,7 +88,7 @@ public class StoreDialog extends JDialog {
 		setVisible(true);
 	}
 
-	public skillPanel[] getItems() {
+	public SkillPanel[] getItems() {
 		return skills;
 	}	
 }
