@@ -20,11 +20,13 @@ import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import gui.ActiveDialog;
 import gui.RankingDialog;
 import gui.SettingDialog;
 import guiDesign.ImagePanel;
 import guiDesign.Methods;
+import main.active.ActiveDialog;
+import main.active.ActiveEventImpl;
+import main.active.Characters;
 import main.store.StoreDialog;
 import progressbar.ProgressbarEvent;
 import projectDialog.ProjectDialog;
@@ -52,16 +54,13 @@ public class MainFrame extends JFrame {
 	private JLabel projectMinute;
 	private GameControllerImpl gameControllerImpl = new GameControllerImpl(this);
 	private ProjectDialog projectFrame = null;
-	private Characters chrs;
+	private Characters chrs = new Characters(this);
+	private ActiveEventImpl activeEventImpl = new ActiveEventImpl(this);
 	private JProgressBar hpbar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
 	private ProgressbarEvent progressbarEventImpl = new ProgressbarEvent(this);
 	private JProgressBar expbar;
 	private JProgressBar stessbar;
 	private JProgressBar healthbar;
-	
-
-	
-	
 
 	public MainFrame(int id) {
 		// 나중에 채우기
@@ -83,8 +82,7 @@ public class MainFrame extends JFrame {
 		setContentPane(Mainpnl);
 		Mainpnl.setLayout(null);	
 	
-		chrs = new Characters(this);
-		chrs.defaultCharacter();
+		activeEventImpl.defaultCharacter();
 		
 		expbar = new JProgressBar();
 		expbar.setValue(20);
@@ -320,7 +318,7 @@ public class MainFrame extends JFrame {
 		activitybtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ActiveDialog activeFrame = new ActiveDialog(MainFrame.this.getX(), MainFrame.this.getY(), MainFrame.this);
+				ActiveDialog activeFrame = new ActiveDialog(MainFrame.this.getX(), MainFrame.this.getY(), activeEventImpl);
 				activeFrame.showGUI();
 			}
 		});

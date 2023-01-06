@@ -1,4 +1,4 @@
-package gui;
+package main.active;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -9,21 +9,19 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 
 import guiDesign.Methods;
-import main.Characters;
 import main.MainFrame;
 
 public class ActiveDialog extends JDialog {
 	private JButton[] btn = new JButton[7];
-	private MainFrame mainFrame;
-	private Characters chrs;
+	private ActiveEventImpl activeEventImpl;
 	
-	public ActiveDialog(int x, int y, MainFrame mainFrame) {
+	public ActiveDialog(int x, int y, ActiveEventImpl activeEventImpl) {
+		
+		this.activeEventImpl = activeEventImpl;
+		
 		setUndecorated(true);
 		setModal(true);
 		setBounds(x + 7, y + 30, 1185, 762);
-		
-		this.mainFrame = mainFrame;
-		chrs = mainFrame.getChrs();
 		
 		setBackground(new Color(0, 0, 0, 80));
 		setLayout(null);
@@ -70,34 +68,40 @@ public class ActiveDialog extends JDialog {
 	public void active (int num) {
 		switch (num) {
 			case 0:
-				chrs.clearlbl();
-				chrs.coupangCharacter();
-				chrs.characterTimer(360);
+				activeEventImpl.clearlbl();
+				activeEventImpl.getCharacters().coupangCharacter();
+				activeEventImpl.showActiveCharacter(360);
+				activeEventImpl.getSwingWorker().execute();
 				break;
 			case 1:
-				chrs.clearlbl();
-				chrs.eatCharacter();
-				chrs.characterTimer(60);
+				activeEventImpl.clearlbl();
+				activeEventImpl.getCharacters().eatCharacter();
+				activeEventImpl.showActiveCharacter(60);
+				activeEventImpl.getSwingWorker().execute();
 				break;
 			case 2:
-				chrs.clearlbl();
-				chrs.playgameCharacter();
-				chrs.characterTimer(30);
+				activeEventImpl.clearlbl();
+				activeEventImpl.getCharacters().playgameCharacter();
+				activeEventImpl.showActiveCharacter(30);
+				activeEventImpl.getSwingWorker().execute();
 				break;
 			case 3:
-				chrs.clearlbl();
-				chrs.bedsleepCharacter();
-				chrs.characterTimer(120);
+				activeEventImpl.clearlbl();
+				activeEventImpl.getCharacters().bedsleepCharacter();
+				activeEventImpl.showActiveCharacter(120);
+				activeEventImpl.getSwingWorker().execute();
 				break;
 			case 4:
-				chrs.clearlbl();
-				chrs.smokeCharacter();
-				chrs.characterTimer(30);
+				activeEventImpl.clearlbl();
+				activeEventImpl.getCharacters().smokeCharacter();
+				activeEventImpl.showActiveCharacter(30);
+				activeEventImpl.getSwingWorker().execute();
 				break;
 			case 5:
-				chrs.clearlbl();
-				chrs.resumeCharacter();
-				chrs.characterTimer(360);
+				activeEventImpl.clearlbl();
+				activeEventImpl.getCharacters().resumeCharacter();
+				activeEventImpl.showActiveCharacter(360);
+				activeEventImpl.getSwingWorker().execute();
 				break;
 			case 6:
 				break;

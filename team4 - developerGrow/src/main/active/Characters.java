@@ -1,12 +1,16 @@
-package main;
+package main.active;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.SwingWorker;
 
 import guiDesign.Methods;
+import main.MainFrame;
 
 public class Characters extends JLabel {
 	private ImageIcon defaultImage = Methods.convertToIcon(getClass(), "character\\character.gif");
@@ -17,30 +21,13 @@ public class Characters extends JLabel {
 	private ImageIcon coupangImage = Methods.convertToIcon(getClass(), "active_image/coupang.gif");
 	private ImageIcon eatImage = Methods.convertToIcon(getClass(), "active_image/eat.gif");
 	private ImageIcon resumeImage = Methods.convertToIcon(getClass(), "active_image/resume.gif");
+	
 	private MainFrame mainFrame = null;
 	private JLabel characterlbl;
 	private JLabel activelbl;
-	private int count;
-	private Timer timer;
-	private TimerTask tt;
 	
 	public Characters(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
-	}
-	
-	public void clearlbl() {
-		if (timer != null) {
-			timer.cancel();
-			System.out.println("캔슬");
-		}
-		if (characterlbl != null) {
-			mainFrame.remove(characterlbl);
-		}
-		if (activelbl != null) {
-			mainFrame.remove(activelbl);
-		}
-		mainFrame.revalidate();
-		mainFrame.repaint();		
 	}
 	
 	public void smokeCharacter() {	
@@ -125,31 +112,20 @@ public class Characters extends JLabel {
 		mainFrame.repaint();
 	}
 	
-	public void defaultCharacter() {
-		characterlbl = new JLabel();
-		activelbl = new JLabel();
-		characterlbl.setIcon(defaultImage);
-		characterlbl.setBounds(211, 392, 210, 300);
-		mainFrame.add(characterlbl);	
-		mainFrame.revalidate();
-		mainFrame.repaint();
+	public JLabel getCharacterlbl() {
+		return characterlbl;
 	}
-		
-	public void characterTimer(int time) {
-		count = 0;
-		timer = new Timer();
-		tt = new TimerTask() {
-			@Override
-			public void run() {
-				count++;
-				if (count >= time) {
-					mainFrame.remove(characterlbl);
-					mainFrame.remove(activelbl);
-					defaultCharacter();
-					timer.cancel();
-				}
-			}
-		};
-		timer.scheduleAtFixedRate(tt, 250, 250);
+	public void setCharacterlbl(JLabel characterlbl) {
+		this.characterlbl = characterlbl;
+	}
+	public JLabel getActivelbl() {
+		return activelbl;
+	}
+	public void setActivelbl(JLabel activelbl) {
+		this.activelbl = activelbl;
+	}
+
+	public ImageIcon getDefaultImage() {
+		return defaultImage;
 	}
 }
