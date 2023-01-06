@@ -67,6 +67,7 @@ public class MainFrame extends JFrame {
 	// 테스트용
 	public MainFrame() {
 		gameControllerImpl.timeController();
+		progressbarEventImpl.ProgressBarTime();
 
 		ClassLoader classLoader = getClass().getClassLoader();
 		URL URLmix = classLoader.getResource("music\\mix.wav");
