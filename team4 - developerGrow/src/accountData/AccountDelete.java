@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import dbutil.ConnectionProvider;
+import database.util.ConnectionProvider;
 
 public class AccountDelete {
 	

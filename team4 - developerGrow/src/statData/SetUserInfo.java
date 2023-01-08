@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dbutil.ConnectionProvider;
+import database.util.ConnectionProvider;
 
 // public MainFrame(int id){
 // UserInfo userInfo = SetUserInfo.GameUserInfo(id);

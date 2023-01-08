@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 
 import custom_panel.SkillPanel;
-import dbutil.ConnectionProvider;
+import database.util.ConnectionProvider;
 
 public class StoreEventImpl implements StoreEvent{
 	

@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import dbutil.ConnectionProvider;
+import database.util.ConnectionProvider;
 
 public class SignUp {
 	public static boolean verifyUserId (String userId) {

@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import dbutil.ConnectionProvider;
+import database.util.ConnectionProvider;
 
 public class Login {
 	public static String checkUserId(String userId) { // 아디 입력 받음

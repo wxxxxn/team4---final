@@ -1,4 +1,4 @@
-package dbutil;
+package database.util;
 
 import java.io.IOException;
 import java.io.InputStream;

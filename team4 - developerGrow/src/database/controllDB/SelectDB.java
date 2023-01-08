@@ -1,0 +1,208 @@
+package database.controllDB;
+
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.imageio.ImageIO;
+
+import database.dblist.CigaLog;
+import database.dblist.Project;
+import database.dblist.Rank;
+import database.dblist.SkillList;
+import database.dblist.User;
+import database.dblist.UserInfo;
+import database.dblist.UserProject;
+import database.dblist.UserSkill;
+import database.util.ConnectionProvider;
+
+public class SelectDB {
+	public List<CigaLog> selectCigaLog(int userId, int infoId) {
+		List<CigaLog> list = new ArrayList<>();
+		String sql = "SELECT * FROM team4.cigaLog WHERE userId = ? AND infoId = ?";
+		try (Connection conn = ConnectionProvider.makeConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql)) {
+			stmt.setInt(1, userId);
+			stmt.setInt(2, infoId);
+			try (ResultSet rs = stmt.executeQuery()) {
+				while(rs.next()) {
+					int logId = rs.getInt("logId");
+					String message = rs.getString("message");
+					list.add(new CigaLog(logId, message, userId, infoId));
+				}
+				return list;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public List<Project> selectProject() {
+		List<Project> list = new ArrayList<>();
+		String sql = "SELECT * FROM team4.project";
+		try (Connection conn = ConnectionProvider.makeConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql)) {
+			try (ResultSet rs = stmt.executeQuery()) {
+				while(rs.next()) {
+					int id = rs.getInt("id");
+					String projectName = rs.getString("projectName");
+					int rewardExp = rs.getInt("rewardExp");
+					int time = rs.getInt("time");
+					list.add(new Project(id, projectName, rewardExp, time));
+				}
+				return list;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public List<Rank> selectRank() {
+		List<Rank> list = new ArrayList<>();
+		String sql = "SELECT * FROM team4.rank";
+		try (Connection conn = ConnectionProvider.makeConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql)) {
+			try (ResultSet rs = stmt.executeQuery()) {
+				while(rs.next()) {
+					int rankId = rs.getInt("rankId");
+					String nickname = rs.getString("nickname");
+					int score = rs.getInt("score");
+					list.add(new Rank(rankId, nickname, score));
+				}
+				return list;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}	
+	
+	public List<SkillList> selectSkillList() {
+		List<SkillList> list = new ArrayList<>();
+		String sql = "SELECT * FROM team4.skillList";
+		try (Connection conn = ConnectionProvider.makeConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql)) {
+			try (ResultSet rs = stmt.executeQuery()) {
+				while(rs.next()) {
+					int skillId = rs.getInt("skillId");
+					String skillName = rs.getString("skillName");
+					int price = rs.getInt("price");
+					String description = rs.getString("description");
+					byte[] byteArr = rs.getBytes("image");
+					ByteArrayInputStream bais = new ByteArrayInputStream(byteArr);
+					BufferedImage image = ImageIO.read(bais);
+					
+					list.add(new SkillList(skillId, skillName, price, description, image));
+				}
+				return list;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}	
+	
+	public List<User> selectUser(String userId) {
+		List<User> list = new ArrayList<>();
+		String sql = "SELECT * FROM team4.user WHERE userId = ?";
+		try (Connection conn = ConnectionProvider.makeConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql)) {
+			stmt.setString(1, userId);
+			try (ResultSet rs = stmt.executeQuery()) {
+				while(rs.next()) {
+					int id = rs.getInt("id");
+					String userPw = rs.getString("userPw");
+					String nickname = rs.getString("nickname");
+					list.add(new User(id, userId, userPw, nickname));
+				}
+				return list;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public static List<UserInfo> seletUserinfo(int userId) {
+		String sql = "SELECT * FROM team4.userinfo WHERE userid = ?";
+		List<UserInfo> list = new ArrayList<>();
+		try (Connection conn = ConnectionProvider.makeConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql)) {	
+			stmt.setInt(1, userId);
+			try (ResultSet rs = stmt.executeQuery()) {
+				while (rs.next()) {
+					int infoId = rs.getInt("infoId");
+					int date = rs.getInt("date");
+					int time = rs.getInt("time");
+					int level = rs.getInt("level");
+					int exp = rs.getInt("exp");
+					int hp = rs.getInt("hp");
+					int health = rs.getInt("health");
+					int stress = rs.getInt("stress");
+					int ciga = rs.getInt("ciga");
+					int usedCiga = rs.getInt("usedCiga");
+					boolean gameover = rs.getBoolean("gameover");
+					list.add(new UserInfo(infoId, date, time, level, exp, hp, health, stress, ciga, usedCiga, gameover, userId));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public List<UserProject> selectUserProject(int userId, int infoId) {
+		List<UserProject> list = new ArrayList<>();
+		String sql = "SELECT * FROM userProject WHERE userId = ? AND infoId = ?";
+		try (Connection conn = ConnectionProvider.makeConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql)) {
+			stmt.setInt(1, userId);
+			stmt.setInt(2, infoId);
+			try (ResultSet rs = stmt.executeQuery()) {
+				while(rs.next()) {
+					int id = rs.getInt("id");
+					int projcetId = rs.getInt("projectId");
+					boolean complete = rs.getBoolean("complete");
+					int lastTime = rs.getInt("lastTime");
+					list.add(new UserProject(projcetId, userId, infoId, id, complete, lastTime));
+				}
+				return list;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public List<UserSkill> selectUserSkill(int userId, int infoId) {
+		List<UserSkill> list = new ArrayList<>();
+		String sql = "SELECT * FROM userSkill WHERE userId = ? AND infoId = ?";
+		try (Connection conn = ConnectionProvider.makeConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql)) {
+			stmt.setInt(1, userId);
+			stmt.setInt(2, infoId);
+			try (ResultSet rs = stmt.executeQuery()) {
+				while(rs.next()) {
+					int id = rs.getInt("id");
+					int skillId = rs.getInt("skillId");
+					int skillLevel = rs.getInt("skillLevel");
+					list.add(new UserSkill(id, userId, infoId, skillId, skillLevel));
+				}
+				return list;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+}

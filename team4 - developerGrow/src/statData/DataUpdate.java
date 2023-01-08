@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import dbutil.ConnectionProvider;
+import database.util.ConnectionProvider;
 
 //public MainFrame(int id){
 //DataUpdate dataUpdate = new DataUpdate();

@@ -18,7 +18,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import dbutil.ConnectionProvider;
+import database.util.ConnectionProvider;
 
 public class SkillInfos {
 
