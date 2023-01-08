@@ -6,10 +6,12 @@ import java.util.TimerTask;
 import main.MainFrame;
 
 public class ProgressbarEvent {
+	
 	MainFrame mainFrame;
 	Timer timeHp = null;
 	Timer timeStress = null;
 	Timer timeHealth = null;
+	
 	private int countHp;
 	private int countStress;
 	private int countHealth;
@@ -21,7 +23,7 @@ public class ProgressbarEvent {
 		this.mainFrame = mainFrame;
 	}
 
-	public void hpbarDecreas(int count, int speed) {
+	public void hpbarDecreas(int speed) {
 		countHp = 0;
 		if (timeHp != null) {
 			timeHp.cancel();
@@ -43,7 +45,7 @@ public class ProgressbarEvent {
 		timeHp.scheduleAtFixedRate(hpTask, 0, speed);		
 	}
 	
-	public void hpbarIncrease(int count, int speed) {
+	public void hpbarIncrease(int speed) {
 		countHp = 0;
 		if (timeHp != null) {
 			timeHp.cancel();
@@ -66,7 +68,7 @@ public class ProgressbarEvent {
 		timeHp.scheduleAtFixedRate(hpTask, 0, speed);		
 	}	
 	
-	public void stressbarDecreas(int count, int speed) {
+	public void stressbarDecreas(int speed) {
 		countStress = 0;
 		if (timeStress != null) {
 			timeStress.cancel();
@@ -88,7 +90,7 @@ public class ProgressbarEvent {
 		timeStress.scheduleAtFixedRate(stressTask, 0, speed);		
 	}
 	
-	public void stressbarIncrease(int count, int speed) {
+	public void stressbarIncrease(int speed) {
 		countStress = 0;
 		if (timeStress != null) {
 			timeStress.cancel();
@@ -108,7 +110,7 @@ public class ProgressbarEvent {
 		timeStress.scheduleAtFixedRate(stressTask, 0, speed);		
 	}		
 	
-	public void healthbarDecreas(int count, int speed) {
+	public void healthbarDecreas(int speed) {
 		countHealth = 0;
 		if (timeHealth != null) {
 			timeHealth.cancel();
@@ -130,7 +132,7 @@ public class ProgressbarEvent {
 		timeHealth.scheduleAtFixedRate(healthTask, 0, speed);		
 	}
 	
-	public void healthbarIncrease(int count, int speed) {
+	public void healthbarIncrease(int speed) {
 		countHealth = 0;
 		if (timeHealth != null) {
 			timeHealth.cancel();

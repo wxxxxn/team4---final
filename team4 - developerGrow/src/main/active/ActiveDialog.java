@@ -70,36 +70,42 @@ public class ActiveDialog extends JDialog {
 			case 0:
 				activeEventImpl.clearlbl();
 				activeEventImpl.getCharacters().coupangCharacter();
+				activeEventImpl.coupangProgressBar();
 				activeEventImpl.showActiveCharacter(360);
 				activeEventImpl.getSwingWorker().execute();
 				break;
 			case 1:
 				activeEventImpl.clearlbl();
 				activeEventImpl.getCharacters().eatCharacter();
+				activeEventImpl.eatProgressBar();
 				activeEventImpl.showActiveCharacter(60);
 				activeEventImpl.getSwingWorker().execute();
 				break;
 			case 2:
 				activeEventImpl.clearlbl();
 				activeEventImpl.getCharacters().playgameCharacter();
+				activeEventImpl.playgameProgressBar();
 				activeEventImpl.showActiveCharacter(30);
 				activeEventImpl.getSwingWorker().execute();
 				break;
 			case 3:
 				activeEventImpl.clearlbl();
 				activeEventImpl.getCharacters().bedsleepCharacter();
+				activeEventImpl.sleepProgressBar();
 				activeEventImpl.showActiveCharacter(120);
 				activeEventImpl.getSwingWorker().execute();
 				break;
 			case 4:
 				activeEventImpl.clearlbl();
 				activeEventImpl.getCharacters().smokeCharacter();
+				activeEventImpl.smokeProgressBar();
 				activeEventImpl.showActiveCharacter(30);
 				activeEventImpl.getSwingWorker().execute();
 				break;
 			case 5:
 				activeEventImpl.clearlbl();
 				activeEventImpl.getCharacters().resumeCharacter();
+				activeEventImpl.resumeProgressBar();
 				activeEventImpl.showActiveCharacter(360);
 				activeEventImpl.getSwingWorker().execute();
 				break;

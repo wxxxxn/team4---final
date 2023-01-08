@@ -57,7 +57,7 @@ public class MainFrame extends JFrame {
 	private Characters chrs = new Characters(this);
 	private ActiveEventImpl activeEventImpl = new ActiveEventImpl(this);
 	private JProgressBar hpbar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
-	private ProgressbarEvent progressbarEventImpl = new ProgressbarEvent(this);
+	private ProgressbarEvent pb = new ProgressbarEvent(this);
 	private JProgressBar expbar;
 	private JProgressBar stessbar;
 	private JProgressBar healthbar;
@@ -69,7 +69,6 @@ public class MainFrame extends JFrame {
 	// 테스트용
 	public MainFrame() {
 		gameControllerImpl.timeController();
-		ProgressbarEvent pb = new ProgressbarEvent(this);
 
 		ClassLoader classLoader = getClass().getClassLoader();
 		URL URLmix = classLoader.getResource("music/mix.wav");
@@ -375,9 +374,9 @@ public class MainFrame extends JFrame {
 		projectMinute.setBounds(154, 103, 29, 17);
 		panel.add(projectMinute);
 		
-		pb.hpbarDecreas(1000, 500);
-		pb.stressbarIncrease(1000, 1000);
-		pb.healthbarDecreas(1000, 2000);
+		pb.hpbarDecreas(500);
+		pb.stressbarIncrease(1000);
+		pb.healthbarDecreas(2000);
 	}
 
 	public void showGUI() {
@@ -475,5 +474,9 @@ public class MainFrame extends JFrame {
 
 	public JProgressBar getHealthbar() {
 		return healthbar;
+	}
+
+	public ProgressbarEvent getPb() {
+		return pb;
 	}
 }
