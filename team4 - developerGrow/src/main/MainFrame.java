@@ -54,7 +54,6 @@ public class MainFrame extends JFrame {
 	private JLabel projectMinute;
 	private GameControllerImpl gameControllerImpl = new GameControllerImpl(this);
 	private ProjectDialog projectFrame = null;
-	private Characters chrs = new Characters(this);
 	private ActiveEventImpl activeEventImpl = new ActiveEventImpl(this);
 	private JProgressBar hpbar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
 	private ProgressbarEvent pb = new ProgressbarEvent(this);
@@ -81,7 +80,7 @@ public class MainFrame extends JFrame {
 		setContentPane(Mainpnl);
 		Mainpnl.setLayout(null);	
 	
-		activeEventImpl.defaultCharacter();
+		activeEventImpl.getCharacters().defaultCharacter();
 		
 		expbar = new JProgressBar();
 		expbar.setValue(20);
@@ -457,9 +456,6 @@ public class MainFrame extends JFrame {
 		return projectMinute;
 	}
 
-	public Characters getChrs() {
-		return chrs;
-	}
 	public JProgressBar getHpbar() {
 		return hpbar;
 	}

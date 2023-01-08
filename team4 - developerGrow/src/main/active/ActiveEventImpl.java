@@ -22,19 +22,11 @@ public class ActiveEventImpl implements ActiveEvent {
 	private JLabel character;
 	private JLabel active;
 
-	public void defaultCharacter() {
-		character = new JLabel();
-		active = new JLabel();
-		character.setIcon(characters.getDefaultImage());
-		character.setBounds(211, 392, 210, 300);
-		characters.setCharacterlbl(character);
-		characters.setActivelbl(active);
-		mainFrame.add(character);
-		mainFrame.revalidate();
-		mainFrame.repaint();
-	}
-
 	public void clearlbl() {
+		
+		character = characters.getCharacterlbl();
+		active = characters.getActivelbl();
+		
 		if (character != null) {
 			mainFrame.remove(character);
 		}
@@ -79,7 +71,7 @@ public class ActiveEventImpl implements ActiveEvent {
 				if (count >= time) {
 					mainFrame.remove(character);
 					mainFrame.remove(active);
-					defaultCharacter();
+					characters.defaultCharacter();
 					defaultProgressBar();
 
 					mainFrame.revalidate();

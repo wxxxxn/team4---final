@@ -30,6 +30,18 @@ public class Characters extends JLabel {
 		this.mainFrame = mainFrame;
 	}
 	
+	public void defaultCharacter() {
+		characterlbl = new JLabel();
+		activelbl = new JLabel();
+		characterlbl.setIcon(getDefaultImage());
+		characterlbl.setBounds(211, 392, 210, 300);
+		setCharacterlbl(characterlbl);
+		setActivelbl(activelbl);
+		mainFrame.add(characterlbl);
+		mainFrame.revalidate();
+		mainFrame.repaint();
+	}
+	
 	public void smokeCharacter() {	
 		characterlbl = new JLabel();
 		activelbl = new JLabel();
