@@ -181,10 +181,11 @@ public class SelectDB {
 				while(rs.next()) {
 					int id = rs.getInt("id");
 					int projcetId = rs.getInt("projectId");
+					boolean proceeding = rs.getBoolean("proceeding");
 					boolean complete = rs.getBoolean("complete");
 					int lastHour = rs.getInt("lastHour");
 					int lastMin = rs.getInt("lastMin");
-					list.add(new UserProject(projcetId, userId, infoId, id, complete, lastHour, lastMin));
+					list.add(new UserProject(projcetId, userId, infoId, id, proceeding, complete, lastHour, lastMin));
 				}
 				return list;
 			}
