@@ -1,6 +1,5 @@
 package login;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,14 +34,36 @@ public class AccountDelete {
 	}
 	public static void accountDelete (boolean delete, int id) { // delete true면 회원탈퇴 아니면 안 함
 		if (delete) {
-			String sql = "DELETE FROM user WHERE id = ?";
-			try (Connection conn = ConnectionProvider.makeConnection();
-					PreparedStatement stmt = conn.prepareStatement(sql)) {
-				stmt.setInt(1, id);
-				stmt.executeUpdate();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			String sql = null;
+			for (int i = 0; i < 6; i++) {
+				sql = sqlSwitch(i);
+				System.out.println(sql);
+				try (Connection conn = ConnectionProvider.makeConnection();
+						PreparedStatement stmt = conn.prepareStatement(sql)) {
+					stmt.setInt(1, id);
+					stmt.executeUpdate();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
+		}
+	}
+	public static String sqlSwitch (int num) {
+		switch (num) {
+			case 0:
+				return "DELETE FROM ranking WHERE nickname = (SELECT nickname FROM user WHERE id = ?)";
+			case 1:
+				return "DELETE FROM userproject WHERE userid = ?";
+			case 2:
+				return "DELETE FROM userskill WHERE userid = ?";
+			case 3:
+				return "DELETE FROM cigalog WHERE userid = ?";
+			case 4:
+				return "DELETE FROM userinfo WHERE userid = ?";
+			case 5:
+				return "DELETE FROM user WHERE id = ?";
+			default:
+				return null;
 		}
 	}
 }
