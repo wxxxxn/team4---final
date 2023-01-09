@@ -1,26 +1,12 @@
 package main.store;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud.Update;
-
-import custom_panel.SkillPanel;
 import database.controllDB.UpdateDB;
 import database.dblist.SkillList;
 import database.dblist.UserSkill;
-import database.util.ConnectionProvider;
 import main.MainFrame;
 
 public class StoreEventImpl implements StoreEvent {

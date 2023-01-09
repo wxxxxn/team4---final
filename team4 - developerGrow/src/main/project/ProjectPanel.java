@@ -20,8 +20,11 @@ public class ProjectPanel extends JPanel implements MouseListener {
 	private JLabel projectName;
 	private JLabel timeTakenlbl;
 	private JLabel completelbl;
+	private boolean proceeding = false;
 	private boolean complete = false;
 	private JPanel completepnl;
+	private JPanel proceedingpnl;
+	private JLabel proceedinglbl;
 	
 	public ProjectPanel() {
 		
@@ -44,6 +47,20 @@ public class ProjectPanel extends JPanel implements MouseListener {
 		completelbl.setHorizontalAlignment(SwingConstants.CENTER);
 		completelbl.setBounds(236, 24, 84, 47);
 		completepnl.add(completelbl);
+		
+		proceedingpnl = new JPanel();
+		proceedingpnl.setBounds(0, 0, 540, 100);
+		proceedingpnl.setBackground(new Color(0, 0, 100, 100));
+		add(proceedingpnl);
+		proceedingpnl.setVisible(false);
+		proceedingpnl.setLayout(null);
+		
+		proceedinglbl = new JLabel("진행중");
+		proceedinglbl.setForeground(Color.GREEN);
+		proceedinglbl.setFont(new Font("HY목각파임B", Font.BOLD, 40));
+		proceedinglbl.setHorizontalAlignment(SwingConstants.CENTER);
+		proceedinglbl.setBounds(209, 24, 136, 47);
+		proceedingpnl.add(proceedinglbl);
 		
 		rankLabel = new JLabel("1주차");
 		rankLabel.setBorder(eborder);
@@ -144,10 +161,26 @@ public class ProjectPanel extends JPanel implements MouseListener {
 	public void setComplete(boolean complete) {
 		this.complete = complete;
 	}
+	
+
+	public boolean isProceeding() {
+		return proceeding;
+	}
+
+	public void setProceeding(boolean proceeding) {
+		this.proceeding = proceeding;
+	}
+
+	public JPanel getProceedingpnl() {
+		return proceedingpnl;
+	}
+
+	public void setProceedingpnl(JPanel proceedingpnl) {
+		this.proceedingpnl = proceedingpnl;
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		completepnl.setVisible(true);
 	}
 
 	@Override
@@ -164,14 +197,14 @@ public class ProjectPanel extends JPanel implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		if (!complete) {
+		if (!complete && !proceeding) {
 			setBackground(Color.pink);
 		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		if (!complete) {
+		if (!complete && !proceeding) {
 			setBackground(Color.LIGHT_GRAY);
 		}
 	}

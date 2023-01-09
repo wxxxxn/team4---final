@@ -19,6 +19,8 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import database.controllDB.UpdateDB;
 import database.dblist.Project;
 import database.dblist.UserProject;
 import main.MainFrame;
@@ -32,9 +34,11 @@ public class ProjectDialog extends JDialog implements MouseListener {
 	private List<UserProject> userProjectList;
 	private ProjectEventImpl projectEventImpl;
 	private int time;
+	private UpdateDB updateDB;
 	
 
 	public ProjectDialog(MainFrame mainFrame) {
+		updateDB = new UpdateDB();
 		this.mainFrame = mainFrame;
 		projectEventImpl = new ProjectEventImpl(mainFrame);
 		
@@ -71,13 +75,28 @@ public class ProjectDialog extends JDialog implements MouseListener {
 			project.getProjectName().setText(projectList.get(i).getProjectName());
 			project.getTimeTakenlbl().setText(String.valueOf(projectList.get(i).getTime()));
 			if (userProjectList.get(i).isComplete()) {
-				project.setComplete(userProjectList.get(i).isComplete());
+				project.setComplete(true);
 				project.getCompletepnl().setVisible(true);
 			}
+			if (userProjectList.get(i).isProceeding()) {
+				project.setProceeding(true);
+				project.getProceedingpnl().setVisible(true);
+			}
 			pjs[i] = project;
-			projectsPanel.add(pjs[i]);
-			projectsPanel.add(Box.createVerticalStrut(25));
 			pjs[i].addMouseListener(this);
+		}
+		
+		for (int i = 0; i < pjs.length; i++) {
+			if (!userProjectList.get(i).isComplete()) {
+				projectsPanel.add(pjs[i]);
+				projectsPanel.add(Box.createVerticalStrut(25));
+			}
+		}
+		for (int i = 0; i < pjs.length; i++) {
+			if (userProjectList.get(i).isComplete()) {
+				projectsPanel.add(pjs[i]);
+				projectsPanel.add(Box.createVerticalStrut(25));
+			}
 		}
 
 		JScrollPane scrollPane = new JScrollPane(projectsPanel);
@@ -119,15 +138,18 @@ public class ProjectDialog extends JDialog implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		Object command = e.getSource();
 		for (int i = 0; i < projectList.size(); i++) {
-			if (command == pjs[i] && !pjs[i].isComplete()) {
-				pjs[i].setComplete(true);
+			if (command == pjs[i] && !pjs[i].isComplete() && !pjs[i].isProceeding()) {
+				pjs[i].setProceeding(true);
+				pjs[i].getProceedingpnl().setVisible(true);
 				String str = projectList.get(i).getProjectName();
-//				userProjectList.get(i).setComplete(pjs[i].isComplete());
 				time = projectList.get(i).getTime();
 				mainFrame.getNowProjectlbl().setText(str);
 				mainFrame.getProjectHour().setText(String.valueOf(time));
 				mainFrame.revalidate();
 				mainFrame.repaint();
+				userProjectList.get(i).setProceeding(true);
+				System.out.println(userProjectList.get(i));
+				updateDB.updateUserProject(userProjectList);
 				dispose();
 				
 				projectEventImpl.timeController(time);
