@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -25,6 +24,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import custom_panel.ProjectPanel;
+import database.dblist.Project;
+import database.dblist.UserProject;
 import main.MainFrame;
 
 public class ProjectDialog extends JDialog implements MouseListener {
@@ -37,13 +38,13 @@ public class ProjectDialog extends JDialog implements MouseListener {
 	private double rate;
 	private List<Project> projectList;
 	private int time;
-	private List<Boolean> completeList;
+	private List<UserProject> userProjectList;
 
 	public ProjectDialog(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
 		
-		projectList = new GetProjectList().getProject(); 
-		completeList = new GetProjectList().getCompleteList(1, 1);
+		projectList = mainFrame.getProjectList();
+		userProjectList = mainFrame.getUserProjectList();
 		
 		setUndecorated(true);
 		setModal(true);
@@ -72,10 +73,10 @@ public class ProjectDialog extends JDialog implements MouseListener {
 		for (int i = 0; i < pjs.length; i++) {
 			ProjectPanel project = new ProjectPanel();
 			project.getRankLabel().setText(String.valueOf((i + 1) + "주차"));
-			project.getProjectName().setText(projectList.get(i).getProjcetName());
+			project.getProjectName().setText(projectList.get(i).getProjectName());
 			project.getTimeTakenlbl().setText(String.valueOf(projectList.get(i).getTime()));
-			if (completeList.get(i)) {
-				project.setComplete(completeList.get(i));
+			if (userProjectList.get(i).isComplete()) {
+				project.setComplete(userProjectList.get(i).isComplete());
 				project.getCompletepnl().setVisible(true);
 			}
 			pjs[i] = project;
@@ -150,7 +151,7 @@ public class ProjectDialog extends JDialog implements MouseListener {
 		for (int i = 0; i < projectList.size(); i++) {
 			if (command == pjs[i] && !pjs[i].isComplete()) {
 				pjs[i].setComplete(true);
-				String str = projectList.get(i).getProjcetName();
+				String str = projectList.get(i).getProjectName();
 				time = projectList.get(i).getTime();
 				mainFrame.getNowProjectlbl().setText(str);
 				mainFrame.getProjectHour().setText(String.valueOf(time));

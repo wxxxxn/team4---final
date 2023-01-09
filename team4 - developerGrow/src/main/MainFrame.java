@@ -433,13 +433,13 @@ public class MainFrame extends JFrame {
 		this.infoId = userInfo.getInfoId();
 		skillList = selectDB.selectSkillList();
 		userSkillList = selectDB.selectUserSkill(userId, infoId);
-		if (userSkillList == null) {
+		if (userSkillList.size() == 0) {
 			insertDB.insertUserSkill(userId, infoId);
 			userSkillList = selectDB.selectUserSkill(userId, infoId);
 		}
 		projectList = selectDB.selectProject();
 		userProjectList = selectDB.selectUserProject(userId, infoId);
-		if (userProjectList == null) {
+		if (userProjectList.size() == 0) {
 			insertDB.insertUserProject(userId, infoId);
 			userProjectList = selectDB.selectUserProject(userId, infoId);
 		}
@@ -543,4 +543,54 @@ public class MainFrame extends JFrame {
 	public ProgressbarEvent getPb() {
 		return pb;
 	}
+
+	public List<UserInfo> getUserInfoList() {
+		return userInfoList;
+	}
+
+	public void setUserInfoList(List<UserInfo> userInfoList) {
+		this.userInfoList = userInfoList;
+	}
+
+	public List<UserSkill> getUserSkillList() {
+		return userSkillList;
+	}
+
+	public void setUserSkillList(List<UserSkill> userSkillList) {
+		this.userSkillList = userSkillList;
+	}
+
+	public List<UserProject> getUserProjectList() {
+		return userProjectList;
+	}
+
+	public void setUserProjectList(List<UserProject> userProjectList) {
+		this.userProjectList = userProjectList;
+	}
+
+	public UserInfo getUserInfo() {
+		return userInfo;
+	}
+
+	public void setUserInfo(UserInfo userInfo) {
+		this.userInfo = userInfo;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public List<Project> getProjectList() {
+		return projectList;
+	}
+
+	public void setProjectList(List<Project> projectList) {
+		this.projectList = projectList;
+	}
+	
+	
 }
