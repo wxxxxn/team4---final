@@ -22,7 +22,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-class Dudu extends JFrame implements ActionListener, Runnable {
+public class dugame extends JFrame implements ActionListener, Runnable {
 //   ImageIcon ii = new ImageIcon("character.gif");
 	private JButton jbt[] = new JButton[9];
 	private JButton start = new JButton(" ");
@@ -48,7 +48,7 @@ class Dudu extends JFrame implements ActionListener, Runnable {
 	private boolean go;
 	private int touch;
 
-	public Dudu(String title) {
+	public dugame(String title) {
 		super(title);
 		this.init();
 		this.start();
@@ -121,7 +121,7 @@ class Dudu extends JFrame implements ActionListener, Runnable {
 			on_button();
 			random(0);
 		} else if (e.getSource() == end) {
-			System.exit(0);
+			dispose();
 		}
 		for (int i = 0; i < 9; ++i) {
 			if (e.getSource() == jbt[i]) {
@@ -237,13 +237,7 @@ class Dudu extends JFrame implements ActionListener, Runnable {
 		return null;
 	}
 
-}
-
-public class dugame {
-
-	public static void main(String[] args) {
-		Dudu dududud = new Dudu("냥");
-		dududud.getContentPane().setLayout(null);
-
+	public void showGUI() {
+		setVisible(true);
 	}
 }

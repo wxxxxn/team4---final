@@ -36,6 +36,7 @@ import guiDesign.Methods;
 import login.LoginFrame;
 import main.active.ActiveDialog;
 import main.active.ActiveEventImpl;
+import main.game.GameDialog;
 import main.project.ProjectDialog;
 import main.store.StoreDialog;
 import progressbar.ProgressbarEvent;
@@ -341,6 +342,13 @@ public class MainFrame extends JFrame {
 		gamebtn.setOpaque(false);
 		gamebtn.setBorderPainted(false);
 		gamebtn.setBackground(new Color(255, 0, 0, 0));
+		gamebtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				GameDialog gameDialog = new GameDialog(MainFrame.this.getX(), MainFrame.this.getY());
+				gameDialog.showGUI();
+			}
+		});
 
 		JButton taskbtn = new JButton();
 		taskbtn.setHorizontalAlignment(SwingConstants.LEFT);
