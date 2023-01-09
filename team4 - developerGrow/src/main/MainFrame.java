@@ -38,6 +38,7 @@ import main.active.ActiveDialog;
 import main.active.ActiveEventImpl;
 import main.game.GameDialog;
 import main.project.ProjectDialog;
+import main.project.ProjectEventImpl;
 import main.store.StoreDialog;
 import progressbar.ProgressbarEvent;
 
@@ -47,8 +48,9 @@ public class MainFrame extends JFrame {
 	// 메인페널
 	private ImagePanel Mainpnl;
 	
-	// 사운드 클립
+	// 사운드
 	private static Clip clip;
+	private JButton soundbtn;
 	
 	// 활동버튼
 	private ActiveEventImpl activeEventImpl = new ActiveEventImpl(this);
@@ -65,13 +67,15 @@ public class MainFrame extends JFrame {
 	
 	// 프로젝트
 	private ProjectDialog projectFrame = null;
+	private ProjectEventImpl projectEventImpl = new ProjectEventImpl(this);
 	private JLabel nowRatinglbl;
 	private JLabel nowProjectlbl;
 	private JLabel projectHour;
 	private JLabel projectMinute;
 	
-	// 캐릭터 레벨
+	// 정보
 	private JLabel levellbl;
+	private JLabel numOfcigalbl;
 	
 	// progressbar
 	private ProgressbarEvent pb = new ProgressbarEvent(this);
@@ -93,9 +97,9 @@ public class MainFrame extends JFrame {
 	private int usedCiga;
 	private List<User> userList;
 
-	private JButton soundbtn;
+	
 
-	private JLabel numOfcigalbl;
+	
 
 	public MainFrame(int userId) {
 		gameControllerImpl.timeController();
@@ -441,10 +445,6 @@ public class MainFrame extends JFrame {
 		
 		gameControllerImpl.readyGame(userId);
 		gameControllerImpl.applyDB();
-
-		pb.hpbarDecreas(3000);
-		pb.stressbarIncrease(3000);
-		pb.healthbarDecreas(3000);
 	}
 
 	public void showGUI() {
@@ -616,4 +616,9 @@ public class MainFrame extends JFrame {
 	public JProgressBar getStressbar() {
 		return stressbar;
 	}
+
+	public ProjectEventImpl getProjectEventImpl() {
+		return projectEventImpl;
+	}
+	
 }

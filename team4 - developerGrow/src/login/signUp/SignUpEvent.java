@@ -1,4 +1,4 @@
-package signUp;
+package login.signUp;
 
 public interface SignUpEvent {
 

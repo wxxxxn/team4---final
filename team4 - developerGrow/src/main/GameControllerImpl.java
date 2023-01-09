@@ -1,5 +1,6 @@
 package main;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -8,10 +9,12 @@ import database.controllDB.InsertDB;
 import database.controllDB.SelectDB;
 import database.controllDB.UpdateDB;
 import database.dblist.UserInfo;
+import main.project.ProjectEventImpl;
 
 public class GameControllerImpl implements GameController {
 
 	private MainFrame mainFrame;
+	private UpdateDB updateDB = new UpdateDB();;
 
 	public GameControllerImpl(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
@@ -42,10 +45,13 @@ public class GameControllerImpl implements GameController {
 			
 			if (((minutes % 60) % 10) == 0) {
 				saveUserInfoData();
-				System.out.println("야호");
+				saveUserProjcet();
+				System.out.println("userInfo, userProject 저장");
+				System.out.println(mainFrame.getUserProjectList());
 			}
 		}
 	};
+	
 
 	private void updateTime(int minutes) {
 
@@ -66,7 +72,6 @@ public class GameControllerImpl implements GameController {
 		mainFrame.setUserId(userId);
 		SelectDB selectDB = new SelectDB();
 		InsertDB insertDB = new InsertDB();
-		UpdateDB updateDB = new UpdateDB();
 		mainFrame.setUserList(selectDB.selectUser(userId));
 		mainFrame.setUserInfoList(selectDB.selectUserinfo(userId));
 		mainFrame.setUserInfo(selectDB.searchNowGame(mainFrame.getUserInfoList()));
@@ -111,6 +116,7 @@ public class GameControllerImpl implements GameController {
 			mainFrame.getNumOfcigalbl().setText(String.valueOf(userInfo.getCiga()));
 			mainFrame.setUsedCiga(userInfo.getUsedCiga());
 			mainFrame.setUserId(userInfo.getUserId());
+			applyProject();
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 		}
@@ -133,11 +139,37 @@ public class GameControllerImpl implements GameController {
 		UserInfo userInfo = new UserInfo(mainFrame.getInfoId(), date, time, level, exp, hp, health, stress, ciga,
 				usedCiga, gameover, mainFrame.getUserId());
 		
-		UpdateDB updateUserInfo = new UpdateDB();
-		updateUserInfo.updateUserInfo(userInfo);
+		updateDB.updateUserInfo(userInfo);
 	}
 	
 	public int getMinutes() {
 		return minutes;
+	}
+	
+	private void applyProject() {
+		ProjectEventImpl projectEventImpl = new ProjectEventImpl(mainFrame);
+		int searchProject = projectEventImpl.searchNowProject(mainFrame.getUserProjectList());
+		if (searchProject != -1) {
+			int index = mainFrame.getUserProjectList().get(searchProject).getProjectId() - 1;
+			String projectName = mainFrame.getProjectList().get(index).getProjectName();
+			int projectHour = mainFrame.getUserProjectList().get(searchProject).getLastHour();
+			int projcetMin = mainFrame.getUserProjectList().get(searchProject).getLastMin();
+			int time = mainFrame.getProjectList().get(index).getTime();
+			mainFrame.getNowProjectlbl().setText(projectName);
+			mainFrame.getProjectHour().setText(String.valueOf(projectHour));
+			mainFrame.getProjectMinute().setText(String.valueOf(projcetMin));
+			projectEventImpl.projectTimeControll(time);
+		}
+	}
+	
+	private void saveUserProjcet() {
+		
+		int searchProject = mainFrame.getProjectEventImpl().searchNowProject(mainFrame.getUserProjectList());
+		if (searchProject != -1) {
+			mainFrame.getUserProjectList().get(searchProject).setLastHour(Integer.valueOf(mainFrame.getProjectHour().getText()));
+			mainFrame.getUserProjectList().get(searchProject).setLastMin(Integer.valueOf(mainFrame.getProjectMinute().getText()));
+		}
+		int[] result = updateDB.updateUserProject(mainFrame.getUserProjectList());
+		System.out.println(Arrays.toString(result));
 	}
 }

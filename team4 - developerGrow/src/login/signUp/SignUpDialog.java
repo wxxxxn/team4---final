@@ -1,4 +1,4 @@
-package signUp;
+package login.signUp;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;

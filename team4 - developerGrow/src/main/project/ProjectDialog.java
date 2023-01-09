@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.URL;
 import java.util.List;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -20,7 +21,6 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import database.controllDB.UpdateDB;
 import database.dblist.Project;
 import database.dblist.UserProject;
 import main.MainFrame;
@@ -32,16 +32,11 @@ public class ProjectDialog extends JDialog implements MouseListener {
 	private ProjectPanel[] pjs;
 	private List<Project> projectList;
 	private List<UserProject> userProjectList;
-	private ProjectEventImpl projectEventImpl;
-	private int time;
-	private UpdateDB updateDB;
 	
 
 	public ProjectDialog(MainFrame mainFrame) {
-		updateDB = new UpdateDB();
 		this.mainFrame = mainFrame;
-		projectEventImpl = new ProjectEventImpl(mainFrame);
-		
+	
 		projectList = mainFrame.getProjectList();
 		userProjectList = mainFrame.getUserProjectList();
 		
@@ -142,22 +137,14 @@ public class ProjectDialog extends JDialog implements MouseListener {
 				pjs[i].setProceeding(true);
 				pjs[i].getProceedingpnl().setVisible(true);
 				String str = projectList.get(i).getProjectName();
-				time = projectList.get(i).getTime();
 				mainFrame.getNowProjectlbl().setText(str);
+				int time = projectList.get(i).getTime();
 				mainFrame.getProjectHour().setText(String.valueOf(time));
 				mainFrame.revalidate();
 				mainFrame.repaint();
 				userProjectList.get(i).setProceeding(true);
-				System.out.println(userProjectList.get(i));
-				updateDB.updateUserProject(userProjectList);
+				mainFrame.getProjectEventImpl().projectTimeControll(time);
 				dispose();
-				
-				projectEventImpl.timeController(time);
-				int speed = 5000 / projectList.get(i).getId();
-				System.out.println(speed);
-				mainFrame.getPb().healthbarDecreas(speed);
-				mainFrame.getPb().stressbarIncrease(speed);
-				mainFrame.getPb().hpbarDecreas(speed);
 			}
 		}	
 	}

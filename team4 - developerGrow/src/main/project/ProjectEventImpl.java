@@ -1,8 +1,10 @@
 package main.project;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import database.dblist.UserProject;
 import main.MainFrame;
 
 public class ProjectEventImpl implements ProjectEvent {
@@ -15,20 +17,29 @@ public class ProjectEventImpl implements ProjectEvent {
 	public ProjectEventImpl(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
 	}
+	
+	public int searchNowProject(List<UserProject> list) {
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).isProceeding() && !list.get(i).isComplete()) {
+				return i;
+			}
+		}
+		return -1;
+	}
 
 	@Override
-	public void timeController(int time) {
+	public void projectTimeControll(int time) {
 		minutes = Integer.valueOf(mainFrame.getProjectMinute().getText());
 		hours = Integer.valueOf(mainFrame.getProjectHour().getText());
 		rate = Double.valueOf(mainFrame.getNowRatinglbl().getText());
 		
-		Timer countdown = new Timer();
-	    TimerTask timerTask = new TimerTask() {
+		Timer projectTimer = new Timer();
+	    TimerTask projcetTask = new TimerTask() {
 			@Override
 			public void run() {
 				
 				if (hours == 0 && minutes == 0) {
-					countdown.cancel();
+					projectTimer.cancel();
 				} else if (minutes == 0) {
 					hours--;
 					minutes = 59;
@@ -39,7 +50,7 @@ public class ProjectEventImpl implements ProjectEvent {
 				updateTime(minutes, hours, rate);
 			}
 	    };
-		countdown.scheduleAtFixedRate(timerTask, 0, 250);
+		projectTimer.scheduleAtFixedRate(projcetTask, 0, 250);
 	}
 	
 	private void updateTime(int minutes, int hours, double rate) {
@@ -49,6 +60,7 @@ public class ProjectEventImpl implements ProjectEvent {
 		mainFrame.revalidate();
 		mainFrame.repaint();		
     }
+
 	
 //	private void saveProjectData() {
 //		

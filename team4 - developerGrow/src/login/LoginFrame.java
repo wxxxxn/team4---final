@@ -22,10 +22,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import guiDesign.Methods;
 import guiDesign.MyPassword;
 import guiDesign.MyTextField;
+import login.signUp.SignUpDialog;
 import main.MainFrame;
-import signUp.SignUpDialog;
 
 public class LoginFrame extends JFrame {
 
@@ -34,20 +35,11 @@ public class LoginFrame extends JFrame {
 	private JButton signupbtn;
 	private JButton loginbtn;
 	private MyPassword passwordField;
-	private JLabel lblNewLabel_1;
+	private JLabel characterlbl;
 	private static Clip clip;
 
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LoginFrame window = new LoginFrame();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		new LoginFrame().showGUI();
 	}
 
 	public LoginFrame() {
@@ -55,80 +47,68 @@ public class LoginFrame extends JFrame {
 		URL URLmix = classLoader.getResource("music/main.wav");
 		sound(URLmix);
 		
-		frame = new JFrame();
-		frame.setBounds(100, 100, 1000, 500);
-		frame.getContentPane().setLayout(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setBounds(100, 100, 1000, 500);
+		setTitle("개발자 키우기 - 로그인");
+		setLayout(null);
 
 		JPanel panel = new JPanel();
 		panel.setBounds(309, 200, 362, 115);
-		frame.getContentPane().add(panel);
+		add(panel);
 		panel.setBackground(new Color(255, 0, 0, 0));
 		panel.setLayout(null);
 
 		txtId = new MyTextField();
 		txtId.setFont(new Font("휴먼둥근헤드라인", Font.PLAIN, 20));
-		txtId.setPrefixIcon(convertToIcon(getClass(), "guiDesign/user.png", 30, 30));
+		txtId.setPrefixIcon(Methods.convertToResizeIcon(getClass(), "guiDesign/user.png", 30, 30));
 		txtId.setBounds(12, 10, 338, 41);
 		panel.add(txtId);
 
 		passwordField = new MyPassword();
-		passwordField.setPrefixIcon(convertToIcon(getClass(), "guiDesign/key.png", 30, 30));
+		passwordField.setPrefixIcon(Methods.convertToResizeIcon(getClass(), "guiDesign/key.png", 30, 30));
 		passwordField.setBounds(12, 61, 338, 41);
 		panel.add(passwordField);
 
 
 
 		signupbtn = new JButton("");
-		URL URLSignupImage = classLoader.getResource("images/btn_img/SignBtnImage.png");
-		ImageIcon SignupBtnIcon = new ImageIcon(URLSignupImage);
-		URL URLSignupPushImage = classLoader.getResource("images/btn_img/SignPushBtnImage.png");
-		ImageIcon SignupPushBtnIcon = new ImageIcon(URLSignupPushImage);
-		signupbtn.setIcon(SignupBtnIcon);
-		signupbtn.setPressedIcon(SignupPushBtnIcon);
+		signupbtn.setIcon(Methods.convertToIcon(getClass(), "images/btn_img/SignBtnImage.png"));
+		signupbtn.setPressedIcon(Methods.convertToIcon(getClass(), "images/btn_img/SignPushBtnImage.png"));
 		signupbtn.setBorderPainted(false);
 		signupbtn.setOpaque(false);
 		signupbtn.setBackground(new Color(255, 0, 0, 0));
 		signupbtn.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		signupbtn.setBounds(336, 335, 139, 63);
-		frame.getContentPane().add(signupbtn);
+		add(signupbtn);
 		signupbtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Point p = frame.getLocationOnScreen();
-				SignUpDialog signupFrame = new SignUpDialog(p.x, p.y);
+				SignUpDialog signupFrame = new SignUpDialog(LoginFrame.this.getX(), LoginFrame.this.getY());
 				signupFrame.showGUI();
 			}
 		});
 
 		loginbtn = new JButton("");
-		URL URLLoginImage = classLoader.getResource("images/btn_img/loginBtnImage.png");
-		ImageIcon LoginBtnIcon = new ImageIcon(URLLoginImage);
-		URL URLLoginPushImage = classLoader.getResource("images/btn_img/loginPushBtnImage.png");
-		ImageIcon LoginPushBtnIcon = new ImageIcon(URLLoginPushImage);
-		loginbtn.setIcon(LoginBtnIcon);
-		loginbtn.setPressedIcon(LoginPushBtnIcon);
+		loginbtn.setIcon(Methods.convertToIcon(getClass(), "images/btn_img/loginBtnImage.png"));
+		loginbtn.setPressedIcon(Methods.convertToIcon(getClass(), "images/btn_img/loginPushBtnImage.png"));
 		loginbtn.setBorderPainted(false);
 		loginbtn.setOpaque(false);
 		loginbtn.setBackground(new Color(255, 0, 0, 0));
 		loginbtn.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		loginbtn.setBounds(508, 335, 139, 63);
 		
-		frame.getContentPane().add(loginbtn);
+		add(loginbtn);
 
-		URL URLback1Image = classLoader.getResource("images/character/logincharacter.gif");
-		ImageIcon URLback1Icon = new ImageIcon(URLback1Image);
+		characterlbl = new JLabel("");
+		characterlbl.setIcon(Methods.convertToIcon(getClass(), "images/character/logincharacter.gif"));
+		characterlbl.setBounds(683, 207, 161, 166);
+		add(characterlbl);
 		
-		lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(URLback1Icon);
-		lblNewLabel_1.setBounds(683, 207, 161, 166);
-		frame.getContentPane().add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_2 = new JLabel("");
-		URL URLLoginBack = classLoader.getResource("images/back_img/LoginBackground.png");
-		lblNewLabel_2.setIcon(new ImageIcon(URLLoginBack));
-		lblNewLabel_2.setBounds(0, 0, 984, 461);
-		frame.getContentPane().add(lblNewLabel_2);
+		JLabel backgourndlbl = new JLabel("");
+		backgourndlbl.setIcon(Methods.convertToIcon(getClass(), "images/back_img/LoginBackground.png"));
+		backgourndlbl.setBounds(0, 0, 984, 461);
+		add(backgourndlbl);
 		
 		loginbtn.addActionListener(new ActionListener() {
 
@@ -141,40 +121,22 @@ public class LoginFrame extends JFrame {
 					if (login.checkUserPw(login.checkUserId(textId), textPw) && !textPw.equals("") && textPw != null) {
 						MainFrame mainFrame = new MainFrame(login.idValue(textId));
 						mainFrame.showGUI();
-						frame.dispose();
+						dispose();
 						stopSound();
 					} else {
-						new JOptionPane();
 						JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 잘못 입력되었습니다. ");
 					}
 				} else {
-					new JOptionPane();
 					JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 잘못 입력되었습니다. ");
 				}
 			}
 		});
-		
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
-	public static ImageIcon convertToIcon(Class useClass, String name, int width, int height) {
-		String imageName = name;
-		int thisWidth = width;
-		int thisHeight = height;
-		Toolkit kit = Toolkit.getDefaultToolkit();
-		ClassLoader classLoader = useClass.getClassLoader();
-		try {
-			Image image = kit.getImage(classLoader.getResource(imageName));
-			image = image.getScaledInstance(thisWidth, thisHeight, Image.SCALE_SMOOTH);
-			// 이미지크기조절
-			ImageIcon icon = new ImageIcon(image);
-			return icon;
-		} catch (NullPointerException e) {
-			System.out.println(name + " 해당 이미지 파일을 찾을 수 없습니다.");
-		}
-		return null;
-	 }
+	public void showGUI() {
+		setVisible(true);
+	}
+	
 	
 	public static void sound(URL file) {
 		try {
