@@ -1,4 +1,4 @@
-package login;
+package signUp;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -26,7 +26,7 @@ public class SignUpDialog extends JDialog  {
 	private String userId;
 	private String userPw;
 	private String nick;
-	private SignUp signUp = new SignUp(this);
+	private SignUpEventImpl signUp = new SignUpEventImpl(this);
 	private JLabel lblIdCheck;
 	private JLabel lblNickCheck;
 
