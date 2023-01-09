@@ -4,7 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.ActionListener;import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
@@ -59,6 +60,35 @@ public class StoreDialog extends JDialog {
 			skills[i] = itemPanel;
 			storeEventImpl.inputSkillInfo(i, skills[i]);
 			itemsPanel.add(skills[i]);
+			
+			skills[i].addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseReleased(MouseEvent e) {
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent e) {
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent e) {
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					itemPanel.setLevel(itemPanel.getLevel() + 1);
+					System.out.println(itemPanel.getLevel());
+					itemPanel.getLevelLabel().setText("LV." + itemPanel.getLevel());
+					
+					mainFrame.setUsedCiga(mainFrame.getUsedCiga() + Integer.parseInt(itemPanel.getPriceLabel().getText()));
+					System.out.println(mainFrame.getUsedCiga());
+				}
+			});
 		}
 		
 		ClassLoader classLoader = getClass().getClassLoader();

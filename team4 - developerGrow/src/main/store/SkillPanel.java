@@ -13,7 +13,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.URL;
 
-public class SkillPanel extends JPanel  implements MouseListener{
+public class SkillPanel extends JPanel{
 
 	private JLabel imageLabel;
 	private JLabel SkillNameLabel;
@@ -69,7 +69,6 @@ public class SkillPanel extends JPanel  implements MouseListener{
 		levelLabel.setBounds(468, 10, 80, 80);
 		add(levelLabel);
 		
-		
 		priceLabel = new JLabel("skill price");
 		priceLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		priceLabel.setOpaque(true);
@@ -93,10 +92,8 @@ public class SkillPanel extends JPanel  implements MouseListener{
 		cigaImageLabel.setBounds(261, 10, 23, 23);
 		add(cigaImageLabel);
 		
-		addMouseListener(this);
 	}
 	
-
 	public JLabel getImageLabel() {
 		return imageLabel;
 	}
@@ -122,23 +119,4 @@ public class SkillPanel extends JPanel  implements MouseListener{
 	public void setLevel(int level) {
 		this.level = level;
 	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		level++;
-		levelLabel.setText("LV." + level);
-	}
-	@Override
-	public void mousePressed(MouseEvent e) {}
-	@Override
-	public void mouseReleased(MouseEvent e) {}
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		setBackground(Color.pink);
-	}
-	@Override
-	public void mouseExited(MouseEvent e) {
-		setBackground(Color.LIGHT_GRAY);
-	}
-	
 }
