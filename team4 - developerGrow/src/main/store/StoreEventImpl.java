@@ -16,18 +16,19 @@ import javax.swing.JDialog;
 
 import com.mysql.cj.x.protobuf.MysqlxCrud.Update;
 
+import custom_panel.SkillPanel;
 import database.controllDB.UpdateDB;
 import database.dblist.SkillList;
 import database.dblist.UserSkill;
 import database.util.ConnectionProvider;
 import main.MainFrame;
 
-public class StoreEventImpl implements StoreEvent{
-	
+public class StoreEventImpl implements StoreEvent {
+
 	private MainFrame mainFrame;
 	private List<SkillList> skillList;
 	private List<UserSkill> userSkillList;
-	
+
 	public StoreEventImpl(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
 		skillList = mainFrame.getSkillList();
@@ -36,7 +37,7 @@ public class StoreEventImpl implements StoreEvent{
 
 	@Override
 	public void inputSkillInfo(int index, SkillPanel skill) {
-		
+
 		skill.getLevelLabel().setText("LV." + userSkillList.get(index).getSkillLevel());
 		skill.getImageLabel().setIcon(new ImageIcon(skillList.get(index).getImage()));
 		skill.getSkillNameLabel().setText(skillList.get(index).getSkillName());
@@ -46,10 +47,8 @@ public class StoreEventImpl implements StoreEvent{
 	}
 
 	@Override
-	public void updateLevelToDB(SkillPanel[] skills) {
-		
-		UpdateDB updateDB = new UpdateDB();
-		
-			updateDB.updateUserSkill(userSkillList);
+	public void updateLevelToDB() {
+
+		new UpdateDB().updateUserSkill(userSkillList);
 	}
 }

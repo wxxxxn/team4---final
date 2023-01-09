@@ -1,8 +1,10 @@
 package main.store;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import custom_panel.SkillPanel;
 import main.MainFrame;
 
 import javax.swing.JLabel;
@@ -82,7 +84,7 @@ public class StoreDialog extends JDialog {
 					mainFrame.getUserSkillList().get(i).setSkillLevel(skills[i].getLevel());
 				}
 				
-				storeEventImpl.updateLevelToDB(skills);
+				storeEventImpl.updateLevelToDB();
 				dispose();
 			}
 		});
