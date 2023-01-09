@@ -122,7 +122,7 @@ public class SelectDB {
 				while(rs.next()) {
 					String userId = rs.getString("userId");
 					String userPw = rs.getString("userPw");
-					String nickname = rs.getString("nickname");
+					String nickname = rs.getString("usernickname");
 					list.add(new User(id, userId, userPw, nickname));
 				}
 				return list;
