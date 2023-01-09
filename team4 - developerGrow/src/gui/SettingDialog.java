@@ -9,8 +9,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import login.AccountDelete;
+import login.LoginFrame;
+
 import java.awt.event.ActionListener;
 import java.net.URL;
 import java.awt.event.ActionEvent;
@@ -19,8 +24,12 @@ import javax.swing.SwingConstants;
 public class SettingDialog extends JDialog {
 
 	private JPanel contentPane;
+	private boolean loginFrame;
+	public boolean getLoginFrame() {
+		return loginFrame;
+	}
 
-	public SettingDialog(int x, int y) {
+	public SettingDialog(int x, int y, int id) {
 		
 		setBounds(x + 7, y + 30, 1185, 762);
 		setUndecorated(true);
@@ -55,8 +64,14 @@ public class SettingDialog extends JDialog {
 		JButton logoutbtn = new JButton("로그아웃");
 		logoutbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int num = JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까?", "로그아웃", JOptionPane.YES_NO_OPTION);
+				if (num == 0) {
+					loginFrame = true;
+					dispose();
+				}
 			}
 		});
+		
 		logoutbtn.setBounds(517, 321, 152, 45);
 		logoutbtn.setIcon(convertToIcon(getClass(), "btn_setting\\logout.png", 165, 45));
 		logoutbtn.setPressedIcon(convertToIcon(getClass(), "btn_setting\\logoutPush.png", 165, 45));
@@ -71,6 +86,18 @@ public class SettingDialog extends JDialog {
 		contentPane.add(outbtn);
 		outbtn.setOpaque(false);
 		outbtn.setBorderPainted(false);
+		
+		outbtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int num = JOptionPane.showConfirmDialog(null, "정말 탈퇴하시겠습니까?", "회원 탈퇴", JOptionPane.YES_NO_OPTION);
+				if (num == 0) {
+					loginFrame = true;
+					AccountDelete.accountDelete(true, id);
+					dispose();
+				}
+			}
+		});
 		
 		JButton closebtn = new JButton("닫기");
 		closebtn.addActionListener(new ActionListener() {

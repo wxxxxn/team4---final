@@ -51,17 +51,17 @@ public class AccountDelete {
 	public static String sqlSwitch (int num) {
 		switch (num) {
 			case 0:
-				return "DELETE FROM ranking WHERE nickname = (SELECT nickname FROM user WHERE id = ?)";
+				return "DELETE FROM team4.rank WHERE nickname = (SELECT nickname FROM team4.user WHERE id = ?)";
 			case 1:
-				return "DELETE FROM userproject WHERE userid = ?";
+				return "DELETE FROM team4.userproject WHERE userid = ?";
 			case 2:
-				return "DELETE FROM userskill WHERE userid = ?";
+				return "DELETE FROM team4.userskill WHERE userid = ?";
 			case 3:
-				return "DELETE FROM cigalog WHERE userid = ?";
+				return "DELETE FROM team4.cigalog WHERE userid = ?";
 			case 4:
-				return "DELETE FROM userinfo WHERE userid = ?";
+				return "DELETE FROM team4.userinfo WHERE userid = ?";
 			case 5:
-				return "DELETE FROM user WHERE id = ?";
+				return "DELETE FROM team4.user WHERE id = ?";
 			default:
 				return null;
 		}

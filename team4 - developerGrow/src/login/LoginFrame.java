@@ -153,6 +153,8 @@ public class LoginFrame extends JFrame {
 			}
 		});
 		
+		frame.setVisible(true);
+		
 		//////////////////// 테스트용 버튼
 		JButton testBtn = new JButton("테스트용 버튼");
 		testBtn.setBounds(300, 130, 200, 70);

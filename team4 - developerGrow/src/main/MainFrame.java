@@ -32,6 +32,7 @@ import gui.RankingDialog;
 import gui.SettingDialog;
 import guiDesign.ImagePanel;
 import guiDesign.Methods;
+import login.LoginFrame;
 import main.active.ActiveDialog;
 import main.active.ActiveEventImpl;
 import main.store.StoreDialog;
@@ -276,9 +277,13 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SettingDialog settingFrame = new SettingDialog(MainFrame.this.getX(), MainFrame.this.getY());
+				SettingDialog settingFrame = new SettingDialog(MainFrame.this.getX(), MainFrame.this.getY(), userId);
 				settingFrame.showGUI();
 				stopSound();
+				if (settingFrame.getLoginFrame()) {
+					new LoginFrame();
+					dispose();
+				}
 			}
 		});
 
