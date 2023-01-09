@@ -1,4 +1,4 @@
-package custom_panel;
+package main.project;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,10 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 
-/**
- * @author GGG
- *
- */
 public class ProjectPanel extends JPanel implements MouseListener {
 	
 	private JLabel rankLabel;

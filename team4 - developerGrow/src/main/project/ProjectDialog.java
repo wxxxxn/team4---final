@@ -1,4 +1,4 @@
-package projectDialog;
+package main.project;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -8,9 +8,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.URL;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -22,8 +19,6 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-
-import custom_panel.ProjectPanel;
 import database.dblist.Project;
 import database.dblist.UserProject;
 import main.MainFrame;
@@ -33,16 +28,15 @@ public class ProjectDialog extends JDialog implements MouseListener {
 	private JPanel contentPane;
 	private MainFrame mainFrame;
 	private ProjectPanel[] pjs;
-	private int minutes;
-	private int hours;
-	private double rate;
 	private List<Project> projectList;
 	private List<UserProject> userProjectList;
+	private ProjectEventImpl projectEventImpl;
 	private int time;
 	
 
 	public ProjectDialog(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
+		projectEventImpl = new ProjectEventImpl(mainFrame);
 		
 		projectList = mainFrame.getProjectList();
 		userProjectList = mainFrame.getUserProjectList();
@@ -121,30 +115,6 @@ public class ProjectDialog extends JDialog implements MouseListener {
 		setVisible(true);
 	}
 	
-	public void timeController() {
-		minutes = Integer.valueOf(mainFrame.getProjectMinute().getText());
-		hours = Integer.valueOf(mainFrame.getProjectHour().getText());
-		rate = Double.valueOf(mainFrame.getNowRatinglbl().getText());
-		Timer countdown = new Timer();
-	    TimerTask timerTask = new TimerTask() {
-			@Override
-			public void run() {
-				
-				if (hours == 0 && minutes == 0) {
-					countdown.cancel();
-				} else if (minutes == 0) {
-					hours--;
-					minutes = 59;
-				} else {
-					minutes--;
-				}
-				rate = 100 - ((double)(hours * 60 + minutes) / (time * 60)) * 100;
-				updateTime(minutes, hours, rate);
-			}
-	    };
-		countdown.scheduleAtFixedRate(timerTask, 0, 250);
-	}
-
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		Object command = e.getSource();
@@ -152,13 +122,15 @@ public class ProjectDialog extends JDialog implements MouseListener {
 			if (command == pjs[i] && !pjs[i].isComplete()) {
 				pjs[i].setComplete(true);
 				String str = projectList.get(i).getProjectName();
+//				userProjectList.get(i).setComplete(pjs[i].isComplete());
 				time = projectList.get(i).getTime();
 				mainFrame.getNowProjectlbl().setText(str);
 				mainFrame.getProjectHour().setText(String.valueOf(time));
 				mainFrame.revalidate();
 				mainFrame.repaint();
 				dispose();
-				timeController();
+				
+				projectEventImpl.timeController(time);
 				int speed = 5000 / projectList.get(i).getId();
 				System.out.println(speed);
 				mainFrame.getPb().healthbarDecreas(speed);
@@ -168,14 +140,6 @@ public class ProjectDialog extends JDialog implements MouseListener {
 		}	
 	}
 	
-	private void updateTime(int minutes, int hours, double rate) {
-		mainFrame.getProjectHour().setText(String.format("%02d", hours));
-		mainFrame.getProjectMinute().setText(String.format("%02d", minutes));
-		mainFrame.getNowRatinglbl().setText(String.format("%.02f", rate));
-		mainFrame.revalidate();
-		mainFrame.repaint();		
-    }
-
 	@Override
 	public void mousePressed(MouseEvent e) {
 	}

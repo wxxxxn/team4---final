@@ -16,7 +16,6 @@ import javax.swing.JDialog;
 
 import com.mysql.cj.x.protobuf.MysqlxCrud.Update;
 
-import custom_panel.SkillPanel;
 import database.controllDB.UpdateDB;
 import database.dblist.SkillList;
 import database.dblist.UserSkill;

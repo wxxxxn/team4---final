@@ -38,7 +38,7 @@ import main.active.ActiveDialog;
 import main.active.ActiveEventImpl;
 import main.store.StoreDialog;
 import progressbar.ProgressbarEvent;
-import projectDialog.ProjectDialog;
+import main.project.ProjectDialog;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
@@ -133,7 +133,6 @@ public class MainFrame extends JFrame {
 
 		datelbl = new JLabel("00일차");
 		datelbl.setHorizontalAlignment(SwingConstants.CENTER);
-//		datelbl.setBorder(new LineBorder(Color.BLACK, 2));
 		datelbl.setFont(new Font("HY목각파임B", Font.BOLD, 30));
 		datelbl.setBounds(0, 0, 135, 45);
 		date.add(datelbl);

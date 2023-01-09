@@ -1,4 +1,4 @@
-package custom_panel;
+package main.store;
 
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
@@ -12,7 +12,6 @@ import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.URL;
-
 
 public class SkillPanel extends JPanel  implements MouseListener{
 
