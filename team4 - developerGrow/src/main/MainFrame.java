@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
@@ -60,6 +61,7 @@ public class MainFrame extends JFrame {
 	private JProgressBar expbar;
 	private JProgressBar stessbar;
 	private JProgressBar healthbar;
+	private JButton activitybtn;
 
 	public MainFrame(int id) {
 		// 나중에 채우기
@@ -78,10 +80,10 @@ public class MainFrame extends JFrame {
 		Mainpnl = new ImagePanel(Methods.converImage(getClass(), "backimg/background.png"));
 		Mainpnl.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(Mainpnl);
-		Mainpnl.setLayout(null);	
-	
+		Mainpnl.setLayout(null);
+
 		activeEventImpl.getCharacters().defaultCharacter();
-		
+
 		expbar = new JProgressBar();
 		expbar.setValue(20);
 		expbar.setStringPainted(true);
@@ -224,7 +226,6 @@ public class MainFrame extends JFrame {
 		hplbl.setBounds(12, 5, 57, 22);
 		hppnl.add(hplbl);
 
-	
 		hpbar.setFont(new Font("휴먼편지체", Font.PLAIN, 12));
 		hpbar.setForeground(Color.RED);
 		hpbar.setStringPainted(true);
@@ -301,12 +302,12 @@ public class MainFrame extends JFrame {
 					projectFrame = new ProjectDialog(MainFrame.this);
 				}
 				projectFrame.setBounds(MainFrame.this.getX() + 7, MainFrame.this.getY() + 30, 1185, 762);
-				projectFrame.showGUI();	
+				projectFrame.showGUI();
 			}
 		});
 		Mainpnl.add(taskbtn);
 
-		JButton activitybtn = new JButton();
+		activitybtn = new JButton();
 		activitybtn.setBounds(1058, 633, 83, 89);
 		activitybtn.setIcon(Methods.convertToIcon(getClass(), "btn_image/activeBtnImage.png"));
 		Mainpnl.add(activitybtn);
@@ -316,7 +317,9 @@ public class MainFrame extends JFrame {
 		activitybtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ActiveDialog activeFrame = new ActiveDialog(MainFrame.this.getX(), MainFrame.this.getY(), activeEventImpl);
+
+				ActiveDialog activeFrame = new ActiveDialog(MainFrame.this.getX(), MainFrame.this.getY(),
+						activeEventImpl);
 				activeFrame.showGUI();
 			}
 		});
@@ -372,7 +375,7 @@ public class MainFrame extends JFrame {
 		projectMinute.setFont(new Font("HY엽서L", Font.BOLD, 14));
 		projectMinute.setBounds(154, 103, 29, 17);
 		panel.add(projectMinute);
-		
+
 		pb.hpbarDecreas(500);
 		pb.stressbarIncrease(1000);
 		pb.healthbarDecreas(2000);
@@ -393,6 +396,10 @@ public class MainFrame extends JFrame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public JButton getActivitybtn() {
+		return activitybtn;
 	}
 
 	public JLabel getCharacter() {

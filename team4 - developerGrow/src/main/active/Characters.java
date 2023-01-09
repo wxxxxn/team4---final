@@ -120,6 +120,7 @@ public class Characters extends JLabel {
 		activelbl.setBounds(306, 0, 490, 418);
 		mainFrame.add(characterlbl);
 		mainFrame.add(activelbl);
+		mainFrame.getActivitybtn().setEnabled(false);
 		mainFrame.revalidate();
 		mainFrame.repaint();
 	}

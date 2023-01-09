@@ -71,9 +71,9 @@ public class ActiveEventImpl implements ActiveEvent {
 				if (count >= time) {
 					mainFrame.remove(character);
 					mainFrame.remove(active);
+					mainFrame.getActivitybtn().setEnabled(true);
 					characters.defaultCharacter();
 					defaultProgressBar();
-
 					mainFrame.revalidate();
 					mainFrame.repaint();
 				}
