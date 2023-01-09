@@ -160,6 +160,11 @@ public class SignUpDialog extends JDialog  {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				userId = idField.getText();
+				userPw = passwordField.getText();
+				nick = nameField.getText();
+				
 				if ((userPw != null) && (userId != null) && (nick != null)) {
 					signUp.signUp(userId, userPw, nick);
 					dialog.dispose();
