@@ -1,4 +1,4 @@
-package gui;
+package login;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -22,7 +22,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import accountData.Login;
 import guiDesign.MyPassword;
 import guiDesign.MyTextField;
 import main.MainFrame;
@@ -113,6 +112,7 @@ public class LoginFrame extends JFrame {
 		loginbtn.setBackground(new Color(255, 0, 0, 0));
 		loginbtn.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		loginbtn.setBounds(508, 335, 139, 63);
+		
 		frame.getContentPane().add(loginbtn);
 
 		URL URLback1Image = classLoader.getResource("character/logincharacter.gif");
@@ -133,7 +133,7 @@ public class LoginFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Login login = new accountData.Login();
+				Login login = new login.Login();
 				String textId = txtId.getText();
 				String textPw = passwordField.getText();
 				if (login.checkUserId(textId) != null && !textId.equals("")) {
@@ -143,10 +143,12 @@ public class LoginFrame extends JFrame {
 						frame.dispose();
 						stopSound();
 					} else {
-						new JOptionPane().showMessageDialog(null, "아이디 또는 비밀번호가 잘못 입력되었습니다. ");
+						new JOptionPane();
+						JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 잘못 입력되었습니다. ");
 					}
 				} else {
-					new JOptionPane().showMessageDialog(null, "아이디 또는 비밀번호가 잘못 입력되었습니다. ");
+					new JOptionPane();
+					JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 잘못 입력되었습니다. ");
 				}
 			}
 		});
@@ -158,7 +160,7 @@ public class LoginFrame extends JFrame {
 		testBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainFrame mainFrame = new MainFrame();
+				MainFrame mainFrame = new MainFrame(1);
 				mainFrame.showGUI();
 				frame.dispose();
 				stopSound();

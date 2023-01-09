@@ -1,7 +1,6 @@
-package gui;
+package login;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -16,8 +15,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import accountData.SignUp;
-
 public class SignUpDialog extends JDialog  {
 
 	private JDialog dialog;
@@ -29,6 +26,9 @@ public class SignUpDialog extends JDialog  {
 	private String userId;
 	private String userPw;
 	private String nick;
+	private SignUp signUp = new SignUp(this);
+	private JLabel lblIdCheck;
+	private JLabel lblNickCheck;
 
 	public SignUpDialog(int x, int y) {
 		dialog = new JDialog();
@@ -40,8 +40,6 @@ public class SignUpDialog extends JDialog  {
 		panel.setBounds(357, 73, 410, 330);
 		dialog.getContentPane().add(panel);
 		panel.setLayout(null);
-		
-
 		
 		// 중복확인버튼
 		JButton btnIdCheck = new JButton("");
@@ -66,7 +64,7 @@ public class SignUpDialog extends JDialog  {
 		btnNickCheck.setBounds(313, 102, 97, 26);
 		panel.add(btnNickCheck);
 		
-		JLabel lblIdCheck = new JLabel("");
+		lblIdCheck = new JLabel("");
 		lblIdCheck.setForeground(Color.RED);
 		lblIdCheck.setBounds(216, 20, 57, 26);
 		panel.add(lblIdCheck);
@@ -91,7 +89,7 @@ public class SignUpDialog extends JDialog  {
 		passwordField.setBounds(67, 275, 116, 28);
 		panel.add(passwordField);
 		
-		JLabel lblNickCheck = new JLabel("");
+		lblNickCheck = new JLabel("");
 		lblNickCheck.setForeground(Color.RED);
 		lblNickCheck.setBounds(216, 110, 57, 15);
 		panel.add(lblNickCheck);
@@ -109,35 +107,13 @@ public class SignUpDialog extends JDialog  {
 		btnIdCheck.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String testId = idField.getText(); 
-				SignUp signUp = new accountData.SignUp();
-				if (signUp.verifyUserId(testId) && signUp.useridDuplicationCheck(testId)) {
-					lblIdCheck.setText("허용");
-					userId = testId;
-				} else if (!signUp.verifyUserId(testId)) {
-					lblIdCheck.setText("불가");
-					userId = null;
-				} else {
-					lblIdCheck.setText("중복");
-					userId = null;
-				}
+				signUp.idCheck();
 			}
 		});
 		btnNickCheck.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String testNick = nameField.getText(); 
-				SignUp signUp = new accountData.SignUp();
-				if (signUp.verifyUserNickName(testNick) && signUp.userNickNameDuplicationCheck(testNick)) {
-					lblNickCheck.setText("허용");
-					nick = testNick;
-				} else if (!signUp.verifyUserNickName(testNick)) {
-					lblNickCheck.setText("불가");
-					nick = null;
-				} else {
-					lblNickCheck.setText("중복");
-					nick = null;
-				}
+				signUp.nickNameCheck();
 			}
 		});
 		
@@ -147,7 +123,7 @@ public class SignUpDialog extends JDialog  {
 			}
 			@Override
 			public void keyReleased(KeyEvent e) {
-				passWordCheck();
+				signUp.passWordCheck();
 			}
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -161,7 +137,7 @@ public class SignUpDialog extends JDialog  {
 			}
 			@Override
 			public void keyReleased(KeyEvent e) {
-				passWordCheck();
+				signUp.passWordCheck();
 			}
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -184,12 +160,12 @@ public class SignUpDialog extends JDialog  {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SignUp signUp = new accountData.SignUp();
 				if ((userPw != null) && (userId != null) && (nick != null)) {
 					signUp.signUp(userId, userPw, nick);
 					dialog.dispose();
 				} else {
-					new JOptionPane().showMessageDialog(null, "가입 정보를 다시 확인해주세요. ");
+					new JOptionPane();
+					JOptionPane.showMessageDialog(null, "가입 정보를 다시 확인해주세요. ");
 				}
 			}
 		});
@@ -229,22 +205,46 @@ public class SignUpDialog extends JDialog  {
 		dialog.getContentPane().setLayout(null);
 	}
 	
-	public void passWordCheck() {
-		String testPw = passwordField.getText(); 
-		String testPwCheck = passwordChkField.getText();
-		SignUp signUp = new accountData.SignUp();
-		if (signUp.verifyUserPw(testPw) && testPw.equals(testPwCheck)) {
-			lblPwCheck.setText("일치");
-			userPw = testPw;
-		} else if (!signUp.verifyUserPw(testPw)) {
-			lblPwCheck.setText("비밀번호 형식이 틀립니다");
-			userPw = null;
-		} else if (!(testPw.equals(testPwCheck))) {
-			lblPwCheck.setText("불일치");
-			userPw = null;
-		}
+	public JTextField getIdField() {
+		return idField;
+	}
+
+	public JLabel getLblIdCheck() {
+		return lblIdCheck;
 	}
 	
+	public JTextField getPasswordChkField() {
+		return passwordChkField;
+	}
+
+	public JTextField getPasswordField() {
+		return passwordField;
+	}
+	
+	public JLabel getLblPwCheck() {
+		return lblPwCheck;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public String getUserPw() {
+		return userPw;
+	}
+	
+	public JLabel getLblNickCheck() {
+		return lblNickCheck;
+	}
+
+	public JTextField getNameField() {
+		return nameField;
+	}
+
+	public String getNick() {
+		return nick;
+	}
+
 	public void showGUI() {
 		dialog.setVisible(true);
 	}
