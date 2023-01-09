@@ -26,7 +26,7 @@ public class StoreDialog extends JDialog {
 	private SkillPanel[] skills;
 	private StoreEventImpl storeEventImpl;
 
-	public StoreDialog(int x, int y, MainFrame mainFrame) {
+	public StoreDialog(MainFrame mainFrame) {
 		
 		storeEventImpl = new StoreEventImpl(mainFrame);
 		
@@ -34,7 +34,6 @@ public class StoreDialog extends JDialog {
 		setModal(true);
 		contentPane = new JPanel();
 		setBackground(new Color(0, 0, 0, 100));
-		setBounds(x + 7, y + 30, 1185, 762);
 		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setBackground(new Color(0, 0, 0, 0));

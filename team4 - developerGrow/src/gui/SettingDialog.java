@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,15 +13,11 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import login.AccountDelete;
-import login.LoginFrame;
-
-import java.awt.event.ActionListener;
-import java.net.URL;
-import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
+import main.MainFrame;
 
 public class SettingDialog extends JDialog {
 
@@ -29,7 +27,7 @@ public class SettingDialog extends JDialog {
 		return loginFrame;
 	}
 
-	public SettingDialog(int x, int y, int id) {
+	public SettingDialog(int x, int y, MainFrame mainFrame) {
 		
 		setBounds(x + 7, y + 30, 1185, 762);
 		setUndecorated(true);
@@ -53,7 +51,7 @@ public class SettingDialog extends JDialog {
 		lblNewLabel.setBounds(50, 152, 585, 54);
 		contentPane.add(lblNewLabel);
 				
-		JButton resetbtn = new JButton("리셋");
+		JButton resetbtn = new JButton();
 		resetbtn.setBounds(517, 246, 152, 45);
 		resetbtn.setIcon(convertToIcon(getClass(), "btn_setting\\reset.png", 165, 45));
 		resetbtn.setPressedIcon(convertToIcon(getClass(), "btn_setting\\resetPush.png", 165, 45));
@@ -61,7 +59,7 @@ public class SettingDialog extends JDialog {
 		resetbtn.setOpaque(false);
 		resetbtn.setBorderPainted(false);
 
-		JButton logoutbtn = new JButton("로그아웃");
+		JButton logoutbtn = new JButton();
 		logoutbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int num = JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까?", "로그아웃", JOptionPane.YES_NO_OPTION);
@@ -79,7 +77,7 @@ public class SettingDialog extends JDialog {
 		logoutbtn.setOpaque(false);
 		logoutbtn.setBorderPainted(false);
 
-		JButton outbtn = new JButton("회원탈퇴");
+		JButton outbtn = new JButton();
 		outbtn.setBounds(517, 397, 152, 45);
 		outbtn.setIcon(convertToIcon(getClass(), "btn_setting\\userout.png", 165, 45));
 		outbtn.setPressedIcon(convertToIcon(getClass(), "btn_setting\\useroutPush.png", 165, 45));
@@ -93,13 +91,13 @@ public class SettingDialog extends JDialog {
 				int num = JOptionPane.showConfirmDialog(null, "정말 탈퇴하시겠습니까?", "회원 탈퇴", JOptionPane.YES_NO_OPTION);
 				if (num == 0) {
 					loginFrame = true;
-					AccountDelete.accountDelete(true, id);
+					AccountDelete.accountDelete(true, mainFrame.getUserId());
 					dispose();
 				}
 			}
 		});
 		
-		JButton closebtn = new JButton("닫기");
+		JButton closebtn = new JButton();
 		closebtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -110,7 +108,7 @@ public class SettingDialog extends JDialog {
 		closebtn.setPressedIcon(convertToIcon(getClass(), "btn_image\\closeBtnPushImage.png", 165, 45));
 		contentPane.add(closebtn);
 		
-		JLabel lblNewLabel_1 = new JLabel("포비");
+		JLabel lblNewLabel_1 = new JLabel(mainFrame.getUserList().get(0).getUserNickname());
 		lblNewLabel_1.setForeground(Color.WHITE);
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1.setFont(new Font("휴먼편지체", Font.PLAIN, 30));

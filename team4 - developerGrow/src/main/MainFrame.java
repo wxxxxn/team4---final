@@ -25,6 +25,7 @@ import database.controllDB.UpdateDB;
 import database.dblist.CigaLog;
 import database.dblist.Project;
 import database.dblist.SkillList;
+import database.dblist.User;
 import database.dblist.UserInfo;
 import database.dblist.UserProject;
 import database.dblist.UserSkill;
@@ -42,34 +43,41 @@ import projectDialog.ProjectDialog;
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
 
+	// 메인페널
 	private ImagePanel Mainpnl;
-	private JButton settingbtn;
+	
+	// 사운드 클립
 	private static Clip clip;
+	
+	// 활동버튼
+	private ActiveEventImpl activeEventImpl = new ActiveEventImpl(this);
+	private JButton activitybtn;
+	
+	// 메인시간
+	private GameControllerImpl gameControllerImpl = new GameControllerImpl(this);
 	private JLabel datelbl;
 	private JLabel hourlbl;
 	private JLabel minutelbl;
-	private JLabel bedlbl;
-	private JLabel sleeplbl;
-	private JLabel bedsleeplbl;
-	private JLabel coupangimg;
-	private JLabel smokecharacter;
-	private JLabel projectTimelbl;
-	private JLabel gameImg;
-	private JLabel character;
+	
+	// 상점
+	private StoreDialog storeFrame = null;
+	
+	// 프로젝트
+	private ProjectDialog projectFrame = null;
 	private JLabel nowRatinglbl;
 	private JLabel nowProjectlbl;
 	private JLabel projectHour;
 	private JLabel projectMinute;
+	
+	// 캐릭터 레벨
 	private JLabel levellbl;
-	private GameControllerImpl gameControllerImpl = new GameControllerImpl(this);
-	private ProjectDialog projectFrame = null;
-	private ActiveEventImpl activeEventImpl = new ActiveEventImpl(this);
-	private JProgressBar hpbar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
+	
+	// progressbar
 	private ProgressbarEvent pb = new ProgressbarEvent(this);
+	private JProgressBar hpbar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
 	private JProgressBar expbar;
 	private JProgressBar stessbar;
 	private JProgressBar healthbar;
-	private JButton activitybtn;
 	
 	// DB
 	private List<UserInfo> userInfoList;
@@ -81,6 +89,8 @@ public class MainFrame extends JFrame {
 	private UserInfo userInfo;
 	private int infoId;
 	private int userId;
+
+	private List<User> userList;
 
 	public MainFrame() {
 	}
@@ -266,7 +276,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 
-		settingbtn = new JButton();
+		JButton settingbtn = new JButton();
 		settingbtn.setBounds(1051, 10, 90, 89);
 		settingbtn.setIcon(Methods.convertToIcon(getClass(), "btn_image/settingBtnImage.png"));
 		Mainpnl.add(settingbtn);
@@ -277,7 +287,7 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SettingDialog settingFrame = new SettingDialog(MainFrame.this.getX(), MainFrame.this.getY(), userId);
+				SettingDialog settingFrame = new SettingDialog(MainFrame.this.getX(), MainFrame.this.getY(), MainFrame.this);
 				settingFrame.showGUI();
 				stopSound();
 				if (settingFrame.getLoginFrame()) {
@@ -296,8 +306,11 @@ public class MainFrame extends JFrame {
 		storebtn.setBorderPainted(false);
 		storebtn.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				StoreDialog storeFrame = new StoreDialog(MainFrame.this.getX(), MainFrame.this.getY(), MainFrame.this);
+			public void actionPerformed(ActionEvent arg0) {
+				if (storeFrame == null) {
+					storeFrame = new StoreDialog(MainFrame.this);
+				}
+				storeFrame.setBounds(MainFrame.this.getX() + 7, MainFrame.this.getY() + 30, 1185, 762);
 				storeFrame.showGUI();
 			}
 		});
@@ -357,7 +370,7 @@ public class MainFrame extends JFrame {
 		prjectTitlelbl.setFont(new Font("HY목각파임B", Font.BOLD, 16));
 		panel.add(prjectTitlelbl);
 
-		nowProjectlbl = new JLabel("자바 기초");
+		nowProjectlbl = new JLabel("");
 		nowProjectlbl.setFont(new Font("HY엽서L", Font.BOLD, 14));
 		nowProjectlbl.setBounds(18, 44, 227, 24);
 		panel.add(nowProjectlbl);
@@ -383,7 +396,7 @@ public class MainFrame extends JFrame {
 		lblNewLabel_3.setBounds(18, 105, 83, 15);
 		panel.add(lblNewLabel_3);
 
-		projectHour = new JLabel("24");
+		projectHour = new JLabel("00");
 		projectHour.setFont(new Font("HY엽서L", Font.BOLD, 14));
 		projectHour.setBounds(113, 103, 29, 17);
 		panel.add(projectHour);
@@ -428,6 +441,7 @@ public class MainFrame extends JFrame {
 		SelectDB selectDB = new SelectDB();
 		InsertDB insertDB = new InsertDB();
 		UpdateDB updateDB = new UpdateDB();
+		userList = selectDB.selectUser(userId);
 		userInfoList = selectDB.selectUserinfo(userId);
 		userInfo = selectDB.searchNowGame(userInfoList);
 		if (userInfo == null) {
@@ -468,14 +482,6 @@ public class MainFrame extends JFrame {
 		return activitybtn;
 	}
 
-	public JLabel getCharacter() {
-		return character;
-	}
-
-	public JLabel getSmokecharacter() {
-		return smokecharacter;
-	}
-
 	public static void stopSound() {
 		clip.stop();
 		clip.close();
@@ -495,26 +501,6 @@ public class MainFrame extends JFrame {
 
 	public JLabel getNowProjectlbl() {
 		return nowProjectlbl;
-	}
-
-	public JLabel getBedlbl() {
-		return bedlbl;
-	}
-
-	public JLabel getSleeplbl() {
-		return sleeplbl;
-	}
-
-	public JLabel getBedsleeplbl() {
-		return bedsleeplbl;
-	}
-
-	public JLabel getCoupangimg() {
-		return coupangimg;
-	}
-
-	public JLabel getGameImg() {
-		return gameImg;
 	}
 
 	public JLabel getNowRatinglbl() {
@@ -599,6 +585,10 @@ public class MainFrame extends JFrame {
 
 	public void setProjectList(List<Project> projectList) {
 		this.projectList = projectList;
+	}
+
+	public List<User> getUserList() {
+		return userList;
 	}
 	
 	
