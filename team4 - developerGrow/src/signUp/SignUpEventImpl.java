@@ -1,4 +1,4 @@
-package login;
+package signUp;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,11 +13,11 @@ import javax.swing.JTextField;
 
 import database.util.ConnectionProvider;
 
-public class SignUp {
+public class SignUpEventImpl {
 
 	private SignUpDialog signUpDialog;
 
-	public SignUp(SignUpDialog signUpDialog) {
+	public SignUpEventImpl(SignUpDialog signUpDialog) {
 		this.signUpDialog = signUpDialog;
 	}
 	

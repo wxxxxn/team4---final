@@ -8,7 +8,9 @@ import java.util.Scanner;
 
 import database.util.ConnectionProvider;
 
-public class Login {
+public class LoginEventImpl implements LoginEvent {
+	
+	@Override
 	public String checkUserId(String userId) { // 아디 입력 받음
 		String sql = "SELECT userPw FROM team4.user where userId = ?";
 		try (Connection conn = ConnectionProvider.makeConnection();
@@ -25,6 +27,7 @@ public class Login {
 		return null; // 아디 없으면 null 반환
 	}
 	
+	@Override
 	public boolean checkUserPw(String userPw, String inputPw) {
 		if (userPw.equals(inputPw)) {
 			return true; // 비번과 입력 비번이 같으면 true 반환
@@ -32,6 +35,8 @@ public class Login {
 			return false; // 다르면 false 반환
 		}
 	}
+	
+	@Override
 	public int idValue(String userId) {
 		String sql = "SELECT id FROM team4.user where userId = ?";
 		try (Connection conn = ConnectionProvider.makeConnection();

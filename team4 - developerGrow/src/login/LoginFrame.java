@@ -25,6 +25,7 @@ import javax.swing.JPanel;
 import guiDesign.MyPassword;
 import guiDesign.MyTextField;
 import main.MainFrame;
+import signUp.SignUpDialog;
 
 public class LoginFrame extends JFrame {
 
@@ -133,7 +134,7 @@ public class LoginFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Login login = new login.Login();
+				LoginEventImpl login = new login.LoginEventImpl();
 				String textId = txtId.getText();
 				String textPw = passwordField.getText();
 				if (login.checkUserId(textId) != null && !textId.equals("")) {
