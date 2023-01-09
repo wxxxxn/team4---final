@@ -3,6 +3,7 @@ package progressbar;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import gui.DeathDialog;
 import main.MainFrame;
 
 public class ProgressbarEvent {
@@ -36,6 +37,8 @@ public class ProgressbarEvent {
 				countHp++;
 				if (hp <= 0) {
 					System.out.println("you die");
+					DeathDialog deathDialog = new DeathDialog(mainFrame.getX(), mainFrame.getY());
+					deathDialog.showGUI();
 				} else if (hp > 0) {
 					hp--;
 				}
@@ -58,6 +61,8 @@ public class ProgressbarEvent {
 				countHp++;
 				if (hp == 0) {
 					System.out.println("you die");
+					DeathDialog deathDialog = new DeathDialog(mainFrame.getX(), mainFrame.getY());
+					deathDialog.showGUI();
 				}
 				if (hp < 100){
 					hp++;
