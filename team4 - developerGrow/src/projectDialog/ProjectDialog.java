@@ -37,8 +37,9 @@ public class ProjectDialog extends JDialog implements MouseListener {
 	private int hours;
 	private double rate;
 	private List<Project> projectList;
-	private int time;
 	private List<UserProject> userProjectList;
+	private int time;
+	
 
 	public ProjectDialog(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
@@ -141,8 +142,7 @@ public class ProjectDialog extends JDialog implements MouseListener {
 				updateTime(minutes, hours, rate);
 			}
 	    };
-		countdown.scheduleAtFixedRate(timerTask, 10, 10);
-		
+		countdown.scheduleAtFixedRate(timerTask, 0, 250);
 	}
 
 	@Override
@@ -159,6 +159,11 @@ public class ProjectDialog extends JDialog implements MouseListener {
 				mainFrame.repaint();
 				dispose();
 				timeController();
+				int speed = 5000 / projectList.get(i).getId();
+				System.out.println(speed);
+				mainFrame.getPb().healthbarDecreas(speed);
+				mainFrame.getPb().stressbarIncrease(speed);
+				mainFrame.getPb().hpbarDecreas(speed);
 			}
 		}	
 	}

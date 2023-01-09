@@ -6,25 +6,28 @@ public class UserProject {
 	private int infoId;
 	private int projectId;
 	private boolean complete;
-	private int lastTime;
+	private int lastHour;
+	private int lastMin;
 	
-	public UserProject(int id, int userId, int infoId, int projectId, boolean complete, int lastTime) {
+	public UserProject(int id, int userId, int infoId, int projectId, boolean complete, int lastHour, int lastMin) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.infoId = infoId;
 		this.projectId = projectId;
 		this.complete = complete;
-		this.lastTime = lastTime;
+		this.lastHour = lastHour;
+		this.lastMin = lastMin;
 	}
 	
-	public UserProject(int userId, int infoId, int projectId, boolean complete, int lastTime) {
+	public UserProject(int userId, int infoId, int projectId, boolean complete, int lastHour, int lastMin) {
 		super();
 		this.userId = userId;
 		this.infoId = infoId;
 		this.projectId = projectId;
 		this.complete = complete;
-		this.lastTime = lastTime;
+		this.lastHour = lastHour;
+		this.lastMin = lastMin;
 	}
 
 	public int getId() {
@@ -57,15 +60,24 @@ public class UserProject {
 	public void setComplete(boolean complete) {
 		this.complete = complete;
 	}
-	public int getLastTime() {
-		return lastTime;
+	public int getLastHour() {
+		return lastHour;
 	}
-	public void setLastTime(int lastTime) {
-		this.lastTime = lastTime;
+	public void setLastHour(int lastHour) {
+		this.lastHour = lastHour;
 	}
+	
+	public int getLastMin() {
+		return lastMin;
+	}
+
+	public void setLastMin(int lastMin) {
+		this.lastMin = lastMin;
+	}
+
 	@Override
 	public String toString() {
 		return "UserProject [id=" + id + ", userId=" + userId + ", infoId=" + infoId + ", projectId=" + projectId
-				+ ", complete=" + complete + ", lastTime=" + lastTime + "]";
+				+ ", complete=" + complete + ", lastHour=" + lastHour + ", lastMin=" + lastMin + "]";
 	}
 }
