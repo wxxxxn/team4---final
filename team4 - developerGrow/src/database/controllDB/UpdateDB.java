@@ -61,14 +61,14 @@ public class UpdateDB {
 		return null;
 	}
 	
-	public int[] updateUserSkill(List<UserSkill> list, int userId, int infoId) {
+	public int[] updateUserSkill(List<UserSkill> list) {
 		String sql = "UPDATE userSkill SET skillLevel = ? WHERE userId = ? AND infoId = ? AND skillId = ?";
 		try (Connection conn = ConnectionProvider.makeConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql)) {
 			for (UserSkill elem : list) {
 				stmt.setInt(1, elem.getSkillLevel());
-				stmt.setInt(2, userId);
-				stmt.setInt(3, infoId);
+				stmt.setInt(2, elem.getUserId());
+				stmt.setInt(3, elem.getInfoId());
 				stmt.setInt(4, elem.getSkillId());
 				
 				stmt.addBatch();

@@ -297,7 +297,7 @@ public class MainFrame extends JFrame {
 		storebtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				StoreDialog storeFrame = new StoreDialog(MainFrame.this.getX(), MainFrame.this.getY());
+				StoreDialog storeFrame = new StoreDialog(MainFrame.this.getX(), MainFrame.this.getY(), MainFrame.this);
 				storeFrame.showGUI();
 			}
 		});
@@ -559,6 +559,10 @@ public class MainFrame extends JFrame {
 
 	public List<UserSkill> getUserSkillList() {
 		return userSkillList;
+	}
+	
+	public List<SkillList> getSkillList() {
+		return skillList;
 	}
 
 	public void setUserSkillList(List<UserSkill> userSkillList) {

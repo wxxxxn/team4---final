@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import custom_panel.SkillPanel;
+import main.MainFrame;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -23,9 +24,11 @@ public class StoreDialog extends JDialog {
 
 	private JPanel contentPane;
 	private SkillPanel[] skills;
-	private StoreEventImpl storeEventImpl = new StoreEventImpl();
+	private StoreEventImpl storeEventImpl;
 
-	public StoreDialog(int x, int y) {
+	public StoreDialog(int x, int y, MainFrame mainFrame) {
+		
+		storeEventImpl = new StoreEventImpl(mainFrame);
 		
 		setUndecorated(true);
 		setModal(true);
@@ -77,6 +80,11 @@ public class StoreDialog extends JDialog {
 		closeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				for (int i = 0; i < skills.length; i++) {
+					mainFrame.getUserSkillList().get(i).setSkillLevel(skills[i].getLevel());
+				}
+				
 				storeEventImpl.updateLevelToDB(skills);
 				dispose();
 			}
