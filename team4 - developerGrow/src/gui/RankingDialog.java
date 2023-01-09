@@ -77,10 +77,10 @@ public class RankingDialog extends JDialog {
 
 		ClassLoader classLoader = getClass().getClassLoader();
 
-		URL URLCloseButtonImage = classLoader.getResource("btn_image/closeBtnImage.png");
+		URL URLCloseButtonImage = classLoader.getResource("images/btn_img/closeBtnImage.png");
 		ImageIcon CloseButtonIcon = new ImageIcon(URLCloseButtonImage);
 
-		URL URLCloseButtonPushImage = classLoader.getResource("btn_image/closeBtnPushImage.png");
+		URL URLCloseButtonPushImage = classLoader.getResource("images/btn_img/closeBtnPushImage.png");
 		ImageIcon CloseButtonPushIcon = new ImageIcon(URLCloseButtonPushImage);
 
 		JButton closeButton = new JButton();

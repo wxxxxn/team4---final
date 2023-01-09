@@ -24,9 +24,9 @@ public class GameDialog extends JDialog {
 		getContentPane().setLayout(null);
 		
 		JButton firstGameBtn = new JButton();
-		URL first = classloader.getResource("btn_image/dodoBtn.png");
+		URL first = classloader.getResource("images/btn_img/dodoBtn.png");
 		ImageIcon firstGame = new ImageIcon(first);
-		URL firstPush = classloader.getResource("btn_image/dodoPush.png");
+		URL firstPush = classloader.getResource("images/btn_img/dodoPush.png");
 		ImageIcon firstPushGame = new ImageIcon(firstPush);
 		firstGameBtn.setIcon(firstGame);
 		firstGameBtn.setPressedIcon(firstPushGame);
@@ -57,9 +57,9 @@ public class GameDialog extends JDialog {
 		getContentPane().add(FourthGameBtn);
 		
 		JButton closeButton = new JButton();
-		URL close = classloader.getResource("btn_image/closeBtnImage.png");
+		URL close = classloader.getResource("images/btn_img/closeBtnImage.png");
 		ImageIcon closeImage = new ImageIcon(close);
-		URL closePush = classloader.getResource("btn_image/closeBtnPushImage.png");
+		URL closePush = classloader.getResource("images/btn_img/closeBtnPushImage.png");
 		ImageIcon closePushImage = new ImageIcon(closePush);
 		closeButton.setBounds(500, 550, 200, 50);
 		closeButton.setBackground(new Color(255, 0, 0, 0));

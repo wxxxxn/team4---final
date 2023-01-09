@@ -18,7 +18,7 @@ public class DeathDialog extends JDialog {
 	
 	public DeathDialog(int x, int y) {
 		ClassLoader classLoader = getClass().getClassLoader();
-		URL Back = classLoader.getResource("backimg/DeathBackground.png");
+		URL Back = classLoader.getResource("images/back_img/DeathBackground.png");
 		ImageIcon back = new ImageIcon(Back);
 		
 		getContentPane().setLayout(null);

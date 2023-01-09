@@ -43,9 +43,9 @@ public class SignUpDialog extends JDialog  {
 		
 		// 중복확인버튼
 		JButton btnIdCheck = new JButton("");
-		URL URLduplicateImage = classLoader.getResource("btn_image/duplicateBtnImage.png");
+		URL URLduplicateImage = classLoader.getResource("images/btn_img/duplicateBtnImage.png");
 		ImageIcon duplicateBtnIcon = new ImageIcon(URLduplicateImage);
-		URL URLduplicatePushImage = classLoader.getResource("btn_image/duplicatePushBtnImage.png");
+		URL URLduplicatePushImage = classLoader.getResource("images/btn_img/duplicatePushBtnImage.png");
 		ImageIcon duplicatePushBtnIcon = new ImageIcon(URLduplicatePushImage);
 		btnIdCheck.setIcon(duplicateBtnIcon);
 		btnIdCheck.setPressedIcon(duplicatePushBtnIcon);
@@ -145,9 +145,9 @@ public class SignUpDialog extends JDialog  {
 		});
 		
 		JButton okbtn = new JButton("");
-		URL URLOkImage = classLoader.getResource("btn_image/signofconfirmBtnImage.png");
+		URL URLOkImage = classLoader.getResource("images/btn_img/signofconfirmBtnImage.png");
 		ImageIcon OkBtnIcon = new ImageIcon(URLOkImage);
-		URL URLOkPushImage = classLoader.getResource("btn_image/signofconfirmPushBtnImage.png");
+		URL URLOkPushImage = classLoader.getResource("images/btn_img/signofconfirmPushBtnImage.png");
 		ImageIcon OkPushBtnIcon = new ImageIcon(URLOkPushImage);
 		okbtn.setIcon(OkBtnIcon);
 		okbtn.setPressedIcon(OkPushBtnIcon);
@@ -177,9 +177,9 @@ public class SignUpDialog extends JDialog  {
 		dialog.getContentPane().add(okbtn);
 		
 		JButton CancelBtn = new JButton("");
-		URL URLCancelImage = classLoader.getResource("btn_image/cancelBtnImage.png");
+		URL URLCancelImage = classLoader.getResource("images/btn_img/cancelBtnImage.png");
 		ImageIcon CancelIcon = new ImageIcon(URLCancelImage);
-		URL URLCancelPushImage = classLoader.getResource("btn_image/cancelPushBtnImage.png");
+		URL URLCancelPushImage = classLoader.getResource("images/btn_img/cancelPushBtnImage.png");
 		ImageIcon CancelPushIcon = new ImageIcon(URLCancelPushImage);
 		CancelBtn.setIcon(CancelIcon);
 		CancelBtn.setPressedIcon(CancelPushIcon);
@@ -198,7 +198,7 @@ public class SignUpDialog extends JDialog  {
 		dialog.getContentPane().add(CancelBtn);
 		
 		JLabel label = new JLabel("");
-		URL URLSignBackImage = classLoader.getResource("backimg/SignBackground.png");
+		URL URLSignBackImage = classLoader.getResource("images/back_img/SignBackground.png");
 		ImageIcon SignBackIcon = new ImageIcon(URLSignBackImage);
 		label.setIcon(SignBackIcon);
 		label.setBounds(0, 0, 984, 463);

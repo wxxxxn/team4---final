@@ -106,15 +106,15 @@ public class MainFrame extends JFrame {
 
 		setBounds(100, 100, 1200, 800);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Mainpnl = new ImagePanel(Methods.converImage(getClass(), "backimg/background.png"));
+		Mainpnl = new ImagePanel(Methods.converImage(getClass(), "images/back_img/background.png"));
 		Mainpnl.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(Mainpnl);
 		Mainpnl.setLayout(null);
 
 		activeEventImpl.getCharacters().defaultCharacter();
 		
-		ImageIcon sound = Methods.convertToResizeIcon(getClass(), "btn_image/sound.png", 50, 50);
-		ImageIcon mute = Methods.convertToResizeIcon(getClass(), "btn_image/mute.png", 50, 50);
+		ImageIcon sound = Methods.convertToResizeIcon(getClass(), "images/btn_img/sound.png", 50, 50);
+		ImageIcon mute = Methods.convertToResizeIcon(getClass(), "images/btn_img/mute.png", 50, 50);
 		soundbtn = new JButton(sound);
 		soundbtn.setBounds(978, 28, 50, 50);
 		soundbtn.setBackground(new Color(0, 0, 0, 0));
@@ -199,7 +199,8 @@ public class MainFrame extends JFrame {
 		currentcigapnl.setLayout(null);
 
 		JLabel currentcigalbl = new JLabel("담배  X");
-		currentcigalbl.setIcon(new ImageIcon(MainFrame.class.getResource("/rank_image/ciga.png")));
+		currentcigalbl.setIcon(Methods.convertToIcon(getClass(), "images/rank_img/ciga.png"));
+		
 		currentcigalbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
 		currentcigalbl.setBounds(12, 0, 117, 43);
 		currentcigapnl.add(currentcigalbl);
@@ -284,7 +285,7 @@ public class MainFrame extends JFrame {
 
 		JButton rankingbtn = new JButton();
 		rankingbtn.setBounds(1051, 140, 90, 89);
-		rankingbtn.setIcon(Methods.convertToIcon(getClass(), "btn_image/rankBtnImage.png"));
+		rankingbtn.setIcon(Methods.convertToIcon(getClass(), "images/btn_img/rankBtnImage.png"));
 		Mainpnl.add(rankingbtn);
 		rankingbtn.setBorderPainted(false);
 		rankingbtn.setOpaque(false);
@@ -299,7 +300,7 @@ public class MainFrame extends JFrame {
 
 		JButton settingbtn = new JButton();
 		settingbtn.setBounds(1051, 10, 90, 89);
-		settingbtn.setIcon(Methods.convertToIcon(getClass(), "btn_image/settingBtnImage.png"));
+		settingbtn.setIcon(Methods.convertToIcon(getClass(), "images/btn_img/settingBtnImage.png"));
 		Mainpnl.add(settingbtn);
 		settingbtn.setOpaque(false);
 		settingbtn.setBorderPainted(false);
@@ -319,7 +320,7 @@ public class MainFrame extends JFrame {
 
 		JButton storebtn = new JButton();
 		storebtn.setBounds(1051, 275, 90, 89);
-		storebtn.setIcon(Methods.convertToIcon(getClass(), "btn_image/StoreBtnImage.png"));
+		storebtn.setIcon(Methods.convertToIcon(getClass(), "images/btn_img/StoreBtnImage.png"));
 		Mainpnl.add(storebtn);
 		storebtn.setOpaque(false);
 		storebtn.setBackground(new Color(255, 0, 0, 0));
@@ -337,7 +338,7 @@ public class MainFrame extends JFrame {
 
 		JButton gamebtn = new JButton();
 		gamebtn.setBounds(1051, 395, 90, 81);
-		gamebtn.setIcon(Methods.convertToIcon(getClass(), "btn_image/miniGameBtnImage.png"));
+		gamebtn.setIcon(Methods.convertToIcon(getClass(), "images/btn_img/miniGameBtnImage.png"));
 		Mainpnl.add(gamebtn);
 		gamebtn.setOpaque(false);
 		gamebtn.setBorderPainted(false);
@@ -354,7 +355,7 @@ public class MainFrame extends JFrame {
 		taskbtn.setHorizontalAlignment(SwingConstants.LEFT);
 		taskbtn.setBounds(1042, 525, 99, 81);
 		;
-		taskbtn.setIcon(Methods.convertToIcon(getClass(), "btn_image/projectBtnImage.png"));
+		taskbtn.setIcon(Methods.convertToIcon(getClass(), "images/btn_img/projectBtnImage.png"));
 		taskbtn.setOpaque(false);
 		taskbtn.setBackground(new Color(255, 0, 0, 0));
 		taskbtn.setBorderPainted(false);
@@ -371,7 +372,7 @@ public class MainFrame extends JFrame {
 
 		activitybtn = new JButton();
 		activitybtn.setBounds(1058, 633, 83, 89);
-		activitybtn.setIcon(Methods.convertToIcon(getClass(), "btn_image/activeBtnImage.png"));
+		activitybtn.setIcon(Methods.convertToIcon(getClass(), "images/btn_img/activeBtnImage.png"));
 		Mainpnl.add(activitybtn);
 		activitybtn.setOpaque(false);
 		activitybtn.setBorderPainted(false);

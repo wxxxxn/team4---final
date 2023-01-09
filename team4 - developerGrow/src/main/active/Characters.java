@@ -13,14 +13,14 @@ import guiDesign.Methods;
 import main.MainFrame;
 
 public class Characters extends JLabel {
-	private ImageIcon defaultImage = Methods.convertToIcon(getClass(), "character\\character.gif");
-	private ImageIcon smokeImage = Methods.convertToIcon(getClass(), "character\\smokecharacter.gif");
-	private ImageIcon sleepImage = Methods.convertToIcon(getClass(), "active_image/sleep.png");
-	private ImageIcon bedsleepImage = Methods.convertToIcon(getClass(), "active_image/bedsleep.png");
-	private ImageIcon playgameImage = Methods.convertToIcon(getClass(), "active_image/playgame.gif");
-	private ImageIcon coupangImage = Methods.convertToIcon(getClass(), "active_image/coupang.gif");
-	private ImageIcon eatImage = Methods.convertToIcon(getClass(), "active_image/eat.gif");
-	private ImageIcon resumeImage = Methods.convertToIcon(getClass(), "active_image/resume.gif");
+	private ImageIcon defaultImage = Methods.convertToIcon(getClass(), "images/character/character.gif");
+	private ImageIcon smokeImage = Methods.convertToIcon(getClass(), "images/character/smokecharacter.gif");
+	private ImageIcon sleepImage = Methods.convertToIcon(getClass(), "images/active_img/sleep.png");
+	private ImageIcon bedsleepImage = Methods.convertToIcon(getClass(), "images/active_img/bedsleep.png");
+	private ImageIcon playgameImage = Methods.convertToIcon(getClass(), "images/active_img/playgame.gif");
+	private ImageIcon coupangImage = Methods.convertToIcon(getClass(), "images/active_img/coupang.gif");
+	private ImageIcon eatImage = Methods.convertToIcon(getClass(), "images/active_img/eat.gif");
+	private ImageIcon resumeImage = Methods.convertToIcon(getClass(), "images/active_img/resume.gif");
 	
 	private MainFrame mainFrame = null;
 	private JLabel characterlbl;

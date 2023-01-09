@@ -79,9 +79,9 @@ public class LoginFrame extends JFrame {
 
 
 		signupbtn = new JButton("");
-		URL URLSignupImage = classLoader.getResource("btn_image/SignBtnImage.png");
+		URL URLSignupImage = classLoader.getResource("images/btn_img/SignBtnImage.png");
 		ImageIcon SignupBtnIcon = new ImageIcon(URLSignupImage);
-		URL URLSignupPushImage = classLoader.getResource("btn_image/SignPushBtnImage.png");
+		URL URLSignupPushImage = classLoader.getResource("images/btn_img/SignPushBtnImage.png");
 		ImageIcon SignupPushBtnIcon = new ImageIcon(URLSignupPushImage);
 		signupbtn.setIcon(SignupBtnIcon);
 		signupbtn.setPressedIcon(SignupPushBtnIcon);
@@ -102,9 +102,9 @@ public class LoginFrame extends JFrame {
 		});
 
 		loginbtn = new JButton("");
-		URL URLLoginImage = classLoader.getResource("btn_image/loginBtnImage.png");
+		URL URLLoginImage = classLoader.getResource("images/btn_img/loginBtnImage.png");
 		ImageIcon LoginBtnIcon = new ImageIcon(URLLoginImage);
-		URL URLLoginPushImage = classLoader.getResource("btn_image/loginPushBtnImage.png");
+		URL URLLoginPushImage = classLoader.getResource("images/btn_img/loginPushBtnImage.png");
 		ImageIcon LoginPushBtnIcon = new ImageIcon(URLLoginPushImage);
 		loginbtn.setIcon(LoginBtnIcon);
 		loginbtn.setPressedIcon(LoginPushBtnIcon);
@@ -116,7 +116,7 @@ public class LoginFrame extends JFrame {
 		
 		frame.getContentPane().add(loginbtn);
 
-		URL URLback1Image = classLoader.getResource("character/logincharacter.gif");
+		URL URLback1Image = classLoader.getResource("images/character/logincharacter.gif");
 		ImageIcon URLback1Icon = new ImageIcon(URLback1Image);
 		
 		lblNewLabel_1 = new JLabel("");
@@ -125,7 +125,7 @@ public class LoginFrame extends JFrame {
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
-		URL URLLoginBack = classLoader.getResource("backimg/LoginBackground.png");
+		URL URLLoginBack = classLoader.getResource("images/back_img/LoginBackground.png");
 		lblNewLabel_2.setIcon(new ImageIcon(URLLoginBack));
 		lblNewLabel_2.setBounds(0, 0, 984, 461);
 		frame.getContentPane().add(lblNewLabel_2);

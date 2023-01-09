@@ -22,6 +22,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import guiDesign.Methods;
+
 public class dugame extends JFrame implements ActionListener, Runnable {
 //   ImageIcon ii = new ImageIcon("character.gif");
 	private JButton jbt[] = new JButton[9];
@@ -39,11 +41,11 @@ public class dugame extends JFrame implements ActionListener, Runnable {
 	private int randomsu = 0;
 	private int count = -1;
 	private ClassLoader classLoader = getClass().getClassLoader();
-	private URL duimg = classLoader.getResource("du_image/2.png");
+	private URL duimg = classLoader.getResource("images/du_img/2.png");
 
-	private URL pressed = classLoader.getResource("du_image/1.png");
-	private URL out = classLoader.getResource("du_image/33.png");
-	private URL in = classLoader.getResource("du_image/22.png");
+	private URL pressed = classLoader.getResource("images/du_img/1.png");
+	private URL out = classLoader.getResource("images/du_img/33.png");
+	private URL in = classLoader.getResource("images/du_img/22.png");
 	private JLabel cusorimage;
 	private boolean go;
 	private int touch;
@@ -69,7 +71,7 @@ public class dugame extends JFrame implements ActionListener, Runnable {
 
 		JLabel imglbl = new JLabel("");
 		imglbl.setBounds(0, 20, 1000, 710);
-		imglbl.setIcon(new ImageIcon(dugame.class.getResource("/du_image/back.png")));
+		imglbl.setIcon(Methods.convertToIcon(getClass(), "images/du_img/back.png"));
 		this.getContentPane().add(imglbl);
 
 	}
@@ -185,7 +187,7 @@ public class dugame extends JFrame implements ActionListener, Runnable {
 
 //
 	public void cockroachappear() {
-		customcusor(pnl, "du_image/mang.png");
+		customcusor(pnl, "images/du_img/mang.png");
 
 		pnl.addMouseListener(new MouseListener() {
 			@Override
@@ -194,7 +196,7 @@ public class dugame extends JFrame implements ActionListener, Runnable {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				customcusor(pnl, "du_image/mang.png");
+				customcusor(pnl, "images/du_img/mang.png");
 				if (go) {
 					pnl.removeMouseListener(this);
 					pnl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -216,7 +218,7 @@ public class dugame extends JFrame implements ActionListener, Runnable {
 			}
 		});
 		touch = 0;
-		cusorimage = new JLabel(convertToIcon(getClass(), "du_image/mang.png", 500, 500));
+		cusorimage = new JLabel(convertToIcon(getClass(), "images/du_img/mang.png", 500, 500));
 	}
 
 	public static ImageIcon convertToIcon(Class useClass, String name, int width, int height) {

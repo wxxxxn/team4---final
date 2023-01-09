@@ -56,7 +56,7 @@ public class RankPanel extends JPanel {
 		add(timeLabel);
 		
 		ClassLoader classLoader = getClass().getClassLoader();
-		URL URLCigaImage = classLoader.getResource("rank_image/ciga.png");
+		URL URLCigaImage = classLoader.getResource("images/rank_img/ciga.png");
 		ImageIcon cigaImageIcon = new ImageIcon(URLCigaImage);
 		
 		JLabel scoreLabel = new JLabel("4444점");

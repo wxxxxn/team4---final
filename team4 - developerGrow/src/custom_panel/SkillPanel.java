@@ -1,4 +1,4 @@
-package main.store;
+package custom_panel;
 
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
@@ -12,6 +12,7 @@ import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.URL;
+
 
 public class SkillPanel extends JPanel  implements MouseListener{
 
@@ -80,7 +81,7 @@ public class SkillPanel extends JPanel  implements MouseListener{
 		add(priceLabel);
 		
 		ClassLoader classLoader = getClass().getClassLoader();
-		URL URLCigaImage = classLoader.getResource("images/skill_img/ciga.png");
+		URL URLCigaImage = classLoader.getResource("skill_image/ciga.png");
 		ImageIcon cigaImageIcon = new ImageIcon(URLCigaImage);
 		
 		JLabel cigaImageLabel = new JLabel("");

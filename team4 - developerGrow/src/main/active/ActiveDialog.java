@@ -118,19 +118,19 @@ public class ActiveDialog extends JDialog {
 	public ImageIcon imageIcon (int num) {
 		switch (num) {
 			case 0:
-				return Methods.convertToIcon(getClass(), "activeBtn_image/activeCouPang.png");	
+				return Methods.convertToIcon(getClass(), "images/activeBtn_img/activeCouPang.png");	
 			case 1:
-				return Methods.convertToIcon(getClass(), "activeBtn_image/activeEat.png");
+				return Methods.convertToIcon(getClass(), "images/activeBtn_img/activeEat.png");
 			case 2:
-				return Methods.convertToIcon(getClass(), "activeBtn_image/activeGame.png");
+				return Methods.convertToIcon(getClass(), "images/activeBtn_img/activeGame.png");
 			case 3:
-				return Methods.convertToIcon(getClass(), "activeBtn_image/activeSleep.png");
+				return Methods.convertToIcon(getClass(), "images/activeBtn_img/activeSleep.png");
 			case 4:
-				return Methods.convertToIcon(getClass(), "activeBtn_image/activeSmokeing.png");
+				return Methods.convertToIcon(getClass(), "images/activeBtn_img/activeSmokeing.png");
 			case 5:
-				return Methods.convertToIcon(getClass(), "activeBtn_image/activeWrite.png");
+				return Methods.convertToIcon(getClass(), "images/activeBtn_img/activeWrite.png");
 			case 6:
-				return Methods.convertToIcon(getClass(), "btn_image/closeBtnImage.png");
+				return Methods.convertToIcon(getClass(), "images/btn_img/closeBtnImage.png");
 			default:
 				return null;
 		}
@@ -138,19 +138,19 @@ public class ActiveDialog extends JDialog {
 	public ImageIcon imageIconPush (int num) {
 		switch (num) {
 			case 0:
-				return Methods.convertToIcon(getClass(), "activeBtn_image/activeCouPangPush.png");
+				return Methods.convertToIcon(getClass(), "images/activeBtn_img/activeCouPangPush.png");
 			case 1:
-				return Methods.convertToIcon(getClass(), "activeBtn_image/activeEatPush.png");
+				return Methods.convertToIcon(getClass(), "images/activeBtn_img/activeEatPush.png");
 			case 2:
-				return Methods.convertToIcon(getClass(), "activeBtn_image/activeGamePush.png");
+				return Methods.convertToIcon(getClass(), "images/activeBtn_img/activeGamePush.png");
 			case 3:
-				return Methods.convertToIcon(getClass(), "activeBtn_image/activeSleepPush.png");
+				return Methods.convertToIcon(getClass(), "images/activeBtn_img/activeSleepPush.png");
 			case 4:
-				return Methods.convertToIcon(getClass(), "activeBtn_image/activeSmokeingPush.png");
+				return Methods.convertToIcon(getClass(), "images/activeBtn_img/activeSmokeingPush.png");
 			case 5:
-				return Methods.convertToIcon(getClass(), "activeBtn_image/activeWritePush.png");
+				return Methods.convertToIcon(getClass(), "images/activeBtn_img/activeWritePush.png");
 			case 6:
-				return Methods.convertToIcon(getClass(), "btn_image/closeBtnPushImage.png");
+				return Methods.convertToIcon(getClass(), "images/btn_img/closeBtnPushImage.png");
 			default:
 				return null;
 		}
