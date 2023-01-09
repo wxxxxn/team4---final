@@ -155,21 +155,7 @@ public class LoginFrame extends JFrame {
 		});
 		
 		frame.setVisible(true);
-		
-		//////////////////// 테스트용 버튼
-		JButton testBtn = new JButton("테스트용 버튼");
-		testBtn.setBounds(300, 130, 200, 70);
-		frame.getContentPane().add(testBtn);
-		testBtn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				MainFrame mainFrame = new MainFrame(1);
-				mainFrame.showGUI();
-				frame.dispose();
-				stopSound();
-			}
-		});
-		////////////////////
+		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
 	public static ImageIcon convertToIcon(Class useClass, String name, int width, int height) {

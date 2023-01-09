@@ -38,9 +38,9 @@ public class DeathDialog extends JDialog {
 		returnBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainFrame mainFrame = new MainFrame();
-				mainFrame.showGUI();
-				dispose();
+//				MainFrame mainFrame = new MainFrame();
+//				mainFrame.showGUI();
+//				dispose();
 			}
 		});
 		contentPane.add(returnBtn);

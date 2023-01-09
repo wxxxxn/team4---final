@@ -36,9 +36,9 @@ import guiDesign.Methods;
 import login.LoginFrame;
 import main.active.ActiveDialog;
 import main.active.ActiveEventImpl;
+import main.project.ProjectDialog;
 import main.store.StoreDialog;
 import progressbar.ProgressbarEvent;
-import main.project.ProjectDialog;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
@@ -92,10 +92,8 @@ public class MainFrame extends JFrame {
 
 	private List<User> userList;
 
-	public MainFrame() {
-	}
+	private JButton soundbtn;
 
-	// 테스트용
 	public MainFrame(int userId) {
 		gameControllerImpl.timeController();
 
@@ -111,6 +109,27 @@ public class MainFrame extends JFrame {
 		Mainpnl.setLayout(null);
 
 		activeEventImpl.getCharacters().defaultCharacter();
+		
+		ImageIcon sound = Methods.convertToResizeIcon(getClass(), "btn_image/sound.png", 50, 50);
+		ImageIcon mute = Methods.convertToResizeIcon(getClass(), "btn_image/mute.png", 50, 50);
+		soundbtn = new JButton(sound);
+		soundbtn.setBounds(978, 28, 50, 50);
+		soundbtn.setBackground(new Color(0, 0, 0, 0));
+		soundbtn.setOpaque(false);
+		soundbtn.setFocusable(false);
+		getContentPane().add(soundbtn);
+		soundbtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (soundbtn.getIcon() == sound) {
+					soundbtn.setIcon(mute);
+					clip.stop();
+				} else if (soundbtn.getIcon() == mute) {
+					soundbtn.setIcon(sound);
+					clip.start();				
+				}
+			}
+		});
 
 		expbar = new JProgressBar();
 		expbar.setValue(20);
@@ -409,7 +428,6 @@ public class MainFrame extends JFrame {
 		projectMinute.setFont(new Font("HY엽서L", Font.BOLD, 14));
 		projectMinute.setBounds(154, 103, 29, 17);
 		panel.add(projectMinute);
-		
 		readyGame(userId);
 		applyDB();
 
@@ -589,6 +607,4 @@ public class MainFrame extends JFrame {
 	public List<User> getUserList() {
 		return userList;
 	}
-	
-	
 }
