@@ -2,11 +2,10 @@ package main;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
+import java.util.List;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -15,19 +14,26 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import database.controllDB.InsertDB;
+import database.controllDB.SelectDB;
+import database.controllDB.UpdateDB;
+import database.dblist.CigaLog;
+import database.dblist.Project;
+import database.dblist.SkillList;
+import database.dblist.UserInfo;
+import database.dblist.UserProject;
+import database.dblist.UserSkill;
 import gui.RankingDialog;
 import gui.SettingDialog;
 import guiDesign.ImagePanel;
 import guiDesign.Methods;
 import main.active.ActiveDialog;
 import main.active.ActiveEventImpl;
-import main.active.Characters;
 import main.store.StoreDialog;
 import progressbar.ProgressbarEvent;
 import projectDialog.ProjectDialog;
@@ -53,6 +59,7 @@ public class MainFrame extends JFrame {
 	private JLabel nowProjectlbl;
 	private JLabel projectHour;
 	private JLabel projectMinute;
+	private JLabel levellbl;
 	private GameControllerImpl gameControllerImpl = new GameControllerImpl(this);
 	private ProjectDialog projectFrame = null;
 	private ActiveEventImpl activeEventImpl = new ActiveEventImpl(this);
@@ -62,13 +69,23 @@ public class MainFrame extends JFrame {
 	private JProgressBar stessbar;
 	private JProgressBar healthbar;
 	private JButton activitybtn;
+	
+	// DB
+	private List<UserInfo> userInfoList;
+	private List<SkillList> skillList;
+	private List<UserSkill> userSkillList;
+	private List<Project> projectList;
+	private List<UserProject> userProjectList;
+	private List<CigaLog> cigaLogList;
+	private UserInfo userInfo;
+	private int infoId;
+	private int userId;
 
-	public MainFrame(int id) {
-		// 나중에 채우기
+	public MainFrame() {
 	}
 
 	// 테스트용
-	public MainFrame() {
+	public MainFrame(int userId) {
 		gameControllerImpl.timeController();
 
 		ClassLoader classLoader = getClass().getClassLoader();
@@ -190,10 +207,10 @@ public class MainFrame extends JFrame {
 		lblNewLabel.setBounds(12, 5, 110, 32);
 		developlvpnl.add(lblNewLabel);
 
-		JLabel numOflevellbl = new JLabel("10");
-		numOflevellbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
-		numOflevellbl.setBounds(124, 5, 89, 33);
-		developlvpnl.add(numOflevellbl);
+		levellbl = new JLabel("10");
+		levellbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
+		levellbl.setBounds(124, 5, 89, 33);
+		developlvpnl.add(levellbl);
 
 		JPanel healthpnl = new JPanel();
 		healthpnl.setLayout(null);
@@ -375,10 +392,13 @@ public class MainFrame extends JFrame {
 		projectMinute.setFont(new Font("HY엽서L", Font.BOLD, 14));
 		projectMinute.setBounds(154, 103, 29, 17);
 		panel.add(projectMinute);
+		
+		readyGame(userId);
+		applyDB();
 
-		pb.hpbarDecreas(500);
-		pb.stressbarIncrease(1000);
-		pb.healthbarDecreas(2000);
+		pb.hpbarDecreas(3000);
+		pb.stressbarIncrease(3000);
+		pb.healthbarDecreas(3000);
 	}
 
 	public void showGUI() {
@@ -394,6 +414,47 @@ public class MainFrame extends JFrame {
 			clip.start();
 			clip.loop(1000);
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void readyGame(int userId) {
+		this.userId = userId;
+		SelectDB selectDB = new SelectDB();
+		InsertDB insertDB = new InsertDB();
+		UpdateDB updateDB = new UpdateDB();
+		userInfoList = selectDB.selectUserinfo(userId);
+		userInfo = selectDB.searchNowGame(userInfoList);
+		if (userInfo == null) {
+			insertDB.insertUserInfo(userId);
+			userInfoList = selectDB.selectUserinfo(userId);
+			userInfo = selectDB.searchNowGame(userInfoList);
+		}
+		this.infoId = userInfo.getInfoId();
+		skillList = selectDB.selectSkillList();
+		userSkillList = selectDB.selectUserSkill(userId, infoId);
+		if (userSkillList == null) {
+			insertDB.insertUserSkill(userId, infoId);
+			userSkillList = selectDB.selectUserSkill(userId, infoId);
+		}
+		projectList = selectDB.selectProject();
+		userProjectList = selectDB.selectUserProject(userId, infoId);
+		if (userProjectList == null) {
+			insertDB.insertUserProject(userId, infoId);
+			userProjectList = selectDB.selectUserProject(userId, infoId);
+		}
+		cigaLogList = selectDB.selectCigaLog(userId, infoId);
+	}
+	
+	public void applyDB() {
+		System.out.println(userInfo);
+		try {
+		levellbl.setText(String.valueOf(userInfo.getLevel()));
+		expbar.setValue(userInfo.getExp());
+		hpbar.setValue(userInfo.getHp());
+		healthbar.setValue(userInfo.getHealth());
+		stessbar.setValue(userInfo.getStress());
+		} catch(NullPointerException e) {
 			e.printStackTrace();
 		}
 	}

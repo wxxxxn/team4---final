@@ -112,15 +112,15 @@ public class SelectDB {
 		return list;
 	}	
 	
-	public List<User> selectUser(String userId) {
+	public List<User> selectUser(int id) {
 		List<User> list = new ArrayList<>();
-		String sql = "SELECT * FROM team4.user WHERE userId = ?";
+		String sql = "SELECT * FROM team4.user WHERE id = ?";
 		try (Connection conn = ConnectionProvider.makeConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql)) {
-			stmt.setString(1, userId);
+			stmt.setInt(1, id);
 			try (ResultSet rs = stmt.executeQuery()) {
 				while(rs.next()) {
-					int id = rs.getInt("id");
+					String userId = rs.getString("userId");
 					String userPw = rs.getString("userPw");
 					String nickname = rs.getString("nickname");
 					list.add(new User(id, userId, userPw, nickname));
@@ -133,7 +133,7 @@ public class SelectDB {
 		return list;
 	}
 	
-	public static List<UserInfo> seletUserinfo(int userId) {
+	public List<UserInfo> selectUserinfo(int userId) {
 		String sql = "SELECT * FROM team4.userinfo WHERE userid = ?";
 		List<UserInfo> list = new ArrayList<>();
 		try (Connection conn = ConnectionProvider.makeConnection();
@@ -159,6 +159,15 @@ public class SelectDB {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	public UserInfo searchNowGame(List<UserInfo> list) {
+		for (int i = 0; i < list.size(); i++) {
+			if (! list.get(i).isGameover()) {
+				return list.get(i);
+			}
+		}
+		return null;
 	}
 	
 	public List<UserProject> selectUserProject(int userId, int infoId) {

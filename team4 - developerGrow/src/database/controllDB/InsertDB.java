@@ -35,7 +35,7 @@ public class InsertDB {
 		return 0;
 	}
 	
-	public int[] insertUserInfo(int userId, int infoId) {
+	public int[] insertUserProject(int userId, int infoId) {
 		String sql = "INSERT INTO team4.userProject (userId, infoId, projectId, complete, lastTime) "
 				+ "VALUES(?, ?, ?, 0, 0)";
 		try (Connection conn = ConnectionProvider.makeConnection();
