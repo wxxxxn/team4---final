@@ -307,7 +307,6 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				SettingDialog settingFrame = new SettingDialog(MainFrame.this.getX(), MainFrame.this.getY(), MainFrame.this);
 				settingFrame.showGUI();
-				stopSound();
 				if (settingFrame.getLoginFrame()) {
 					new LoginFrame();
 					dispose();
