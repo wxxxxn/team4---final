@@ -76,7 +76,7 @@ public class MainFrame extends JFrame {
 	private ProgressbarEvent pb = new ProgressbarEvent(this);
 	private JProgressBar hpbar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
 	private JProgressBar expbar;
-	private JProgressBar stessbar;
+	private JProgressBar stressbar;
 	private JProgressBar healthbar;
 	
 	// DB
@@ -89,10 +89,12 @@ public class MainFrame extends JFrame {
 	private UserInfo userInfo;
 	private int infoId;
 	private int userId;
-
+	private int usedCiga;
 	private List<User> userList;
 
 	private JButton soundbtn;
+
+	private JLabel numOfcigalbl;
 
 	public MainFrame(int userId) {
 		gameControllerImpl.timeController();
@@ -201,7 +203,7 @@ public class MainFrame extends JFrame {
 		currentcigalbl.setBounds(12, 0, 117, 43);
 		currentcigapnl.add(currentcigalbl);
 
-		JLabel numOfcigalbl = new JLabel("10");
+		numOfcigalbl = new JLabel("10");
 		numOfcigalbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
 		numOfcigalbl.setBounds(124, 5, 89, 33);
 		currentcigapnl.add(numOfcigalbl);
@@ -217,13 +219,13 @@ public class MainFrame extends JFrame {
 		stresslbl.setBounds(12, 5, 64, 22);
 		stresspnl.add(stresslbl);
 
-		stessbar = new JProgressBar();
-		stessbar.setFont(new Font("휴먼편지체", Font.PLAIN, 12));
-		stessbar.setValue(10);
-		stessbar.setStringPainted(true);
-		stessbar.setForeground(new Color(139, 0, 0));
-		stessbar.setBounds(80, 5, 480, 22);
-		stresspnl.add(stessbar);
+		stressbar = new JProgressBar();
+		stressbar.setFont(new Font("휴먼편지체", Font.PLAIN, 12));
+		stressbar.setValue(10);
+		stressbar.setStringPainted(true);
+		stressbar.setForeground(new Color(139, 0, 0));
+		stressbar.setBounds(80, 5, 480, 22);
+		stresspnl.add(stressbar);
 
 		JPanel developlvpnl = new JPanel();
 		developlvpnl.setBounds(22, 62, 225, 42);
@@ -427,8 +429,9 @@ public class MainFrame extends JFrame {
 		projectMinute.setFont(new Font("HY엽서L", Font.BOLD, 14));
 		projectMinute.setBounds(154, 103, 29, 17);
 		panel.add(projectMinute);
-		readyGame(userId);
-		applyDB();
+		
+		gameControllerImpl.readyGame(userId);
+		gameControllerImpl.applyDB();
 
 		pb.hpbarDecreas(3000);
 		pb.stressbarIncrease(3000);
@@ -448,48 +451,6 @@ public class MainFrame extends JFrame {
 			clip.start();
 			clip.loop(1000);
 		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void readyGame(int userId) {
-		this.userId = userId;
-		SelectDB selectDB = new SelectDB();
-		InsertDB insertDB = new InsertDB();
-		UpdateDB updateDB = new UpdateDB();
-		userList = selectDB.selectUser(userId);
-		userInfoList = selectDB.selectUserinfo(userId);
-		userInfo = selectDB.searchNowGame(userInfoList);
-		if (userInfo == null) {
-			insertDB.insertUserInfo(userId);
-			userInfoList = selectDB.selectUserinfo(userId);
-			userInfo = selectDB.searchNowGame(userInfoList);
-		}
-		this.infoId = userInfo.getInfoId();
-		skillList = selectDB.selectSkillList();
-		userSkillList = selectDB.selectUserSkill(userId, infoId);
-		if (userSkillList.size() == 0) {
-			insertDB.insertUserSkill(userId, infoId);
-			userSkillList = selectDB.selectUserSkill(userId, infoId);
-		}
-		projectList = selectDB.selectProject();
-		userProjectList = selectDB.selectUserProject(userId, infoId);
-		if (userProjectList.size() == 0) {
-			insertDB.insertUserProject(userId, infoId);
-			userProjectList = selectDB.selectUserProject(userId, infoId);
-		}
-		cigaLogList = selectDB.selectCigaLog(userId, infoId);
-	}
-	
-	public void applyDB() {
-		System.out.println(userInfo);
-		try {
-		levellbl.setText(String.valueOf(userInfo.getLevel()));
-		expbar.setValue(userInfo.getExp());
-		hpbar.setValue(userInfo.getHp());
-		healthbar.setValue(userInfo.getHealth());
-		stessbar.setValue(userInfo.getStress());
-		} catch(NullPointerException e) {
 			e.printStackTrace();
 		}
 	}
@@ -540,7 +501,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public JProgressBar getStessbar() {
-		return stessbar;
+		return stressbar;
 	}
 
 	public JProgressBar getHealthbar() {
@@ -605,5 +566,45 @@ public class MainFrame extends JFrame {
 
 	public List<User> getUserList() {
 		return userList;
+	}
+	
+	public void setUserList(List<User> userList) {
+		this.userList = userList;
+	}
+
+	public int getInfoId() {
+		return infoId;
+	}
+
+	public void setInfoId(int infoId) {
+		this.infoId = infoId;
+	}
+
+	public void setCigaLogList(List<CigaLog> cigaLogList) {
+		this.cigaLogList = cigaLogList;
+	}
+
+	public JLabel getLevellbl() {
+		return levellbl;
+	}
+
+	public JLabel getNumOfcigalbl() {
+		return numOfcigalbl;
+	}
+
+	public int getUsedCiga() {
+		return usedCiga;
+	}
+
+	public void setUsedCiga(int usedCiga) {
+		this.usedCiga = usedCiga;
+	}
+
+	public void setSkillList(List<SkillList> skillList) {
+		this.skillList = skillList;
+	}
+
+	public JProgressBar getStressbar() {
+		return stressbar;
 	}
 }

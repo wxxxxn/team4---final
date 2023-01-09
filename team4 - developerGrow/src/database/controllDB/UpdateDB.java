@@ -11,28 +11,28 @@ import database.dblist.UserSkill;
 import database.util.ConnectionProvider;
 
 public class UpdateDB {
-	public int[] updateUserInfo(List<UserInfo> list, int userId, int infoId) {
+	
+	public int[] updateUserInfo(UserInfo userInfo) {
 		String sql = "UPDATE userInfo SET date =?, time = ?, level = ?, exp = ?"
 				+ ", hp = ?, health = ?, stress = ?, ciga = ?, usedCiga = ?, gameover = ? "
 				+ "WHERE userId = ? AND infoId = ?";
 		try (Connection conn = ConnectionProvider.makeConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql)) {
-			for (UserInfo elem : list) {
-				stmt.setInt(1, elem.getDate());
-				stmt.setInt(2, elem.getTime());
-				stmt.setInt(3, elem.getLevel());
-				stmt.setInt(4, elem.getExp());
-				stmt.setInt(5, elem.getHp());
-				stmt.setInt(6, elem.getHealth());
-				stmt.setInt(7, elem.getStress());
-				stmt.setInt(8, elem.getCiga());
-				stmt.setInt(9, elem.getUsedCiga());
-				stmt.setBoolean(10, elem.isGameover());
-				stmt.setInt(11, userId);
-				stmt.setInt(12, infoId);
+				stmt.setInt(1, userInfo.getDate());
+				stmt.setInt(2, userInfo.getTime());
+				stmt.setInt(3, userInfo.getLevel());
+				stmt.setInt(4, userInfo.getExp());
+				stmt.setInt(5, userInfo.getHp());
+				stmt.setInt(6, userInfo.getHealth());
+				stmt.setInt(7, userInfo.getStress());
+				stmt.setInt(8, userInfo.getCiga());
+				stmt.setInt(9, userInfo.getUsedCiga());
+				stmt.setBoolean(10, userInfo.isGameover());
+				stmt.setInt(11, userInfo.getUserId());
+				stmt.setInt(12, userInfo.getInfoId());
 				
 				stmt.addBatch();
-			}
+			
 			return stmt.executeBatch();
 		} catch (SQLException e) {
 			e.printStackTrace();
