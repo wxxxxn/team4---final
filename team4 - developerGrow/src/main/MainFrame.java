@@ -296,7 +296,7 @@ public class MainFrame extends JFrame {
 		rankingbtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				RankingDialog rankingFrame = new RankingDialog(MainFrame.this.getX(), MainFrame.this.getY());
+				RankingDialog rankingFrame = new RankingDialog(MainFrame.this.getX(), MainFrame.this.getY(), MainFrame.this);
 				rankingFrame.showGUI();
 			}
 		});

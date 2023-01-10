@@ -5,6 +5,8 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import main.MainFrame;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -25,9 +27,9 @@ public class RankingDialog extends JDialog {
 	private JPanel contentPane;
 	private RankEventImpl rankEventImpl;
 
-	public RankingDialog(int x, int y) {
+	public RankingDialog(int x, int y, MainFrame mainFrame) {
 		
-		rankEventImpl = new RankEventImpl();
+		rankEventImpl = new RankEventImpl(mainFrame);
 		
 		setUndecorated(true);
 		setModal(true);
@@ -58,6 +60,7 @@ public class RankingDialog extends JDialog {
 			ranker.getRankLabel().setText(String.valueOf((i + 1)));
 			rp[i] = ranker;
 			rankersPanel.add(rp[i]);
+			rankEventImpl.inputRankData(i, rp[i]);
 			rankersPanel.add(Box.createVerticalStrut(25));
 		}
 
@@ -96,4 +99,6 @@ public class RankingDialog extends JDialog {
 	public void showGUI() {
 		setVisible(true);
 	}
+	
+	
 }

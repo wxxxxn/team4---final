@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 import database.dblist.CigaLog;
 import database.dblist.Project;
 import database.dblist.Rank;
+import database.dblist.RankerInfo;
 import database.dblist.SkillList;
 import database.dblist.User;
 import database.dblist.UserInfo;
@@ -83,6 +84,35 @@ public class SelectDB {
 		}
 		return list;
 	}	
+	
+public RankerInfo searchRankerInfo(int userInfoId, String userNickname) {
+		
+		String sql = "SELECT u.userNickname, ui.date, ui.time, ui.usedciga"
+				+ " FROM team4.userinfo AS ui, team4.user AS u, team4.rank AS r"
+				+ " WHERE ui.infoid = ? AND u.userNickname = ?"
+				+ " ORDER BY score DESC LIMIT 1";
+		try (Connection conn = ConnectionProvider.makeConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql)) {
+			
+			stmt.setInt(1, userInfoId);
+			stmt.setString(2, userNickname);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			rs.next();
+			int date = rs.getInt("ui.date");
+			int time = rs.getInt("ui.time");
+			int usedCiga = rs.getInt("ui.usedciga");
+			
+			RankerInfo rankerInfo = new RankerInfo(date, time, usedCiga);
+			return rankerInfo;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 	
 	public List<SkillList> selectSkillList() {
 		List<SkillList> list = new ArrayList<>();

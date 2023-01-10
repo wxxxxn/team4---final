@@ -17,6 +17,11 @@ import java.awt.BorderLayout;
 public class RankPanel extends JPanel {
 	
 	private JLabel rankLabel;
+	private JLabel nickNameLabel;
+	private JLabel timeLabel;
+	private JLabel usedCigaLabel;
+	private JLabel dateLabel;
+	private JLabel scoreLabel;
 	
 	public RankPanel() {
 		
@@ -33,10 +38,10 @@ public class RankPanel extends JPanel {
 		rankLabel.setForeground(Color.BLACK);
 		rankLabel.setBackground(Color.WHITE);
 		rankLabel.setOpaque(true);
-		rankLabel.setBounds(12, 10, 80, 80);
+		rankLabel.setBounds(10, 10, 80, 80);
 		add(rankLabel);
 		
-		JLabel nickNameLabel = new JLabel("닉네임");
+		nickNameLabel = new JLabel("닉네임");
 		nickNameLabel.setBorder(eborder);
 		nickNameLabel.setFont(new Font("휴먼편지체", Font.BOLD, 15));
 		nickNameLabel.setForeground(Color.BLACK);
@@ -45,24 +50,14 @@ public class RankPanel extends JPanel {
 		nickNameLabel.setBounds(104, 10, 424, 28);
 		add(nickNameLabel);
 		
-		JLabel timeLabel = new JLabel("4일차 13:20");
-		timeLabel.setBorder(eborder);
-		timeLabel.setFont(new Font("휴먼편지체", Font.BOLD, 15));
-		timeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		timeLabel.setForeground(Color.BLACK);
-		timeLabel.setBackground(Color.WHITE);
-		timeLabel.setOpaque(true);
-		timeLabel.setBounds(258, 48, 114, 42);
-		add(timeLabel);
-		
 		ClassLoader classLoader = getClass().getClassLoader();
 		URL URLCigaImage = classLoader.getResource("images/rank_img/ciga.png");
 		ImageIcon cigaImageIcon = new ImageIcon(URLCigaImage);
 		
-		JLabel scoreLabel = new JLabel("4444점");
+		scoreLabel = new JLabel("4444점");
 		scoreLabel.setBorder(eborder);
 		scoreLabel.setFont(new Font("휴먼편지체", Font.BOLD, 15));
-		scoreLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		scoreLabel.setForeground(Color.BLACK);
 		scoreLabel.setBackground(Color.WHITE);
 		scoreLabel.setOpaque(true);
@@ -81,7 +76,7 @@ public class RankPanel extends JPanel {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(eborder);
-		panel.setBounds(384, 48, 144, 42);
+		panel.setBounds(403, 48, 125, 42);
 		add(panel);
 		panel.setLayout(new BorderLayout(0, 0));
 		
@@ -90,15 +85,37 @@ public class RankPanel extends JPanel {
 		panel.add(cigaImageLabel, BorderLayout.WEST);
 		cigaImageLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		cigaImageLabel.setIcon(cigaImageIcon);
+		cigaImageLabel.setOpaque(true);
 		
-		JLabel usedCigaLabel = new JLabel("444개");
+		
+		usedCigaLabel = new JLabel("444개");
 		panel.add(usedCigaLabel);
-		usedCigaLabel.setBorder(null);
+		usedCigaLabel.setBorder(eborder);
 		usedCigaLabel.setFont(new Font("휴먼편지체", Font.BOLD, 15));
 		usedCigaLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		usedCigaLabel.setForeground(Color.BLACK);
 		usedCigaLabel.setBackground(Color.WHITE);
 		usedCigaLabel.setOpaque(true);
+		
+		dateLabel = new JLabel("4일차");
+		dateLabel.setBounds(258, 48, 65, 42);
+		dateLabel.setBorder(eborder);
+		dateLabel.setFont(new Font("휴먼편지체", Font.BOLD, 15));
+		dateLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		dateLabel.setForeground(Color.BLACK);
+		dateLabel.setBackground(Color.WHITE);
+		dateLabel.setOpaque(true);
+		add(dateLabel);
+		
+		timeLabel = new JLabel("13:20");
+		timeLabel.setBounds(335, 48, 56, 42);
+		timeLabel.setBorder(eborder);
+		timeLabel.setFont(new Font("휴먼편지체", Font.BOLD, 15));
+		timeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		timeLabel.setForeground(Color.BLACK);
+		timeLabel.setBackground(Color.WHITE);
+		timeLabel.setOpaque(true);
+		add(timeLabel);
 		
 	}
 
@@ -109,5 +126,25 @@ public class RankPanel extends JPanel {
 	
 	public JLabel getRankLabel() {
 		return rankLabel;
+	}
+
+	public JLabel getNickNameLabel() {
+		return nickNameLabel;
+	}
+
+	public JLabel getTimeLabel() {
+		return timeLabel;
+	}
+
+	public JLabel getUsedCigaLabel() {
+		return usedCigaLabel;
+	}
+
+	public JLabel getDateLabel() {
+		return dateLabel;
+	}
+
+	public JLabel getScoreLabel() {
+		return scoreLabel;
 	}
 }
