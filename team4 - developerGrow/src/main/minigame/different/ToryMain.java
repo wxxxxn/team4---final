@@ -59,7 +59,7 @@ public class ToryMain extends JFrame {
 		lblNewLabel_1.setBounds(0, 0, 337, 70);
 		right.add(lblNewLabel_1);
 
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+//		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBounds(200, 100, 1000, 600);
 //		setVisible(true);
 	}

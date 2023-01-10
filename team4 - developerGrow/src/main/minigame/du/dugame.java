@@ -105,7 +105,7 @@ public class dugame extends JFrame implements ActionListener, Runnable {
 	}
 
 	public void start() {
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		start.addActionListener(this);
 		end.addActionListener(this);
 		for (int i = 0; i < 9; ++i) {

@@ -42,7 +42,7 @@ public class Hide extends JFrame {
 		center.add(leftimg);
 
 		// 프레임 온,오프를 위한 기본설정
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+//		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBounds(500, 0, 700, 1000);
 		setVisible(true);
 	}// ThigauEEx()
