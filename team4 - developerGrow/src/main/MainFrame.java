@@ -21,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 
 import database.dblist.CigaLog;
 import database.dblist.Project;
+import database.dblist.Rank;
 import database.dblist.SkillList;
 import database.dblist.User;
 import database.dblist.UserInfo;
@@ -88,13 +89,16 @@ public class MainFrame extends JFrame {
 	private List<UserSkill> userSkillList;
 	private List<Project> projectList;
 	private List<UserProject> userProjectList;
+	private List<User> userList;
 	private List<CigaLog> cigaLogList;
+	private List<Rank> userRankList;
 	private UserInfo userInfo;
+	private Rank userRank;
 	private int infoId;
 	private int userId;
 	private int ciga;
 	private int usedCiga;
-	private List<User> userList;
+	private int score;
 
 	public MainFrame(int userId) {
 		gameControllerImpl.timeController();
@@ -630,4 +634,27 @@ public class MainFrame extends JFrame {
 		this.nowProjectId = nowProjectId;
 	}
 	
+	public List<Rank> getUserRankList() {
+		return userRankList;
+	}
+
+	public void setUserRankList(List<Rank> userRankList) {
+		this.userRankList = userRankList;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public Rank getUserRank() {
+		return userRank;
+	}
+
+	public void setUserRank(Rank userRank) {
+		this.userRank = userRank;
+	}
 }

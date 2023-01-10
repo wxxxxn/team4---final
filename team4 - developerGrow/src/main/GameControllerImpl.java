@@ -6,6 +6,7 @@ import java.util.TimerTask;
 import database.controllDB.InsertDB;
 import database.controllDB.SelectDB;
 import database.controllDB.UpdateDB;
+import database.dblist.Rank;
 import database.dblist.UserInfo;
 import main.project.ProjectEventImpl;
 
@@ -39,7 +40,7 @@ public class GameControllerImpl implements GameController {
 				minutes++;
 				updateTime(minutes);
 			}
-			
+
 			if (((minutes % 60) % 10) == 0) {
 				saveUserInfoData();
 				saveUserProjcet();
@@ -47,7 +48,6 @@ public class GameControllerImpl implements GameController {
 			checkProject();
 		}
 	};
-	
 
 	private void updateTime(int minutes) {
 
@@ -68,6 +68,7 @@ public class GameControllerImpl implements GameController {
 		mainFrame.setUserId(userId);
 		SelectDB selectDB = new SelectDB();
 		InsertDB insertDB = new InsertDB();
+
 		mainFrame.setUserList(selectDB.selectUser(userId));
 		mainFrame.setUserInfoList(selectDB.selectUserinfo(userId));
 		mainFrame.setUserInfo(selectDB.searchNowGame(mainFrame.getUserInfoList()));
@@ -76,6 +77,7 @@ public class GameControllerImpl implements GameController {
 			mainFrame.setUserInfoList(selectDB.selectUserinfo(userId));
 			mainFrame.setUserInfo(selectDB.searchNowGame(mainFrame.getUserInfoList()));
 		}
+
 		int infoId = mainFrame.getUserInfo().getInfoId();
 		mainFrame.setInfoId(infoId);
 		mainFrame.setSkillList(selectDB.selectSkillList());
@@ -84,12 +86,21 @@ public class GameControllerImpl implements GameController {
 			insertDB.insertUserSkill(userId, infoId);
 			mainFrame.setUserSkillList(selectDB.selectUserSkill(userId, infoId));
 		}
+
 		mainFrame.setProjectList(selectDB.selectProject());
 		mainFrame.setUserProjectList(selectDB.selectUserProject(userId, infoId));
 		if (mainFrame.getUserProjectList().size() == 0) {
 			insertDB.insertUserProject(userId, infoId);
 			mainFrame.setUserProjectList(selectDB.selectUserProject(userId, infoId));
 		}
+
+		mainFrame.setUserRankList(selectDB.selectRank(infoId, userId));
+		if (mainFrame.getUserRankList().size() == 0) {
+			insertDB.insertUserRank(userId, infoId, scoreCalculator(),
+					mainFrame.getUserList().get(0).getUserNickname());
+			mainFrame.setUserRankList(selectDB.selectRank(infoId, userId));
+		}
+
 		mainFrame.setCigaLogList(selectDB.selectCigaLog(userId, infoId));
 	}
 
@@ -135,14 +146,14 @@ public class GameControllerImpl implements GameController {
 
 		UserInfo userInfo = new UserInfo(mainFrame.getInfoId(), date, time, level, exp, hp, health, stress, ciga,
 				usedCiga, gameover, mainFrame.getUserId());
-		
+
 		updateDB.updateUserInfo(userInfo);
 	}
-	
+
 	public int getMinutes() {
 		return minutes;
 	}
-	
+
 	private void applyProject() {
 		ProjectEventImpl projectEventImpl = new ProjectEventImpl(mainFrame);
 		int searchProject = projectEventImpl.searchNowProject(mainFrame.getUserProjectList());
@@ -158,20 +169,22 @@ public class GameControllerImpl implements GameController {
 			projectEventImpl.projectTimeControll(time);
 		}
 	}
-	
+
 	private void saveUserProjcet() {
-		
+
 		int searchProject = mainFrame.getProjectEventImpl().searchNowProject(mainFrame.getUserProjectList());
 		if (searchProject != -1) {
 			mainFrame.setNowProjectId(searchProject);
-			mainFrame.getUserProjectList().get(searchProject).setLastHour(Integer.valueOf(mainFrame.getProjectHour().getText()));
-			mainFrame.getUserProjectList().get(searchProject).setLastMin(Integer.valueOf(mainFrame.getProjectMinute().getText()));
+			mainFrame.getUserProjectList().get(searchProject)
+					.setLastHour(Integer.valueOf(mainFrame.getProjectHour().getText()));
+			mainFrame.getUserProjectList().get(searchProject)
+					.setLastMin(Integer.valueOf(mainFrame.getProjectMinute().getText()));
 		}
 		updateDB.updateUserProject(mainFrame.getUserProjectList());
 	}
-	
+
 	private void checkProject() {
-		if(mainFrame.getNowRatinglbl().getText().equals("완료")) {
+		if (mainFrame.getNowRatinglbl().getText().equals("완료")) {
 			int index = mainFrame.getNowProjectId();
 			mainFrame.getUserProjectList().get(index).setComplete(true);
 			mainFrame.getNowRatinglbl().setText("완료!");
@@ -180,17 +193,35 @@ public class GameControllerImpl implements GameController {
 			mainFrame.repaint();
 		}
 	}
-	
+
+	private void saveRanking() {
+
+		Rank userRank = new Rank(mainFrame.getUserList().get(0).getUserNickname(), scoreCalculator(),
+				mainFrame.getUserInfo().getInfoId(), mainFrame.getUserInfo().getUserId());
+		updateDB.updateRanking(userRank);
+		System.out.println(userRank);
+	}
+
+	private int scoreCalculator() {
+
+		int usedCiga = mainFrame.getUserInfo().getUsedCiga();
+		int level = mainFrame.getUserInfo().getLevel();
+
+		int score = (usedCiga * 50) + (level * 200);
+
+		return score;
+	}
+
 	public void expProgressBar(int addExp) {
 		int levelExp = mainFrame.getUserInfo().getLevel() * 100;
 		int charExp = mainFrame.getExpbar().getValue();
-		int input = (int)(charExp + (((double)addExp / (double)levelExp) * 100));
+		int input = (int) (charExp + (((double) addExp / (double) levelExp) * 100));
 		if (input >= 100) {
 			int level = Integer.valueOf(mainFrame.getLevellbl().getText());
 			mainFrame.getLevellbl().setText(String.valueOf(level + 1));
 			mainFrame.getUserInfo().setLevel(level + 1);
-			double a = ((double)level / (double)(level + 1));
-			input = (int)((input - 100) * a);
+			double a = ((double) level / (double) (level + 1));
+			input = (int) ((input - 100) * a);
 			mainFrame.getExpbar().setValue(input);
 		} else {
 			mainFrame.getExpbar().setValue(input);

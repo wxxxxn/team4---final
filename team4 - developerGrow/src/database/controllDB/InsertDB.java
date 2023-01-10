@@ -72,4 +72,21 @@ public class InsertDB {
 		}
 		return null;
 	}
+	
+	public int insertUserRank(int userId, int userinfoId, int score, String nickname) {
+
+		String sql = "INSERT INTO team4.rank (nickname, score, userinfoId, userId)" + "VALUES(?, ?, ?, ?)";
+		try (Connection conn = ConnectionProvider.makeConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql)) {
+			stmt.setString(1, nickname);
+			stmt.setInt(2, score);
+			stmt.setInt(3, userinfoId);
+			stmt.setInt(4, userId);
+
+			return stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }

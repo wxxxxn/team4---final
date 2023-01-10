@@ -1,19 +1,12 @@
 package main.ranking;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.EventQueue;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import custom_panel.RankPanel;
-
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
@@ -30,13 +23,16 @@ import javax.swing.SwingConstants;
 public class RankingDialog extends JDialog {
 
 	private JPanel contentPane;
+	private RankEventImpl rankEventImpl;
 
 	public RankingDialog(int x, int y) {
+		
+		rankEventImpl = new RankEventImpl();
 		
 		setUndecorated(true);
 		setModal(true);
 		setBounds(x + 7, y + 30, 1185, 762);
-		setBackground(new Color(0, 0, 0, 100));
+//		setBackground(new Color(0, 0, 0, 100));
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setOpaque(false);

@@ -1,41 +1,55 @@
 package database.dblist;
 
 public class Rank {
-	private int rankId;
+	
 	private String nickname;
 	private int score;
-	public Rank(int rankId, String nickname, int score) {
-		super();
-		this.rankId = rankId;
-		this.nickname = nickname;
-		this.score = score;
-	}
-	public Rank(String nickname, int score) {
+	private int userinfoId;
+	private int userid;
+	
+	public Rank(String nickname, int score, int userinfoId, int userid) {
 		super();
 		this.nickname = nickname;
 		this.score = score;
+		this.userinfoId = userinfoId;
+		this.userid = userid;
 	}
-	public int getRankId() {
-		return rankId;
-	}
-	public void setRankId(int rankId) {
-		this.rankId = rankId;
-	}
+
 	public String getNickname() {
 		return nickname;
 	}
+
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+
 	public int getScore() {
 		return score;
 	}
+
 	public void setScore(int score) {
 		this.score = score;
 	}
+
+	public int getUserinfoId() {
+		return userinfoId;
+	}
+
+	public void setUserinfoId(int userinfoId) {
+		this.userinfoId = userinfoId;
+	}
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
 	@Override
 	public String toString() {
-		return "rank [rankId=" + rankId + ", nickname=" + nickname + ", score=" + score + "]";
+		return "Rank [" + "nickname=" + nickname + ", score=" + score + ", userinfoId=" + userinfoId
+				+ ", userid=" + userid + "]";
 	}
-	
 }

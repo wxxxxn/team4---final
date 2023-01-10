@@ -65,17 +65,16 @@ public class SelectDB {
 		return list;
 	}
 	
-	public List<Rank> selectRank() {
+	public List<Rank> selectRank(int userinfoId, int userid) {
 		List<Rank> list = new ArrayList<>();
 		String sql = "SELECT * FROM team4.rank";
 		try (Connection conn = ConnectionProvider.makeConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql)) {
 			try (ResultSet rs = stmt.executeQuery()) {
 				while(rs.next()) {
-					int rankId = rs.getInt("rankId");
 					String nickname = rs.getString("nickname");
 					int score = rs.getInt("score");
-					list.add(new Rank(rankId, nickname, score));
+					list.add(new Rank(nickname, score, userinfoId, userid));
 				}
 				return list;
 			}
