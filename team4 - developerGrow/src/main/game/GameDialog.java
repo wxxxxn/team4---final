@@ -47,9 +47,9 @@ public class GameDialog extends JDialog {
 		getContentPane().add(firstGameBtn);
 		
 		JButton secondGameBtn = new JButton();
-		URL second = classloader.getResource("images/btn_img/dodoBtn.png");
+		URL second = classloader.getResource("images/btn_img/difPictureBtn.png");
 		ImageIcon secondGame = new ImageIcon(second);
-		URL secondPush = classloader.getResource("images/btn_img/dodoPush.png");
+		URL secondPush = classloader.getResource("images/btn_img/difPicturePushBtn.png");
 		ImageIcon secondPushGame = new ImageIcon(secondPush);
 		secondGameBtn.setIcon(secondGame);
 		secondGameBtn.setPressedIcon(secondPushGame);
