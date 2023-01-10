@@ -44,6 +44,7 @@ public class GameControllerImpl implements GameController {
 			if (((minutes % 60) % 10) == 0) {
 				saveUserInfoData();
 				saveUserProjcet();
+				saveRanking();
 			}
 			checkProject();
 		}
