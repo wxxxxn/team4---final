@@ -99,14 +99,13 @@ public RankerInfo searchRankerInfo(int userInfoId, String userNickname) {
 			
 			ResultSet rs = stmt.executeQuery();
 			
-			rs.next();
-			int date = rs.getInt("ui.date");
-			int time = rs.getInt("ui.time");
-			int usedCiga = rs.getInt("ui.usedciga");
-			
-			RankerInfo rankerInfo = new RankerInfo(date, time, usedCiga);
-			return rankerInfo;
-			
+			if (rs.next()) {
+				int date = rs.getInt("ui.date");
+				int time = rs.getInt("ui.time");
+				int usedCiga = rs.getInt("ui.usedciga");
+				RankerInfo rankerInfo = new RankerInfo(date, time, usedCiga);
+				return rankerInfo;
+			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
