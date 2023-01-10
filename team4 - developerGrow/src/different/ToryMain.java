@@ -61,6 +61,10 @@ public class ToryMain extends JFrame {
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBounds(200, 100, 1000, 600);
+//		setVisible(true);
+	}
+	
+	public void showGUI() {
 		setVisible(true);
 	}
 
@@ -123,9 +127,12 @@ public class ToryMain extends JFrame {
 				right.repaint();
 			}
 		}
+		
 	}
 
-	public static void main(String[] args) {
-		new ToryMain("틀린그림찾기");
-	}// main
+	
+	
+//	public static void main(String[] args) {
+//		new ToryMain("틀린그림찾기");
+//	}// main
 }// end

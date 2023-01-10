@@ -9,6 +9,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
+import different.Tory;
+import different.ToryMain;
 import du.dugame;
 
 public class GameDialog extends JDialog {
@@ -44,9 +46,32 @@ public class GameDialog extends JDialog {
 		});
 		getContentPane().add(firstGameBtn);
 		
-		JButton secondGameBtn = new JButton("2");
+		JButton secondGameBtn = new JButton();
+		URL second = classloader.getResource("images/btn_img/dodoBtn.png");
+		ImageIcon secondGame = new ImageIcon(second);
+		URL secondPush = classloader.getResource("images/btn_img/dodoPush.png");
+		ImageIcon secondPushGame = new ImageIcon(secondPush);
+		secondGameBtn.setIcon(secondGame);
+		secondGameBtn.setPressedIcon(secondPushGame);
+		secondGameBtn.setBorderPainted(false);
+		secondGameBtn.setContentAreaFilled(false);
+		secondGameBtn.setBackground(new Color(255, 0, 0, 0));
 		secondGameBtn.setBounds(700, 200, 100, 50);
+		secondGameBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				ToryMain torymain = new ToryMain("");
+				
+				dispose();
+				torymain.showGUI();			
+			}
+		});
 		getContentPane().add(secondGameBtn);
+		
+		
+		
+		
 		
 		JButton thirdGameBtn = new JButton("3");
 		thirdGameBtn.setBounds(400, 400, 100, 50);
