@@ -37,9 +37,16 @@ public class SignUpDialog extends JDialog  {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color (255, 0, 0, 0));
-		panel.setBounds(357, 73, 410, 330);
+		panel.setBounds(0, 0, 984, 463);
 		dialog.getContentPane().add(panel);
 		panel.setLayout(null);
+		
+		JLabel label = new JLabel("");
+		URL URLSignBackImage = classLoader.getResource("images/back_img/SignBackground.png");
+		ImageIcon SignBackIcon = new ImageIcon(URLSignBackImage);
+		label.setIcon(SignBackIcon);
+		label.setBounds(0, 0, 984, 463);
+		
 		
 		// 중복확인버튼
 		JButton btnIdCheck = new JButton("");
@@ -49,7 +56,7 @@ public class SignUpDialog extends JDialog  {
 		ImageIcon duplicatePushBtnIcon = new ImageIcon(URLduplicatePushImage);
 		btnIdCheck.setIcon(duplicateBtnIcon);
 		btnIdCheck.setPressedIcon(duplicatePushBtnIcon);
-		btnIdCheck.setBounds(313, 20, 97, 26);
+		btnIdCheck.setBounds(633, 102, 97, 26);
 		btnIdCheck.setBorderPainted(false);
 		btnIdCheck.setOpaque(false);
 		btnIdCheck.setBackground(new Color(255, 0, 0, 0));
@@ -61,42 +68,44 @@ public class SignUpDialog extends JDialog  {
 		btnNickCheck.setBorderPainted(false);
 		btnNickCheck.setOpaque(false);
 		btnNickCheck.setBackground(new Color(255, 0, 0, 0));
-		btnNickCheck.setBounds(313, 102, 97, 26);
+		btnNickCheck.setBounds(633, 169, 97, 26);
 		panel.add(btnNickCheck);
 		
 		lblIdCheck = new JLabel("");
 		lblIdCheck.setForeground(Color.RED);
-		lblIdCheck.setBounds(216, 20, 57, 26);
+		lblIdCheck.setBounds(564, 102, 57, 26);
+		lblIdCheck.setOpaque(false);
+		lblIdCheck.setBackground(new Color(255, 0, 0, 0));
 		panel.add(lblIdCheck);
 		
 		idField = new JTextField();
-		idField.setBounds(67, 20, 116, 28);
+		idField.setBounds(436, 102, 116, 28);
 		panel.add(idField);
 		idField.setColumns(10);
 		
 		nameField = new JTextField();
 		nameField.setColumns(10);
-		nameField.setBounds(67, 100, 116, 28);
+		nameField.setBounds(436, 169, 116, 28);
 		panel.add(nameField);
 		
 		passwordChkField = new JTextField();
 		passwordChkField.setColumns(10);
-		passwordChkField.setBounds(67, 183, 116, 28);
+		passwordChkField.setBounds(436, 255, 116, 28);
 		panel.add(passwordChkField);
 		
 		passwordField = new JTextField();
 		passwordField.setColumns(10);
-		passwordField.setBounds(67, 275, 116, 28);
+		passwordField.setBounds(436, 346, 116, 28);
 		panel.add(passwordField);
 		
 		lblNickCheck = new JLabel("");
 		lblNickCheck.setForeground(Color.RED);
-		lblNickCheck.setBounds(216, 110, 57, 15);
+		lblNickCheck.setBounds(564, 169, 57, 28);
 		panel.add(lblNickCheck);
 		
 		lblPwCheck = new JLabel("");
 		lblPwCheck.setForeground(Color.RED);
-		lblPwCheck.setBounds(216, 281, 57, 15);
+		lblPwCheck.setBounds(564, 346, 166, 28);
 		panel.add(lblPwCheck);
 		
 //		JLabel lblNewLabel = new JLabel("회원가입");
@@ -179,7 +188,7 @@ public class SignUpDialog extends JDialog  {
 				}
 			}
 		});
-		dialog.getContentPane().add(okbtn);
+		panel.add(okbtn);
 		
 		JButton CancelBtn = new JButton("");
 		URL URLCancelImage = classLoader.getResource("images/btn_img/cancelBtnImage.png");
@@ -200,14 +209,9 @@ public class SignUpDialog extends JDialog  {
 			}
 		});
 		
-		dialog.getContentPane().add(CancelBtn);
+		panel.add(CancelBtn);
 		
-		JLabel label = new JLabel("");
-		URL URLSignBackImage = classLoader.getResource("images/back_img/SignBackground.png");
-		ImageIcon SignBackIcon = new ImageIcon(URLSignBackImage);
-		label.setIcon(SignBackIcon);
-		label.setBounds(0, 0, 984, 463);
-		dialog.getContentPane().add(label);
+		panel.add(label);
 		
 		dialog.setBounds(x + 8, y + 30, 984, 463);
 		dialog.setUndecorated(true);
