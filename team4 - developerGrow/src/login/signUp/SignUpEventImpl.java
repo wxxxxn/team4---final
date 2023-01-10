@@ -16,6 +16,9 @@ import database.util.ConnectionProvider;
 public class SignUpEventImpl {
 
 	private SignUpDialog signUpDialog;
+	private JLabel lblIdCheck;
+	private JLabel lblNickCheck;
+	private JLabel lblPwCheck;
 
 	public SignUpEventImpl(SignUpDialog signUpDialog) {
 		this.signUpDialog = signUpDialog;
@@ -102,7 +105,7 @@ public class SignUpEventImpl {
 
 	public void idCheck() {
 		
-		JLabel lblIdCheck = signUpDialog.getLblIdCheck();
+		lblIdCheck = signUpDialog.getLblIdCheck();
 		String testId = signUpDialog.getIdField().getText();
 		String userId = signUpDialog.getUserId();
 
@@ -120,7 +123,7 @@ public class SignUpEventImpl {
 
 	public void nickNameCheck() {
 		
-		JLabel lblNickCheck = signUpDialog.getLblNickCheck();
+		lblNickCheck = signUpDialog.getLblNickCheck();
 		String nick = signUpDialog.getNick();
 		String testNick = signUpDialog.getNameField().getText();
 		
@@ -140,7 +143,7 @@ public class SignUpEventImpl {
 
 		JTextField passwordField = signUpDialog.getPasswordField();
 		JTextField passwordChkField = signUpDialog.getPasswordChkField();
-		JLabel lblPwCheck = signUpDialog.getLblPwCheck();
+		lblPwCheck = signUpDialog.getLblPwCheck();
 		String userPw = signUpDialog.getUserPw();
 		String testPw = passwordField.getText();
 		String testPwCheck = passwordChkField.getText();
@@ -156,4 +159,29 @@ public class SignUpEventImpl {
 			userPw = null;
 		}
 	}
+
+	public JLabel getLblIdCheck() {
+		return lblIdCheck;
+	}
+
+	public void setLblIdCheck(JLabel lblIdCheck) {
+		this.lblIdCheck = lblIdCheck;
+	}
+
+	public JLabel getLblNickCheck() {
+		return lblNickCheck;
+	}
+
+	public void setLblNickCheck(JLabel lblNickCheck) {
+		this.lblNickCheck = lblNickCheck;
+	}
+
+	public JLabel getLblPwCheck() {
+		return lblPwCheck;
+	}
+
+	public void setLblPwCheck(JLabel lblPwCheck) {
+		this.lblPwCheck = lblPwCheck;
+	}
+	
 }

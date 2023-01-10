@@ -165,12 +165,17 @@ public class SignUpDialog extends JDialog  {
 				userPw = passwordField.getText();
 				nick = nameField.getText();
 				
-				if ((userPw != null) && (userId != null) && (nick != null)) {
-					signUp.signUp(userId, userPw, nick);
-					dialog.dispose();
-				} else {
-					new JOptionPane();
-					JOptionPane.showMessageDialog(null, "가입 정보를 다시 확인해주세요. ");
+				try {
+					if ( signUp.getLblIdCheck().getText().equals("허용")
+							&& signUp.getLblNickCheck().getText().equals("허용")
+							&& signUp.getLblPwCheck().getText().equals("일치") ) {
+						signUp.signUp(userId, userPw, nick);
+						dialog.dispose();
+					} else {
+						new JOptionPane();	
+						JOptionPane.showMessageDialog(null, "가입 정보를 다시 확인해주세요. ");
+					}
+				} catch (NullPointerException e1) {
 				}
 			}
 		});
