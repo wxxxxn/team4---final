@@ -57,7 +57,7 @@ public class StoreDialog extends JDialog {
 
 		skills = new SkillPanel[5];
 		for (int i = 0; i < skills.length; i++) {
-			SkillPanel itemPanel = new SkillPanel(mainFrame);
+			SkillPanel itemPanel = new SkillPanel(storeEventImpl);
 			skills[i] = itemPanel;
 			storeEventImpl.inputSkillInfo(i, skills[i]);
 			itemsPanel.add(skills[i]);
