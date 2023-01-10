@@ -19,9 +19,6 @@ import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import database.controllDB.InsertDB;
-import database.controllDB.SelectDB;
-import database.controllDB.UpdateDB;
 import database.dblist.CigaLog;
 import database.dblist.Project;
 import database.dblist.SkillList;
@@ -29,8 +26,6 @@ import database.dblist.User;
 import database.dblist.UserInfo;
 import database.dblist.UserProject;
 import database.dblist.UserSkill;
-import gui.RankingDialog;
-import gui.SettingDialog;
 import guiDesign.ImagePanel;
 import guiDesign.Methods;
 import login.LoginFrame;
@@ -39,6 +34,8 @@ import main.active.ActiveEventImpl;
 import main.minigame.GameDialog;
 import main.project.ProjectDialog;
 import main.project.ProjectEventImpl;
+import main.ranking.RankingDialog;
+import main.setting.SettingDialog;
 import main.store.StoreDialog;
 import progressbar.ProgressbarEvent;
 

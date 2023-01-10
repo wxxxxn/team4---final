@@ -185,7 +185,7 @@ public class SelectDB {
 					boolean complete = rs.getBoolean("complete");
 					int lastHour = rs.getInt("lastHour");
 					int lastMin = rs.getInt("lastMin");
-					list.add(new UserProject(projcetId, userId, infoId, id, proceeding, complete, lastHour, lastMin));
+					list.add(new UserProject(id, userId, infoId, projcetId, proceeding, complete, lastHour, lastMin));
 				}
 				return list;
 			}
