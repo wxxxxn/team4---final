@@ -6,7 +6,6 @@ import java.net.URL;
 
 import javax.swing.*;
 
-import different.ToryMain.CustomMouseAdapter;
 
 public class Hide extends JFrame {
 
@@ -37,7 +36,7 @@ public class Hide extends JFrame {
 
 		JLabel leftimg = new JLabel("");
 		ClassLoader classLoader = getClass().getClassLoader();
-		URL hiding = classLoader.getResource("images.dif_img/1234.PNG");
+		URL hiding = classLoader.getResource("images/dif_img/1234.PNG");
 		leftimg.setIcon(new ImageIcon(hiding));
 		leftimg.setBounds(29, 22, 631, 883);
 		center.add(leftimg);
@@ -55,6 +54,10 @@ public class Hide extends JFrame {
 	 * @param p
 	 * @return
 	 */
+	public void showGUI() {
+		setVisible(true);
+	}
+	
 	public boolean isRangeof(int index, Point p) {
 		// 포인트 X좌표를 입력받아 pointX로 저장
 		int pointX = p.x;
@@ -65,6 +68,8 @@ public class Hide extends JFrame {
 				&& (pointY >= imageY[index] - range) && (pointY <= imageY[index] + range);
 	}// isRangeof()
 
+	
+	
 	class CustomMouseAdapter extends MouseAdapter {
 		public void mouseReleased(MouseEvent e) {
 			Point p = e.getPoint();
@@ -125,7 +130,4 @@ public class Hide extends JFrame {
 		}
 	}
 
-	public static void main(String[] args) {
-		new Hide("숨은그림찾기");
-	}// main
 }// end

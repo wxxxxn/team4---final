@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
+import main.minigame.different.Hide;
 import main.minigame.different.ToryMain;
 import main.minigame.du.dugame;
 
@@ -72,9 +73,31 @@ public class GameDialog extends JDialog {
 		
 		
 		
-		JButton thirdGameBtn = new JButton("3");
+		JButton thirdGameBtn = new JButton();
+		URL third = classloader.getResource("images/btn_img/difPictureBtn.png");
+		ImageIcon thirdGame = new ImageIcon(third);
+		URL thirdPush = classloader.getResource("images/btn_img/difPicturePushBtn.png");
+		ImageIcon thirdPushGame = new ImageIcon(thirdPush);
+		thirdGameBtn.setIcon(thirdGame);
+		thirdGameBtn.setPressedIcon(thirdPushGame);
+		thirdGameBtn.setBorderPainted(false);
+		thirdGameBtn.setContentAreaFilled(false);
+		thirdGameBtn.setBackground(new Color(255, 0, 0, 0));
 		thirdGameBtn.setBounds(400, 400, 100, 50);
+		thirdGameBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Hide hide = new Hide("");
+				dispose();
+				hide.showGUI();
+			}
+		});
 		getContentPane().add(thirdGameBtn);
+		
+		
+		
+		
 		
 		JButton FourthGameBtn = new JButton("4");
 		FourthGameBtn.setBounds(700, 400, 100, 50);
