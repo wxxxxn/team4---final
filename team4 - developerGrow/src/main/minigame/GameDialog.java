@@ -9,11 +9,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
+import main.minigame.different.BulletGame;
 import main.minigame.different.Hide;
 import main.minigame.different.ToryMain;
 import main.minigame.du.dugame;
 
 public class GameDialog extends JDialog {
+	int score;
+	
 	public GameDialog(int x, int y) {
 		
 		ClassLoader classloader = getClass().getClassLoader();
@@ -114,8 +117,10 @@ public class GameDialog extends JDialog {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				BulletGame bulletGame = new BulletGame(GameDialog.this);
+				dispose();
+				bulletGame.setVisible(true);
+				System.out.println(score);
 			}
 		});
 		getContentPane().add(forthGameBtn);
@@ -145,5 +150,11 @@ public class GameDialog extends JDialog {
 	
 	public void showGUI() {
 		setVisible(true);
+	}
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
 	}
 }
