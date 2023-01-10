@@ -74,9 +74,9 @@ public class GameDialog extends JDialog {
 		
 		
 		JButton thirdGameBtn = new JButton();
-		URL third = classloader.getResource("images/btn_img/difPictureBtn.png");
+		URL third = classloader.getResource("images/btn_img/hideBtn.png");
 		ImageIcon thirdGame = new ImageIcon(third);
-		URL thirdPush = classloader.getResource("images/btn_img/difPicturePushBtn.png");
+		URL thirdPush = classloader.getResource("images/btn_img/hideBtnpush.png");
 		ImageIcon thirdPushGame = new ImageIcon(thirdPush);
 		thirdGameBtn.setIcon(thirdGame);
 		thirdGameBtn.setPressedIcon(thirdPushGame);
@@ -99,9 +99,28 @@ public class GameDialog extends JDialog {
 		
 		
 		
-		JButton FourthGameBtn = new JButton("4");
-		FourthGameBtn.setBounds(700, 400, 100, 50);
-		getContentPane().add(FourthGameBtn);
+		JButton forthGameBtn = new JButton();
+		URL forth = classloader.getResource("images/btn_img/gunBtn.png");
+		ImageIcon forthGame = new ImageIcon(forth);
+		URL forthPush = classloader.getResource("images/btn_img/gunBtnpush.png");
+		ImageIcon forthPushGame = new ImageIcon(forthPush);
+		forthGameBtn.setIcon(forthGame);
+		forthGameBtn.setPressedIcon(forthPushGame);
+		forthGameBtn.setBorderPainted(false);
+		forthGameBtn.setContentAreaFilled(false);
+		forthGameBtn.setBackground(new Color(255, 0, 0, 0));
+		forthGameBtn.setBounds(700, 400, 100, 50);
+		forthGameBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		getContentPane().add(forthGameBtn);
+		
+		
 		
 		JButton closeButton = new JButton();
 		URL close = classloader.getResource("images/btn_img/closeBtnImage.png");
