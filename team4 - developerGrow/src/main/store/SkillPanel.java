@@ -3,17 +3,21 @@ package main.store;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
+
+import main.MainFrame;
 
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.URL;
 
-public class SkillPanel extends JPanel{
+public class SkillPanel extends JPanel implements MouseListener{
 
 	private JLabel imageLabel;
 	private JLabel SkillNameLabel;
@@ -21,8 +25,11 @@ public class SkillPanel extends JPanel{
 	private JLabel levelLabel;
 	private JLabel priceLabel;
 	private int level = 0;
+	private MainFrame mainFrame;
 
-	public SkillPanel() {
+	public SkillPanel(MainFrame mainFrame) {
+		
+		this.mainFrame = mainFrame;
 		EtchedBorder eborder = new EtchedBorder(EtchedBorder.RAISED);
 		
 		setBorder(eborder);
@@ -92,6 +99,7 @@ public class SkillPanel extends JPanel{
 		cigaImageLabel.setBounds(261, 10, 23, 23);
 		add(cigaImageLabel);
 		
+		addMouseListener(this);
 	}
 	
 	public JLabel getImageLabel() {
@@ -119,4 +127,45 @@ public class SkillPanel extends JPanel{
 	public void setLevel(int level) {
 		this.level = level;
 	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		
+		int allCiga = mainFrame.getCiga();
+		String priceStr = priceLabel.getText();
+		int priceInt = Integer.parseInt(priceStr.substring(0, priceStr.length() - 1));
+
+		if (allCiga >= priceInt) {
+			level++;
+			levelLabel.setText("LV." + level);
+			
+			int currentCiga = allCiga - priceInt;
+			mainFrame.setCiga(currentCiga);
+			mainFrame.getUserInfo().setCiga(currentCiga);
+			mainFrame.setUsedCiga(mainFrame.getUsedCiga() + priceInt);
+			mainFrame.getNumOfcigalbl().setText(String.valueOf(currentCiga));
+			
+			System.out.println("지금 담배 : " + mainFrame.getCiga());
+			System.out.println("디비 시가 : " + mainFrame.getUserInfo().getCiga());
+			System.out.println("핀 담배 : " + mainFrame.getUsedCiga());
+			
+			mainFrame.revalidate();
+			mainFrame.repaint();
+		} else {
+			JOptionPane.showMessageDialog(null, "아 담배 없다고~", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		setBackground(Color.pink);		
+	}
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		setBackground(Color.LIGHT_GRAY);		
+	}
+	@Override
+	public void mousePressed(MouseEvent arg0) {}
+	@Override
+	public void mouseReleased(MouseEvent arg0) {}
 }

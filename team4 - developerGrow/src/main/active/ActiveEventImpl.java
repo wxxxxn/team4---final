@@ -57,7 +57,6 @@ public class ActiveEventImpl implements ActiveEvent {
 
 					publish(count);
 
-					System.out.println(count);
 					count++;
 					Thread.sleep(250);
 				}

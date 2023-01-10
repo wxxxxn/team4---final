@@ -4,7 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.URL;
 
@@ -25,19 +26,19 @@ public class StoreDialog extends JDialog {
 	private StoreEventImpl storeEventImpl;
 
 	public StoreDialog(MainFrame mainFrame) {
-		
+
 		storeEventImpl = new StoreEventImpl(mainFrame);
-		
+
 		setUndecorated(true);
 		setModal(true);
 		contentPane = new JPanel();
 		setBackground(new Color(0, 0, 0, 100));
-		
+
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setBackground(new Color(0, 0, 0, 0));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel storeLabel = new JLabel("스킬 목록");
 		storeLabel.setForeground(Color.BLACK);
 		storeLabel.setBackground(Color.WHITE);
@@ -45,7 +46,7 @@ public class StoreDialog extends JDialog {
 		storeLabel.setFont(new Font("HY목각파임B", Font.BOLD, 40));
 		storeLabel.setBounds(12, 10, 1176, 50);
 		contentPane.add(storeLabel);
-		
+
 		JPanel itemsPanel = new JPanel();
 		itemsPanel.setForeground(new Color(255, 255, 255));
 		itemsPanel.setOpaque(true);
@@ -53,52 +54,23 @@ public class StoreDialog extends JDialog {
 		itemsPanel.setBounds(308, 70, 560, 619);
 		contentPane.add(itemsPanel);
 		itemsPanel.setLayout(new GridLayout(5, 0, 10, 25));
-		
+
 		skills = new SkillPanel[5];
 		for (int i = 0; i < skills.length; i++) {
-			SkillPanel itemPanel = new SkillPanel();
+			SkillPanel itemPanel = new SkillPanel(mainFrame);
 			skills[i] = itemPanel;
 			storeEventImpl.inputSkillInfo(i, skills[i]);
 			itemsPanel.add(skills[i]);
-			
-			skills[i].addMouseListener(new MouseListener() {
-				
-				@Override
-				public void mouseReleased(MouseEvent e) {
-				}
-				
-				@Override
-				public void mousePressed(MouseEvent e) {
-				}
-				
-				@Override
-				public void mouseExited(MouseEvent e) {
-				}
-				
-				@Override
-				public void mouseEntered(MouseEvent e) {
-				}
-				
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					itemPanel.setLevel(itemPanel.getLevel() + 1);
-					System.out.println(itemPanel.getLevel());
-					itemPanel.getLevelLabel().setText("LV." + itemPanel.getLevel());
-					
-					mainFrame.setUsedCiga(mainFrame.getUsedCiga() + Integer.parseInt(itemPanel.getPriceLabel().getText()));
-					System.out.println(mainFrame.getUsedCiga());
-				}
-			});
 		}
-		
+
 		ClassLoader classLoader = getClass().getClassLoader();
-		
+
 		URL URLCloseButtonImage = classLoader.getResource("images/btn_img/closeBtnImage.png");
 		ImageIcon CloseButtonIcon = new ImageIcon(URLCloseButtonImage);
-		
+
 		URL URLCloseButtonPushImage = classLoader.getResource("images/btn_img/closeBtnPushImage.png");
 		ImageIcon CloseButtonPushIcon = new ImageIcon(URLCloseButtonPushImage);
-		
+
 		JButton closeButton = new JButton("");
 		closeButton.setBounds(488, 701, 200, 50);
 		closeButton.setIcon(CloseButtonIcon);
@@ -106,23 +78,23 @@ public class StoreDialog extends JDialog {
 		closeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				for (int i = 0; i < skills.length; i++) {
 					mainFrame.getUserSkillList().get(i).setSkillLevel(skills[i].getLevel());
 				}
-				
+
 				storeEventImpl.updateLevelToDB();
 				dispose();
 			}
 		});
 		contentPane.add(closeButton);
 	}
-	
+
 	public void showGUI() {
 		setVisible(true);
 	}
 
 	public SkillPanel[] getItems() {
 		return skills;
-	}	
+	}
 }

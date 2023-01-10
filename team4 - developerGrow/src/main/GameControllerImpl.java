@@ -46,8 +46,6 @@ public class GameControllerImpl implements GameController {
 			if (((minutes % 60) % 10) == 0) {
 				saveUserInfoData();
 				saveUserProjcet();
-				System.out.println("userInfo, userProject 저장");
-				System.out.println(mainFrame.getUserProjectList());
 			}
 		}
 	};
@@ -114,6 +112,7 @@ public class GameControllerImpl implements GameController {
 			mainFrame.getHealthbar().setValue(userInfo.getHealth());
 			mainFrame.getStressbar().setValue(userInfo.getStress());
 			mainFrame.getNumOfcigalbl().setText(String.valueOf(userInfo.getCiga()));
+			mainFrame.setCiga(userInfo.getCiga());
 			mainFrame.setUsedCiga(userInfo.getUsedCiga());
 			mainFrame.setUserId(userInfo.getUserId());
 			applyProject();
@@ -132,7 +131,7 @@ public class GameControllerImpl implements GameController {
 		int hp = mainFrame.getHpbar().getValue();
 		int health = mainFrame.getHealthbar().getValue();
 		int stress = mainFrame.getStressbar().getValue();
-		int ciga = Integer.parseInt(mainFrame.getNumOfcigalbl().getText());
+		int ciga = mainFrame.getCiga();
 		int usedCiga = mainFrame.getUsedCiga();
 		boolean gameover = mainFrame.getUserInfo().isGameover();
 
@@ -170,6 +169,5 @@ public class GameControllerImpl implements GameController {
 			mainFrame.getUserProjectList().get(searchProject).setLastMin(Integer.valueOf(mainFrame.getProjectMinute().getText()));
 		}
 		int[] result = updateDB.updateUserProject(mainFrame.getUserProjectList());
-		System.out.println(Arrays.toString(result));
 	}
 }

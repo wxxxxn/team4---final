@@ -94,12 +94,9 @@ public class MainFrame extends JFrame {
 	private UserInfo userInfo;
 	private int infoId;
 	private int userId;
+	private int ciga;
 	private int usedCiga;
 	private List<User> userList;
-
-	
-
-	
 
 	public MainFrame(int userId) {
 		gameControllerImpl.timeController();
@@ -621,4 +618,11 @@ public class MainFrame extends JFrame {
 		return projectEventImpl;
 	}
 	
+	public int getCiga() {
+		return ciga;
+	}
+
+	public void setCiga(int ciga) {
+		this.ciga = ciga;
+	}
 }

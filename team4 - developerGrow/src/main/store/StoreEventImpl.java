@@ -37,4 +37,6 @@ public class StoreEventImpl implements StoreEvent {
 
 		new UpdateDB().updateUserSkill(userSkillList);
 	}
+	
+	
 }
