@@ -73,7 +73,7 @@ class MiniGame extends JDialog {
 		setLayout(null);;
 		
 		life = true;
-		size = 8;
+		size = 20;
 		score = 0;
 		time = 0;
 		
@@ -83,10 +83,9 @@ class MiniGame extends JDialog {
 		lbl = new ArrayList<>();
 		bul = new ArrayList<>();
 		
-//		create(1);
-		create(50);
-		createT(20, 10000);
-		createT(20, 20000);
+		create(30);
+		createT(30, 10000);
+		createT(30, 20000);
 		move(gameDialog);
 		mouse();
 		
@@ -124,7 +123,10 @@ class MiniGame extends JDialog {
 							&& 0 <= pt.getLocation().y - 300 && pt.getLocation().y - 300 < y) {
 						score += 1;
 					} else {
-						score -= 4;
+						score -= 3;
+						if (score < 0) {
+							score = 0;
+						}
 					}
 					
 					lblScore.setText(String.valueOf(score));
@@ -226,7 +228,17 @@ class BulletScoreDialog extends JDialog {
 		setLayout(null);;
 		
 		JLabel lbl = new JLabel(score + "점 입니다. ");
-		lbl.setBounds(70, 30, 80, 20);
+		if(score < 100) {
+			lbl.setBounds(70, 30, 80, 20);
+		} else if (score < 1000) {
+			lbl.setBounds(65, 30, 100, 20);
+		} else if (score < 10000) {
+			lbl.setBounds(60, 30, 120, 20);
+		} else if (score < 100000) {
+			lbl.setBounds(55, 30, 140, 20);
+		} else {
+			lbl.setBounds(50, 30, 160, 20);
+		}
 		add(lbl);
 		
 		JButton btn = new JButton("확인");
