@@ -9,11 +9,14 @@ import main.MainFrame;
 public class ActiveEventImpl implements ActiveEvent {
 
 	private int count;
+	private boolean isCoupang = false;
 	private SwingWorker<Void, Integer> swingWorker;
 
 	private MainFrame mainFrame;
 	private Characters characters;
-
+	
+	
+	
 	public ActiveEventImpl(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
 		characters = new Characters(mainFrame);
@@ -67,7 +70,12 @@ public class ActiveEventImpl implements ActiveEvent {
 			@Override
 			protected void process(List<Integer> chunks) {
 				super.process(chunks);
+				
 				if (count >= time) {
+					if (isCoupang) {
+						getPaidCoupang();
+						isCoupang = false;
+					}
 					mainFrame.remove(character);
 					mainFrame.remove(active);
 					mainFrame.getActivitybtn().setEnabled(true);
@@ -126,6 +134,20 @@ public class ActiveEventImpl implements ActiveEvent {
 		mainFrame.getPb().stressbarIncrease(800);
 		mainFrame.getPb().healthbarDecreas(800);
 	}
+	
+	@Override
+	public void getPaidCoupang() {
+		
+		int currentCiga = mainFrame.getCiga();
+		int getPaid = currentCiga + 20;
+		
+		mainFrame.setCiga(getPaid);
+		mainFrame.getUserInfo().setCiga(getPaid);
+		mainFrame.getNumOfcigalbl().setText(String.valueOf(getPaid));
+		
+		System.out.println(mainFrame.getCiga());
+		System.out.println(mainFrame.getUserInfo().getCiga());
+	}
 
 	@Override
 	public void defaultProgressBar() {
@@ -140,5 +162,9 @@ public class ActiveEventImpl implements ActiveEvent {
 
 	public Characters getCharacters() {
 		return characters;
+	}
+
+	public void setCoupang(boolean isCoupang) {
+		this.isCoupang = isCoupang;
 	}
 }

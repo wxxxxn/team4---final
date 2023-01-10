@@ -68,11 +68,13 @@ public class ActiveDialog extends JDialog {
 	public void active (int num) {
 		switch (num) {
 			case 0:
+				activeEventImpl.setCoupang(true);
 				activeEventImpl.clearlbl();
 				activeEventImpl.getCharacters().coupangCharacter();
 				activeEventImpl.coupangProgressBar();
-				activeEventImpl.showActiveCharacter(360);
+				activeEventImpl.showActiveCharacter(10);
 				activeEventImpl.getSwingWorker().execute();
+				
 				break;
 			case 1:
 				activeEventImpl.clearlbl();

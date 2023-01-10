@@ -10,5 +10,6 @@ public interface ActiveEvent {
 	void eatProgressBar();
 	void resumeProgressBar();
 	void coupangProgressBar();
+	void getPaidCoupang();
 	void defaultProgressBar();
 }
