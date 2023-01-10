@@ -1,4 +1,4 @@
-package gui;
+package main.ranking;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

@@ -1,4 +1,4 @@
-package gui;
+package main.setting;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -53,8 +53,8 @@ public class SettingDialog extends JDialog {
 				
 		JButton resetbtn = new JButton();
 		resetbtn.setBounds(517, 246, 152, 45);
-		resetbtn.setIcon(convertToIcon(getClass(), "btn_setting\\reset.png", 165, 45));
-		resetbtn.setPressedIcon(convertToIcon(getClass(), "btn_setting\\resetPush.png", 165, 45));
+		resetbtn.setIcon(convertToIcon(getClass(), "images/btn_setting/reset.png", 165, 45));
+		resetbtn.setPressedIcon(convertToIcon(getClass(), "images/btn_setting/resetPush.png", 165, 45));
 		contentPane.add(resetbtn);
 		resetbtn.setOpaque(false);
 		resetbtn.setBorderPainted(false);
@@ -71,16 +71,16 @@ public class SettingDialog extends JDialog {
 		});
 		
 		logoutbtn.setBounds(517, 321, 152, 45);
-		logoutbtn.setIcon(convertToIcon(getClass(), "btn_setting\\logout.png", 165, 45));
-		logoutbtn.setPressedIcon(convertToIcon(getClass(), "btn_setting\\logoutPush.png", 165, 45));
+		logoutbtn.setIcon(convertToIcon(getClass(), "images/btn_setting/logout.png", 165, 45));
+		logoutbtn.setPressedIcon(convertToIcon(getClass(), "images/btn_setting/logoutPush.png", 165, 45));
 		contentPane.add(logoutbtn);
 		logoutbtn.setOpaque(false);
 		logoutbtn.setBorderPainted(false);
 
 		JButton outbtn = new JButton();
 		outbtn.setBounds(517, 397, 152, 45);
-		outbtn.setIcon(convertToIcon(getClass(), "btn_setting\\userout.png", 165, 45));
-		outbtn.setPressedIcon(convertToIcon(getClass(), "btn_setting\\useroutPush.png", 165, 45));
+		outbtn.setIcon(convertToIcon(getClass(), "images/btn_setting/userout.png", 165, 45));
+		outbtn.setPressedIcon(convertToIcon(getClass(), "images/btn_setting/useroutPush.png", 165, 45));
 		contentPane.add(outbtn);
 		outbtn.setOpaque(false);
 		outbtn.setBorderPainted(false);
@@ -104,8 +104,8 @@ public class SettingDialog extends JDialog {
 			}
 		});
 		closebtn.setBounds(517, 543, 152, 45);
-		closebtn.setIcon(convertToIcon(getClass(), "btn_image\\closeBtnImage.png", 165, 45));
-		closebtn.setPressedIcon(convertToIcon(getClass(), "btn_image\\closeBtnPushImage.png", 165, 45));
+		closebtn.setIcon(convertToIcon(getClass(), "images/btn_img/closeBtnImage.png", 165, 45));
+		closebtn.setPressedIcon(convertToIcon(getClass(), "images/btn_img/closeBtnPushImage.png", 165, 45));
 		contentPane.add(closebtn);
 		
 		JLabel lblNewLabel_1 = new JLabel(mainFrame.getUserList().get(0).getUserNickname());

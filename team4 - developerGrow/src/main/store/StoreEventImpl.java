@@ -39,6 +39,7 @@ public class StoreEventImpl implements StoreEvent {
 		new UpdateDB().updateUserSkill(userSkillList);
 	}
 	
+	@Override
 	public void payCiga(SkillPanel skillPanel) {
 		
 		int allCiga = mainFrame.getCiga();
@@ -56,10 +57,6 @@ public class StoreEventImpl implements StoreEvent {
 			mainFrame.getUserInfo().setCiga(currentCiga);
 			mainFrame.setUsedCiga(mainFrame.getUsedCiga() + priceInt);
 			mainFrame.getNumOfcigalbl().setText(String.valueOf(currentCiga));
-			
-			System.out.println("지금 담배 : " + mainFrame.getCiga());
-			System.out.println("디비 시가 : " + mainFrame.getUserInfo().getCiga());
-			System.out.println("핀 담배 : " + mainFrame.getUsedCiga());
 			
 			mainFrame.revalidate();
 			mainFrame.repaint();
