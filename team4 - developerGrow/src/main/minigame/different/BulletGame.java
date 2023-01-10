@@ -83,17 +83,18 @@ class MiniGame extends JDialog {
 		lbl = new ArrayList<>();
 		bul = new ArrayList<>();
 		
+		lblScore = new JLabel(String.valueOf(0));
+		lblScore.setBounds(440, 5, 50, 10);
+		add(lblScore);
+		
 		create(30);
 		createT(30, 10000);
 		createT(30, 20000);
 		move(gameDialog);
 		mouse();
 		
-		lblScore = new JLabel(String.valueOf(score));
-		lblScore.setBounds(440, 5, 50, 10);
-		add(lblScore);
 		
-		setBounds(300, 300, x, y);
+		setBounds(400, 200, x, y);
 		setVisible(true);
 	}
 	
@@ -119,8 +120,8 @@ class MiniGame extends JDialog {
 						}
 					}
 
-					if (0 <= pt.getLocation().x - 300 && pt.getLocation().x - 300 < x
-							&& 0 <= pt.getLocation().y - 300 && pt.getLocation().y - 300 < y) {
+					if (0 <= pt.getLocation().x - 400 && pt.getLocation().x - 400 < x
+							&& 0 <= pt.getLocation().y - 200 && pt.getLocation().y - 200 < y) {
 						score += 1;
 					} else {
 						score -= 3;
@@ -128,7 +129,6 @@ class MiniGame extends JDialog {
 							score = 0;
 						}
 					}
-					
 					lblScore.setText(String.valueOf(score));
 				} else {
 					timer.cancel(); // 타이머 종료
@@ -149,8 +149,8 @@ class MiniGame extends JDialog {
 				if(life){ // 수행
 					pt = MouseInfo.getPointerInfo();
 					for (int i = 0; i < bul.size(); i++) {
-						if (bul.get(i).getX() <= pt.getLocation().x - 300 && pt.getLocation().x - 300 < bul.get(i).getX() + size
-								&& bul.get(i).getY() <= pt.getLocation().y - 300 && pt.getLocation().y - 300 < bul.get(i).getY() + size) {
+						if (bul.get(i).getX() <= pt.getLocation().x - 400 && pt.getLocation().x - 400 < bul.get(i).getX() + size
+								&& bul.get(i).getY() <= pt.getLocation().y - 200 && pt.getLocation().y - 200 < bul.get(i).getY() + size) {
 							life = false;
 						}
 					}
