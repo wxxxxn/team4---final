@@ -68,6 +68,7 @@ public class ToryMain extends JFrame {
 
 //		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBounds(200, 100, 1000, 600);
+		setResizable(false);
 //		setVisible(true);
 	}
 	
