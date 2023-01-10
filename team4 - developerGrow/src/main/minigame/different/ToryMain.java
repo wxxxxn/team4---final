@@ -10,12 +10,13 @@ public class ToryMain extends JFrame {
 
 	final Tory left = new Tory("dif_img/1.jpg");
 	final Tory right = new Tory("dif_img/2.jpg");
-
+	JLabel click;
+	
 	// 틀린그림부분의 좌표값 배열
 	static int[] imageX = { 150, 278, 205, 205, 310 };
 	static int[] imageY = { 242, 242, 290, 333, 160 };
 	// 틀린부분의 범위 기본 설정값
-	static final int range = 40;
+	static final int range = 30;
 	
 	
 	public ToryMain(String string) {
@@ -33,10 +34,16 @@ public class ToryMain extends JFrame {
 		getContentPane().add(left);
 
 		ClassLoader classLoader = getClass().getClassLoader();
+		URL clickImg = classLoader.getResource("images/dif_img/check.png");
 		URL toryimg1 = classLoader.getResource("images/dif_img/1.jpg");
 		URL toryimg2 = classLoader.getResource("images/dif_img/2.png");
 		left.setLayout(null);
 
+		click = new JLabel();
+		click.setIcon(new ImageIcon(clickImg));
+		click.setSize(70, 70);
+		right.add(click);
+		
 		JLabel leftimg = new JLabel("");
 		leftimg.setBounds(6, 23, 458, 591);
 		leftimg.setIcon(new ImageIcon(toryimg1));
@@ -78,6 +85,14 @@ public class ToryMain extends JFrame {
 	}
 
 	class CustomMouseAdapter extends MouseAdapter {
+		@Override
+		public void mousePressed(MouseEvent e) {
+			int x = e.getX();
+			int y = e.getY();
+			
+			click.setLocation(x - 20, y - 20);
+		}
+
 		public void mouseReleased(MouseEvent e) {
 			Point p = e.getPoint();
 			if (isRangeof(0, p)) {
