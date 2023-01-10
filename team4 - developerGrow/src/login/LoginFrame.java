@@ -30,7 +30,6 @@ import main.MainFrame;
 
 public class LoginFrame extends JFrame {
 
-	private JFrame frame;
 	private MyTextField txtId;
 	private JButton signupbtn;
 	private JButton loginbtn;
@@ -111,23 +110,14 @@ public class LoginFrame extends JFrame {
 		add(backgourndlbl);
 		
 		loginbtn.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				LoginEventImpl login = new login.LoginEventImpl();
-				String textId = txtId.getText();
-				String textPw = passwordField.getText();
-				if (login.checkUserId(textId) != null && !textId.equals("")) {
-					if (login.checkUserPw(login.checkUserId(textId), textPw) && !textPw.equals("") && textPw != null) {
-						MainFrame mainFrame = new MainFrame(login.idValue(textId));
-						mainFrame.showGUI();
-						dispose();
-						stopSound();
-					} else {
-						JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 잘못 입력되었습니다. ");
-					}
-				} else {
-					JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 잘못 입력되었습니다. ");
+				int userId = LoginEvent.startLogin(txtId.getText(), passwordField.getText());
+				if (userId != -1) {
+					dispose();
+					stopSound();
+					MainFrame mainFrame = new MainFrame(userId);
+					mainFrame.showGUI();
 				}
 			}
 		});
@@ -138,20 +128,32 @@ public class LoginFrame extends JFrame {
 	}
 	
 	
-	public static void sound(URL file) {
+	public void sound(URL file) {
 		try {
 			AudioInputStream ais = AudioSystem.getAudioInputStream(file);
 			clip = AudioSystem.getClip();
 			clip.stop();
 			clip.open(ais);
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
 			clip.start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public static void stopSound() {
+	public void startSound() {
+		clip.start();
+	}
+	
+	public  void stopSound() {
 		clip.stop();
-		clip.close();
+	}
+
+	public MyTextField getTxtId() {
+		return txtId;
+	}
+
+	public MyPassword getPasswordField() {
+		return passwordField;
 	}
 }

@@ -176,7 +176,7 @@ public class ProgressbarEvent {
 			public void run() {
 				if (hp <= 0) {
 					System.out.println("you die");
-					DeathDialog deathDialog = new DeathDialog(mainFrame.getX(), mainFrame.getY());
+					DeathDialog deathDialog = new DeathDialog(mainFrame.getX(), mainFrame.getY(), mainFrame);
 					deathDialog.showGUI();
 				} else if (hp > 0) {
 					hp--;
@@ -198,7 +198,7 @@ public class ProgressbarEvent {
 			public void run() {
 				if (hp == 0) {
 					System.out.println("you die");
-					DeathDialog deathDialog = new DeathDialog(mainFrame.getX(), mainFrame.getY());
+					DeathDialog deathDialog = new DeathDialog(mainFrame.getX(), mainFrame.getY(), mainFrame);
 					deathDialog.showGUI();
 				}
 				if (hp < 100){
@@ -284,5 +284,19 @@ public class ProgressbarEvent {
 			}
 		};
 		timeHealth.scheduleAtFixedRate(healthTask, 0, speed);		
+	}
+
+	public Timer getTimeHp() {
+		return timeHp;
+	}
+
+	public Timer getTimeStress() {
+		return timeStress;
+	}
+
+	public Timer getTimeHealth() {
+		return timeHealth;
 	}	
+	
+	
 }

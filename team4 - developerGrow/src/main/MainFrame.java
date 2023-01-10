@@ -78,7 +78,7 @@ public class MainFrame extends JFrame {
 	
 	// progressbar
 	private ProgressbarEvent pb = new ProgressbarEvent(this);
-	private JProgressBar hpbar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
+	private JProgressBar hpbar;
 	private JProgressBar expbar;
 	private JProgressBar stressbar;
 	private JProgressBar healthbar;
@@ -101,6 +101,7 @@ public class MainFrame extends JFrame {
 	private int score;
 
 	public MainFrame(int userId) {
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		gameControllerImpl.timeController();
 
 		ClassLoader classLoader = getClass().getClassLoader();
@@ -279,6 +280,7 @@ public class MainFrame extends JFrame {
 		hplbl.setBounds(12, 5, 57, 22);
 		hppnl.add(hplbl);
 
+		hpbar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
 		hpbar.setFont(new Font("휴먼편지체", Font.PLAIN, 12));
 		hpbar.setForeground(Color.RED);
 		hpbar.setStringPainted(true);
@@ -449,7 +451,7 @@ public class MainFrame extends JFrame {
 		setVisible(true);
 	}
 
-	public static void sound(URL file) {
+	public void sound(URL file) {
 		try {
 			AudioInputStream ais1 = AudioSystem.getAudioInputStream(file);
 			clip = AudioSystem.getClip();
@@ -466,7 +468,7 @@ public class MainFrame extends JFrame {
 		return activitybtn;
 	}
 
-	public static void stopSound() {
+	public void stopSound() {
 		clip.stop();
 		clip.close();
 	}
@@ -657,5 +659,9 @@ public class MainFrame extends JFrame {
 
 	public void setUserRank(Rank userRank) {
 		this.userRank = userRank;
+	}
+
+	public GameControllerImpl getGameControllerImpl() {
+		return gameControllerImpl;
 	}
 }

@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import database.util.ConnectionProvider;
 
 public class InsertDB {
-	public int insertUser(String userId, String userPw, String nick) { // 회원가입
+	public static int insertUser(String userId, String userPw, String userNickname) {
 		String sql = "INSERT INTO team4.user (userId, userPw, userNickname) VALUES (?, ?, ?)";
 		try (Connection conn = ConnectionProvider.makeConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, userId);
 			stmt.setString(2, userPw);
-			stmt.setString(3, nick);
+			stmt.setString(3, userNickname);
 			return stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -21,7 +21,7 @@ public class InsertDB {
 		return 0;
 	}
 	
-	public int insertUserInfo(int userId) {
+	public static int insertUserInfo(int userId) {
 		String sql = "INSERT INTO team4.userinfo "
 				+ "(date, time, level, exp, hp, health, stress, ciga, usedciga, gameover, userid) "
 				+ "VALUES (0, 0, 1, 0, 100, 100, 0, 10, 0, 0, ?)";
@@ -35,7 +35,7 @@ public class InsertDB {
 		return 0;
 	}
 	
-	public int[] insertUserProject(int userId, int infoId) {
+	public static int[] insertUserProject(int userId, int infoId) {
 		String sql = "INSERT INTO team4.userProject (userId, infoId, projectId, complete, lastHour, lastMin) "
 				+ "VALUES(?, ?, ?, 0, 0, 0)";
 		try (Connection conn = ConnectionProvider.makeConnection();
@@ -54,7 +54,7 @@ public class InsertDB {
 		return null;
 	}
 	
-	public int[] insertUserSkill(int userId, int infoId) {
+	public static int[] insertUserSkill(int userId, int infoId) {
 		String sql = "INSERT INTO team4.userSkill (userId, infoId, skillId, skillLevel)"
 				+ "VALUES(?, ?, ?, 0)";
 		try (Connection conn = ConnectionProvider.makeConnection();
@@ -73,7 +73,7 @@ public class InsertDB {
 		return null;
 	}
 	
-	public int insertUserRank(int userId, int userinfoId, int score, String nickname) {
+	public static int insertUserRank(int userId, int userinfoId, int score, String nickname) {
 
 		String sql = "INSERT INTO team4.rank (nickname, score, userinfoId, userId)" + "VALUES(?, ?, ?, ?)";
 		try (Connection conn = ConnectionProvider.makeConnection();

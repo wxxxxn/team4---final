@@ -2,32 +2,28 @@ package gui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URL;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
+import database.controllDB.UpdateDB;
+import guiDesign.ImagePanel;
+import guiDesign.Methods;
 import main.MainFrame;
 
 public class DeathDialog extends JDialog {
+	private MainFrame mainFrame;
+	private ImagePanel contentPane;
 	
-	private JPanel contentPane;
-	
-	public DeathDialog(int x, int y) {
-		ClassLoader classLoader = getClass().getClassLoader();
-		URL Back = classLoader.getResource("images/back_img/DeathBackground.png");
-		ImageIcon back = new ImageIcon(Back);
-		
+	public DeathDialog(int x, int y, MainFrame mainFrame) {
+		this.mainFrame = mainFrame;
 		getContentPane().setLayout(null);
 		setUndecorated(true);
 		setModal(true);
 		setBounds(x, y, 1200, 800);
 		setBackground(new Color(0, 0, 0, 100));
 		
-		contentPane = new JPanel();
+		contentPane = new ImagePanel(Methods.converImage(getClass(), "images/back_img/DeathBackground.png"));
 		contentPane.setBounds(0, 0, 1200, 800);
 		getContentPane().add(contentPane);
 		contentPane.setLayout(null);
@@ -38,17 +34,43 @@ public class DeathDialog extends JDialog {
 		returnBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				MainFrame mainFrame = new MainFrame();
-//				mainFrame.showGUI();
-//				dispose();
+				if (mainFrame.getPb().getTimeHp() != null) {
+					mainFrame.getPb().getTimeHp().cancel();
+				}
+				if (mainFrame.getPb().getTimeStress() != null) {
+					mainFrame.getPb().getTimeStress().cancel();
+				}
+				if (mainFrame.getPb().getTimeHealth() != null) {
+					mainFrame.getPb().getTimeHealth().cancel();
+				}
+				if (mainFrame.getProjectEventImpl().getProjectTimer() != null) {
+					mainFrame.getProjectEventImpl().getProjectTimer().cancel();
+				}
+				if (mainFrame.getGameControllerImpl().getCurrentTime() != null) {
+					mainFrame.getGameControllerImpl().getCurrentTime().cancel();
+				}
+				mainFrame.getUserInfo().setGameover(true);
+				UpdateDB.updateUserInfo(mainFrame.getUserInfo());
+				int userId = mainFrame.getUserId();
+				mainFrame.stopSound();
+				mainFrame.dispose();
+				MainFrame mainFrameNew = new MainFrame(userId);
+				mainFrameNew.showGUI();
+				dispose();
 			}
 		});
-		contentPane.add(returnBtn);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(back);
-		lblNewLabel.setBounds(0, 0, 1200, 800);
-		contentPane.add(lblNewLabel);
+		JButton finishBtn = new JButton("그만하기");
+		finishBtn.setBounds(27, 698, 146, 53);
+		finishBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		
+		contentPane.add(finishBtn);
+		contentPane.add(returnBtn);
 	}
 	
 	public void showGUI() {

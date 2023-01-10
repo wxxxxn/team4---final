@@ -24,7 +24,7 @@ import database.dblist.UserSkill;
 import database.util.ConnectionProvider;
 
 public class SelectDB {
-	public List<CigaLog> selectCigaLog(int userId, int infoId) {
+	public static List<CigaLog> selectCigaLog(int userId, int infoId) {
 		List<CigaLog> list = new ArrayList<>();
 		String sql = "SELECT * FROM team4.cigaLog WHERE userId = ? AND infoId = ?";
 		try (Connection conn = ConnectionProvider.makeConnection();
@@ -45,7 +45,7 @@ public class SelectDB {
 		return list;
 	}
 	
-	public List<Project> selectProject() {
+	public static List<Project> selectProject() {
 		List<Project> list = new ArrayList<>();
 		String sql = "SELECT * FROM team4.project";
 		try (Connection conn = ConnectionProvider.makeConnection();
@@ -66,7 +66,7 @@ public class SelectDB {
 		return list;
 	}
 	
-	public List<Rank> selectRank() {
+	public static List<Rank> selectRank() {
 		List<Rank> list = new ArrayList<>();
 		String sql = "SELECT * FROM team4.rank";
 		try (Connection conn = ConnectionProvider.makeConnection();
@@ -87,7 +87,7 @@ public class SelectDB {
 		return list;
 	}	
 	
-public RankerInfo searchRankerInfo(int userInfoId, String userNickname) {
+	public static RankerInfo searchRankerInfo(int userInfoId, String userNickname) {
 		
 		String sql = "SELECT u.userNickname, ui.date, ui.time, ui.usedciga"
 				+ " FROM team4.userinfo AS ui, team4.user AS u, team4.rank AS r"
@@ -115,7 +115,7 @@ public RankerInfo searchRankerInfo(int userInfoId, String userNickname) {
 		return null;
 	}
 	
-	public List<SkillList> selectSkillList() {
+	public static List<SkillList> selectSkillList() {
 		List<SkillList> list = new ArrayList<>();
 		String sql = "SELECT * FROM team4.skillList";
 		try (Connection conn = ConnectionProvider.makeConnection();
@@ -142,7 +142,7 @@ public RankerInfo searchRankerInfo(int userInfoId, String userNickname) {
 		return list;
 	}	
 	
-	public List<User> selectUser(int id) {
+	public static List<User> selectUser(int id) {
 		List<User> list = new ArrayList<>();
 		String sql = "SELECT * FROM team4.user WHERE id = ?";
 		try (Connection conn = ConnectionProvider.makeConnection();
@@ -163,7 +163,28 @@ public RankerInfo searchRankerInfo(int userInfoId, String userNickname) {
 		return list;
 	}
 	
-	public List<UserInfo> selectUserinfo(int userId) {
+	public static List<User> selectUser(String userId) {
+		List<User> list = new ArrayList<>();
+		String sql = "SELECT * FROM team4.user WHERE userId = ?";
+		try (Connection conn = ConnectionProvider.makeConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql)) {
+			stmt.setString(1, userId);
+			try (ResultSet rs = stmt.executeQuery()) {
+				while(rs.next()) {
+					int id = rs.getInt("id");
+					String userPw = rs.getString("userPw");
+					String nickname = rs.getString("usernickname");
+					list.add(new User(id, userId, userPw, nickname));
+				}
+				return list;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public static List<UserInfo> selectUserinfo(int userId) {
 		String sql = "SELECT * FROM team4.userinfo WHERE userid = ?";
 		List<UserInfo> list = new ArrayList<>();
 		try (Connection conn = ConnectionProvider.makeConnection();
@@ -191,7 +212,7 @@ public RankerInfo searchRankerInfo(int userInfoId, String userNickname) {
 		return list;
 	}
 	
-	public UserInfo searchNowGame(List<UserInfo> list) {
+	public static UserInfo searchNowGame(List<UserInfo> list) {
 		for (int i = 0; i < list.size(); i++) {
 			if (! list.get(i).isGameover()) {
 				return list.get(i);
@@ -200,7 +221,7 @@ public RankerInfo searchRankerInfo(int userInfoId, String userNickname) {
 		return null;
 	}
 	
-	public List<UserProject> selectUserProject(int userId, int infoId) {
+	public static List<UserProject> selectUserProject(int userId, int infoId) {
 		List<UserProject> list = new ArrayList<>();
 		String sql = "SELECT * FROM userProject WHERE userId = ? AND infoId = ?";
 		try (Connection conn = ConnectionProvider.makeConnection();
@@ -225,7 +246,7 @@ public RankerInfo searchRankerInfo(int userInfoId, String userNickname) {
 		return list;
 	}
 	
-	public List<UserSkill> selectUserSkill(int userId, int infoId) {
+	public static List<UserSkill> selectUserSkill(int userId, int infoId) {
 		List<UserSkill> list = new ArrayList<>();
 		String sql = "SELECT * FROM userSkill WHERE userId = ? AND infoId = ?";
 		try (Connection conn = ConnectionProvider.makeConnection();

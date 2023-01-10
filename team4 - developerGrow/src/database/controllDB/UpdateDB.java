@@ -12,8 +12,8 @@ import database.dblist.UserSkill;
 import database.util.ConnectionProvider;
 
 public class UpdateDB {
-
-	public int[] updateUserInfo(UserInfo userInfo) {
+	
+	public static int[] updateUserInfo(UserInfo userInfo) {
 		String sql = "UPDATE userInfo SET date =?, time = ?, level = ?, exp = ?"
 				+ ", hp = ?, health = ?, stress = ?, ciga = ?, usedCiga = ?, gameover = ? "
 				+ "WHERE userId = ? AND infoId = ?";
@@ -41,7 +41,7 @@ public class UpdateDB {
 		return null;
 	}
 
-	public int[] updateUserProject(List<UserProject> list) {
+	public static int[] updateUserProject(List<UserProject> list) {
 		String sql = "UPDATE userProject SET proceeding = ?, complete = ?, lastHour = ?, lastMin = ? WHERE userId = ? AND infoId = ? AND projectId = ?";
 		try (Connection conn = ConnectionProvider.makeConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -63,7 +63,7 @@ public class UpdateDB {
 		return null;
 	}
 
-	public int[] updateUserSkill(List<UserSkill> list) {
+	public static int[] updateUserSkill(List<UserSkill> list) {
 		String sql = "UPDATE userSkill SET skillLevel = ? WHERE userId = ? AND infoId = ? AND skillId = ?";
 		try (Connection conn = ConnectionProvider.makeConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -82,7 +82,7 @@ public class UpdateDB {
 		return null;
 	}
 
-	public int updateRanking(Rank rank) {
+	public static int updateRanking(Rank rank) {
 
 		String sql = "UPDATE team4.rank SET score = ? WHERE userid = ? AND userinfoId = ?";
 		try (Connection conn = ConnectionProvider.makeConnection();
