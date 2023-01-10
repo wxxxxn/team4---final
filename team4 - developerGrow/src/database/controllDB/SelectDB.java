@@ -66,7 +66,7 @@ public class SelectDB {
 		return list;
 	}
 	
-	public List<Rank> selectRank(int userinfoId, int userid) {
+	public List<Rank> selectRank() {
 		List<Rank> list = new ArrayList<>();
 		String sql = "SELECT * FROM team4.rank";
 		try (Connection conn = ConnectionProvider.makeConnection();
@@ -75,6 +75,8 @@ public class SelectDB {
 				while(rs.next()) {
 					String nickname = rs.getString("nickname");
 					int score = rs.getInt("score");
+					int userinfoId = rs.getInt("userinfoId");
+					int userid = rs.getInt("userid");
 					list.add(new Rank(nickname, score, userinfoId, userid));
 				}
 				return list;

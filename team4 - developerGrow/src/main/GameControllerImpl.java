@@ -95,11 +95,11 @@ public class GameControllerImpl implements GameController {
 			mainFrame.setUserProjectList(selectDB.selectUserProject(userId, infoId));
 		}
 
-		mainFrame.setUserRankList(selectDB.selectRank(infoId, userId));
+		mainFrame.setUserRankList(selectDB.selectRank());
 		if (mainFrame.getUserRankList().size() == 0) {
 			insertDB.insertUserRank(userId, infoId, scoreCalculator(),
 					mainFrame.getUserList().get(0).getUserNickname());
-			mainFrame.setUserRankList(selectDB.selectRank(infoId, userId));
+			mainFrame.setUserRankList(selectDB.selectRank());
 		}
 
 		mainFrame.setCigaLogList(selectDB.selectCigaLog(userId, infoId));
