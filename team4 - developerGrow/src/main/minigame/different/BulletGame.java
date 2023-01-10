@@ -12,6 +12,7 @@ import java.util.TimerTask;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -38,7 +39,7 @@ public class BulletGame extends JDialog {
 		btn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				miniGame = new MiniGame(gameDialog);
+				miniGame = new MiniGame(gameDialog, new SubFrame());
 				dispose();
 			}
 		});
@@ -54,7 +55,17 @@ public class BulletGame extends JDialog {
 		setVisible(true);
 	}
 }
-
+class SubFrame extends JFrame {
+	public SubFrame() {
+		setUndecorated(true);
+		setBounds(107, 130, 1185, 762);
+		
+		setBackground(new Color(0, 0, 0, 80));
+		setLayout(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setVisible(true);
+	}
+}
 class MiniGame extends JDialog {
 	private List<JLabel> lbl;
 	private List<Bullet> bul;
@@ -67,7 +78,7 @@ class MiniGame extends JDialog {
 	private JLabel lblScore;
 	private int time;
 	
-	public MiniGame(GameDialog gameDialog) {
+	public MiniGame(GameDialog gameDialog, SubFrame subFrame) {
 		setUndecorated(true);
 		setModal(true);
 		setLayout(null);;
@@ -90,7 +101,7 @@ class MiniGame extends JDialog {
 		create(30);
 		createT(30, 10000);
 		createT(30, 20000);
-		move(gameDialog);
+		move(gameDialog, subFrame);
 		mouse();
 		
 		
@@ -98,7 +109,7 @@ class MiniGame extends JDialog {
 		setVisible(true);
 	}
 	
-	public void move(GameDialog gameDialog) {
+	public void move(GameDialog gameDialog, SubFrame subFrame) {
 		Timer timer=new Timer();
 		TimerTask task=new TimerTask(){
 		    @Override
@@ -135,6 +146,7 @@ class MiniGame extends JDialog {
 					dispose();
 					gameDialog.setScore(score);
 					new BulletScoreDialog(score);
+					subFrame.dispose();
 				}
 		    }
 		};
