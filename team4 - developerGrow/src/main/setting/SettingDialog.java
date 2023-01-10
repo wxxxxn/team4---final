@@ -17,6 +17,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import login.AccountDelete;
+import login.LoginFrame;
 import main.MainFrame;
 
 public class SettingDialog extends JDialog {
@@ -66,6 +67,8 @@ public class SettingDialog extends JDialog {
 				if (num == 0) {
 					loginFrame = true;
 					dispose();
+					LoginFrame loginFrame = new LoginFrame();
+					loginFrame.showGUI();
 				}
 			}
 		});
