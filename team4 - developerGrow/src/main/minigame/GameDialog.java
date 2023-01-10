@@ -1,4 +1,4 @@
-package main.game;
+package main.minigame;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -9,9 +9,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
-import different.Tory;
-import different.ToryMain;
-import du.dugame;
+import main.minigame.different.ToryMain;
+import main.minigame.du.dugame;
 
 public class GameDialog extends JDialog {
 	public GameDialog(int x, int y) {

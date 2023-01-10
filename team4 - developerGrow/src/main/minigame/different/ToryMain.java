@@ -1,4 +1,4 @@
-package different;
+package main.minigame.different;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -33,8 +33,8 @@ public class ToryMain extends JFrame {
 		getContentPane().add(left);
 
 		ClassLoader classLoader = getClass().getClassLoader();
-		URL toryimg1 = classLoader.getResource("dif_img/1.jpg");
-		URL toryimg2 = classLoader.getResource("dif_img/2.png");
+		URL toryimg1 = classLoader.getResource("images/dif_img/1.jpg");
+		URL toryimg2 = classLoader.getResource("images/dif_img/2.png");
 		left.setLayout(null);
 
 		JLabel leftimg = new JLabel("");

@@ -36,7 +36,7 @@ import guiDesign.Methods;
 import login.LoginFrame;
 import main.active.ActiveDialog;
 import main.active.ActiveEventImpl;
-import main.game.GameDialog;
+import main.minigame.GameDialog;
 import main.project.ProjectDialog;
 import main.project.ProjectEventImpl;
 import main.store.StoreDialog;

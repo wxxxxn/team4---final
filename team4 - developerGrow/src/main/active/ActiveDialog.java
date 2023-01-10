@@ -72,7 +72,7 @@ public class ActiveDialog extends JDialog {
 				activeEventImpl.clearlbl();
 				activeEventImpl.getCharacters().coupangCharacter();
 				activeEventImpl.coupangProgressBar();
-				activeEventImpl.showActiveCharacter(10);
+				activeEventImpl.showActiveCharacter(10); // 360
 				activeEventImpl.getSwingWorker().execute();
 				
 				break;

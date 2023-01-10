@@ -1,4 +1,4 @@
-package different;
+package main.minigame.different;
 
 import java.awt.*;
 import java.awt.event.*;

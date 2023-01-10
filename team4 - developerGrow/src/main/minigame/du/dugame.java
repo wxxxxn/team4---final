@@ -1,4 +1,4 @@
-package du;
+package main.minigame.du;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
