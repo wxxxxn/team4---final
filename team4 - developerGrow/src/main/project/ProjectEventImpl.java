@@ -13,6 +13,7 @@ public class ProjectEventImpl implements ProjectEvent {
 	private int minutes;
 	private int hours;
 	private double rate;
+	private Timer projectTimer;
 	
 	public ProjectEventImpl(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
@@ -33,7 +34,7 @@ public class ProjectEventImpl implements ProjectEvent {
 		hours = Integer.valueOf(mainFrame.getProjectHour().getText());
 		rate = Double.valueOf(mainFrame.getNowRatinglbl().getText());
 		
-		Timer projectTimer = new Timer();
+		projectTimer = new Timer();
 	    TimerTask projcetTask = new TimerTask() {
 			@Override
 			public void run() {
@@ -50,19 +51,23 @@ public class ProjectEventImpl implements ProjectEvent {
 				updateTime(minutes, hours, rate);
 			}
 	    };
-		projectTimer.scheduleAtFixedRate(projcetTask, 0, 250);
+		projectTimer.scheduleAtFixedRate(projcetTask, 0, 20);
 	}
 	
 	private void updateTime(int minutes, int hours, double rate) {
 		mainFrame.getProjectHour().setText(String.format("%02d", hours));
 		mainFrame.getProjectMinute().setText(String.format("%02d", minutes));
-		mainFrame.getNowRatinglbl().setText(String.format("%.02f", rate));
+		if (rate >= 100.0) {
+			mainFrame.getNowRatinglbl().setText("완료");
+			projectTimer.cancel();
+		} else {
+			mainFrame.getNowRatinglbl().setText(String.format("%.02f", rate));
+		}
 		mainFrame.revalidate();
 		mainFrame.repaint();		
     }
 
-	
-//	private void saveProjectData() {
-//		
-//	}
+	public Timer getProjectTimer() {
+		return projectTimer;
+	}
 }

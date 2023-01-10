@@ -25,6 +25,7 @@ public class ProjectPanel extends JPanel implements MouseListener {
 	private JPanel completepnl;
 	private JPanel proceedingpnl;
 	private JLabel proceedinglbl;
+	private JLabel rewardlbl;
 	
 	public ProjectPanel() {
 		
@@ -95,24 +96,24 @@ public class ProjectPanel extends JPanel implements MouseListener {
 		URL URLCigaImage = classLoader.getResource("images/rank_img/ciga.png");
 		ImageIcon cigaImageIcon = new ImageIcon(URLCigaImage);
 		
-		JLabel rewardlbl = new JLabel("경험치 10000");
+		rewardlbl = new JLabel("100");
 		rewardlbl.setBorder(eborder);
 		rewardlbl.setFont(new Font("휴먼편지체", Font.BOLD, 15));
-		rewardlbl.setHorizontalAlignment(SwingConstants.LEFT);
+		rewardlbl.setHorizontalAlignment(SwingConstants.CENTER);
 		rewardlbl.setForeground(Color.BLACK);
 		rewardlbl.setBackground(Color.WHITE);
 		rewardlbl.setOpaque(true);
-		rewardlbl.setBounds(155, 48, 114, 42);
+		rewardlbl.setBounds(201, 48, 68, 42);
 		add(rewardlbl);
 		
-		JLabel scoreTextLabel = new JLabel("보상");
+		JLabel scoreTextLabel = new JLabel("보상EXp");
 		scoreTextLabel.setBorder(eborder);
 		scoreTextLabel.setFont(new Font("휴먼편지체", Font.BOLD, 15));
 		scoreTextLabel.setOpaque(true);
 		scoreTextLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		scoreTextLabel.setForeground(Color.BLACK);
 		scoreTextLabel.setBackground(Color.WHITE);
-		scoreTextLabel.setBounds(104, 48, 39, 42);
+		scoreTextLabel.setBounds(104, 48, 85, 42);
 		add(scoreTextLabel);
 		
 		JPanel panel = new JPanel();
@@ -177,6 +178,16 @@ public class ProjectPanel extends JPanel implements MouseListener {
 
 	public void setProceedingpnl(JPanel proceedingpnl) {
 		this.proceedingpnl = proceedingpnl;
+	}
+	
+	
+
+	public JLabel getRewardlbl() {
+		return rewardlbl;
+	}
+
+	public void setRewardlbl(JLabel rewardlbl) {
+		this.rewardlbl = rewardlbl;
 	}
 
 	@Override

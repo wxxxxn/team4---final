@@ -68,12 +68,12 @@ public class ProjectDialog extends JDialog implements MouseListener {
 			ProjectPanel project = new ProjectPanel();
 			project.getRankLabel().setText(String.valueOf((i + 1) + "주차"));
 			project.getProjectName().setText(projectList.get(i).getProjectName());
+			project.getRewardlbl().setText(String.valueOf(projectList.get(i).getRewardExp()));
 			project.getTimeTakenlbl().setText(String.valueOf(projectList.get(i).getTime()));
 			if (userProjectList.get(i).isComplete()) {
 				project.setComplete(true);
 				project.getCompletepnl().setVisible(true);
-			}
-			if (userProjectList.get(i).isProceeding()) {
+			} else if (userProjectList.get(i).isProceeding()) {
 				project.setProceeding(true);
 				project.getProceedingpnl().setVisible(true);
 			}
@@ -134,6 +134,7 @@ public class ProjectDialog extends JDialog implements MouseListener {
 		Object command = e.getSource();
 		for (int i = 0; i < projectList.size(); i++) {
 			if (command == pjs[i] && !pjs[i].isComplete() && !pjs[i].isProceeding()) {
+				mainFrame.getNowRatinglbl().setText("00");
 				pjs[i].setProceeding(true);
 				pjs[i].getProceedingpnl().setVisible(true);
 				String str = projectList.get(i).getProjectName();
@@ -163,5 +164,9 @@ public class ProjectDialog extends JDialog implements MouseListener {
 
 	@Override
 	public void mouseExited(MouseEvent e) {
+	}
+
+	public ProjectPanel[] getPjs() {
+		return pjs;
 	}
 }

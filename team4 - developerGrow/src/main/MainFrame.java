@@ -69,6 +69,7 @@ public class MainFrame extends JFrame {
 	private JLabel nowProjectlbl;
 	private JLabel projectHour;
 	private JLabel projectMinute;
+	private int nowProjectId = 0;
 	
 	// 정보
 	private JLabel levellbl;
@@ -359,9 +360,7 @@ public class MainFrame extends JFrame {
 		taskbtn.setBorderPainted(false);
 		taskbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (projectFrame == null) {
-					projectFrame = new ProjectDialog(MainFrame.this);
-				}
+				projectFrame = new ProjectDialog(MainFrame.this);
 				projectFrame.setBounds(MainFrame.this.getX() + 7, MainFrame.this.getY() + 30, 1185, 762);
 				projectFrame.showGUI();
 			}
@@ -622,4 +621,13 @@ public class MainFrame extends JFrame {
 	public void setCiga(int ciga) {
 		this.ciga = ciga;
 	}
+
+	public int getNowProjectId() {
+		return nowProjectId;
+	}
+
+	public void setNowProjectId(int nowProjectId) {
+		this.nowProjectId = nowProjectId;
+	}
+	
 }

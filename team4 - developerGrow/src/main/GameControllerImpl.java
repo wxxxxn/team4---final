@@ -1,7 +1,5 @@
 package main;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -33,7 +31,6 @@ public class GameControllerImpl implements GameController {
 
 		@Override
 		public void run() {
-
 			if (minutes == 1440) {
 				minutes = 0;
 				updateDate();
@@ -47,6 +44,7 @@ public class GameControllerImpl implements GameController {
 				saveUserInfoData();
 				saveUserProjcet();
 			}
+			checkProject();
 		}
 	};
 	
@@ -165,9 +163,37 @@ public class GameControllerImpl implements GameController {
 		
 		int searchProject = mainFrame.getProjectEventImpl().searchNowProject(mainFrame.getUserProjectList());
 		if (searchProject != -1) {
+			mainFrame.setNowProjectId(searchProject);
 			mainFrame.getUserProjectList().get(searchProject).setLastHour(Integer.valueOf(mainFrame.getProjectHour().getText()));
 			mainFrame.getUserProjectList().get(searchProject).setLastMin(Integer.valueOf(mainFrame.getProjectMinute().getText()));
 		}
-		int[] result = updateDB.updateUserProject(mainFrame.getUserProjectList());
+		updateDB.updateUserProject(mainFrame.getUserProjectList());
+	}
+	
+	private void checkProject() {
+		if(mainFrame.getNowRatinglbl().getText().equals("완료")) {
+			int index = mainFrame.getNowProjectId();
+			mainFrame.getUserProjectList().get(index).setComplete(true);
+			mainFrame.getNowRatinglbl().setText("완료!");
+			expProgressBar(mainFrame.getProjectList().get(index).getRewardExp());
+			mainFrame.revalidate();
+			mainFrame.repaint();
+		}
+	}
+	
+	public void expProgressBar(int addExp) {
+		int levelExp = mainFrame.getUserInfo().getLevel() * 100;
+		int charExp = mainFrame.getExpbar().getValue();
+		int input = (int)(charExp + (((double)addExp / (double)levelExp) * 100));
+		if (input >= 100) {
+			int level = Integer.valueOf(mainFrame.getLevellbl().getText());
+			mainFrame.getLevellbl().setText(String.valueOf(level + 1));
+			mainFrame.getUserInfo().setLevel(level + 1);
+			double a = ((double)level / (double)(level + 1));
+			input = (int)((input - 100) * a);
+			mainFrame.getExpbar().setValue(input);
+		} else {
+			mainFrame.getExpbar().setValue(input);
+		}
 	}
 }
