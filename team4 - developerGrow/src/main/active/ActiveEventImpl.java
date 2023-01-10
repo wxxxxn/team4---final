@@ -80,7 +80,7 @@ public class ActiveEventImpl implements ActiveEvent {
 					mainFrame.remove(active);
 					mainFrame.getActivitybtn().setEnabled(true);
 					characters.defaultCharacter();
-					defaultProgressBar();
+					mainFrame.getPb().controllPB_default();
 					mainFrame.revalidate();
 					mainFrame.repaint();
 				}
@@ -95,44 +95,32 @@ public class ActiveEventImpl implements ActiveEvent {
 
 	@Override
 	public void smokeProgressBar() {
-		mainFrame.getPb().hpbarDecreas(1000);
-		mainFrame.getPb().stressbarDecreas(1000);
-		mainFrame.getPb().healthbarDecreas(1500);
+		mainFrame.getPb().controllPB_ciga();
 	}
 
 	@Override
 	public void sleepProgressBar() {
-		mainFrame.getPb().hpbarIncrease(1000);
-		mainFrame.getPb().stressbarDecreas(1000);
-		mainFrame.getPb().healthbarIncrease(1000);
+		mainFrame.getPb().controllPB_sleep();
 	}
 
 	@Override
 	public void playgameProgressBar() {
-		mainFrame.getPb().hpbarDecreas(1500);
-		mainFrame.getPb().stressbarDecreas(1500);
-		mainFrame.getPb().healthbarDecreas(1500);
+		mainFrame.getPb().controllPB_game();
 	}
 
 	@Override
 	public void eatProgressBar() {
-		mainFrame.getPb().hpbarIncrease(2000);
-		mainFrame.getPb().stressbarDecreas(1500);
-		mainFrame.getPb().healthbarIncrease(1500);
+		mainFrame.getPb().controllPB_eat();
 	}
 
 	@Override
 	public void resumeProgressBar() {
-		mainFrame.getPb().hpbarDecreas(1500);
-		mainFrame.getPb().stressbarIncrease(1000);
-		mainFrame.getPb().healthbarDecreas(1000);
+		mainFrame.getPb().controllPB_resume();
 	}
 
 	@Override
 	public void coupangProgressBar() {
-		mainFrame.getPb().hpbarDecreas(500);
-		mainFrame.getPb().stressbarIncrease(800);
-		mainFrame.getPb().healthbarDecreas(800);
+		mainFrame.getPb().controllPB_coupang();
 	}
 	
 	@Override
@@ -151,9 +139,7 @@ public class ActiveEventImpl implements ActiveEvent {
 
 	@Override
 	public void defaultProgressBar() {
-		mainFrame.getPb().hpbarDecreas(500);
-		mainFrame.getPb().stressbarIncrease(1000);
-		mainFrame.getPb().healthbarDecreas(1000);
+		mainFrame.getPb().controllPB_default();
 	}
 
 	public SwingWorker<Void, Integer> getSwingWorker() {
