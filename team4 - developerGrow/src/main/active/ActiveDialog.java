@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 import guiDesign.Methods;
 import main.MainFrame;
@@ -85,8 +86,18 @@ public class ActiveDialog extends JDialog {
 				activeEventTimer.sleepTimer(420);
 				break;
 			case 4: // 담배
-				activeEventTimer.clearlbl();
-				activeEventTimer.smokeTimer(30);
+				if (mainFrame.getUserInfo().getCiga() > 0) {
+					mainFrame.getUserInfo().setCiga(mainFrame.getUserInfo().getCiga() - 1);
+					mainFrame.getUserInfo().setUsedCiga(mainFrame.getUserInfo().getUsedCiga() + 1);
+					mainFrame.getNumOfcigalbl().setText(String.valueOf(mainFrame.getUserInfo().getCiga()));
+					mainFrame.getProjectEventImpl().expProgressBar(10);
+					mainFrame.revalidate();
+					mainFrame.repaint();
+					activeEventTimer.clearlbl();
+					activeEventTimer.smokeTimer(30);
+				} else {
+					JOptionPane.showMessageDialog(null, "아 담배 없다고~", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 				break;
 			case 5: // 이력서
 				activeEventTimer.clearlbl();

@@ -62,13 +62,18 @@ public class WorkBookDialog extends JDialog {
 		lbl_.setBounds(503, 50, 235, 40);
 		pnlD.add(lbl_);
 
-		int[] list = {1, 5, 4, 3, 3, 3, 4, 3, 2, 2, 1, 4, 4, 3, 3, 3};
+		int[] list = {1, 5, 4, 3, 3, 3, 4, 3, 2, 1, 1, 4, 4, 3, 3, 3};
 		btn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if (list[num - 1] == Integer.valueOf(inputTxt.getText())) {
 						lbl_.setText("정답입니다. ");
+						mainFrame.getUserInfo().setCiga(mainFrame.getUserInfo().getCiga() + 2);
+						mainFrame.getNumOfcigalbl().setText(String.valueOf(mainFrame.getUserInfo().getCiga()));
+						mainFrame.getProjectEventImpl().expProgressBar(20);
+						mainFrame.revalidate();
+						mainFrame.repaint();
 					} else {
 						lbl_.setText("오답입니다. ");
 					}

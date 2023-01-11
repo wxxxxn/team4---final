@@ -17,6 +17,13 @@ public class DeathDialog extends JDialog {
 	
 	public DeathDialog(int x, int y, MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
+		mainFrame.setTimeGo(false);
+		mainFrame.setProjectGo(false);
+		mainFrame.stopSound();
+		mainFrame.getUserInfo().setGameover(true);
+		mainFrame.getGameControllerImpl().saveRanking();
+		UpdateDB.updateUserInfo(mainFrame.getUserInfo());
+		
 		getContentPane().setLayout(null);
 		setUndecorated(true);
 		setModal(true);
@@ -34,7 +41,6 @@ public class DeathDialog extends JDialog {
 		returnBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.setTimeGo(false);
 				if (mainFrame.getPb().getTimeHp() != null) {
 					mainFrame.getPb().getTimeHp().cancel();
 				}
@@ -50,10 +56,7 @@ public class DeathDialog extends JDialog {
 				if (mainFrame.getGameControllerImpl().getCurrentTime() != null) {
 					mainFrame.getGameControllerImpl().getCurrentTime().cancel();
 				}
-				mainFrame.getUserInfo().setGameover(true);
-				UpdateDB.updateUserInfo(mainFrame.getUserInfo());
 				int userId = mainFrame.getUserId();
-				mainFrame.stopSound();
 				mainFrame.dispose();
 				MainFrame mainFrameNew = new MainFrame(userId);
 				dispose();

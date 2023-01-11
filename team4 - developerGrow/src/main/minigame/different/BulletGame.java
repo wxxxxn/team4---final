@@ -158,6 +158,19 @@ class MiniGame extends JDialog {
 					dispose();
 					gameDialog.setScore(score);
 					new BulletScoreDialog(score, mainFrame);
+					if (score > 600) {
+						mainFrame.getUserInfo().setCiga(mainFrame.getUserInfo().getCiga() + 2);
+						mainFrame.getNumOfcigalbl().setText(String.valueOf(mainFrame.getUserInfo().getCiga()));
+						mainFrame.getProjectEventImpl().expProgressBar(10);
+						mainFrame.revalidate();
+						mainFrame.repaint();
+					} else if (score > 1000) {
+						mainFrame.getUserInfo().setCiga(mainFrame.getUserInfo().getCiga() + 5);
+						mainFrame.getNumOfcigalbl().setText(String.valueOf(mainFrame.getUserInfo().getCiga()));
+						mainFrame.getProjectEventImpl().expProgressBar(30);
+						mainFrame.revalidate();
+						mainFrame.repaint();
+					}
 					subFrame.dispose();
 				}
 			}

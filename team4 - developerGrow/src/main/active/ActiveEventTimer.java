@@ -40,8 +40,11 @@ public class ActiveEventTimer {
 						timer.cancel();
 						mainFrame.getActivitybtn().setEnabled(true);
 						mainFrame.setProjectGo(true);
+						mainFrame.getUserInfo().setCiga(mainFrame.getUserInfo().getCiga() + 20);
+						mainFrame.getNumOfcigalbl().setText(String.valueOf(mainFrame.getUserInfo().getCiga()));
+						mainFrame.revalidate();
+						mainFrame.repaint();
 						timer.cancel();
-						
 					}
 					playCount++;
 				}

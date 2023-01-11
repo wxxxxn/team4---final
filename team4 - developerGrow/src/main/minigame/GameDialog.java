@@ -17,6 +17,8 @@ import main.minigame.du.dugame;
 
 public class GameDialog extends JDialog {
 	private int score;
+	private JButton secondGameBtn;
+	private JButton thirdGameBtn;
 	
 	public GameDialog(int x, int y, MainFrame mainFrame) {
 		
@@ -50,7 +52,7 @@ public class GameDialog extends JDialog {
 		});
 		getContentPane().add(firstGameBtn);
 		
-		JButton secondGameBtn = new JButton();
+		secondGameBtn = new JButton();
 		URL second = classloader.getResource("images/btn_img/difPictureBtn.png");
 		ImageIcon secondGame = new ImageIcon(second);
 		URL secondPush = classloader.getResource("images/btn_img/difPicturePushBtn.png");
@@ -66,7 +68,7 @@ public class GameDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
-				ToryMain torymain = new ToryMain("", mainFrame);
+				ToryMain torymain = new ToryMain("", mainFrame, GameDialog.this);
 				torymain.showGUI();			
 			}
 		});
@@ -76,7 +78,7 @@ public class GameDialog extends JDialog {
 		
 		
 		
-		JButton thirdGameBtn = new JButton();
+		thirdGameBtn = new JButton();
 		URL third = classloader.getResource("images/btn_img/hideBtn.png");
 		ImageIcon thirdGame = new ImageIcon(third);
 		URL thirdPush = classloader.getResource("images/btn_img/hideBtnpush.png");
@@ -92,7 +94,7 @@ public class GameDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				Hide hide = new Hide("", mainFrame);
+				Hide hide = new Hide("", mainFrame, GameDialog.this);
 				hide.showGUI();
 			}
 		});
@@ -158,4 +160,13 @@ public class GameDialog extends JDialog {
 	public void setScore(int score) {
 		this.score = score;
 	}
+
+	public JButton getSecondGameBtn() {
+		return secondGameBtn;
+	}
+
+	public JButton getThirdGameBtn() {
+		return thirdGameBtn;
+	}
+	
 }

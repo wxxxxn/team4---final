@@ -142,8 +142,6 @@ public class GameControllerImpl implements GameController {
 			mainFrame.getHealthbar().setValue(userInfo.getHealth());
 			mainFrame.getStressbar().setValue(userInfo.getStress());
 			mainFrame.getNumOfcigalbl().setText(String.valueOf(userInfo.getCiga()));
-			mainFrame.setCiga(userInfo.getCiga());
-			mainFrame.setUsedCiga(userInfo.getUsedCiga());
 			mainFrame.setUserId(userInfo.getUserId());
 			applyProject();
 		} catch (NullPointerException e) {
@@ -161,8 +159,8 @@ public class GameControllerImpl implements GameController {
 		int hp = mainFrame.getHpbar().getValue();
 		int health = mainFrame.getHealthbar().getValue();
 		int stress = mainFrame.getStressbar().getValue();
-		int ciga = mainFrame.getCiga();
-		int usedCiga = mainFrame.getUsedCiga();
+		int ciga = Integer.valueOf(mainFrame.getNumOfcigalbl().getText());
+		int usedCiga = mainFrame.getUserInfo().getUsedCiga();
 		boolean gameover = mainFrame.getUserInfo().isGameover();
 
 		UserInfo userInfo = new UserInfo(mainFrame.getInfoId(), date, time, level, exp, hp, health, stress, ciga,
@@ -205,7 +203,7 @@ public class GameControllerImpl implements GameController {
 	}
 
 
-	private void saveRanking() {
+	public void saveRanking() {
 
 		Rank userRank = new Rank(mainFrame.getUserList().get(0).getUserNickname(), scoreCalculator(),
 				mainFrame.getUserInfo().getInfoId(), mainFrame.getUserInfo().getUserId());

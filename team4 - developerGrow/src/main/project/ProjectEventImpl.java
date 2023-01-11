@@ -5,6 +5,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import database.dblist.UserProject;
+import main.DeathDialog;
 import main.MainFrame;
 
 public class ProjectEventImpl implements ProjectEvent {
@@ -13,12 +14,11 @@ public class ProjectEventImpl implements ProjectEvent {
 	private int minutes;
 	private int hours;
 	private double rate;
-	private Timer projectTimer;
+	private Timer projectTimer = null;
 	private int deadLine;
 	
 	public ProjectEventImpl(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
-		projectTimer = new Timer();
 	}
 	
 	public int searchNowProject(List<UserProject> list) {
@@ -32,11 +32,15 @@ public class ProjectEventImpl implements ProjectEvent {
 
 	@Override
 	public void projectTimeControll(int time, int index) {
+		if (projectTimer != null) {
+			projectTimer.cancel();
+		}
 		minutes = Integer.valueOf(mainFrame.getProjectMinute().getText());
 		hours = Integer.valueOf(mainFrame.getProjectHour().getText());
 		rate = Double.valueOf(mainFrame.getNowRatinglbl().getText());
 		deadLine = mainFrame.getUserProjectList().get(index).getDeadLine();
 		mainFrame.getProjectDeadLine().setText(String.valueOf(deadLine));
+		projectTimer = new Timer();
 	    TimerTask projcetTask = new TimerTask() {
 			@Override
 			public void run() {
@@ -60,7 +64,8 @@ public class ProjectEventImpl implements ProjectEvent {
 						mainFrame.revalidate();
 						mainFrame.repaint();
 						if (deadLine <= 0) {
-							System.out.println("쥬금!!!!");
+							DeathDialog deathDialog = new DeathDialog(mainFrame.getX(), mainFrame.getY(), mainFrame);
+							deathDialog.showGUI();
 						}
 					}
 					int gameSpeed = mainFrame.getGameSpeed();
@@ -100,6 +105,27 @@ public class ProjectEventImpl implements ProjectEvent {
 			int level = Integer.valueOf(mainFrame.getLevellbl().getText());
 			mainFrame.getLevellbl().setText(String.valueOf(level + 1));
 			mainFrame.getUserInfo().setLevel(level + 1);
+			mainFrame.getUserInfo().setCiga(mainFrame.getUserInfo().getCiga() + 10);
+			mainFrame.getNumOfcigalbl().setText(String.valueOf(mainFrame.getUserInfo().getCiga()));
+			int hp = mainFrame.getHpbar().getValue() + 30;
+			int stress = mainFrame.getStessbar().getValue() - 30;
+			int health = mainFrame.getHealthbar().getValue() + 30;
+			if (hp >= 100) {
+				mainFrame.getHpbar().setValue(100);
+			} else {
+				mainFrame.getHpbar().setValue(hp);
+			}
+			if (stress <= 100) {
+				mainFrame.getStressbar().setValue(0);
+			} else {
+				mainFrame.getStressbar().setValue(stress);
+			}
+			if (health >= 100) {
+				mainFrame.getHealthbar().setValue(100);
+			} else {
+				mainFrame.getHealthbar().setValue(health);
+			}
+			
 			double a = ((double) level / (double) (level + 1));
 			input = (int) ((input - 100) * a);
 			mainFrame.getExpbar().setValue(input);

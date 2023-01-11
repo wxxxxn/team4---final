@@ -158,6 +158,19 @@ public class dugame extends JFrame implements ActionListener, Runnable {
 			if (time == 0) {
 				timelbl.setText("GAME OVER");
 				off_button();
+				if (count > 60) {
+					mainFrame.getUserInfo().setCiga(mainFrame.getUserInfo().getCiga() + 2);
+					mainFrame.getNumOfcigalbl().setText(String.valueOf(mainFrame.getUserInfo().getCiga()));
+					mainFrame.getProjectEventImpl().expProgressBar(10);
+					mainFrame.revalidate();
+					mainFrame.repaint();
+				} else if (count > 100) {
+					mainFrame.getUserInfo().setCiga(mainFrame.getUserInfo().getCiga() + 5);
+					mainFrame.getNumOfcigalbl().setText(String.valueOf(mainFrame.getUserInfo().getCiga()));
+					mainFrame.getProjectEventImpl().expProgressBar(30);
+					mainFrame.revalidate();
+					mainFrame.repaint();
+				}
 				break;
 			}
 			timelbl.setText("시간  0:" + time);

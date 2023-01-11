@@ -79,6 +79,7 @@ public class MainFrame extends JFrame {
 	private JLabel projectMinute;
 	private int nowProjectId = 0;
 	private int deadLine = 2880;
+	private JLabel projectDeadLine;
 	
 	// 정보
 	private JLabel levellbl;
@@ -104,11 +105,10 @@ public class MainFrame extends JFrame {
 	private Rank userRank;
 	private int infoId;
 	private int userId;
-	private int ciga;
-	private int usedCiga;
 	private int score;
-
-	private JLabel projectDeadLine;
+	
+	// 미니게임
+	GameDialog gameDialog = null;
 
 	public MainFrame(int userId) {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -394,7 +394,9 @@ public class MainFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				timeGo = false;
-				GameDialog gameDialog = new GameDialog(MainFrame.this.getX(), MainFrame.this.getY(), MainFrame.this);
+				if (gameDialog == null) {
+					gameDialog = new GameDialog(MainFrame.this.getX(), MainFrame.this.getY(), MainFrame.this);
+				}
 				gameDialog.showGUI();
 			}
 		});
@@ -410,9 +412,7 @@ public class MainFrame extends JFrame {
 		taskbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				timeGo = false;
-				if (projectFrame == null) {
-					projectFrame = new ProjectDialog(MainFrame.this);
-				}
+				projectFrame = new ProjectDialog(MainFrame.this);
 				projectFrame.setBounds(MainFrame.this.getX() + 7, MainFrame.this.getY() + 30, 1185, 762);
 				projectFrame.showGUI();
 			}
@@ -662,14 +662,6 @@ public class MainFrame extends JFrame {
 		return numOfcigalbl;
 	}
 
-	public int getUsedCiga() {
-		return usedCiga;
-	}
-
-	public void setUsedCiga(int usedCiga) {
-		this.usedCiga = usedCiga;
-	}
-
 	public void setSkillList(List<SkillList> skillList) {
 		this.skillList = skillList;
 	}
@@ -682,14 +674,6 @@ public class MainFrame extends JFrame {
 		return projectEventImpl;
 	}
 	
-	public int getCiga() {
-		return ciga;
-	}
-
-	public void setCiga(int ciga) {
-		this.ciga = ciga;
-	}
-
 	public int getNowProjectId() {
 		return nowProjectId;
 	}

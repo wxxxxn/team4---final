@@ -42,7 +42,7 @@ public class StoreEventImpl implements StoreEvent {
 	@Override
 	public void payCiga(SkillPanel skillPanel) {
 		
-		int allCiga = mainFrame.getCiga();
+		int allCiga = mainFrame.getUserInfo().getCiga();
 		String priceStr = skillPanel.getPriceLabel().getText();
 		int priceInt = Integer.parseInt(priceStr.substring(0, priceStr.length() - 1));
 
@@ -53,9 +53,8 @@ public class StoreEventImpl implements StoreEvent {
 			skillPanel.getLevelLabel().setText("LV." + level);
 			
 			int currentCiga = allCiga - priceInt;
-			mainFrame.setCiga(currentCiga);
 			mainFrame.getUserInfo().setCiga(currentCiga);
-			mainFrame.setUsedCiga(mainFrame.getUsedCiga() + priceInt);
+			mainFrame.getUserInfo().setUsedCiga(mainFrame.getUserInfo().getUsedCiga() + priceInt);
 			mainFrame.getNumOfcigalbl().setText(String.valueOf(currentCiga));
 			
 			mainFrame.revalidate();
