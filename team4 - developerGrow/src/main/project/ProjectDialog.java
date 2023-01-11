@@ -63,8 +63,7 @@ public class ProjectDialog extends JDialog {
 
 		pjs = new ProjectPanel[17];
 		int lastCompletet = -1;
-		int lastProceeding = -1;
-		int count = 0;
+		int lastProceeding = -1;;
 		
 		for (int i = 0; i < pjs.length; i++) {
 			ProjectPanel project = new ProjectPanel(mainFrame, ProjectDialog.this);
@@ -74,13 +73,11 @@ public class ProjectDialog extends JDialog {
 			project.getTimeTakenlbl().setText(String.valueOf(projectList.get(i).getTime()));
 			project.index = i;
 			if (userProjectList.get(i).isComplete()) {
-				count++;
 				lastCompletet = i;
 				project.setComplete(true);
 				project.getSelectablepnl().setVisible(false);
 				project.getCompletepnl().setVisible(true);
 			} else if (userProjectList.get(i).isProceeding()) {
-				count++;
 				lastProceeding = i;
 				project.getSelectablepnl().setVisible(false);
 				project.setProceeding(true);
@@ -89,15 +86,12 @@ public class ProjectDialog extends JDialog {
 			pjs[i] = project;
 		}
 		
-		if (count > 0) {
-			if ((lastProceeding == -1) && (lastCompletet != -1)) {
-				pjs[lastCompletet + 1].getSelectablepnl().setVisible(false);
-				pjs[lastCompletet + 1].setSelectable(true);
-			} else if ((lastProceeding == -1) && (lastCompletet == -1)) {
-				pjs[0].getSelectablepnl().setVisible(false);
-				pjs[0].setSelectable(true);				
-			}
-			count = 0;
+		if ((lastProceeding == -1) && (lastCompletet != -1)) {
+			pjs[lastCompletet + 1].getSelectablepnl().setVisible(false);
+			pjs[lastCompletet + 1].setSelectable(true);
+		} else if ((lastProceeding == -1) && (lastCompletet == -1)) {
+			pjs[0].setSelectable(true);	
+			pjs[0].getSelectablepnl().setVisible(false);			
 		}
 		
 		for (int i = 0; i < pjs.length; i++) {
