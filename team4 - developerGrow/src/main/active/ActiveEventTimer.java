@@ -40,15 +40,10 @@ public class ActiveEventTimer {
 						timer.cancel();
 						mainFrame.getActivitybtn().setEnabled(true);
 						mainFrame.setProjectGo(true);
-<<<<<<< HEAD
 						mainFrame.getUserInfo().setCiga(mainFrame.getUserInfo().getCiga() + 20);
 						mainFrame.getNumOfcigalbl().setText(String.valueOf(mainFrame.getUserInfo().getCiga()));
 						mainFrame.revalidate();
 						mainFrame.repaint();
-=======
-						mainFrame.setCiga(mainFrame.getCiga() + 20);
-						mainFrame.getNumOfcigalbl().setText(String.valueOf(mainFrame.getCiga()));
->>>>>>> branch 'master' of https://github.com/Pobilover/team4---final.git
 						timer.cancel();
 					}
 					playCount++;
