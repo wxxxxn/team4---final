@@ -504,8 +504,8 @@ public class MainFrame extends JFrame {
 		
 		gameControllerImpl.readyGame(userId);
 		gameControllerImpl.applyDB();
-		pb.controllPB_default();
 		gameControllerImpl.timeController();
+		pb.controllPB_default();
 	}
 
 	public void showGUI() {

@@ -41,6 +41,7 @@ public class ActiveEventTimer {
 						mainFrame.getActivitybtn().setEnabled(true);
 						mainFrame.setProjectGo(true);
 						timer.cancel();
+						
 					}
 					playCount++;
 				}
