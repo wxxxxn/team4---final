@@ -1,13 +1,7 @@
 package main.active;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.SwingWorker;
 
 import guiDesign.Methods;
 import main.MainFrame;
@@ -51,23 +45,14 @@ public class Characters extends JLabel {
 		mainFrame.revalidate();
 		mainFrame.repaint();
 	}
-	
-	public void sleepCharacter() {
-		characterlbl = new JLabel();
-		activelbl = new JLabel();
-		characterlbl.setIcon(sleepImage);
-		characterlbl.setBounds(211, 392, 210, 300);
-		mainFrame.add(characterlbl);	
-		mainFrame.revalidate();
-		mainFrame.repaint();
-	}
-	
+		
 	public void bedsleepCharacter() {
 		characterlbl = new JLabel();
 		activelbl = new JLabel();
 		characterlbl.setIcon(bedsleepImage);
 		characterlbl.setBounds(597, 382, 446, 240);
-		mainFrame.add(characterlbl);	
+		mainFrame.add(characterlbl);
+		mainFrame.setProjectGo(false);
 		mainFrame.revalidate();
 		mainFrame.repaint();
 	}
@@ -80,7 +65,8 @@ public class Characters extends JLabel {
 		activelbl.setIcon(playgameImage);
 		activelbl.setBounds(331, 47, 408, 335);
 		mainFrame.add(characterlbl);
-		mainFrame.add(activelbl);		
+		mainFrame.add(activelbl);	
+		mainFrame.setProjectGo(false);
 		mainFrame.revalidate();
 		mainFrame.repaint();
 	}
@@ -93,7 +79,8 @@ public class Characters extends JLabel {
 		activelbl.setIcon(eatImage);
 		activelbl.setBounds(331, 47, 408, 335);
 		mainFrame.add(characterlbl);
-		mainFrame.add(activelbl);		
+		mainFrame.add(activelbl);	
+		mainFrame.setProjectGo(false);
 		mainFrame.revalidate();
 		mainFrame.repaint();
 	}
@@ -107,6 +94,7 @@ public class Characters extends JLabel {
 		activelbl.setBounds(331, 47, 408, 335);
 		mainFrame.add(characterlbl);
 		mainFrame.add(activelbl);	
+		mainFrame.setProjectGo(false);
 		mainFrame.revalidate();
 		mainFrame.repaint();
 	}
@@ -121,6 +109,7 @@ public class Characters extends JLabel {
 		mainFrame.add(characterlbl);
 		mainFrame.add(activelbl);
 		mainFrame.getActivitybtn().setEnabled(false);
+		mainFrame.setProjectGo(false);
 		mainFrame.revalidate();
 		mainFrame.repaint();
 	}

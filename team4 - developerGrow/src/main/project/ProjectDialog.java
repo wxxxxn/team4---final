@@ -132,6 +132,7 @@ public class ProjectDialog extends JDialog {
 		closeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				mainFrame.setTimeGo(true);
 				dispose();
 			}
 		});

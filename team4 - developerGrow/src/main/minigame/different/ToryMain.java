@@ -6,6 +6,8 @@ import java.net.URL;
 
 import javax.swing.*;
 
+import main.MainFrame;
+
 public class ToryMain extends JFrame {
 
 	final Tory left = new Tory("dif_img/1.jpg");
@@ -17,10 +19,11 @@ public class ToryMain extends JFrame {
 	static int[] imageY = { 242, 242, 290, 333, 160 };
 	// 틀린부분의 범위 기본 설정값
 	static final int range = 30;
+	private MainFrame mainFrame;
 	
-	
-	public ToryMain(String string) {
+	public ToryMain(String string, MainFrame mainFrame) {
 		super(string);
+		this.mainFrame = mainFrame;
 		CustomMouseAdapter cma = new CustomMouseAdapter();
 		left.setBounds(10, 10, 470, 541);
 		// imga 이미지가 저장된 JPanel a 객체에 감지기 설정
@@ -55,7 +58,26 @@ public class ToryMain extends JFrame {
 		left.add(lblNewLabel);
 		getContentPane().add(right);
 		right.setLayout(null);
-
+		
+		JButton btnNewButton = new JButton("");
+		URL btn = classLoader.getResource("images/btn_img/miniGameCloseBtn.png");
+		URL btnhide = classLoader.getResource("images/btn_img/miniGameClosePushBtn.png");
+		btnNewButton.setIcon(new ImageIcon(btn));
+		btnNewButton.setBorderPainted(false);
+		btnNewButton.setPressedIcon(new ImageIcon(btnhide));
+		btnNewButton.setOpaque(false);
+		btnNewButton.setBackground(new Color(255, 0, 0, 0));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mainFrame.setTimeGo(true);
+				dispose();
+			}
+		});
+		btnNewButton.setBounds(358, 10, 100, 45);
+		right.add(btnNewButton);
+		getContentPane().add(right);
+		right.setLayout(null);
+		
 		JLabel rightimg = new JLabel("");
 		rightimg.setBounds(0, 10, 458, 620);
 		rightimg.setIcon(new ImageIcon(toryimg2));

@@ -181,8 +181,9 @@ public class ProjectPanel extends JPanel implements MouseListener {
 			mainFrame.revalidate();
 			mainFrame.repaint();
 			mainFrame.getUserProjectList().get(index).setProceeding(true);
-			mainFrame.getProjectEventImpl().projectTimeControll(time);	
+			mainFrame.getProjectEventImpl().projectTimeControll(time, index);	
 			projectDialog.dispose();
+			mainFrame.setTimeGo(true);
 		}
 	}
 

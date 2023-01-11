@@ -6,6 +6,8 @@ import java.net.URL;
 
 import javax.swing.*;
 
+import main.MainFrame;
+
 
 public class Hide extends JFrame {
 
@@ -17,15 +19,18 @@ public class Hide extends JFrame {
 	static int[] imageY = { 408, 350, 143, 340, 405, 350, 520 };
 	static final int range = 40;
 	
+	private MainFrame mainFrame;
 	
-	
-	public Hide(String string) {
+	public Hide(String string, MainFrame mainFrame) {
 		super(string);
+		this.mainFrame = mainFrame;
+		
 		ClassLoader classLoader = getClass().getClassLoader();
 		URL clickImg = classLoader.getResource("images/dif_img/check.png");
 		URL hiding = classLoader.getResource("images/dif_img/1234.PNG");
 		
-		center.setBounds(10, 36, 672, 915);
+		center.setBounds(0, 0, 694, 951);
+		center.setBackground(Color.white);
 		CustomMouseAdapter cma = new CustomMouseAdapter();
 		center.addMouseListener(cma);
 		getContentPane().setLayout(null);
@@ -38,13 +43,31 @@ public class Hide extends JFrame {
 
 		JLabel leftimg = new JLabel("");
 		leftimg.setIcon(new ImageIcon(hiding));
-		leftimg.setBounds(29, 22, 631, 883);
+		leftimg.setBounds(28, -24, 611, 951);
 		center.add(leftimg);
 		
-
+		JButton btnNewButton = new JButton();
+		URL btn = classLoader.getResource("images/btn_img/miniGameCloseBtn.png");
+		URL btnhide = classLoader.getResource("images/btn_img/miniGameClosePushBtn.png");
+		btnNewButton.setIcon(new ImageIcon(btn));
+		btnNewButton.setBorderPainted(false);
+		btnNewButton.setPressedIcon(new ImageIcon(btnhide));
+		btnNewButton.setOpaque(false);
+		btnNewButton.setBackground(new Color(255, 0, 0, 0));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mainFrame.setTimeGo(true);
+				dispose();
+			}
+		});
+		btnNewButton.setBounds(537, 900, 100, 45);
+		center.add(btnNewButton);
+		setBounds(500, 0, 700, 1000);
+		setResizable(false);
+		setVisible(true);
 
 		getContentPane().add(center);
-		setBounds(500, 0, 700, 1000);
+		setBounds(500, 0, 700, 980);
 		setResizable(false);
 		setVisible(true);
 	}

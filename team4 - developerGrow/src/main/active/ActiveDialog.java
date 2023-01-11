@@ -13,11 +13,12 @@ import main.MainFrame;
 
 public class ActiveDialog extends JDialog {
 	private JButton[] btn = new JButton[7];
-	private ActiveEventImpl activeEventImpl;
+	private MainFrame mainFrame;
+	private ActiveEventTimer activeEventTimer; 
 	
-	public ActiveDialog(int x, int y, ActiveEventImpl activeEventImpl) {
-		
-		this.activeEventImpl = activeEventImpl;
+	public ActiveDialog(int x, int y, MainFrame mainFrame) {
+		this.mainFrame = mainFrame;
+		activeEventTimer = mainFrame.getActiveEventTimer(); 
 		
 		setUndecorated(true);
 		setModal(true);
@@ -67,49 +68,29 @@ public class ActiveDialog extends JDialog {
 	// 추가
 	public void active (int num) {
 		switch (num) {
-			case 0:
-				activeEventImpl.setCoupang(true);
-				activeEventImpl.clearlbl();
-				activeEventImpl.getCharacters().coupangCharacter();
-				activeEventImpl.coupangProgressBar();
-				activeEventImpl.showActiveCharacter(10);
-				activeEventImpl.getSwingWorker().execute();
-				
+			case 0: // 쿠팡
+				activeEventTimer.clearlbl();
+				activeEventTimer.coupangTimer(360);
 				break;
-			case 1:
-				activeEventImpl.clearlbl();
-				activeEventImpl.getCharacters().eatCharacter();
-				activeEventImpl.eatProgressBar();
-				activeEventImpl.showActiveCharacter(60);
-				activeEventImpl.getSwingWorker().execute();
+			case 1: // 밥
+				activeEventTimer.clearlbl();
+				activeEventTimer.eatTimer(60);
 				break;
-			case 2:
-				activeEventImpl.clearlbl();
-				activeEventImpl.getCharacters().playgameCharacter();
-				activeEventImpl.playgameProgressBar();
-				activeEventImpl.showActiveCharacter(30);
-				activeEventImpl.getSwingWorker().execute();
+			case 2: // 게임
+				activeEventTimer.clearlbl();
+				activeEventTimer.gameTimer(60);
 				break;
-			case 3:
-				activeEventImpl.clearlbl();
-				activeEventImpl.getCharacters().bedsleepCharacter();
-				activeEventImpl.sleepProgressBar();
-				activeEventImpl.showActiveCharacter(120);
-				activeEventImpl.getSwingWorker().execute();
+			case 3: // 잠
+				activeEventTimer.clearlbl();
+				activeEventTimer.sleepTimer(420);
 				break;
-			case 4:
-				activeEventImpl.clearlbl();
-				activeEventImpl.getCharacters().smokeCharacter();
-				activeEventImpl.smokeProgressBar();
-				activeEventImpl.showActiveCharacter(30);
-				activeEventImpl.getSwingWorker().execute();
+			case 4: // 담배
+				activeEventTimer.clearlbl();
+				activeEventTimer.smokeTimer(30);
 				break;
-			case 5:
-				activeEventImpl.clearlbl();
-				activeEventImpl.getCharacters().resumeCharacter();
-				activeEventImpl.resumeProgressBar();
-				activeEventImpl.showActiveCharacter(360);
-				activeEventImpl.getSwingWorker().execute();
+			case 5: // 이력서
+				activeEventTimer.clearlbl();
+				activeEventTimer.resumeTimer(300);
 				break;
 			case 6:
 				break;

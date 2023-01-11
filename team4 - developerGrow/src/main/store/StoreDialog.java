@@ -84,6 +84,7 @@ public class StoreDialog extends JDialog {
 				}
 
 				storeEventImpl.updateLevelToDB();
+				mainFrame.setTimeGo(true);
 				dispose();
 			}
 		});

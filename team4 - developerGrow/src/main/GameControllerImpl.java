@@ -1,5 +1,6 @@
 package main;
 
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -9,6 +10,7 @@ import database.controllDB.UpdateDB;
 import database.dblist.Rank;
 import database.dblist.UserInfo;
 import main.project.ProjectEventImpl;
+import main.suddenQuestion.WorkBookDialog;
 
 public class GameControllerImpl implements GameController {
 
@@ -18,49 +20,63 @@ public class GameControllerImpl implements GameController {
 		this.mainFrame = mainFrame;
 	}
 
+	private int day;
 	private int minutes = 0;
 
 	@Override
 	public void timeController() {
-
 		currentTime = new Timer();
-		currentTime.scheduleAtFixedRate(timerTask, 250, 250);
+		currentTime.scheduleAtFixedRate(timerTask, 0, 1);
 	}
 
 	private TimerTask timerTask = new TimerTask() {
 
 		@Override
 		public void run() {
-			if (minutes == 1440) {
-				minutes = 0;
-				updateDate();
-				updateTime(minutes);
-			} else {
-				minutes++;
-				updateTime(minutes);
+			if (mainFrame.isTimeGo()) {
+				if (minutes == 1440) {
+					minutes = 0;
+					updateDate();
+					updateTime(minutes);
+				} else {
+					minutes++;
+					updateTime(minutes);
+				}
+				
+				if (minutes == randomMin1) {
+					showrandomQustion();
+				} else if (minutes == randomMin2) {
+					showrandomQustion();
+				}
+	
+				if (((minutes % 60) % 10) == 0) {
+					saveUserInfoData();
+					saveUserProjcet();
+					saveRanking();
+				}
 			}
-
-			if (((minutes % 60) % 10) == 0) {
-				saveUserInfoData();
-				saveUserProjcet();
-				saveRanking();
+			try {
+				int gameSpeed = mainFrame.getGameSpeed();
+				Thread.sleep(50 / gameSpeed);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-			checkProject();
 		}
 	};
 	private Timer currentTime;
 
 	private void updateTime(int minutes) {
-
 		mainFrame.getHourlbl().setText(String.format("%02d", minutes / 60));
 		mainFrame.getMinutelbl().setText(String.format("%02d", minutes % 60));
 	}
 
 	private void updateDate() {
 
-		int day = 0;
-
+		day = mainFrame.getUserInfo().getDate();
 		day++;
+		randomMin1 = random.nextInt(1339) + 1;
+		randomMin2 = random.nextInt((1339 - randomMin1)) + randomMin1 + 1;
+
 		mainFrame.getDatelbl().setText(String.format("%02d", day) + "일차");
 	}
 
@@ -171,7 +187,7 @@ public class GameControllerImpl implements GameController {
 			mainFrame.getNowProjectlbl().setText(projectName);
 			mainFrame.getProjectHour().setText(String.valueOf(projectHour));
 			mainFrame.getProjectMinute().setText(String.valueOf(projcetMin));
-			projectEventImpl.projectTimeControll(time);
+			projectEventImpl.projectTimeControll(time, index);
 		}
 	}
 
@@ -188,16 +204,6 @@ public class GameControllerImpl implements GameController {
 		UpdateDB.updateUserProject(mainFrame.getUserProjectList());
 	}
 
-	private void checkProject() {
-		if (mainFrame.getNowRatinglbl().getText().equals("완료")) {
-			int index = mainFrame.getNowProjectId();
-			mainFrame.getUserProjectList().get(index).setComplete(true);
-			mainFrame.getNowRatinglbl().setText("완료!");
-			expProgressBar(mainFrame.getProjectList().get(index).getRewardExp());
-			mainFrame.revalidate();
-			mainFrame.repaint();
-		}
-	}
 
 	private void saveRanking() {
 
@@ -219,25 +225,21 @@ public class GameControllerImpl implements GameController {
 
 		return score;
 	}
-
-	public void expProgressBar(int addExp) {
-		int levelExp = mainFrame.getUserInfo().getLevel() * 100;
-		int charExp = mainFrame.getExpbar().getValue();
-		int input = (int) (charExp + (((double) addExp / (double) levelExp) * 100));
-		if (input >= 100) {
-			int level = Integer.valueOf(mainFrame.getLevellbl().getText());
-			mainFrame.getLevellbl().setText(String.valueOf(level + 1));
-			mainFrame.getUserInfo().setLevel(level + 1);
-			double a = ((double) level / (double) (level + 1));
-			input = (int) ((input - 100) * a);
-			mainFrame.getExpbar().setValue(input);
-		} else {
-			mainFrame.getExpbar().setValue(input);
-		}
-	}
+	
 
 	public Timer getCurrentTime() {
 		return currentTime;
+	}
+	
+	private Random random = new Random();
+	private int randomMin1 = random.nextInt(1339) + 1;
+	private int randomMin2 = random.nextInt((1339 - randomMin1)) + randomMin1 + 1;
+	
+	public void showrandomQustion() {
+		
+		int index = random.nextInt(16) + 1;
+		WorkBookDialog workBookDialog = new WorkBookDialog(index, mainFrame, mainFrame.getX(), mainFrame.getY());
+		workBookDialog.showGUI();
 	}
 	
 	

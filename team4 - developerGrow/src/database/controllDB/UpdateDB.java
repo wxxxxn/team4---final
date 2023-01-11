@@ -42,7 +42,7 @@ public class UpdateDB {
 	}
 
 	public static int[] updateUserProject(List<UserProject> list) {
-		String sql = "UPDATE userProject SET proceeding = ?, complete = ?, lastHour = ?, lastMin = ? WHERE userId = ? AND infoId = ? AND projectId = ?";
+		String sql = "UPDATE userProject SET proceeding = ?, complete = ?, lastHour = ?, lastMin = ?, deadLine = ? WHERE userId = ? AND infoId = ? AND projectId = ?";
 		try (Connection conn = ConnectionProvider.makeConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql)) {
 			for (UserProject elem : list) {
@@ -50,9 +50,10 @@ public class UpdateDB {
 				stmt.setBoolean(2, elem.isComplete());
 				stmt.setInt(3, elem.getLastHour());
 				stmt.setInt(4, elem.getLastMin());
-				stmt.setInt(5, elem.getUserId());
-				stmt.setInt(6, elem.getInfoId());
-				stmt.setInt(7, elem.getProjectId());
+				stmt.setInt(5, elem.getDeadLine());
+				stmt.setInt(6, elem.getUserId());
+				stmt.setInt(7, elem.getInfoId());
+				stmt.setInt(8, elem.getProjectId());
 
 				stmt.addBatch();
 			}

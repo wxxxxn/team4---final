@@ -31,7 +31,7 @@ import guiDesign.ImagePanel;
 import guiDesign.Methods;
 import login.LoginFrame;
 import main.active.ActiveDialog;
-import main.active.ActiveEventImpl;
+import main.active.ActiveEventTimer;
 import main.minigame.GameDialog;
 import main.project.ProjectDialog;
 import main.project.ProjectEventImpl;
@@ -42,6 +42,13 @@ import progressbar.ProgressbarEvent;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
+	
+	// 게임속도
+	int gameSpeed = 1;
+	
+	// timer 정지 및 시작
+	private boolean timeGo = true;
+	private boolean projectGo = true;
 
 	// 메인페널
 	private ImagePanel Mainpnl;
@@ -51,7 +58,7 @@ public class MainFrame extends JFrame {
 	private JButton soundbtn;
 	
 	// 활동버튼
-	private ActiveEventImpl activeEventImpl = new ActiveEventImpl(this);
+	private ActiveEventTimer activeEventTimer = new ActiveEventTimer(this);
 	private JButton activitybtn;
 	
 	// 메인시간
@@ -71,6 +78,7 @@ public class MainFrame extends JFrame {
 	private JLabel projectHour;
 	private JLabel projectMinute;
 	private int nowProjectId = 0;
+	private int deadLine = 2880;
 	
 	// 정보
 	private JLabel levellbl;
@@ -100,9 +108,10 @@ public class MainFrame extends JFrame {
 	private int usedCiga;
 	private int score;
 
+	private JLabel projectDeadLine;
+
 	public MainFrame(int userId) {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		gameControllerImpl.timeController();
 
 		ClassLoader classLoader = getClass().getClassLoader();
 		URL URLmix = classLoader.getResource("music/mix.wav");
@@ -115,13 +124,43 @@ public class MainFrame extends JFrame {
 		setContentPane(Mainpnl);
 		Mainpnl.setLayout(null);
 
-		activeEventImpl.getCharacters().defaultCharacter();
+		activeEventTimer.getCharacters().defaultCharacter();
 		
 		ImageIcon sound = Methods.convertToResizeIcon(getClass(), "images/btn_img/sound.png", 50, 50);
 		ImageIcon mute = Methods.convertToResizeIcon(getClass(), "images/btn_img/mute.png", 50, 50);
+		
+		JButton btnSpeed = new JButton(Methods.convertToResizeIcon(getClass(), "images/btn_img/speed1.png", 60, 50));
+		btnSpeed.setForeground(Color.RED);
+		btnSpeed.setBackground(new Color(0, 0, 0, 0));
+		btnSpeed.setOpaque(false);
+		btnSpeed.setBorderPainted(false);
+		btnSpeed.setBounds(290, 10, 60, 50);
+		Mainpnl.add(btnSpeed);
+		btnSpeed.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (gameSpeed == 5) {
+					gameSpeed = 1;
+				} else {
+					gameSpeed++;
+				}
+				if (gameSpeed == 1) {
+					btnSpeed.setIcon(Methods.convertToResizeIcon(getClass(), "images/btn_img/speed1.png", 60, 50));
+				} else if (gameSpeed == 2) {
+					btnSpeed.setIcon(Methods.convertToResizeIcon(getClass(), "images/btn_img/speed2.png", 60, 50));
+				} else if (gameSpeed == 3) {
+					btnSpeed.setIcon(Methods.convertToResizeIcon(getClass(), "images/btn_img/speed3.png", 60, 50));
+				} else if (gameSpeed == 4) {
+					btnSpeed.setIcon(Methods.convertToResizeIcon(getClass(), "images/btn_img/speed4.png", 60, 50));
+				} else if (gameSpeed == 5) {
+					btnSpeed.setIcon(Methods.convertToResizeIcon(getClass(), "images/btn_img/speed5.png", 60, 50));
+				}
+			}
+		});
 		soundbtn = new JButton(sound);
 		soundbtn.setBounds(978, 28, 50, 50);
 		soundbtn.setBackground(new Color(0, 0, 0, 0));
+		soundbtn.setBorderPainted(false);
 		soundbtn.setOpaque(false);
 		soundbtn.setFocusable(false);
 		getContentPane().add(soundbtn);
@@ -171,7 +210,7 @@ public class MainFrame extends JFrame {
 		currentTime.setBackground(new Color(255, 0, 0, 0));
 		currentTime.setLayout(null);
 
-		hourlbl = new JLabel("07");
+		hourlbl = new JLabel("00");
 		hourlbl.setHorizontalAlignment(SwingConstants.CENTER);
 
 		hourlbl.setFont(new Font("HY목각파임B", Font.BOLD, 30));
@@ -209,7 +248,7 @@ public class MainFrame extends JFrame {
 		currentcigalbl.setBounds(12, 0, 117, 43);
 		currentcigapnl.add(currentcigalbl);
 
-		numOfcigalbl = new JLabel("10");
+		numOfcigalbl = new JLabel("00");
 		numOfcigalbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
 		numOfcigalbl.setBounds(124, 5, 89, 33);
 		currentcigapnl.add(numOfcigalbl);
@@ -244,7 +283,7 @@ public class MainFrame extends JFrame {
 		lblNewLabel.setBounds(12, 5, 110, 32);
 		developlvpnl.add(lblNewLabel);
 
-		levellbl = new JLabel("10");
+		levellbl = new JLabel("00");
 		levellbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
 		levellbl.setBounds(124, 5, 89, 33);
 		developlvpnl.add(levellbl);
@@ -298,6 +337,7 @@ public class MainFrame extends JFrame {
 		rankingbtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				timeGo = false;
 				RankingDialog rankingFrame = new RankingDialog(MainFrame.this.getX(), MainFrame.this.getY(), MainFrame.this);
 				rankingFrame.showGUI();
 			}
@@ -314,6 +354,7 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				timeGo = false;
 				SettingDialog settingFrame = new SettingDialog(MainFrame.this.getX(), MainFrame.this.getY(), MainFrame.this);
 				settingFrame.showGUI();
 				if (settingFrame.getLoginFrame()) {
@@ -333,6 +374,7 @@ public class MainFrame extends JFrame {
 		storebtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				timeGo = false;
 				if (storeFrame == null) {
 					storeFrame = new StoreDialog(MainFrame.this);
 				}
@@ -351,7 +393,8 @@ public class MainFrame extends JFrame {
 		gamebtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				GameDialog gameDialog = new GameDialog(MainFrame.this.getX(), MainFrame.this.getY());
+				timeGo = false;
+				GameDialog gameDialog = new GameDialog(MainFrame.this.getX(), MainFrame.this.getY(), MainFrame.this);
 				gameDialog.showGUI();
 			}
 		});
@@ -366,7 +409,10 @@ public class MainFrame extends JFrame {
 		taskbtn.setBorderPainted(false);
 		taskbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				projectFrame = new ProjectDialog(MainFrame.this);
+				timeGo = false;
+				if (projectFrame == null) {
+					projectFrame = new ProjectDialog(MainFrame.this);
+				}
 				projectFrame.setBounds(MainFrame.this.getX() + 7, MainFrame.this.getY() + 30, 1185, 762);
 				projectFrame.showGUI();
 			}
@@ -383,16 +429,14 @@ public class MainFrame extends JFrame {
 		activitybtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				ActiveDialog activeFrame = new ActiveDialog(MainFrame.this.getX(), MainFrame.this.getY(),
-						activeEventImpl);
+				ActiveDialog activeFrame = new ActiveDialog(MainFrame.this.getX(), MainFrame.this.getY(), MainFrame.this);
 				activeFrame.showGUI();
 			}
 		});
 
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 0, 50));
-		panel.setBounds(12, 207, 263, 137);
+		panel.setBounds(12, 207, 263, 157);
 		Mainpnl.add(panel);
 		panel.setLayout(null);
 
@@ -442,9 +486,26 @@ public class MainFrame extends JFrame {
 		projectMinute.setBounds(154, 103, 29, 17);
 		panel.add(projectMinute);
 		
+		JLabel lblNewLabel_3_1 = new JLabel("마감 시간: ");
+		lblNewLabel_3_1.setFont(new Font("HY엽서L", Font.BOLD, 14));
+		lblNewLabel_3_1.setBounds(18, 130, 83, 15);
+		panel.add(lblNewLabel_3_1);
+		
+		projectDeadLine = new JLabel("0000");
+		projectDeadLine.setFont(new Font("HY엽서L", Font.BOLD, 14));
+		projectDeadLine.setBounds(113, 130, 62, 17);
+		panel.add(projectDeadLine);
+		
+		JLabel de = new JLabel("분");
+		de.setFont(new Font("HY엽서L", Font.BOLD, 14));
+		de.setBounds(164, 130, 29, 17);
+		panel.add(de);
+		
+		
 		gameControllerImpl.readyGame(userId);
 		gameControllerImpl.applyDB();
 		pb.controllPB_default();
+		gameControllerImpl.timeController();
 	}
 
 	public void showGUI() {
@@ -663,5 +724,41 @@ public class MainFrame extends JFrame {
 
 	public GameControllerImpl getGameControllerImpl() {
 		return gameControllerImpl;
+	}
+	
+	public int getGameSpeed() {
+		return gameSpeed;
+	}
+
+	public boolean isTimeGo() {
+		return timeGo;
+	}
+
+	public void setTimeGo(boolean timeGo) {
+		this.timeGo = timeGo;
+	}
+
+	public ActiveEventTimer getActiveEventTimer() {
+		return activeEventTimer;
+	}
+
+	public boolean isProjectGo() {
+		return projectGo;
+	}
+
+	public void setProjectGo(boolean projectGo) {
+		this.projectGo = projectGo;
+	}
+
+	public int getDeadLine() {
+		return deadLine;
+	}
+
+	public void setDeadLine(int deadLine) {
+		this.deadLine = deadLine;
+	}
+
+	public JLabel getProjectDeadLine() {
+		return projectDeadLine;
 	}
 }

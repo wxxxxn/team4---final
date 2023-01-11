@@ -9,8 +9,9 @@ public class UserProject {
 	private boolean complete;
 	private int lastHour;
 	private int lastMin;
+	private int deadLine;
 	
-	public UserProject(int id, int userId, int infoId, int projectId, boolean proceeding, boolean complete, int lastHour, int lastMin) {
+	public UserProject(int id, int userId, int infoId, int projectId, boolean proceeding, boolean complete, int lastHour, int lastMin, int deadLine) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -20,9 +21,10 @@ public class UserProject {
 		this.complete = complete;
 		this.lastHour = lastHour;
 		this.lastMin = lastMin;
+		this.deadLine = deadLine;
 	}
 	
-	public UserProject(int userId, int infoId, int projectId, boolean proceeding, boolean complete, int lastHour, int lastMin) {
+	public UserProject(int userId, int infoId, int projectId, boolean proceeding, boolean complete, int lastHour, int lastMin, int deadLine) {
 		super();
 		this.userId = userId;
 		this.infoId = infoId;
@@ -31,6 +33,7 @@ public class UserProject {
 		this.complete = complete;
 		this.lastHour = lastHour;
 		this.lastMin = lastMin;
+		this.deadLine = deadLine;
 	}
 
 	public int getId() {
@@ -85,11 +88,20 @@ public class UserProject {
 	public void setProceeding(boolean proceeding) {
 		this.proceeding = proceeding;
 	}
+	
+	
+	public int getDeadLine() {
+		return deadLine;
+	}
+
+	public void setDeadLine(int deadLine) {
+		this.deadLine = deadLine;
+	}
 
 	@Override
 	public String toString() {
 		return "UserProject [id=" + id + ", userId=" + userId + ", infoId=" + infoId + ", projectId=" + projectId
 				+ ", proceeding=" + proceeding + ", complete=" + complete + ", lastHour=" + lastHour + ", lastMin="
-				+ lastMin + "]";
+				+ lastMin + ", deadLine=" + deadLine + "]";
 	}
 }

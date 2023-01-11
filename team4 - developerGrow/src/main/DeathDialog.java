@@ -1,4 +1,4 @@
-package gui;
+package main;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,6 +34,7 @@ public class DeathDialog extends JDialog {
 		returnBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				mainFrame.setTimeGo(false);
 				if (mainFrame.getPb().getTimeHp() != null) {
 					mainFrame.getPb().getTimeHp().cancel();
 				}
@@ -55,8 +56,8 @@ public class DeathDialog extends JDialog {
 				mainFrame.stopSound();
 				mainFrame.dispose();
 				MainFrame mainFrameNew = new MainFrame(userId);
-				mainFrameNew.showGUI();
 				dispose();
+				mainFrameNew.showGUI();
 			}
 		});
 		
