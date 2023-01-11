@@ -37,7 +37,7 @@ public class AccountDelete {
 			String sql = null;
 			for (int i = 0; i < 6; i++) {
 				sql = sqlSwitch(i);
-				System.out.println(sql);
+//				System.out.println(sql);
 				try (Connection conn = ConnectionProvider.makeConnection();
 						PreparedStatement stmt = conn.prepareStatement(sql)) {
 					stmt.setInt(1, id);

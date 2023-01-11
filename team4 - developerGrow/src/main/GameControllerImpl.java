@@ -112,7 +112,6 @@ public class GameControllerImpl implements GameController {
 		String userNickName = mainFrame.getUserList().get(0).getUserNickname();
 		mainFrame.setUserRankList(SelectDB.selectRank());
 		
-		System.out.println(SelectDB.searchUserRank(userId));
 		
 		if (!SelectDB.searchUserRank(userId)) {
 			InsertDB.insertUserRank(userId, infoId, scoreCalculator(), userNickName);
@@ -129,8 +128,6 @@ public class GameControllerImpl implements GameController {
 	public void applyDB() {
 
 		UserInfo userInfo = mainFrame.getUserInfo();
-
-		System.out.println(userInfo);
 
 		try {
 			mainFrame.getDatelbl().setText(String.format("%02d", userInfo.getDate()) + "일차");
@@ -151,7 +148,6 @@ public class GameControllerImpl implements GameController {
 
 	@Override
 	public void saveUserInfoData() {
-		System.out.println("들어왔숑");
 		String strDate = mainFrame.getDatelbl().getText();
 		int date = Integer.parseInt(strDate.substring(0, 2));
 		int time = minutes;
@@ -214,7 +210,6 @@ public class GameControllerImpl implements GameController {
 		
 		
 		UpdateDB.updateRanking(userRank);
-		System.out.println(userRank);
 	}
 
 	private int scoreCalculator() {
