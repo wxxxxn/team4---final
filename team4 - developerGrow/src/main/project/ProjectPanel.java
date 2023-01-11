@@ -14,20 +14,35 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 
+import main.MainFrame;
+
 public class ProjectPanel extends JPanel implements MouseListener {
+	
+	private MainFrame mainFrame;
+	ProjectDialog projectDialog;
 	
 	private JLabel rankLabel;
 	private JLabel projectName;
 	private JLabel timeTakenlbl;
 	private JLabel completelbl;
-	private boolean proceeding = false;
-	private boolean complete = false;
 	private JPanel completepnl;
 	private JPanel proceedingpnl;
 	private JLabel proceedinglbl;
 	private JLabel rewardlbl;
 	
-	public ProjectPanel() {
+	int index = 0;
+	
+	private boolean proceeding = false;
+	private boolean complete = false;
+	private boolean selectable = false;
+
+	private JLabel selectablelbl;
+
+	private JPanel selectablepnl;
+	
+	public ProjectPanel(MainFrame mainFrame, ProjectDialog projectDialog) {
+		this.mainFrame = mainFrame;
+		this.projectDialog = projectDialog;
 		
 		EtchedBorder eborder = new EtchedBorder(EtchedBorder.RAISED);
 		setBorder(eborder);
@@ -62,6 +77,20 @@ public class ProjectPanel extends JPanel implements MouseListener {
 		proceedinglbl.setHorizontalAlignment(SwingConstants.CENTER);
 		proceedinglbl.setBounds(209, 24, 136, 47);
 		proceedingpnl.add(proceedinglbl);
+			
+		selectablepnl = new JPanel();
+		selectablepnl.setBounds(0, 0, 540, 100);
+		selectablepnl.setBackground(new Color(100, 100, 100, 100));
+		add(selectablepnl);
+		selectablepnl.setVisible(true);
+		selectablepnl.setLayout(null);
+		
+		selectablelbl = new JLabel("이전 과제를 완료해야 진행 가능합니다.");
+		selectablelbl.setForeground(Color.black);
+		selectablelbl.setFont(new Font("HY목각파임B", Font.BOLD, 20));
+		selectablelbl.setHorizontalAlignment(SwingConstants.CENTER);
+		selectablelbl.setBounds(65, 24, 404, 47);
+		selectablepnl.add(selectablelbl);
 		
 		rankLabel = new JLabel("1주차");
 		rankLabel.setBorder(eborder);
@@ -139,6 +168,50 @@ public class ProjectPanel extends JPanel implements MouseListener {
 		return new Dimension(540, 100);
 	}
 	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (selectable && !complete && !proceeding) {
+			mainFrame.getNowRatinglbl().setText("00");
+			setProceeding(true);
+			getProceedingpnl().setVisible(true);
+			String str = mainFrame.getProjectList().get(index).getProjectName();
+			mainFrame.getNowProjectlbl().setText(str);
+			int time = mainFrame.getProjectList().get(index).getTime();
+			mainFrame.getProjectHour().setText(String.valueOf(time));
+			mainFrame.revalidate();
+			mainFrame.repaint();
+			mainFrame.getUserProjectList().get(index).setProceeding(true);
+			mainFrame.getProjectEventImpl().projectTimeControll(time);	
+			projectDialog.dispose();
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		if (selectable && !complete && !proceeding) {
+			setBackground(Color.pink);
+		}
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		if (selectable && !complete && !proceeding) {
+			setBackground(Color.LIGHT_GRAY);
+		}
+	}
+	
 	public JLabel getRankLabel() {
 		return rankLabel;
 	}
@@ -180,7 +253,21 @@ public class ProjectPanel extends JPanel implements MouseListener {
 		this.proceedingpnl = proceedingpnl;
 	}
 	
-	
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
+	public boolean isSelectable() {
+		return selectable;
+	}
+
+	public void setSelectable(boolean selectable) {
+		this.selectable = selectable;
+	}
 
 	public JLabel getRewardlbl() {
 		return rewardlbl;
@@ -190,33 +277,8 @@ public class ProjectPanel extends JPanel implements MouseListener {
 		this.rewardlbl = rewardlbl;
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
+	public JPanel getSelectablepnl() {
+		return selectablepnl;
 	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		if (!complete && !proceeding) {
-			setBackground(Color.pink);
-		}
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		if (!complete && !proceeding) {
-			setBackground(Color.LIGHT_GRAY);
-		}
-	}
+	
 }

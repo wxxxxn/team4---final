@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.URL;
 import java.util.List;
@@ -25,7 +24,7 @@ import database.dblist.Project;
 import database.dblist.UserProject;
 import main.MainFrame;
 
-public class ProjectDialog extends JDialog implements MouseListener {
+public class ProjectDialog extends JDialog {
 
 	private JPanel contentPane;
 	private MainFrame mainFrame;
@@ -63,22 +62,42 @@ public class ProjectDialog extends JDialog implements MouseListener {
 		projectsPanel.setLayout(new BoxLayout(projectsPanel, BoxLayout.Y_AXIS));
 
 		pjs = new ProjectPanel[17];
-	
+		int lastCompletet = -1;
+		int lastProceeding = -1;
+		int count = 0;
+		
 		for (int i = 0; i < pjs.length; i++) {
-			ProjectPanel project = new ProjectPanel();
+			ProjectPanel project = new ProjectPanel(mainFrame, ProjectDialog.this);
 			project.getRankLabel().setText(String.valueOf((i + 1) + "주차"));
 			project.getProjectName().setText(projectList.get(i).getProjectName());
 			project.getRewardlbl().setText(String.valueOf(projectList.get(i).getRewardExp()));
 			project.getTimeTakenlbl().setText(String.valueOf(projectList.get(i).getTime()));
+			project.index = i;
 			if (userProjectList.get(i).isComplete()) {
+				count++;
+				lastCompletet = i;
 				project.setComplete(true);
+				project.getSelectablepnl().setVisible(false);
 				project.getCompletepnl().setVisible(true);
 			} else if (userProjectList.get(i).isProceeding()) {
+				count++;
+				lastProceeding = i;
+				project.getSelectablepnl().setVisible(false);
 				project.setProceeding(true);
 				project.getProceedingpnl().setVisible(true);
 			}
 			pjs[i] = project;
-			pjs[i].addMouseListener(this);
+		}
+		
+		if (count > 0) {
+			if ((lastProceeding == -1) && (lastCompletet != -1)) {
+				pjs[lastCompletet + 1].getSelectablepnl().setVisible(false);
+				pjs[lastCompletet + 1].setSelectable(true);
+			} else if ((lastProceeding == -1) && (lastCompletet == -1)) {
+				pjs[0].getSelectablepnl().setVisible(false);
+				pjs[0].setSelectable(true);				
+			}
+			count = 0;
 		}
 		
 		for (int i = 0; i < pjs.length; i++) {
@@ -129,43 +148,6 @@ public class ProjectDialog extends JDialog implements MouseListener {
 		setVisible(true);
 	}
 	
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		Object command = e.getSource();
-		for (int i = 0; i < projectList.size(); i++) {
-			if (command == pjs[i] && !pjs[i].isComplete() && !pjs[i].isProceeding()) {
-				mainFrame.getNowRatinglbl().setText("00");
-				pjs[i].setProceeding(true);
-				pjs[i].getProceedingpnl().setVisible(true);
-				String str = projectList.get(i).getProjectName();
-				mainFrame.getNowProjectlbl().setText(str);
-				int time = projectList.get(i).getTime();
-				mainFrame.getProjectHour().setText(String.valueOf(time));
-				mainFrame.revalidate();
-				mainFrame.repaint();
-				userProjectList.get(i).setProceeding(true);
-				mainFrame.getProjectEventImpl().projectTimeControll(time);
-				dispose();
-			}
-		}	
-	}
-	
-	@Override
-	public void mousePressed(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-	}
-
 	public ProjectPanel[] getPjs() {
 		return pjs;
 	}
