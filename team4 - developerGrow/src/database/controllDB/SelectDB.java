@@ -68,7 +68,7 @@ public class SelectDB {
 	
 	public static List<Rank> selectRank() {
 		List<Rank> list = new ArrayList<>();
-		String sql = "SELECT * FROM team4.rank";
+		String sql = "SELECT * FROM team4.rank ORDER BY score DESC LIMIT 10";
 		try (Connection conn = ConnectionProvider.makeConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql)) {
 			try (ResultSet rs = stmt.executeQuery()) {
