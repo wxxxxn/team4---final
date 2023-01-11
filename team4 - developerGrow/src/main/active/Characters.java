@@ -50,8 +50,8 @@ public class Characters extends JLabel {
 		characterlbl = new JLabel();
 		activelbl = new JLabel();
 		characterlbl.setIcon(bedsleepImage);
-		characterlbl.setBounds(597, 382, 446, 240);
-		mainFrame.add(characterlbl);
+		characterlbl.setBounds(543, 345, 480, 260);
+		mainFrame.add(characterlbl);	
 		mainFrame.setProjectGo(false);
 		mainFrame.revalidate();
 		mainFrame.repaint();
