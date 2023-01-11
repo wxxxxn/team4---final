@@ -40,8 +40,9 @@ public class ActiveEventTimer {
 						timer.cancel();
 						mainFrame.getActivitybtn().setEnabled(true);
 						mainFrame.setProjectGo(true);
+						mainFrame.setCiga(mainFrame.getCiga() + 20);
+						mainFrame.getNumOfcigalbl().setText(String.valueOf(mainFrame.getCiga()));
 						timer.cancel();
-						
 					}
 					playCount++;
 				}
@@ -176,6 +177,8 @@ public class ActiveEventTimer {
 						clearlbl();
 						characters.defaultCharacter();
 						mainFrame.getPb().controllPB_default();
+						mainFrame.setCiga(mainFrame.getCiga() - 1);
+						mainFrame.getNumOfcigalbl().setText(String.valueOf(mainFrame.getCiga()));
 						timer.cancel();
 					}
 					playCount++;
