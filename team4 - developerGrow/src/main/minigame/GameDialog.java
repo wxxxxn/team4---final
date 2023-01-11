@@ -68,7 +68,7 @@ public class GameDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
-				ToryMain torymain = new ToryMain("", mainFrame, GameDialog.this);
+				ToryMain torymain = new ToryMain("", mainFrame);
 				torymain.showGUI();			
 			}
 		});
@@ -94,7 +94,7 @@ public class GameDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				Hide hide = new Hide("", mainFrame, GameDialog.this);
+				Hide hide = new Hide("", mainFrame);
 				hide.showGUI();
 			}
 		});
