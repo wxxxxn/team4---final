@@ -222,8 +222,10 @@ public class SelectDB {
 					int stress = rs.getInt("stress");
 					int ciga = rs.getInt("ciga");
 					int usedCiga = rs.getInt("usedCiga");
+					boolean hide = rs.getBoolean("hide");
+					boolean tory = rs.getBoolean("tory");
 					boolean gameover = rs.getBoolean("gameover");
-					list.add(new UserInfo(infoId, date, time, level, exp, hp, health, stress, ciga, usedCiga, gameover, userId));
+					list.add(new UserInfo(infoId, date, time, level, exp, hp, health, stress, ciga, usedCiga, hide, tory, gameover, userId));
 				}
 			}
 		} catch (SQLException e) {

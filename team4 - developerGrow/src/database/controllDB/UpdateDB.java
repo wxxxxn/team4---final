@@ -15,7 +15,7 @@ public class UpdateDB {
 	
 	public static int[] updateUserInfo(UserInfo userInfo) {
 		String sql = "UPDATE userInfo SET date =?, time = ?, level = ?, exp = ?"
-				+ ", hp = ?, health = ?, stress = ?, ciga = ?, usedCiga = ?, gameover = ? "
+				+ ", hp = ?, health = ?, stress = ?, ciga = ?, usedCiga = ?, hide = ?, tory = ?, gameover = ? "
 				+ "WHERE userId = ? AND infoId = ?";
 		try (Connection conn = ConnectionProvider.makeConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -28,9 +28,11 @@ public class UpdateDB {
 			stmt.setInt(7, userInfo.getStress());
 			stmt.setInt(8, userInfo.getCiga());
 			stmt.setInt(9, userInfo.getUsedCiga());
-			stmt.setBoolean(10, userInfo.isGameover());
-			stmt.setInt(11, userInfo.getUserId());
-			stmt.setInt(12, userInfo.getInfoId());
+			stmt.setBoolean(10, userInfo.isHide());
+			stmt.setBoolean(11, userInfo.isTory());
+			stmt.setBoolean(12, userInfo.isGameover());
+			stmt.setInt(13, userInfo.getUserId());
+			stmt.setInt(14, userInfo.getInfoId());
 
 			stmt.addBatch();
 

@@ -1,12 +1,22 @@
 package main.minigame.different;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.net.URL;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import main.MainFrame;
+import main.minigame.GameDialog;
 
 public class ToryMain extends JFrame {
 
@@ -14,16 +24,19 @@ public class ToryMain extends JFrame {
 	final Tory right = new Tory("dif_img/2.jpg");
 	JLabel click;
 	
+	
 	// 틀린그림부분의 좌표값 배열
 	static int[] imageX = { 150, 278, 205, 205, 310 };
 	static int[] imageY = { 242, 242, 290, 333, 160 };
 	// 틀린부분의 범위 기본 설정값
 	static final int range = 30;
 	private MainFrame mainFrame;
+	private GameDialog gameDialog;
 	
-	public ToryMain(String string, MainFrame mainFrame) {
+	public ToryMain(String string, MainFrame mainFrame, GameDialog gameDialog) {
 		super(string);
 		this.mainFrame = mainFrame;
+		this.gameDialog = gameDialog;
 		CustomMouseAdapter cma = new CustomMouseAdapter();
 		left.setBounds(10, 10, 470, 541);
 		// imga 이미지가 저장된 JPanel a 객체에 감지기 설정
@@ -163,6 +176,15 @@ public class ToryMain extends JFrame {
 				Tory.f5 = false;
 				left.repaint();
 				right.repaint();
+				mainFrame.getUserInfo().setCiga(mainFrame.getUserInfo().getCiga() + 10);
+				mainFrame.getNumOfcigalbl().setText(String.valueOf(mainFrame.getUserInfo().getCiga()));
+				mainFrame.getProjectEventImpl().expProgressBar(20);
+				mainFrame.revalidate();
+				mainFrame.repaint();
+				mainFrame.getUserInfo().setTory(true);
+				mainFrame.setTimeGo(true);
+				mainFrame.setProjectGo(true);
+				dispose();
 			}
 		}
 		

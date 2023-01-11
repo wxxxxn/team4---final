@@ -1,12 +1,21 @@
 package main.minigame.different;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.net.URL;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import main.MainFrame;
+import main.minigame.GameDialog;
 
 
 public class Hide extends JFrame {
@@ -20,10 +29,12 @@ public class Hide extends JFrame {
 	static final int range = 40;
 	
 	private MainFrame mainFrame;
+	private GameDialog gameDialog;
 	
-	public Hide(String string, MainFrame mainFrame) {
+	public Hide(String string, MainFrame mainFrame, GameDialog gameDialog) {
 		super(string);
 		this.mainFrame = mainFrame;
+		this.gameDialog = gameDialog;
 		
 		ClassLoader classLoader = getClass().getClassLoader();
 		URL clickImg = classLoader.getResource("images/dif_img/check.png");
@@ -141,6 +152,15 @@ public class Hide extends JFrame {
 				Hidee.f6 = false;
 				Hidee.f7 = false;
 				center.repaint();
+				mainFrame.getUserInfo().setCiga(mainFrame.getUserInfo().getCiga() + 10);
+				mainFrame.getNumOfcigalbl().setText(String.valueOf(mainFrame.getUserInfo().getCiga()));
+				mainFrame.getProjectEventImpl().expProgressBar(20);
+				mainFrame.revalidate();
+				mainFrame.repaint();
+				mainFrame.getUserInfo().setHide(true);
+				mainFrame.setTimeGo(true);
+				mainFrame.setProjectGo(true);
+				dispose();
 			}
 		}
 	}

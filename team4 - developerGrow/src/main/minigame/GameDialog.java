@@ -68,7 +68,7 @@ public class GameDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
-				ToryMain torymain = new ToryMain("", mainFrame);
+				ToryMain torymain = new ToryMain("", mainFrame, GameDialog.this);
 				torymain.showGUI();			
 			}
 		});
@@ -94,7 +94,7 @@ public class GameDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				Hide hide = new Hide("", mainFrame);
+				Hide hide = new Hide("", mainFrame, GameDialog.this);
 				hide.showGUI();
 			}
 		});
@@ -148,6 +148,12 @@ public class GameDialog extends JDialog {
 			}
 		});
 		getContentPane().add(closeButton);
+		if (mainFrame.getUserInfo().isHide()) {
+			getThirdGameBtn().setEnabled(false);
+		}
+		if (mainFrame.getUserInfo().isTory()) {
+			getSecondGameBtn().setEnabled(false);
+		}
 		
 	}
 	

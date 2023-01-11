@@ -11,10 +11,12 @@ public class UserInfo {
 	private int stress;
 	private int ciga;
 	private int usedCiga;
+	private boolean hide;
+	private boolean tory;
 	private boolean gameover;
 	private int userId;
 	public UserInfo(int infoId, int date, int time, int level, int exp, int hp, int health, int stress, int ciga,
-			int usedCiga, boolean gameover, int userId) {
+			int usedCiga, boolean hide, boolean tory, boolean gameover, int userId) {
 		super();
 		this.infoId = infoId;
 		this.date = date;
@@ -26,11 +28,13 @@ public class UserInfo {
 		this.stress = stress;
 		this.ciga = ciga;
 		this.usedCiga = usedCiga;
+		this.hide = hide;
+		this.tory = tory;
 		this.gameover = gameover;
 		this.userId = userId;
 	}
 	public UserInfo(int date, int time, int level, int exp, int hp, int health, int stress, int ciga,
-			int usedCiga, boolean gameover, int userId) {
+			int usedCiga, boolean hide, boolean tory, boolean gameover, int userId) {
 		super();
 		this.date = date;
 		this.time = time;
@@ -41,6 +45,8 @@ public class UserInfo {
 		this.stress = stress;
 		this.ciga = ciga;
 		this.usedCiga = usedCiga;
+		this.hide = hide;
+		this.tory = tory;
 		this.gameover = gameover;
 		this.userId = userId;
 	}
@@ -116,10 +122,25 @@ public class UserInfo {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+	
+	public boolean isHide() {
+		return hide;
+	}
+	public void setHide(boolean hide) {
+		this.hide = hide;
+	}
+	public boolean isTory() {
+		return tory;
+	}
+	public void setTory(boolean tory) {
+		this.tory = tory;
+	}
 	@Override
 	public String toString() {
 		return "UserInfo [infoId=" + infoId + ", date=" + date + ", time=" + time + ", level=" + level + ", exp=" + exp
 				+ ", hp=" + hp + ", health=" + health + ", stress=" + stress + ", ciga=" + ciga + ", usedCiga="
-				+ usedCiga + ", gameover=" + gameover + ", userId=" + userId + "]";
+				+ usedCiga + ", hide=" + hide + ", tory=" + tory + ", gameover=" + gameover + ", userId=" + userId
+				+ "]";
 	}
+
 }

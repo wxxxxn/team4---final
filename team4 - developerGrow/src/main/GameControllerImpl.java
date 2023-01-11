@@ -151,6 +151,7 @@ public class GameControllerImpl implements GameController {
 
 	@Override
 	public void saveUserInfoData() {
+		System.out.println("들어왔숑");
 		String strDate = mainFrame.getDatelbl().getText();
 		int date = Integer.parseInt(strDate.substring(0, 2));
 		int time = minutes;
@@ -161,10 +162,12 @@ public class GameControllerImpl implements GameController {
 		int stress = mainFrame.getStressbar().getValue();
 		int ciga = Integer.valueOf(mainFrame.getNumOfcigalbl().getText());
 		int usedCiga = mainFrame.getUserInfo().getUsedCiga();
+		boolean hide = mainFrame.getUserInfo().isHide();
+		boolean tory = mainFrame.getUserInfo().isTory();
 		boolean gameover = mainFrame.getUserInfo().isGameover();
 
 		UserInfo userInfo = new UserInfo(mainFrame.getInfoId(), date, time, level, exp, hp, health, stress, ciga,
-				usedCiga, gameover, mainFrame.getUserId());
+				usedCiga, hide, tory, gameover, mainFrame.getUserId());
 
 		UpdateDB.updateUserInfo(userInfo);
 	}
