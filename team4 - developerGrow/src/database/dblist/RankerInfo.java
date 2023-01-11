@@ -24,4 +24,9 @@ public class RankerInfo {
 	public int getUsedCiga() {
 		return usedCiga;
 	}
+
+	@Override
+	public String toString() {
+		return "RankerInfo [date=" + date + ", time=" + time + ", usedCiga=" + usedCiga + "]";
+	}
 }

@@ -93,10 +93,16 @@ public class GameControllerImpl implements GameController {
 			mainFrame.setUserProjectList(SelectDB.selectUserProject(userId, infoId));
 		}
 
+		String userNickName = mainFrame.getUserList().get(0).getUserNickname();
 		mainFrame.setUserRankList(SelectDB.selectRank());
+		
+		System.out.println(SelectDB.searchUserRank(userId));
+		
+		if (!SelectDB.searchUserRank(userId)) {
+			InsertDB.insertUserRank(userId, infoId, scoreCalculator(), userNickName);
+		}
 		if (mainFrame.getUserRankList().size() == 0) {
-			InsertDB.insertUserRank(userId, infoId, scoreCalculator(),
-					mainFrame.getUserList().get(0).getUserNickname());
+			InsertDB.insertUserRank(userId, infoId, scoreCalculator(), userNickName);
 			mainFrame.setUserRankList(SelectDB.selectRank());
 		}
 
@@ -197,6 +203,9 @@ public class GameControllerImpl implements GameController {
 
 		Rank userRank = new Rank(mainFrame.getUserList().get(0).getUserNickname(), scoreCalculator(),
 				mainFrame.getUserInfo().getInfoId(), mainFrame.getUserInfo().getUserId());
+		
+		
+		
 		UpdateDB.updateRanking(userRank);
 		System.out.println(userRank);
 	}

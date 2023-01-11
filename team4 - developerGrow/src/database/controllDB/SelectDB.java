@@ -115,6 +115,26 @@ public class SelectDB {
 		return null;
 	}
 	
+	public static boolean searchUserRank(int userId) {
+		String sql = "SELECT * FROM team4.rank WHERE userid = ?";
+		try (Connection conn = ConnectionProvider.makeConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql)) {
+			
+				stmt.setInt(1, userId);
+				
+				ResultSet rs = stmt.executeQuery();
+				if (rs.next()) {
+					return true;
+				} else {
+					return false;
+				}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	public static List<SkillList> selectSkillList() {
 		List<SkillList> list = new ArrayList<>();
 		String sql = "SELECT * FROM team4.skillList";
