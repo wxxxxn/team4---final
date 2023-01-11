@@ -42,34 +42,34 @@ import progressbar.ProgressbarEvent;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
-	
+
 	// 게임속도
 	int gameSpeed = 1;
-	
+
 	// timer 정지 및 시작
 	private boolean timeGo = true;
 	private boolean projectGo = true;
 
 	// 메인페널
 	private ImagePanel Mainpnl;
-	
+
 	// 사운드
 	private static Clip clip;
 	private JButton soundbtn;
-	
+
 	// 활동버튼
 	private ActiveEventTimer activeEventTimer = new ActiveEventTimer(this);
 	private JButton activitybtn;
-	
+
 	// 메인시간
 	private GameControllerImpl gameControllerImpl = new GameControllerImpl(this);
 	private JLabel datelbl;
 	private JLabel hourlbl;
 	private JLabel minutelbl;
-	
+
 	// 상점
 	private StoreDialog storeFrame = null;
-	
+
 	// 프로젝트
 	private ProjectDialog projectFrame = null;
 	private ProjectEventImpl projectEventImpl = new ProjectEventImpl(this);
@@ -80,18 +80,18 @@ public class MainFrame extends JFrame {
 	private int nowProjectId = 0;
 	private int deadLine = 2880;
 	private JLabel projectDeadLine;
-	
+
 	// 정보
 	private JLabel levellbl;
 	private JLabel numOfcigalbl;
-	
+
 	// progressbar
 	private ProgressbarEvent pb = new ProgressbarEvent(this);
 	private JProgressBar hpbar;
 	private JProgressBar expbar;
 	private JProgressBar stressbar;
 	private JProgressBar healthbar;
-	
+
 	// DB
 	private List<UserInfo> userInfoList;
 	private List<SkillList> skillList;
@@ -106,7 +106,7 @@ public class MainFrame extends JFrame {
 	private int infoId;
 	private int userId;
 	private int score;
-	
+
 	// 미니게임
 	GameDialog gameDialog = null;
 
@@ -125,10 +125,111 @@ public class MainFrame extends JFrame {
 		Mainpnl.setLayout(null);
 
 		activeEventTimer.getCharacters().defaultCharacter();
-		
+
 		ImageIcon sound = Methods.convertToResizeIcon(getClass(), "images/btn_img/sound.png", 50, 50);
 		ImageIcon mute = Methods.convertToResizeIcon(getClass(), "images/btn_img/mute.png", 50, 50);
-		
+
+		JPanel statuspnl = new JPanel();
+		statuspnl.setBounds(46, 613, 934, 114);
+		Mainpnl.add(statuspnl);
+		statuspnl.setLayout(null);
+		statuspnl.setBackground(new Color(255, 255, 255, 100));
+
+		JPanel currentcigapnl = new JPanel();
+		currentcigapnl.setBounds(22, 10, 225, 42);
+		statuspnl.add(currentcigapnl);
+		currentcigapnl.setOpaque(false);
+		currentcigapnl.setLayout(null);
+
+		JLabel currentcigalbl = new JLabel("담배  X");
+		currentcigalbl.setIcon(Methods.convertToIcon(getClass(), "images/rank_img/ciga.png"));
+
+		currentcigalbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
+		currentcigalbl.setBounds(12, 0, 117, 43);
+		currentcigapnl.add(currentcigalbl);
+
+		numOfcigalbl = new JLabel("00");
+		numOfcigalbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
+		numOfcigalbl.setBounds(124, 5, 89, 33);
+		currentcigapnl.add(numOfcigalbl);
+
+		JPanel stresspnl = new JPanel();
+		stresspnl.setBounds(294, 40, 628, 30);
+		statuspnl.add(stresspnl);
+		stresspnl.setOpaque(false);
+		stresspnl.setLayout(null);
+
+		JLabel stresslbl = new JLabel("스트레스");
+		stresslbl.setHorizontalAlignment(SwingConstants.LEFT);
+		stresslbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
+		stresslbl.setBounds(39, 5, 85, 22);
+		stresspnl.add(stresslbl);
+
+		stressbar = new JProgressBar();
+		stressbar.setFont(new Font("휴먼편지체", Font.PLAIN, 12));
+		stressbar.setValue(10);
+		stressbar.setStringPainted(true);
+		stressbar.setForeground(new Color(139, 0, 0));
+		stressbar.setBounds(136, 5, 480, 22);
+		stresspnl.add(stressbar);
+
+		JPanel developlvpnl = new JPanel();
+		developlvpnl.setBounds(22, 62, 225, 42);
+		statuspnl.add(developlvpnl);
+		developlvpnl.setOpaque(false);
+		developlvpnl.setLayout(null);
+
+		JLabel lblNewLabel = new JLabel("개발능력Lv");
+		lblNewLabel.setFont(new Font("휴먼편지체", Font.BOLD, 20));
+		lblNewLabel.setBounds(12, 5, 110, 32);
+		developlvpnl.add(lblNewLabel);
+
+		levellbl = new JLabel("00");
+		levellbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
+		levellbl.setBounds(124, 5, 89, 33);
+		developlvpnl.add(levellbl);
+
+		JPanel healthpnl = new JPanel();
+		healthpnl.setLayout(null);
+		healthpnl.setOpaque(false);
+		healthpnl.setBounds(294, 75, 628, 30);
+		statuspnl.add(healthpnl);
+
+		JLabel healthlbl = new JLabel("건강");
+		healthlbl.setHorizontalAlignment(SwingConstants.LEFT);
+		healthlbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
+		healthlbl.setBounds(39, 5, 85, 22);
+		healthpnl.add(healthlbl);
+
+		healthbar = new JProgressBar();
+		healthbar.setFont(new Font("휴먼편지체", Font.PLAIN, 12));
+		healthbar.setValue(100);
+		healthbar.setStringPainted(true);
+		healthbar.setForeground(new Color(0, 128, 0));
+		healthbar.setBounds(136, 5, 480, 22);
+		healthpnl.add(healthbar);
+
+		JPanel hppnl = new JPanel();
+		hppnl.setBounds(294, 5, 628, 30);
+		statuspnl.add(hppnl);
+		hppnl.setOpaque(false);
+		hppnl.setBackground(new Color(255, 0, 0, 0));
+		hppnl.setLayout(null);
+
+		JLabel hplbl = new JLabel("HP");
+		hplbl.setHorizontalAlignment(SwingConstants.LEFT);
+		hplbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
+		hplbl.setBounds(39, 5, 85, 22);
+		hppnl.add(hplbl);
+
+		hpbar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
+		hpbar.setFont(new Font("휴먼편지체", Font.PLAIN, 12));
+		hpbar.setForeground(Color.RED);
+		hpbar.setStringPainted(true);
+		hpbar.setValue(100);
+		hpbar.setBounds(136, 5, 480, 22);
+		hppnl.add(hpbar);
+
 		JButton btnSpeed = new JButton(Methods.convertToResizeIcon(getClass(), "images/btn_img/speed1.png", 60, 50));
 		btnSpeed.setForeground(Color.RED);
 		btnSpeed.setBackground(new Color(0, 0, 0, 0));
@@ -172,7 +273,7 @@ public class MainFrame extends JFrame {
 					clip.stop();
 				} else if (soundbtn.getIcon() == mute) {
 					soundbtn.setIcon(sound);
-					clip.start();				
+					clip.start();
 				}
 			}
 		});
@@ -182,12 +283,12 @@ public class MainFrame extends JFrame {
 		expbar.setStringPainted(true);
 		expbar.setForeground(new Color(30, 144, 255));
 		expbar.setFont(new Font("휴먼편지체", Font.PLAIN, 12));
-		expbar.setBounds(50, 735, 827, 20);
+		expbar.setBounds(95, 737, 861, 20);
 		Mainpnl.add(expbar);
 
 		JLabel lblNewLabel_2 = new JLabel("exp");
 		lblNewLabel_2.setFont(new Font("휴먼편지체", Font.BOLD, 20));
-		lblNewLabel_2.setBounds(12, 728, 37, 29);
+		lblNewLabel_2.setBounds(46, 728, 37, 29);
 		Mainpnl.add(lblNewLabel_2);
 
 		JPanel date = new JPanel();
@@ -229,104 +330,6 @@ public class MainFrame extends JFrame {
 		colonlbl.setBounds(60, 0, 15, 45);
 		currentTime.add(colonlbl);
 
-		JPanel statuspnl = new JPanel();
-		statuspnl.setBounds(12, 608, 877, 114);
-		Mainpnl.add(statuspnl);
-		statuspnl.setLayout(null);
-		statuspnl.setBackground(new Color(255, 255, 255, 100));
-
-		JPanel currentcigapnl = new JPanel();
-		currentcigapnl.setBounds(22, 10, 225, 42);
-		statuspnl.add(currentcigapnl);
-		currentcigapnl.setOpaque(false);
-		currentcigapnl.setLayout(null);
-
-		JLabel currentcigalbl = new JLabel("담배  X");
-		currentcigalbl.setIcon(Methods.convertToIcon(getClass(), "images/rank_img/ciga.png"));
-		
-		currentcigalbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
-		currentcigalbl.setBounds(12, 0, 117, 43);
-		currentcigapnl.add(currentcigalbl);
-
-		numOfcigalbl = new JLabel("00");
-		numOfcigalbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
-		numOfcigalbl.setBounds(124, 5, 89, 33);
-		currentcigapnl.add(numOfcigalbl);
-
-		JPanel stresspnl = new JPanel();
-		stresspnl.setBounds(294, 40, 571, 30);
-		statuspnl.add(stresspnl);
-		stresspnl.setOpaque(false);
-		stresspnl.setLayout(null);
-
-		JLabel stresslbl = new JLabel("스트레스");
-		stresslbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
-		stresslbl.setBounds(12, 5, 64, 22);
-		stresspnl.add(stresslbl);
-
-		stressbar = new JProgressBar();
-		stressbar.setFont(new Font("휴먼편지체", Font.PLAIN, 12));
-		stressbar.setValue(10);
-		stressbar.setStringPainted(true);
-		stressbar.setForeground(new Color(139, 0, 0));
-		stressbar.setBounds(80, 5, 480, 22);
-		stresspnl.add(stressbar);
-
-		JPanel developlvpnl = new JPanel();
-		developlvpnl.setBounds(22, 62, 225, 42);
-		statuspnl.add(developlvpnl);
-		developlvpnl.setOpaque(false);
-		developlvpnl.setLayout(null);
-
-		JLabel lblNewLabel = new JLabel("개발능력Lv");
-		lblNewLabel.setFont(new Font("휴먼편지체", Font.BOLD, 20));
-		lblNewLabel.setBounds(12, 5, 110, 32);
-		developlvpnl.add(lblNewLabel);
-
-		levellbl = new JLabel("00");
-		levellbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
-		levellbl.setBounds(124, 5, 89, 33);
-		developlvpnl.add(levellbl);
-
-		JPanel healthpnl = new JPanel();
-		healthpnl.setLayout(null);
-		healthpnl.setOpaque(false);
-		healthpnl.setBounds(294, 75, 571, 30);
-		statuspnl.add(healthpnl);
-
-		JLabel healthlbl = new JLabel("건강");
-		healthlbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
-		healthlbl.setBounds(12, 5, 54, 22);
-		healthpnl.add(healthlbl);
-
-		healthbar = new JProgressBar();
-		healthbar.setFont(new Font("휴먼편지체", Font.PLAIN, 12));
-		healthbar.setValue(100);
-		healthbar.setStringPainted(true);
-		healthbar.setForeground(new Color(0, 128, 0));
-		healthbar.setBounds(80, 5, 480, 22);
-		healthpnl.add(healthbar);
-
-		JPanel hppnl = new JPanel();
-		hppnl.setBounds(294, 5, 571, 30);
-		statuspnl.add(hppnl);
-		hppnl.setOpaque(false);
-		hppnl.setBackground(new Color(255, 0, 0, 0));
-		hppnl.setLayout(null);
-
-		JLabel hplbl = new JLabel("HP");
-		hplbl.setFont(new Font("휴먼편지체", Font.BOLD, 20));
-		hplbl.setBounds(12, 5, 57, 22);
-		hppnl.add(hplbl);
-
-		hpbar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
-		hpbar.setFont(new Font("휴먼편지체", Font.PLAIN, 12));
-		hpbar.setForeground(Color.RED);
-		hpbar.setStringPainted(true);
-		hpbar.setValue(100);
-		hpbar.setBounds(80, 5, 480, 22);
-		hppnl.add(hpbar);
-
 		JButton rankingbtn = new JButton();
 		rankingbtn.setBounds(1051, 140, 90, 89);
 		rankingbtn.setIcon(Methods.convertToIcon(getClass(), "images/btn_img/rankBtnImage.png"));
@@ -338,7 +341,8 @@ public class MainFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				timeGo = false;
-				RankingDialog rankingFrame = new RankingDialog(MainFrame.this.getX(), MainFrame.this.getY(), MainFrame.this);
+				RankingDialog rankingFrame = new RankingDialog(MainFrame.this.getX(), MainFrame.this.getY(),
+						MainFrame.this);
 				rankingFrame.showGUI();
 			}
 		});
@@ -355,7 +359,8 @@ public class MainFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				timeGo = false;
-				SettingDialog settingFrame = new SettingDialog(MainFrame.this.getX(), MainFrame.this.getY(), MainFrame.this);
+				SettingDialog settingFrame = new SettingDialog(MainFrame.this.getX(), MainFrame.this.getY(),
+						MainFrame.this);
 				settingFrame.showGUI();
 				if (settingFrame.getLoginFrame()) {
 					new LoginFrame();
@@ -429,7 +434,8 @@ public class MainFrame extends JFrame {
 		activitybtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ActiveDialog activeFrame = new ActiveDialog(MainFrame.this.getX(), MainFrame.this.getY(), MainFrame.this);
+				ActiveDialog activeFrame = new ActiveDialog(MainFrame.this.getX(), MainFrame.this.getY(),
+						MainFrame.this);
 				activeFrame.showGUI();
 			}
 		});
@@ -485,23 +491,22 @@ public class MainFrame extends JFrame {
 		projectMinute.setFont(new Font("HY엽서L", Font.BOLD, 14));
 		projectMinute.setBounds(154, 103, 29, 17);
 		panel.add(projectMinute);
-		
+
 		JLabel lblNewLabel_3_1 = new JLabel("마감 시간: ");
 		lblNewLabel_3_1.setFont(new Font("HY엽서L", Font.BOLD, 14));
 		lblNewLabel_3_1.setBounds(18, 130, 83, 15);
 		panel.add(lblNewLabel_3_1);
-		
+
 		projectDeadLine = new JLabel("0000");
 		projectDeadLine.setFont(new Font("HY엽서L", Font.BOLD, 14));
 		projectDeadLine.setBounds(113, 130, 62, 17);
 		panel.add(projectDeadLine);
-		
+
 		JLabel de = new JLabel("분");
 		de.setFont(new Font("HY엽서L", Font.BOLD, 14));
 		de.setBounds(164, 130, 29, 17);
 		panel.add(de);
-		
-		
+
 		gameControllerImpl.readyGame(userId);
 		gameControllerImpl.applyDB();
 		gameControllerImpl.timeController();
@@ -593,7 +598,7 @@ public class MainFrame extends JFrame {
 	public List<UserSkill> getUserSkillList() {
 		return userSkillList;
 	}
-	
+
 	public List<SkillList> getSkillList() {
 		return skillList;
 	}
@@ -637,7 +642,7 @@ public class MainFrame extends JFrame {
 	public List<User> getUserList() {
 		return userList;
 	}
-	
+
 	public void setUserList(List<User> userList) {
 		this.userList = userList;
 	}
@@ -673,7 +678,7 @@ public class MainFrame extends JFrame {
 	public ProjectEventImpl getProjectEventImpl() {
 		return projectEventImpl;
 	}
-	
+
 	public int getNowProjectId() {
 		return nowProjectId;
 	}
@@ -681,7 +686,7 @@ public class MainFrame extends JFrame {
 	public void setNowProjectId(int nowProjectId) {
 		this.nowProjectId = nowProjectId;
 	}
-	
+
 	public List<Rank> getUserRankList() {
 		return userRankList;
 	}
@@ -709,7 +714,7 @@ public class MainFrame extends JFrame {
 	public GameControllerImpl getGameControllerImpl() {
 		return gameControllerImpl;
 	}
-	
+
 	public int getGameSpeed() {
 		return gameSpeed;
 	}
