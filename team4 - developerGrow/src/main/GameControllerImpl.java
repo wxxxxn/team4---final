@@ -10,6 +10,7 @@ import database.controllDB.UpdateDB;
 import database.dblist.Rank;
 import database.dblist.UserInfo;
 import main.project.ProjectEventImpl;
+import main.suddenQuestion.Cockroach;
 import main.suddenQuestion.WorkBookDialog;
 
 public class GameControllerImpl implements GameController {
@@ -47,6 +48,14 @@ public class GameControllerImpl implements GameController {
 					showrandomQustion();
 				} else if (minutes == randomMin2) {
 					showrandomQustion();
+				}
+				
+				if (minutes == randomMin3 && cockroachCount >= 3) {
+					new Cockroach().cockroachappear(mainFrame);
+					randomMin3 = random.nextInt(1339) + 1;
+					cockroachCount = 0;
+				} else if (minutes == randomMin3) {
+					cockroachCount++;
 				}
 	
 				if (((minutes % 60) % 10) == 0) {
@@ -230,6 +239,8 @@ public class GameControllerImpl implements GameController {
 	private Random random = new Random();
 	private int randomMin1 = random.nextInt(1339) + 1;
 	private int randomMin2 = random.nextInt((1339 - randomMin1)) + randomMin1 + 1;
+	private int randomMin3 = random.nextInt(1339) + 1;
+	private int cockroachCount = 0;
 	
 	public void showrandomQustion() {
 		
