@@ -1,25 +1,17 @@
 package login;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.net.URL;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import guiDesign.Methods;
@@ -27,7 +19,7 @@ import guiDesign.MyPassword;
 import guiDesign.MyTextField;
 import login.signUp.SignUpDialog;
 import main.MainFrame;
-import manual.Manual1;
+import main.menual.Menual1;
 
 public class LoginFrame extends JFrame {
 
@@ -110,9 +102,8 @@ public class LoginFrame extends JFrame {
 		manualBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Manual1 manual1 = new Manual1(LoginFrame.this.getX(), LoginFrame.this.getY(), LoginFrame.this);
+				Menual1 manual1 = new Menual1(LoginFrame.this.getX(), LoginFrame.this.getY());
 				manual1.showGUI();
-				dispose();
 			}
 		});
 		getContentPane().add(manualBtn);

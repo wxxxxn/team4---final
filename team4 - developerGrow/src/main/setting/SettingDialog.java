@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 import login.AccountDelete;
 import login.LoginFrame;
 import main.MainFrame;
+import main.menual.Menual1;
 
 public class SettingDialog extends JDialog {
 
@@ -52,13 +53,20 @@ public class SettingDialog extends JDialog {
 		lblNewLabel.setBounds(50, 152, 585, 54);
 		contentPane.add(lblNewLabel);
 				
-		JButton resetbtn = new JButton();
-		resetbtn.setBounds(517, 246, 152, 45);
-		resetbtn.setIcon(convertToIcon(getClass(), "images/btn_setting/reset.png", 165, 45));
-		resetbtn.setPressedIcon(convertToIcon(getClass(), "images/btn_setting/resetPush.png", 165, 45));
-		contentPane.add(resetbtn);
-		resetbtn.setOpaque(false);
-		resetbtn.setBorderPainted(false);
+		JButton menualbtn = new JButton();
+		menualbtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Menual1 menual = new Menual1(mainFrame.getX(), mainFrame.getY());
+				menual.showGUI();
+			}
+		});
+		menualbtn.setBounds(517, 246, 152, 45);
+		menualbtn.setIcon(convertToIcon(getClass(), "images/btn_setting/menual.png", 165, 45));
+		menualbtn.setPressedIcon(convertToIcon(getClass(), "images/btn_setting/menualPush.png", 165, 45));
+		contentPane.add(menualbtn);
+		menualbtn.setOpaque(false);
+		menualbtn.setBorderPainted(false);
 
 		JButton logoutbtn = new JButton();
 		logoutbtn.addActionListener(new ActionListener() {
