@@ -45,7 +45,6 @@ public class ActiveEventImpl implements ActiveEvent {
 
 	@Override
 	public void showActiveCharacter(int time) {
-
 		character = characters.getCharacterlbl();
 		active = characters.getActivelbl();
 
