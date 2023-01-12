@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import guiDesign.Methods;
 import main.MainFrame;
 import main.minigame.GameDialog;
 
@@ -37,8 +38,6 @@ public class Hide extends JFrame {
 		this.gameDialog = gameDialog;
 		
 		ClassLoader classLoader = getClass().getClassLoader();
-		URL clickImg = classLoader.getResource("images/dif_img/check.png");
-		URL hiding = classLoader.getResource("images/dif_img/1234.PNG");
 		
 		center.setBounds(0, 0, 694, 951);
 		center.setBackground(Color.white);
@@ -48,21 +47,19 @@ public class Hide extends JFrame {
 		center.setLayout(null);
 
 		click = new JLabel();
-		click.setIcon(new ImageIcon(clickImg));
+		click.setIcon(Methods.convertToIcon(getClass(), "images/dif_img/check.png"));
 		click.setSize(70, 70);
 		center.add(click);
 
 		JLabel leftimg = new JLabel("");
-		leftimg.setIcon(new ImageIcon(hiding));
+		leftimg.setIcon(Methods.convertToIcon(getClass(), "images/dif_img/1234.PNG"));
 		leftimg.setBounds(28, -24, 611, 951);
 		center.add(leftimg);
 		
 		JButton btnNewButton = new JButton();
-		URL btn = classLoader.getResource("images/btn_img/miniGameCloseBtn.png");
-		URL btnhide = classLoader.getResource("images/btn_img/miniGameClosePushBtn.png");
-		btnNewButton.setIcon(new ImageIcon(btn));
+		btnNewButton.setIcon(Methods.convertToIcon(getClass(), "images/btn_img/miniGameCloseBtn.png"));
 		btnNewButton.setBorderPainted(false);
-		btnNewButton.setPressedIcon(new ImageIcon(btnhide));
+		btnNewButton.setPressedIcon(Methods.convertToIcon(getClass(), "images/btn_img/miniGameClosePushBtn.png"));
 		btnNewButton.setOpaque(false);
 		btnNewButton.setBackground(new Color(255, 0, 0, 0));
 		btnNewButton.addActionListener(new ActionListener() {
