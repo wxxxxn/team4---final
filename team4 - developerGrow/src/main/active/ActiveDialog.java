@@ -71,7 +71,7 @@ public class ActiveDialog extends JDialog {
 		switch (num) {
 			case 0: // 쿠팡
 				activeEventTimer.clearlbl();
-				activeEventTimer.coupangTimer(360);
+				activeEventTimer.coupangTimer(150);
 				break;
 			case 1: // 밥
 				activeEventTimer.clearlbl();

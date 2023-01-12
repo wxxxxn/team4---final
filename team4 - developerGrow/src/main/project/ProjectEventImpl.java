@@ -85,6 +85,9 @@ public class ProjectEventImpl implements ProjectEvent {
 			mainFrame.getNowRatinglbl().setText("완료");
 			projectTimer.cancel();
 			int index = mainFrame.getNowProjectId();
+			if (index == mainFrame.getProjectList().size() - 1) {
+				mainFrame.getTaskbtn().setEnabled(false);
+			}
 			mainFrame.getUserProjectList().get(index).setComplete(true);
 			mainFrame.getNowRatinglbl().setText("완료!!");
 			expProgressBar(mainFrame.getProjectList().get(index).getRewardExp());

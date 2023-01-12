@@ -59,7 +59,7 @@ public class ProgressbarEvent {
 		int mac = mainFrame.getUserSkillList().get(4).getSkillLevel();
 		
 		int speedHp = 2500 + (level * 20) + (energydrink * 50) + (mac * 50);
-		int speedStress = 1000 - (level * 20) - (mac * 50) - (elecciga * 10);
+		int speedStress = 500 - (level * 20) - (mac * 50) - (elecciga * 10);
 		int speedHealth = 1300 + (level * 20) + (mac * 50);
 		
 		if (speedHp < 10) {

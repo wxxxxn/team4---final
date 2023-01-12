@@ -110,6 +110,8 @@ public class MainFrame extends JFrame {
 	// 미니게임
 	GameDialog gameDialog = null;
 
+	private JButton taskbtn;
+
 	public MainFrame(int userId) {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -406,7 +408,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 
-		JButton taskbtn = new JButton();
+		taskbtn = new JButton();
 		taskbtn.setHorizontalAlignment(SwingConstants.LEFT);
 		taskbtn.setBounds(1042, 525, 99, 81);
 		;
@@ -750,4 +752,9 @@ public class MainFrame extends JFrame {
 	public JLabel getProjectDeadLine() {
 		return projectDeadLine;
 	}
+
+	public JButton getTaskbtn() {
+		return taskbtn;
+	}
+	
 }

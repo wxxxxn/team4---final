@@ -195,6 +195,9 @@ public class GameControllerImpl implements GameController {
 			mainFrame.getProjectMinute().setText(String.valueOf(projcetMin));
 			projectEventImpl.projectTimeControll(time, index);
 		}
+		if (mainFrame.getUserProjectList().get(16).isComplete()) {
+				mainFrame.getTaskbtn().setEnabled(false);
+		}
 	}
 
 	private void saveUserProjcet() {
