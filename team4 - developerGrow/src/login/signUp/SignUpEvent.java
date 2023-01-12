@@ -111,7 +111,7 @@ public class SignUpEvent {
 	}
 
 	public boolean verifyUserPw(String userPw) {
-		Pattern p = Pattern.compile("[a-zA-Z0-9]{1,30}");
+		Pattern p = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$");
 		Matcher m = p.matcher(userPw);
 
 		return m.matches();
