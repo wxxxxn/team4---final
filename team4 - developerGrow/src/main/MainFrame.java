@@ -401,9 +401,7 @@ public class MainFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				timeGo = false;
-				if (gameDialog == null) {
-					gameDialog = new GameDialog(MainFrame.this.getX(), MainFrame.this.getY(), MainFrame.this);
-				}
+				gameDialog = new GameDialog(MainFrame.this.getX(), MainFrame.this.getY(), MainFrame.this);
 				gameDialog.showGUI();
 			}
 		});

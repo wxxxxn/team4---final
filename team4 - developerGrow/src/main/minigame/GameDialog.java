@@ -68,7 +68,8 @@ public class GameDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
-				ToryMain torymain = new ToryMain("", mainFrame, GameDialog.this);
+				ToryMain torymain = new ToryMain("틀린그림 찾기", mainFrame, GameDialog.this);
+				torymain.setBounds(0, 0, 1000, 600);
 				torymain.showGUI();			
 			}
 		});
@@ -94,7 +95,7 @@ public class GameDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				Hide hide = new Hide("", mainFrame, GameDialog.this);
+				Hide hide = new Hide("숨은 그림 찾기", mainFrame, GameDialog.this);
 				hide.showGUI();
 			}
 		});
