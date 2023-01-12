@@ -189,6 +189,10 @@ public class dugame extends JFrame implements ActionListener, Runnable {
 		jbt[randomsu].setOpaque(false);
 		jbt[randomsu].setBackground(new Color(255, 0, 0, 0));
 		jbt[randomsu].setPressedIcon(new ImageIcon(pressed));
+		jbt[randomsu].setBorderPainted(false);
+		jbt[randomsu].setContentAreaFilled(false);
+		jbt[randomsu].setFocusable(false);
+		
 	}
 
 	public void customcusor(JPanel pnl, String imageName) {
