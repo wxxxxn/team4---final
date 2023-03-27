@@ -32,21 +32,23 @@
 - 프론트 60%
 - 미니게임
     - 두더지 잡기(Thread)
-        
-        ![152.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a9ca7d43-3db2-4241-853e-27c5bb1bf6f4/152.png)
+![152](https://user-images.githubusercontent.com/119999556/227833132-4b9726bc-9096-4593-89ef-8c007c6e0252.png)
+
         
     
     게임 화면에서 두더지가 나타날 위치를 랜덤으로 결정하고, 일정 시간마 다 새로운 위치에서 두더지가 나타나도록 구현
     
     - 틀린그림찾기
-        
-        ![12312421.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/342a23ab-16b9-4be9-a450-308525149d6b/12312421.png)
-        
+
+        ![12312421](https://user-images.githubusercontent.com/119999556/227833171-53c34f11-9aa3-4975-9113-a896d623ce31.png)
+
     
     - 다른그림찾기
-    
-    ![화면 캡처 2023-03-24 113157.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/50e9c36f-81f5-4c28-999b-76f7fb034cfe/%ED%99%94%EB%A9%B4_%EC%BA%A1%EC%B2%98_2023-03-24_113157.png)
-    
+    ![화면 캡처 2023-03-24 113157](https://user-images.githubusercontent.com/119999556/227833212-07af14d4-a504-4799-8489-1eae0b8a4b91.png)
+
+
     게임 화면에서 이미지를 보여주고, 사용자가 좌표값의 오차범위 안을 클릭하면 부분 동그라미를 렌더링
     
 - 활동으로 인한 progressbar 수치 조정(Thread)
+- ![화면 캡처 2023-03-24 105028](https://user-images.githubusercontent.com/119999556/227833237-ace9fd47-d02a-484f-ab92-f5e30707881b.png)
+
