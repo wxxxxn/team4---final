@@ -18,27 +18,25 @@ import guiDesign.Methods;
 import main.MainFrame;
 import main.minigame.GameDialog;
 
-
 public class Hide extends JFrame {
 
 	final Hidee center = new Hidee("");
 	JLabel click;
-	
-	
+
 	static int[] imageX = { 240, 500, 368, 568, 430, 220, 580 };
 	static int[] imageY = { 408, 350, 143, 340, 405, 350, 520 };
 	static final int range = 40;
-	
+
 	private MainFrame mainFrame;
 	private GameDialog gameDialog;
-	
+
 	public Hide(String string, MainFrame mainFrame, GameDialog gameDialog) {
 		super(string);
 		this.mainFrame = mainFrame;
 		this.gameDialog = gameDialog;
-		
+
 		ClassLoader classLoader = getClass().getClassLoader();
-		
+
 		center.setBounds(0, 0, 694, 951);
 		center.setBackground(Color.white);
 		CustomMouseAdapter cma = new CustomMouseAdapter();
@@ -55,7 +53,7 @@ public class Hide extends JFrame {
 		leftimg.setIcon(Methods.convertToIcon(getClass(), "images/dif_img/1234.PNG"));
 		leftimg.setBounds(28, -24, 611, 951);
 		center.add(leftimg);
-		
+
 		JButton btnNewButton = new JButton();
 		btnNewButton.setIcon(Methods.convertToIcon(getClass(), "images/btn_img/miniGameCloseBtn.png"));
 		btnNewButton.setBorderPainted(false);
@@ -79,29 +77,27 @@ public class Hide extends JFrame {
 		setResizable(false);
 		setVisible(true);
 	}
-	
+
 	public void showGUI() {
 		setVisible(true);
 	}
-	
+
 	public boolean isRangeof(int index, Point p) {
-	
+
 		int pointX = p.x;
 
 		int pointY = p.y;
-	
+
 		return (pointX >= imageX[index] - range) && (pointX <= imageX[index] + range)
 				&& (pointY >= imageY[index] - range) && (pointY <= imageY[index] + range);
 	}
 
-	
-	
 	class CustomMouseAdapter extends MouseAdapter {
 		@Override
 		public void mousePressed(MouseEvent e) {
 			int x = e.getX();
 			int y = e.getY();
-			
+
 			click.setLocation(x - 20, y - 20);
 		}
 
@@ -111,21 +107,17 @@ public class Hide extends JFrame {
 				Hidee.f1 = true; //
 				center.repaint();
 
-
 			} else if (isRangeof(1, p)) {
 				Hidee.f2 = true;
 				center.repaint();
-
 
 			} else if (isRangeof(2, p)) {
 				Hidee.f3 = true;
 				center.repaint();
 
-
 			} else if (isRangeof(3, p)) {
 				Hidee.f4 = true;
 				center.repaint();
-
 
 			} else if (isRangeof(4, p)) {
 				Hidee.f5 = true;
@@ -139,7 +131,8 @@ public class Hide extends JFrame {
 				center.repaint();
 			}
 
-			if (Hidee.f1 == true && Hidee.f2 == true && Hidee.f3 == true && Hidee.f4 == true && Hidee.f5 == true && Hidee.f6 == true && Hidee.f7 == true) {
+			if (Hidee.f1 == true && Hidee.f2 == true && Hidee.f3 == true && Hidee.f4 == true && Hidee.f5 == true
+					&& Hidee.f6 == true && Hidee.f7 == true) {
 				JOptionPane.showMessageDialog(null, "축하합니다.");
 				Hidee.f1 = false;
 				Hidee.f2 = false;
